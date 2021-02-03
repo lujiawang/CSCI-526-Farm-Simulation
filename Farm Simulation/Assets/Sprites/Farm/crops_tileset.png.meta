@@ -1,7 +1,184 @@
 fileFormatVersion: 2
-guid: d976271482f7ea4429a57046d158473a
+guid: c26c43587bf180c4aaad3e8ebc0b4e52
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 6880962046667153946
+    second: _Land Yellowly Green
+  - first:
+      213: -8064642329068675026
+    second: Compelete House
+  - first:
+      213: 7583499002485015791
+    second: _Land Light Green
+  - first:
+      213: 3819665915668639210
+    second: _Land Yellow
+  - first:
+      213: -8529174385529849532
+    second: _Land White
+  - first:
+      213: -520680372347419661
+    second: _CropLand
+  - first:
+      213: 851497172168307707
+    second: crops_tileset 1_31
+  - first:
+      213: -6923460746425715112
+    second: crops_tileset 1_32
+  - first:
+      213: -7273646310373799401
+    second: crops_tileset 1_33
+  - first:
+      213: 8566176678710629413
+    second: crops_tileset 1_34
+  - first:
+      213: -3803088155706147340
+    second: crops_tileset 1_35
+  - first:
+      213: 5343217683853525762
+    second: crops_tileset 1_36
+  - first:
+      213: -3757723028419145484
+    second: crops_tileset 1_37
+  - first:
+      213: 3685658419317632025
+    second: crops_tileset 1_38
+  - first:
+      213: 914054282784403291
+    second: crops_tileset 1_39
+  - first:
+      213: 7020813010556380753
+    second: crops_tileset 1_40
+  - first:
+      213: 7409221759993924444
+    second: crops_tileset 1_41
+  - first:
+      213: -2331307500214764761
+    second: crops_tileset 1_42
+  - first:
+      213: -784005467846636022
+    second: crops_tileset 1_43
+  - first:
+      213: 2407724997150111402
+    second: crops_tileset 1_44
+  - first:
+      213: 6360554028517564059
+    second: crops_tileset 1_45
+  - first:
+      213: -7037364133392677101
+    second: crops_tileset 1_46
+  - first:
+      213: -2650102534631705258
+    second: crops_tileset 1_47
+  - first:
+      213: -5228958659332106930
+    second: crops_tileset 1_48
+  - first:
+      213: -1737790324692147847
+    second: crops_tileset 1_49
+  - first:
+      213: -2597276640062351134
+    second: crops_tileset 1_50
+  - first:
+      213: 8861343373970215754
+    second: crops_tileset 1_51
+  - first:
+      213: -6242364186198964233
+    second: crops_tileset 1_52
+  - first:
+      213: -8347944521706710318
+    second: crops_tileset 1_53
+  - first:
+      213: -1088793156015559127
+    second: crops_tileset 1_54
+  - first:
+      213: 8790273365205016990
+    second: crops_tileset 1_55
+  - first:
+      213: 680757462881633812
+    second: crops_tileset 1_56
+  - first:
+      213: 7643746926747924241
+    second: crops_tileset 1_57
+  - first:
+      213: 9180482436793912678
+    second: crops_tileset 1_58
+  - first:
+      213: -7748127281738690274
+    second: crops_tileset 1_59
+  - first:
+      213: 7290793357405414935
+    second: crops_tileset 1_60
+  - first:
+      213: 3324258268066151384
+    second: crops_tileset 1_61
+  - first:
+      213: -857082476886956956
+    second: crops_tileset 1_62
+  - first:
+      213: -2514918485988372814
+    second: crops_tileset 1_63
+  - first:
+      213: -9067802320170990910
+    second: crops_tileset 1_64
+  - first:
+      213: 1776747238186748173
+    second: crops_tileset 1_65
+  - first:
+      213: -7798850359809156838
+    second: crops_tileset 1_66
+  - first:
+      213: 56124367126812463
+    second: crops_tileset 1_67
+  - first:
+      213: -8782177493799868875
+    second: crops_tileset 1_68
+  - first:
+      213: -7762266915764568676
+    second: crops_tileset 1_69
+  - first:
+      213: 5045271780537366996
+    second: crops_tileset 1_70
+  - first:
+      213: -8622573294137111297
+    second: crops_tileset 1_71
+  - first:
+      213: 7135736106298352869
+    second: crops_tileset 1_72
+  - first:
+      213: -1894109011400267957
+    second: crops_tileset 1_73
+  - first:
+      213: 2847473880557676003
+    second: crops_tileset 1_74
+  - first:
+      213: 8657394009274295744
+    second: crops_tileset 1_75
+  - first:
+      213: -2599981688572708366
+    second: crops_tileset 1_76
+  - first:
+      213: -4029368403682891943
+    second: crops_tileset 1_77
+  - first:
+      213: -8355240075922765308
+    second: crops_tileset 1_78
+  - first:
+      213: 5747905573089457185
+    second: crops_tileset 1_79
+  - first:
+      213: 521495596874275923
+    second: crops_tileset 1_80
+  - first:
+      213: 4884421442029506262
+    second: crops_tileset 1_1
+  - first:
+      213: 2951294469911409230
+    second: crops_tileset 1_2
+  - first:
+      213: -8169630105099502087
+    second: crops_tileset 1_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -45,7 +222,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 28
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -109,7 +286,1246 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: _Land Yellowly Green
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 173
+        width: 34
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a126a8846861e7f50800000000000000
+      internalID: 6880962046667153946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Compelete House
+      rect:
+        serializedVersion: 2
+        x: 476
+        y: 102
+        width: 96
+        height: 92
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e20684fa782a41090800000000000000
+      internalID: -8064642329068675026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _Land Light Green
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 161
+        width: 34
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe406a5e9200e3960800000000000000
+      internalID: 7583499002485015791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _Land Yellow
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 161
+        width: 34
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aeda810b9ed220530800000000000000
+      internalID: 3819665915668639210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _Land White
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 149
+        width: 34
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 449f12bf51942a980800000000000000
+      internalID: -8529174385529849532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: _CropLand
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 140
+        width: 64
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f3c6b4c5fb26c8f0800000000000000
+      internalID: -520680372347419661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_31
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 120
+        width: 63
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf3775aaa2021db00800000000000000
+      internalID: 851497172168307707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_32
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 120
+        width: 64
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8563fe8122deaef90800000000000000
+      internalID: -6923460746425715112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_33
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 120
+        width: 64
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71ac658d731de0b90800000000000000
+      internalID: -7273646310373799401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_34
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 110
+        width: 32
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52458c1cd4c21e670800000000000000
+      internalID: 8566176678710629413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_35
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 122
+        width: 33
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fdb3a5d877b83bc0800000000000000
+      internalID: -3803088155706147340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_36
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 108
+        width: 32
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 203cca38c2ce62a40800000000000000
+      internalID: 5343217683853525762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_37
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 112
+        width: 32
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f095ce90d2e9dbc0800000000000000
+      internalID: -3757723028419145484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_38
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 126
+        width: 32
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91ceade0ec6162330800000000000000
+      internalID: 3685658419317632025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_39
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 114
+        width: 7
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5fe9cef68f5fac00800000000000000
+      internalID: 914054282784403291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_40
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 94
+        width: 32
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15667a83c30fe6160800000000000000
+      internalID: 7020813010556380753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_41
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 85
+        width: 32
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5b488a5fe7d2d660800000000000000
+      internalID: 7409221759993924444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_42
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 95
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72bbe7b2e2885afd0800000000000000
+      internalID: -2331307500214764761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_43
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 93
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0e890b4e27ae15f0800000000000000
+      internalID: -784005467846636022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_44
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 93
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa6f5f3d025f96120800000000000000
+      internalID: 2407724997150111402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_45
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 83
+        width: 10
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9e1874703a354850800000000000000
+      internalID: 6360554028517564059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_46
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 95
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3170e023b92465e90800000000000000
+      internalID: -7037364133392677101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_47
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 92
+        width: 27
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6553aec19c1f83bd0800000000000000
+      internalID: -2650102534631705258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_48
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 81
+        width: 32
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e459e45bdc10f67b0800000000000000
+      internalID: -5228958659332106930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_49
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 81
+        width: 32
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9712d9a28e022e7e0800000000000000
+      internalID: -1737790324692147847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_50
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 81
+        width: 32
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e8d9a528ae94fbd0800000000000000
+      internalID: -2597276640062351134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_51
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 81
+        width: 32
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a43914669d0d9fa70800000000000000
+      internalID: 8861343373970215754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_52
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 83
+        width: 9
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f78dfa98daae59a0800000000000000
+      internalID: -6242364186198964233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_53
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 80
+        width: 12
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2dad003dfa4262c80800000000000000
+      internalID: -8347944521706710318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_54
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 70
+        width: 32
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92ee0dda464d3e0f0800000000000000
+      internalID: -1088793156015559127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_55
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 60
+        width: 32
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e916f938d035df970800000000000000
+      internalID: 8790273365205016990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_56
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 79
+        width: 9
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41681414e49827900800000000000000
+      internalID: 680757462881633812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_57
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 21
+        width: 34
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1173bc1e45b041a60800000000000000
+      internalID: 7643746926747924241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_58
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 21
+        width: 34
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66d40dfc220a76f70800000000000000
+      internalID: 9180482436793912678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_59
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 21
+        width: 34
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e11d371e94f197490800000000000000
+      internalID: -7748127281738690274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_60
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 21
+        width: 34
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7166de62ee91e2560800000000000000
+      internalID: 7290793357405414935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_61
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 21
+        width: 34
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8dbfcb93843222e20800000000000000
+      internalID: 3324258268066151384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_62
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 21
+        width: 34
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 464e0fd37080b14f0800000000000000
+      internalID: -857082476886956956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_63
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 24
+        width: 34
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2be899b26f6391dd0800000000000000
+      internalID: -2514918485988372814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_64
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 51
+        width: 32
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c2ceb445d1b82280800000000000000
+      internalID: -9067802320170990910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_65
+      rect:
+        serializedVersion: 2
+        x: 370
+        y: 50
+        width: 32
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0907c3133648a810800000000000000
+      internalID: 1776747238186748173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_66
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 50
+        width: 32
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a19d527faeae4c390800000000000000
+      internalID: -7798850359809156838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_67
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 50
+        width: 32
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2756d580d467c000800000000000000
+      internalID: 56124367126812463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_68
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 23
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 536e0af69107f1680800000000000000
+      internalID: -8782177493799868875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_69
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 21
+        width: 18
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9df51acd53e64490800000000000000
+      internalID: -7762266915764568676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_70
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 21
+        width: 18
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d97b3214f7640640800000000000000
+      internalID: 5045271780537366996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_71
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 21
+        width: 18
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffc0039f547765880800000000000000
+      internalID: -8622573294137111297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_72
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 24
+        width: 32
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e4a7d29e2a370360800000000000000
+      internalID: 7135736106298352869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_73
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 24
+        width: 32
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b47ee99b3e5c6b5e0800000000000000
+      internalID: -1894109011400267957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_74
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 24
+        width: 32
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e5e7d56862448720800000000000000
+      internalID: 2847473880557676003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_75
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 24
+        width: 32
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c5a36b8bfd352870800000000000000
+      internalID: 8657394009274295744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_76
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 13
+        width: 14
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f97a16fd620bebd0800000000000000
+      internalID: -2599981688572708366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_77
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 8
+        width: 18
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9576c4d09cec418c0800000000000000
+      internalID: -4029368403682891943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_78
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 8
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40a048d3b693c0c80800000000000000
+      internalID: -8355240075922765308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_79
+      rect:
+        serializedVersion: 2
+        x: 251
+        y: 8
+        width: 18
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1243c7e3aa9a4cf40800000000000000
+      internalID: 5747905573089457185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_80
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 8
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35c1f9b7b79bc3700800000000000000
+      internalID: 521495596874275923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_1
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 95
+        width: 4
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6de48793c63f8c340800000000000000
+      internalID: 4884421442029506262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_2
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 94
+        width: 5
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e42f4aa0faa15f820800000000000000
+      internalID: 2951294469911409230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: crops_tileset 1_3
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 104
+        width: 5
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9fdf43734b4af9e80800000000000000
+      internalID: -8169630105099502087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
