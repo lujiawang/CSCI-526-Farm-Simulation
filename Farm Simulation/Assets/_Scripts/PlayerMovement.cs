@@ -11,11 +11,11 @@ public class PlayerMovement : MonoBehaviour
 
     public Joystick joystick;
 
-    private float minX = -7.9f;
-    private float minY = -4f;
+    //private float minX = -7.9f;
+    //private float minY = -4f;
 
-    private float maxX = 7.9f;
-    private float maxY = 4f;
+   //private float maxX = 7.9f;
+    //private float maxY = 4f;
 
     private float joystickDeadZone = 0.2f;
     
@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
         // float moveHorizontal = Input.GetAxis ("Horizontal");
         float moveHorizontal = 0f;
         // if the joystick falls under a joystickdeadzone, there are no reactions
+        /*
         if(Math.Abs(joystick.Horizontal) >= joystickDeadZone){
             // if positive horizontal movements are within scope, allow the movements
             if(rb2d.position.x < maxX && joystick.Horizontal > 0){
@@ -42,14 +43,16 @@ public class PlayerMovement : MonoBehaviour
                 moveHorizontal = joystick.Horizontal;
             }
         }
-        
-        
-        
+        */
+
+        moveHorizontal = joystick.Horizontal;
+
 
         //Store the current vertical input in the float moveVertical.
         // float moveVertical = Input.GetAxis ("Vertical");
         float moveVertical = 0f;
-        // if the joystick falls under a joystickdeadzone, there are no reactions
+        /*
+         * // if the joystick falls under a joystickdeadzone, there are no reactions
         if(Math.Abs(joystick.Vertical) >= joystickDeadZone){
             // if positive vertical movements are within scope, allow the movements
             if(rb2d.position.y < maxY && joystick.Vertical > 0){
@@ -59,8 +62,11 @@ public class PlayerMovement : MonoBehaviour
                 moveVertical = joystick.Vertical;
             }
         }
-        
-        
+        */
+
+        moveVertical = joystick.Vertical;
+
+
         //Use the two store floats to create a new Vector2 variable movement.
         Vector2 movement = new Vector2 (moveHorizontal, moveVertical);
 
