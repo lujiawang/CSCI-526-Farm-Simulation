@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
    //private float maxX = 7.9f;
     //private float maxY = 4f;
 
-    private float joystickDeadZone = 0.2f;
+    // private float joystickDeadZone = 0.2f;
     
     // Use this for initialization
     void Start()
