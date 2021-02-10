@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - TestTarget
+  - cropLand
+  - crop
   layers:
   - Default
   - TransparentFX

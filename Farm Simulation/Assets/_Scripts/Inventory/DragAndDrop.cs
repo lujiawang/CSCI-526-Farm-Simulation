@@ -10,31 +10,44 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 	private RectTransform rectTransform;
 	private CanvasGroup canvasGroup;
 
+	private bool isCrop;
+
 	private void Awake()
 	{
 		rectTransform = GetComponent<RectTransform>();
 		canvas = GetComponentInParent<Canvas>().rootCanvas;
 		canvasGroup = GetComponent<CanvasGroup>();
+
+		isCrop = CompareTag("crop");
 	}
 
 	public void OnBeginDrag(PointerEventData eventData)
 	{
+        if (isCrop) { 
+			canvasGroup.alpha = 0.6f;
+			canvasGroup.blocksRaycasts = false;
+		}
 		// Debug.Log("OnBeginDrag");
-		canvasGroup.alpha = 0.6f;
-		canvasGroup.blocksRaycasts = false;
+		
 	}
 
 	public void OnDrag(PointerEventData eventData)
 	{
-		// Debug.Log("OnDrag");
-		rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+		if (isCrop)
+		{
+			// Debug.Log("OnDrag");
+			rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+		}
 	}
 
 	public void OnEndDrag(PointerEventData eventData)
 	{
-		// Debug.Log("OnEndDrag");
-		canvasGroup.alpha = 1f;
-		canvasGroup.blocksRaycasts = true;
+		if (isCrop)
+		{
+			// Debug.Log("OnEndDrag");
+			canvasGroup.alpha = 1f;
+			canvasGroup.blocksRaycasts = true;
+		}
 	}
 
 	public void OnPointerDown(PointerEventData eventData)
@@ -55,6 +68,6 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     // Update is called once per frame
     void Update()
     {
-        
-    }
+		
+	}
 }
