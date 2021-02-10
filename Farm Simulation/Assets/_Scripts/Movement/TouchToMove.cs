@@ -50,13 +50,13 @@ public class TouchToMove : MonoBehaviour
     	if(Input.GetMouseButtonDown(0)){
 			targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			targetPos.z = 0;
-			Debug.Log(targetPos);
+			// Debug.Log(targetPos);
 			if(!NavMesh.Raycast(rb.position, targetPos, out hit, NavMesh.AllAreas)){
 				NavMesh.SamplePosition(targetPos, out hit, 1.0f, NavMesh.AllAreas);
 				targetPos = hit.position;
-				Debug.Log("Invalid Point. Newly Generated Point: "+targetPos);
+				// Debug.Log("Invalid Point. Newly Generated Point: "+targetPos);
 			}else{
-				Debug.Log("Workable Point: "+targetPos);
+				// Debug.Log("Workable Point: "+targetPos);
 			}
 			agent.SetDestination(targetPos);
     	}
