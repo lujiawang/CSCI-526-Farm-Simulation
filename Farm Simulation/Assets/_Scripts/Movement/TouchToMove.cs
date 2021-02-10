@@ -35,19 +35,12 @@ public class TouchToMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
         Vector3 targetPos = rb.position;
-
-
-        if (isPlayer)
+        if (Input.GetMouseButtonDown(0) && isPlayer)
         {
             targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             targetPos.z = 0;
-            Debug.Log("go!");
+            // Debug.Log(targetPos);
             if (!NavMesh.Raycast(rb.position, targetPos, out hit, NavMesh.AllAreas))
             {
                 NavMesh.SamplePosition(targetPos, out hit, 1.0f, NavMesh.AllAreas);
@@ -61,6 +54,7 @@ public class TouchToMove : MonoBehaviour
             agent.SetDestination(targetPos);
         }
     }
+
 
     public void PlayerEnable()
     {

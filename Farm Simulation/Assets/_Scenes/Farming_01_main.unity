@@ -4749,8 +4749,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 145418764}
-        m_MethodName: MenuHideAndShow
+      - m_Target: {fileID: 693246527}
+        m_MethodName: PlayerEnable
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4760,8 +4760,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 693246527}
-        m_MethodName: PlayerEnable
+      - m_Target: {fileID: 145418764}
+        m_MethodName: MenuHideAndShow
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
