@@ -45,15 +45,6 @@ public class TouchToMove : MonoBehaviour
 
         if (isPlayer)
         {
-
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hitRay;
-
-            if (Physics.Raycast(ray, out hitRay, 300))
-            {
-                Debug.Log(hitRay.transform.gameObject.name);
-            }
-
             targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             targetPos.z = 0;
             Debug.Log("go!");
