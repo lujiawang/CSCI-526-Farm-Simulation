@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using System;
+using UnityEngine.EventSystems;
 
 public class TouchToMove : MonoBehaviour
 {
-    
+    private string MenuName = "";
+
+
 	private NavMeshAgent agent;
 	private Rigidbody2D rb;
 
 	// public Transform target;
 	private NavMeshHit hit;
 
-    public GameObject InventorySystem;
-    private CanvasGroup inventCanvas;
     private bool isPlayer;
 
 
@@ -27,7 +28,6 @@ public class TouchToMove : MonoBehaviour
     	agent.updateRotation = false;
     	agent.updateUpAxis = false;
 
-        inventCanvas = InventorySystem.GetComponent<CanvasGroup>();
     	// target = GameObject.FindGameObjectWithTag("TestTarget").transform;
         
     }
@@ -36,55 +36,44 @@ public class TouchToMove : MonoBehaviour
     void Update()
     {
         
-        Debug.Log(isPlayer);            
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        Vector3 targetPos = rb.position;
+
+
         if (isPlayer)
         {
-            inventCanvas.alpha = 0f; //this makes everything transparent
-            inventCanvas.blocksRaycasts = false; //this prevents the UI element to receive input events
+
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hitRay;
+
+            if (Physics.Raycast(ray, out hitRay, 300))
+            {
+                Debug.Log(hitRay.transform.gameObject.name);
+            }
+
+            targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            targetPos.z = 0;
+            Debug.Log("go!");
+            if (!NavMesh.Raycast(rb.position, targetPos, out hit, NavMesh.AllAreas))
+            {
+                NavMesh.SamplePosition(targetPos, out hit, 1.0f, NavMesh.AllAreas);
+                targetPos = hit.position;
+                // Debug.Log("Invalid Point. Newly Generated Point: "+targetPos);
+            }
+            else
+            {
+                // Debug.Log("Workable Point: "+targetPos);
+            }
+            agent.SetDestination(targetPos);
         }
-        else
-        {
-            inventCanvas.alpha = 1f; 
-            inventCanvas.blocksRaycasts = true;
+    }
 
-        }
-
-        if (Input.GetKeyDown(KeyCode.M)) {
-
-            isPlayer = !isPlayer;
-        }
-
-    	Vector3 targetPos = rb.position;
-
-    	/* the following block is for Smartphone */
-
-    	// int i = 0;
-    	// // loop over all the touches
-    	// while(i < Input.touchCount){
-    	// 	// boundary limits go in here
-    	// 	if(true){
-    	// 		targetPos = Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position);
-    	// 		targetPos.z = 0;
-    	// 		Debug.Log(targetPos);
-    	// 		agent.SetDestination(target.position);
-    	// 	}
-    	// 	i++;
-    	// }
-
-    	if(Input.GetMouseButtonDown(0) && isPlayer){
-			targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			targetPos.z = 0;
-			// Debug.Log(targetPos);
-			if(!NavMesh.Raycast(rb.position, targetPos, out hit, NavMesh.AllAreas)){
-				NavMesh.SamplePosition(targetPos, out hit, 1.0f, NavMesh.AllAreas);
-				targetPos = hit.position;
-				// Debug.Log("Invalid Point. Newly Generated Point: "+targetPos);
-			}else{
-				// Debug.Log("Workable Point: "+targetPos);
-			}
-			agent.SetDestination(targetPos);
-    	}
-
-        
+    public void PlayerEnable()
+    {
+        isPlayer = !isPlayer; 
+        Debug.Log("isPlayer: "+ isPlayer);
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 
 public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler
@@ -12,6 +13,8 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
 	private bool isCrop;
 
+	private Camera cam;
+
 	private void Awake()
 	{
 		rectTransform = GetComponent<RectTransform>();
@@ -19,6 +22,7 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 		canvasGroup = GetComponent<CanvasGroup>();
 
 		isCrop = CompareTag("crop");
+		cam = Camera.main;
 	}
 
 	public void OnBeginDrag(PointerEventData eventData)
@@ -47,6 +51,23 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 			// Debug.Log("OnEndDrag");
 			canvasGroup.alpha = 1f;
 			canvasGroup.blocksRaycasts = true;
+
+			GameObject CropParent = GameObject.Find("Crops");
+			GameObject newItem = new GameObject(this.name);
+			newItem.transform.SetParent(CropParent.transform);
+
+			newItem.AddComponent<SpriteRenderer>();
+			SpriteRenderer sr = newItem.GetComponent<SpriteRenderer>();
+			sr.sprite = this.GetComponent<Image>().sprite;
+			
+
+			Vector2 pos = cam.ScreenToWorldPoint(transform.position);
+			newItem.transform.position = pos;
+
+			newItem.transform.localScale = new Vector2(0.5f, 0.5f);
+			
+			gameObject.SetActive(false);
+			
 		}
 	}
 
