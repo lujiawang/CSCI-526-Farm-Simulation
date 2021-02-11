@@ -19,8 +19,8 @@ public class SpriteChange : MonoBehaviour
         spriteHandle.Completed += LoadOnReady;
         
         sr = GetComponent<SpriteRenderer>();
-       
-        
+        stage = 0;
+
     }
 
     void LoadOnReady(AsyncOperationHandle<Sprite[]> handleToCheck)
@@ -38,11 +38,9 @@ public class SpriteChange : MonoBehaviour
             {
                 corns[i] = sprites[i + 18];
             }
-            Debug.Log("Checking " + corns[0].name);
-
+            // Debug.log("checking " + corns[0].name);
 
             runningPointer = -1;
-            stage = 0;
             growingCondition = new int[6];
             for (int i = 1; i < growingCondition.Length; i++)
             {
@@ -67,6 +65,9 @@ public class SpriteChange : MonoBehaviour
     }
     void updateSprite()
     {
+        //callback function not yet done
+        if (growingCondition == null) return;
+        
         if (stage == growingCondition.Length)
         {
             CancelInvoke("incrementByOne");

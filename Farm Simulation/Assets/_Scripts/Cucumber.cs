@@ -23,6 +23,7 @@ public class Cucumber : MonoBehaviour
         spriteHandle.Completed += LoadOnReady;
 
         sr = GetComponent<SpriteRenderer>();
+        stage = 0;
     }
     void LoadOnReady(AsyncOperationHandle<Sprite[]> handleToCheck)
     {
@@ -39,11 +40,11 @@ public class Cucumber : MonoBehaviour
             {
                 crops[i] = sprites[i + 24];
             }
-            Debug.Log("Checking " + crops[0].name);
+            // Debug.log("checking " + crops[0].name);
 
 
             runningPointer = -1;
-            stage = 0;
+            
             growingCondition = new int[6];
             for (int i = 1; i < growingCondition.Length; i++)
             {
@@ -68,6 +69,11 @@ public class Cucumber : MonoBehaviour
     }
     void updateSprite()
     {
+        //callback function is not yet done
+        if (growingCondition == null) return;
+
+
+
         if (stage == growingCondition.Length)
         {
             CancelInvoke("incrementByOne");
