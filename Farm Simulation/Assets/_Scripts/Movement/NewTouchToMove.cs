@@ -5,9 +5,11 @@ using UnityEngine.AI;
 using System;
 using UnityEngine.EventSystems;
 
-public class TouchToMove : MonoBehaviour
+public class NewTouchToMove : MonoBehaviour, IPointerDownHandler
 {
     private string MenuName = "";
+
+    private GameObject playerObj;
 
 
 	private NavMeshAgent agent;
@@ -23,8 +25,9 @@ public class TouchToMove : MonoBehaviour
     void Start()
     {
         isPlayer = true;
-    	agent = GetComponent<NavMeshAgent>();
-    	rb = GetComponent<Rigidbody2D>();
+        playerObj = GameObject.FindWithTag("Player");
+    	agent = playerObj.GetComponent<NavMeshAgent>();
+    	rb = playerObj.GetComponent<Rigidbody2D>();
     	agent.updateRotation = false;
     	agent.updateUpAxis = false;
 
@@ -35,26 +38,32 @@ public class TouchToMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
         Vector3 targetPos = rb.position;
-        if (Input.GetMouseButtonDown(0) && isPlayer && !EventSystem.current.IsPointerOverGameObject())
+
+
+        if (isPlayer)
         {
             targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             targetPos.z = 0;
-            // Debug.Log(targetPos);
+            Debug.Log("go!");
             if (!NavMesh.Raycast(rb.position, targetPos, out hit, NavMesh.AllAreas))
             {
                 NavMesh.SamplePosition(targetPos, out hit, 1.0f, NavMesh.AllAreas);
                 targetPos = hit.position;
-                // Debug.Log("Invalid Point. Newly Generated Point: "+targetPos);
+                Debug.Log("Invalid Point. Newly Generated Point: "+targetPos);
             }
             else
             {
-                // Debug.Log("Workable Point: "+targetPos);
+                Debug.Log("Workable Point: "+targetPos);
             }
             agent.SetDestination(targetPos);
         }
     }
-
 
     public void PlayerEnable()
     {
