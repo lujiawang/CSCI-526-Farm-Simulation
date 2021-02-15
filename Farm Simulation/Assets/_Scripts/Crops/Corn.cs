@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
-public class SpriteChange : MonoBehaviour
+public class Corn : MonoBehaviour
 {
     // Start is called before the first frame update
 
@@ -11,6 +11,7 @@ public class SpriteChange : MonoBehaviour
     private int runningPointer;
     private int stage;
     private int[] growingCondition;
+    // private int nextStage;
 
     void Start()
     {
