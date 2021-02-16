@@ -12,7 +12,8 @@ public class Cucumber : MonoBehaviour
     private int runningPointer;
     private int stage;
     private int[] growingCondition;
-
+    private bool inPosition;
+    public int growTime;
 
 
     // Start is called before the first frame update
@@ -24,6 +25,7 @@ public class Cucumber : MonoBehaviour
 
         sr = GetComponent<SpriteRenderer>();
         stage = 0;
+        inPosition = false;
     }
     void LoadOnReady(AsyncOperationHandle<Sprite[]> handleToCheck)
     {
@@ -43,13 +45,21 @@ public class Cucumber : MonoBehaviour
             // Debug.log("checking " + crops[0].name);
 
 
-            runningPointer = -1;
-            
+            runningPointer = 0;
             growingCondition = new int[6];
+
+            //initialize to random variable if not specified in the inspector;
+            if (growTime == 0) growTime = 2;
+
             for (int i = 1; i < growingCondition.Length; i++)
             {
-                growingCondition[i] = growingCondition[i - 1] + 3;
+                growingCondition[i] = growingCondition[i - 1] + growTime;
             }
+            //Starting sprite is always the seed
+            assignSprite(0);
+
+
+
             // Repeat method per 1 second
             InvokeRepeating("incrementByOne", 1f, 1f);
 
@@ -61,23 +71,25 @@ public class Cucumber : MonoBehaviour
 
 
 
+
     void assignSprite(int index)
     {
         // changing of sprites 
         Sprite sprite = crops[index];
         sr.sprite = sprite;
     }
-    void updateSprite()
+    void growCrop()
     {
-        //callback function is not yet done
+        //when callback function not yet done
         if (growingCondition == null) return;
 
 
-
+        //crop is fulling grown
         if (stage == growingCondition.Length)
         {
             CancelInvoke("incrementByOne");
 
+            //TODO: Collect Reward;
         }
         else if (runningPointer == growingCondition[stage])
         {
@@ -90,6 +102,7 @@ public class Cucumber : MonoBehaviour
 
     void incrementByOne()
     {
+        if (!inPosition) return;
         if (stage < growingCondition.Length)
         {
             runningPointer++;
@@ -101,7 +114,15 @@ public class Cucumber : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        updateSprite();
 
+
+        //only update when crop is attached to the parent
+        if (this.transform.parent != null && this.transform.parent.name != "CropPlaceholder")
+        {
+            //start growing condition
+            inPosition = true;
+
+            growCrop();
+        }
     }
 }
