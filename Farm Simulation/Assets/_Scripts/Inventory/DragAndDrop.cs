@@ -11,23 +11,38 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 	private RectTransform rectTransform;
 	private CanvasGroup canvasGroup;
 
-	private bool isCrop;
+	private bool inMenu;
+	GameObject CropParent;
+	GameObject realCrop; //the corresponding object that pre-saved inside CropParent;
 
 	private Camera cam;
 
 	private void Awake()
 	{
+		//get pre-defined children
+		CropParent = GameObject.Find("CropPlaceholder"); //the placeholder object named Crops in scene
+
+		string name = this.name;//this.GetComponent<Image>().sprite.name;
+		foreach (Transform child in CropParent.transform)
+        {
+			if (child.name.Equals(name))
+            {
+				realCrop = child.gameObject;
+				break;
+            }
+        }
+
 		rectTransform = GetComponent<RectTransform>();
 		canvas = GetComponentInParent<Canvas>().rootCanvas;
 		canvasGroup = GetComponent<CanvasGroup>();
 
-		isCrop = CompareTag("crop");
+		inMenu = true; // see if the crop is in Canvas or the real World
 		cam = Camera.main;
 	}
 
 	public void OnBeginDrag(PointerEventData eventData)
 	{
-        if (isCrop) { 
+        if (inMenu) { 
 			canvasGroup.alpha = 0.6f;
 			canvasGroup.blocksRaycasts = false;
 		}
@@ -37,7 +52,7 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
 	public void OnDrag(PointerEventData eventData)
 	{
-		if (isCrop)
+		if (inMenu)
 		{
 			// Debug.Log("OnDrag");
 			rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
@@ -46,28 +61,17 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
 	public void OnEndDrag(PointerEventData eventData)
 	{
-		if (isCrop)
+		if (inMenu) //when drag out from the menu, switch to the real crop
 		{
 			// Debug.Log("OnEndDrag");
 			canvasGroup.alpha = 1f;
 			canvasGroup.blocksRaycasts = true;
 
-			GameObject CropParent = GameObject.Find("Crops");
-			GameObject newItem = new GameObject(this.name);
-			newItem.transform.SetParent(CropParent.transform);
-
-			newItem.AddComponent<SpriteRenderer>();
-			SpriteRenderer sr = newItem.GetComponent<SpriteRenderer>();
-			sr.sprite = this.GetComponent<Image>().sprite;
-			
-
+			inMenu = false;
+			this.gameObject.SetActive(false);
+			realCrop.SetActive(true);
 			Vector2 pos = cam.ScreenToWorldPoint(transform.position);
-			newItem.transform.position = pos;
-
-			newItem.transform.localScale = new Vector2(0.5f, 0.5f);
-			
-			gameObject.SetActive(false);
-			
+			realCrop.transform.position = pos;
 		}
 	}
 
