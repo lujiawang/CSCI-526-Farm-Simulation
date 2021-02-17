@@ -36,8 +36,9 @@ public class TouchToMove : MonoBehaviour
     void Update()
     {
         Vector3 targetPos = rb.position;
-        /*
-        if (Input.GetMouseButtonDown(0) && isPlayer && !EventSystem.current.IsPointerOverGameObject())
+        
+        if (Input.GetMouseButtonDown(0) && isPlayer && !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+        //( !EventSystem.current.IsPointerOverGameObject() || !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId)))
         {
             targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             targetPos.z = 0;
@@ -53,9 +54,10 @@ public class TouchToMove : MonoBehaviour
                 // Debug.Log("Workable Point: "+targetPos);
             }
             agent.SetDestination(targetPos);
-        }*/
+        }
 
-        if (Input.touchCount > 0 && isPlayer && !EventSystem.current.IsPointerOverGameObject())
+        /* a Input.touch version 
+        if (Input.touchCount > 0 && isPlayer && !EventSystem.current.IsPointerOverGameObject(Input.GetTouch (0).fingerId)))
         {
             Touch touch = Input.GetTouch(0);
             targetPos = Camera.main.ScreenToWorldPoint(touch.position);
@@ -73,6 +75,7 @@ public class TouchToMove : MonoBehaviour
             }
             agent.SetDestination(targetPos);
         }
+        */
     }
 
 
