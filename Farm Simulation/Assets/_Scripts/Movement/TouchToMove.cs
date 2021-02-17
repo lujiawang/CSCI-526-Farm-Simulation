@@ -36,9 +36,29 @@ public class TouchToMove : MonoBehaviour
     void Update()
     {
         Vector3 targetPos = rb.position;
+        /*
         if (Input.GetMouseButtonDown(0) && isPlayer && !EventSystem.current.IsPointerOverGameObject())
         {
             targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            targetPos.z = 0;
+            // Debug.Log(targetPos);
+            if (!NavMesh.Raycast(rb.position, targetPos, out hit, NavMesh.AllAreas))
+            {
+                NavMesh.SamplePosition(targetPos, out hit, 1.0f, NavMesh.AllAreas);
+                targetPos = hit.position;
+                // Debug.Log("Invalid Point. Newly Generated Point: "+targetPos);
+            }
+            else
+            {
+                // Debug.Log("Workable Point: "+targetPos);
+            }
+            agent.SetDestination(targetPos);
+        }*/
+
+        if (Input.touchCount > 0 && isPlayer && !EventSystem.current.IsPointerOverGameObject())
+        {
+            Touch touch = Input.GetTouch(0);
+            targetPos = Camera.main.ScreenToWorldPoint(touch.position);
             targetPos.z = 0;
             // Debug.Log(targetPos);
             if (!NavMesh.Raycast(rb.position, targetPos, out hit, NavMesh.AllAreas))

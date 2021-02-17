@@ -11,48 +11,57 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 	private RectTransform rectTransform;
 	private CanvasGroup canvasGroup;
 
-	private bool inMenu;
 	GameObject CropParent;
 	GameObject realCrop; //the corresponding object that pre-saved inside CropParent;
 
+	private bool inPosition; //whether it is on the land
+	private Vector2 snapSensitivity = new Vector2(1.8f, 1.0f);
+
+	private GameObject[] cropLands;
+
 	private Camera cam;
+
 
 	private void Awake()
 	{
 		//get pre-defined children
 		CropParent = GameObject.Find("CropPlaceholder"); //the placeholder object named Crops in scene
 
-		string name = this.name;//this.GetComponent<Image>().sprite.name;
 		foreach (Transform child in CropParent.transform)
         {
-			if (child.name.Equals(name))
+			if (child.name.Equals(this.name))
             {
 				realCrop = child.gameObject;
 				break;
             }
         }
 
+		inPosition = false;
+
+		cropLands = GameObject.FindGameObjectsWithTag("cropLand");
+
+
 		rectTransform = GetComponent<RectTransform>();
 		canvas = GetComponentInParent<Canvas>().rootCanvas;
 		canvasGroup = GetComponent<CanvasGroup>();
 
-		inMenu = true; // see if the crop is in Canvas or the real World
 		cam = Camera.main;
 	}
 
 	public void OnBeginDrag(PointerEventData eventData)
 	{
-        if (inMenu) { 
+        if (!inPosition) { 
 			canvasGroup.alpha = 0.6f;
 			canvasGroup.blocksRaycasts = false;
 		}
 		// Debug.Log("OnBeginDrag");
 		
+		
 	}
 
 	public void OnDrag(PointerEventData eventData)
 	{
-		if (inMenu)
+		if (!inPosition)
 		{
 			// Debug.Log("OnDrag");
 			rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
@@ -61,17 +70,12 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
 	public void OnEndDrag(PointerEventData eventData)
 	{
-		if (inMenu) //when drag out from the menu, switch to the real crop
+		if (!inPosition) //when drag out from the menu, switch to the real crop
 		{
 			// Debug.Log("OnEndDrag");
 			canvasGroup.alpha = 1f;
 			canvasGroup.blocksRaycasts = true;
 
-			inMenu = false;
-			this.gameObject.SetActive(false);
-			realCrop.SetActive(true);
-			Vector2 pos = cam.ScreenToWorldPoint(transform.position);
-			realCrop.transform.position = pos;
 		}
 	}
 
@@ -93,6 +97,22 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     // Update is called once per frame
     void Update()
     {
-		
+		if (!inPosition)
+		{
+			Vector2 pos = cam.ScreenToWorldPoint(transform.position);
+			foreach (GameObject cropLand in cropLands)
+			{
+				if (cropLand.transform.childCount == 0 && Mathf.Abs(pos.x - cropLand.transform.position.x) <= snapSensitivity.x
+					&& Mathf.Abs(pos.y - cropLand.transform.position.y) <= snapSensitivity.y)
+				{
+					this.gameObject.SetActive(false);
+					realCrop.SetActive(true);
+					realCrop.transform.position = cropLand.transform.position; //clip to the position
+					realCrop.transform.SetParent(cropLand.transform);
+					inPosition = true; //and stop dragging
+					break;
+				}
+			}
+		}
 	}
 }
