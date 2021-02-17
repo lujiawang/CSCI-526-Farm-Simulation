@@ -4,17 +4,18 @@ using UnityEngine;
 using UnityEngine.AI;
 using System;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class TouchToMove : MonoBehaviour
 {
     private string MenuName = "";
 
 
-	private NavMeshAgent agent;
-	private Rigidbody2D rb;
+    private NavMeshAgent agent;
+    private Rigidbody2D rb;
 
-	// public Transform target;
-	private NavMeshHit hit;
+    // public Transform target;
+    private NavMeshHit hit;
 
     private bool isPlayer;
 
@@ -23,22 +24,24 @@ public class TouchToMove : MonoBehaviour
     void Start()
     {
         isPlayer = true;
-    	agent = GetComponent<NavMeshAgent>();
-    	rb = GetComponent<Rigidbody2D>();
-    	agent.updateRotation = false;
-    	agent.updateUpAxis = false;
+        agent = GetComponent<NavMeshAgent>();
+        rb = GetComponent<Rigidbody2D>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
 
-    	// target = GameObject.FindGameObjectWithTag("TestTarget").transform;
-        
+        // target = GameObject.FindGameObjectWithTag("TestTarget").transform;
+
     }
 
     // Update is called once per frame
     void Update()
     {
         Vector3 targetPos = rb.position;
-        
-        if (Input.GetMouseButtonDown(0) && isPlayer && !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
-        //( !EventSystem.current.IsPointerOverGameObject() || !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId)))
+
+
+        /* Need to do sth like !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId), check Input.touchCount > 0 first */
+
+        if (Input.GetMouseButtonDown(0) && isPlayer && !EventSystem.current.IsPointerOverGameObject())
         {
             targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             targetPos.z = 0;
@@ -56,32 +59,12 @@ public class TouchToMove : MonoBehaviour
             agent.SetDestination(targetPos);
         }
 
-        /* a Input.touch version 
-        if (Input.touchCount > 0 && isPlayer && !EventSystem.current.IsPointerOverGameObject(Input.GetTouch (0).fingerId)))
-        {
-            Touch touch = Input.GetTouch(0);
-            targetPos = Camera.main.ScreenToWorldPoint(touch.position);
-            targetPos.z = 0;
-            // Debug.Log(targetPos);
-            if (!NavMesh.Raycast(rb.position, targetPos, out hit, NavMesh.AllAreas))
-            {
-                NavMesh.SamplePosition(targetPos, out hit, 1.0f, NavMesh.AllAreas);
-                targetPos = hit.position;
-                // Debug.Log("Invalid Point. Newly Generated Point: "+targetPos);
-            }
-            else
-            {
-                // Debug.Log("Workable Point: "+targetPos);
-            }
-            agent.SetDestination(targetPos);
-        }
-        */
     }
 
 
     public void PlayerEnable()
     {
-        isPlayer = !isPlayer; 
-        Debug.Log("isPlayer: "+ isPlayer);
+        isPlayer = !isPlayer;
+        Debug.Log("isPlayer: " + isPlayer);
     }
 }

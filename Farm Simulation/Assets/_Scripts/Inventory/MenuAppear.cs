@@ -24,12 +24,10 @@ public class MenuAppear : MonoBehaviour
         if (isMenu)
         {
             anim.SetBool("isMenu", true);
-            //transform.position = new Vector2(transform.position.x, maxY);
         }
         else
         {
             anim.SetBool("isMenu", false);
-            //transform.position = new Vector2(transform.position.x, minY);
         }
     }
 }

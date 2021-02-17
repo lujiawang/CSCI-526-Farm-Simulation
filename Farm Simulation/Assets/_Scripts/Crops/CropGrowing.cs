@@ -18,8 +18,6 @@ public class CropGrowing : MonoBehaviour
     public int index; //corn 18, cucumber 24
 
 
-    public Text debugText;
-
     void Start()
     {
         //Loading of assets using Addressable Sprite Assets
@@ -37,7 +35,6 @@ public class CropGrowing : MonoBehaviour
         //callback function
         if (handleToCheck.Status == AsyncOperationStatus.Succeeded)
         {
-            debugText.text = "sprites loaded";
             sprites = handleToCheck.Result;
 
 
@@ -71,8 +68,6 @@ public class CropGrowing : MonoBehaviour
 
         }
     }
-
-
 
 
     void assignSprite(int index)
