@@ -378,6 +378,7 @@ GameObject:
   - component: {fileID: 499693446}
   - component: {fileID: 499693447}
   - component: {fileID: 499693448}
+  - component: {fileID: 499693449}
   m_Layer: 0
   m_Name: Flowchart
   m_TagString: Untagged
@@ -398,11 +399,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: 0, y: 0}
+  scrollPos: {x: 28.977991, y: 17.046051}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 400
-  zoom: 1
+  zoom: 0.9100001
   scrollViewRect:
     serializedVersion: 2
     x: -343
@@ -412,7 +413,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 499693443}
   selectedCommands:
-  - {fileID: 499693448}
+  - {fileID: 499693449}
   variables: []
   description: 
   stepPause: 0
@@ -426,7 +427,7 @@ MonoBehaviour:
   luaBindingName: flowchart
 --- !u!114 &499693442
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -466,8 +467,8 @@ MonoBehaviour:
   nodeRect:
     serializedVersion: 2
     x: 68
-    y: 72
-    width: 102
+    y: 70.9011
+    width: 100.549446
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -480,6 +481,7 @@ MonoBehaviour:
   - {fileID: 499693447}
   - {fileID: 499693442}
   - {fileID: 499693446}
+  - {fileID: 499693449}
   suppressAllAutoSelections: 0
 --- !u!114 &499693444
 MonoBehaviour:
@@ -512,7 +514,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &499693446
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -541,7 +543,7 @@ MonoBehaviour:
   setSayDialog: {fileID: 0}
 --- !u!114 &499693447
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -571,7 +573,7 @@ MonoBehaviour:
   waitUntilFinished: 0
 --- !u!114 &499693448
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -586,6 +588,23 @@ MonoBehaviour:
   soundClip: {fileID: 8300000, guid: 9fc5390da1ab57445943e64c53778d1a, type: 3}
   volume: 1
   loop: 0
+--- !u!114 &499693449
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499693440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17a200dbd67304446a3019434503338a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 5
+  indentLevel: 0
+  targetObject: {fileID: 1509576602}
+  methodName: SwitchScene
+  delay: 0
 --- !u!1 &636005695
 GameObject:
   m_ObjectHideFlags: 0
@@ -932,6 +951,49 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &1509576602
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1509576603}
+  - component: {fileID: 1509576604}
+  m_Layer: 0
+  m_Name: SceneSwitcher
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1509576603
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1509576602}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1287.3358, y: 706.6862, z: -12.389723}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1509576604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1509576602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2c31d6617481504aac1a11d004ed34d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1797714615
 GameObject:
   m_ObjectHideFlags: 0
