@@ -19,7 +19,7 @@ public class CropGrowing : MonoBehaviour
     public string cropName;
     private Dictionary<string, int> cropAssets;
     private bool grown;
-
+    public int reward;
     void Start()
     {
         setUpAssets();
@@ -31,6 +31,7 @@ public class CropGrowing : MonoBehaviour
         stage = 0;
         inPosition = false;
         grown = false;
+        
     }
 
     void setUpAssets()
@@ -65,7 +66,6 @@ public class CropGrowing : MonoBehaviour
        //edge case check
         return cropAssets.ContainsKey(cropName) ? cropAssets[cropName] : 0;
     }
-
 
 
     void LoadOnReady(AsyncOperationHandle<Sprite[]> handleToCheck)
@@ -124,8 +124,8 @@ public class CropGrowing : MonoBehaviour
         if (stage == growingCondition.Length)
         {
             CancelInvoke("incrementByOne");
-
-            harvestCrop();
+            //signify that crop has fully grown
+            grown = true;
         }
         else if (runningPointer == growingCondition[stage])
         {
@@ -146,13 +146,14 @@ public class CropGrowing : MonoBehaviour
     }
 
 
-    void harvestCrop()
+    public int harvestCrop()
     {
-        //signify that crop has fully grown
-        grown = true;
+        if (!grown) return -1 ;
 
 
-        //TODO: obtain reward
+        //TODO: obtain reward and remove from parent
+        return reward;
+
     }
 
 
