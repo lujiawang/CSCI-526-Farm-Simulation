@@ -579,6 +579,7 @@ GameObject:
   - component: {fileID: 218100342}
   - component: {fileID: 218100344}
   - component: {fileID: 218100343}
+  - component: {fileID: 218100345}
   m_Layer: 0
   m_Name: cropLand (2)
   m_TagString: cropLand
@@ -667,6 +668,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &218100345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218100341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac4de685dd8a3ef4b88145424f953ffb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &235950528
 GameObject:
   m_ObjectHideFlags: 0
@@ -1057,6 +1070,7 @@ GameObject:
   - component: {fileID: 355921286}
   - component: {fileID: 355921288}
   - component: {fileID: 355921287}
+  - component: {fileID: 355921289}
   m_Layer: 0
   m_Name: cropLand (1)
   m_TagString: cropLand
@@ -1145,6 +1159,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &355921289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 355921285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac4de685dd8a3ef4b88145424f953ffb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &368939585
 GameObject:
   m_ObjectHideFlags: 0
@@ -1156,6 +1182,7 @@ GameObject:
   - component: {fileID: 368939586}
   - component: {fileID: 368939588}
   - component: {fileID: 368939587}
+  - component: {fileID: 368939589}
   m_Layer: 0
   m_Name: cropLand (4)
   m_TagString: cropLand
@@ -1244,6 +1271,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &368939589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 368939585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac4de685dd8a3ef4b88145424f953ffb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &369707457
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2491,6 +2530,7 @@ GameObject:
   - component: {fileID: 923679705}
   - component: {fileID: 923679707}
   - component: {fileID: 923679706}
+  - component: {fileID: 923679708}
   m_Layer: 0
   m_Name: cropLand (7)
   m_TagString: cropLand
@@ -2579,6 +2619,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &923679708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 923679704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac4de685dd8a3ef4b88145424f953ffb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &943330045
 GameObject:
   m_ObjectHideFlags: 0
@@ -4636,6 +4688,7 @@ GameObject:
   - component: {fileID: 1193152599}
   - component: {fileID: 1193152601}
   - component: {fileID: 1193152600}
+  - component: {fileID: 1193152602}
   m_Layer: 0
   m_Name: cropLand (6)
   m_TagString: cropLand
@@ -4724,6 +4777,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1193152602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1193152598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac4de685dd8a3ef4b88145424f953ffb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1270497709
 GameObject:
   m_ObjectHideFlags: 0
@@ -4972,6 +5037,7 @@ GameObject:
   - component: {fileID: 1538616332}
   - component: {fileID: 1538616334}
   - component: {fileID: 1538616333}
+  - component: {fileID: 1538616335}
   m_Layer: 0
   m_Name: cropLand (0)
   m_TagString: cropLand
@@ -5060,6 +5126,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1538616335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1538616331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac4de685dd8a3ef4b88145424f953ffb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1660901091
 GameObject:
   m_ObjectHideFlags: 0
@@ -5912,6 +5990,7 @@ GameObject:
   - component: {fileID: 2090081307}
   - component: {fileID: 2090081309}
   - component: {fileID: 2090081308}
+  - component: {fileID: 2090081310}
   m_Layer: 0
   m_Name: cropLand (5)
   m_TagString: cropLand
@@ -6000,6 +6079,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2090081310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2090081306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac4de685dd8a3ef4b88145424f953ffb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2116686956
 GameObject:
   m_ObjectHideFlags: 0
@@ -6309,6 +6400,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Cucumber
+      objectReference: {fileID: 0}
+    - target: {fileID: 7811732804729390583, guid: 91428446e72b0f14cb729e39d5e83de4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91428446e72b0f14cb729e39d5e83de4, type: 3}

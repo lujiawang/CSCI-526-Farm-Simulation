@@ -6,7 +6,10 @@ using UnityEngine.UI;
 
 public class CropGrowing : MonoBehaviour
 {
-    // Start is called before the first frame update
+    
+
+
+
 
     private SpriteRenderer sr;
     private Sprite[] sprites;
@@ -20,6 +23,9 @@ public class CropGrowing : MonoBehaviour
     private Dictionary<string, int> cropAssets;
     private bool grown;
     public int reward;
+
+
+    // Start is called before the first frame update
     void Start()
     {
         setUpAssets();
@@ -148,7 +154,7 @@ public class CropGrowing : MonoBehaviour
 
     public int harvestCrop()
     {
-        if (!grown) return -1 ;
+        if (!grown) return -1;
 
 
         //TODO: obtain reward and remove from parent

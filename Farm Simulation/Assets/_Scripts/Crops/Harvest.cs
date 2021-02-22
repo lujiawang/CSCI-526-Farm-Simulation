@@ -4,11 +4,27 @@ using UnityEngine;
 
 public class Harvest : MonoBehaviour
 {
+    public class Crop
+    {
+        public string cropName;
+        public int reward;
+
+        public Crop(string cn, int rwd)
+        {
+            cropName = cn;
+            reward = rwd;
+        }
+    }
+
+
+
     // Start is called before the first frame update
 
     private GameObject childObject;
     private CropGrowing gScript;
     private int gain;
+
+    
     void Start()
     {
         
@@ -36,10 +52,15 @@ public class Harvest : MonoBehaviour
             int reward = gScript.harvestCrop();
             if (reward > 0)
             {
-                Debug.Log("Sold " + gScript.cropName + " for: " + reward + " coins!");
+                
                 gain = reward;
+                Crop crop = new Crop(gScript.cropName, reward);
+                Debug.Log("Sold " + crop.cropName + " for: " + crop.reward + " coins!");
             }
 
+            //return specifics of the crop. Change function to return Crop object later on.
+
+            
         }
         else
         {

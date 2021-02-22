@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7811732804729390583
+--- !u!1 &3626184005770508900
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,38 +8,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7811732804729390568}
-  - component: {fileID: 7811732804729390569}
-  - component: {fileID: 700030614}
-  - component: {fileID: 700030613}
+  - component: {fileID: 6687200105322766894}
+  - component: {fileID: 7464745621669652570}
+  - component: {fileID: 9156347695727364841}
+  - component: {fileID: 2639167266109021971}
   m_Layer: 0
-  m_Name: Cucumber
+  m_Name: Tomato
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7811732804729390568
+--- !u!4 &6687200105322766894
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7811732804729390583}
+  m_GameObject: {fileID: 3626184005770508900}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.11, y: -0.65, z: 0}
+  m_LocalPosition: {x: -2.542446, y: -1.3291805, z: -0.1901954}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &7811732804729390569
+--- !u!212 &7464745621669652570
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7811732804729390583}
+  m_GameObject: {fileID: 3626184005770508900}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: 1222993207
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: -7214779071068452208, guid: ef320b5269778f842a9bb0cf66981501,
+  m_Sprite: {fileID: -6403212856916885531, guid: ef320b5269778f842a9bb0cf66981501,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -84,13 +84,13 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &700030614
+--- !u!60 &9156347695727364841
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7811732804729390583}
+  m_GameObject: {fileID: 3626184005770508900}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -114,18 +114,18 @@ PolygonCollider2D:
       - {x: -0.5877852, y: -0.80901706}
       - {x: 0.58778536, y: -0.80901694}
       - {x: 0.9510565, y: 0.30901712}
---- !u!114 &700030613
+--- !u!114 &2639167266109021971
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7811732804729390583}
+  m_GameObject: {fileID: 3626184005770508900}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a24d8db036957e45b181aabc27079f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   growTime: 2
-  cropName: 
-  reward: 0
+  cropName: Tomato
+  reward: 1
