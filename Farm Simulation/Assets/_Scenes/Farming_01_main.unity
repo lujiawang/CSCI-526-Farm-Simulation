@@ -106,15 +106,15 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.2
-    agentHeight: 0.8
+    agentRadius: 0.08
+    agentHeight: 0.3
     agentSlope: 45
-    agentClimb: 0.4
+    agentClimb: 0.1
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.06666667
+    cellSize: 0.026666665
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -1937,6 +1937,7 @@ GameObject:
   - component: {fileID: 693246524}
   - component: {fileID: 693246525}
   - component: {fileID: 693246527}
+  - component: {fileID: 693246520}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1944,6 +1945,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &693246520
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693246519}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 20cbcca5e61d246bd93231648abb3130, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!50 &693246521
 Rigidbody2D:
   serializedVersion: 4
@@ -2004,7 +2024,7 @@ SpriteRenderer:
   m_SortingLayerID: 1163050265
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 0f39a9205e4394ee1b6ba8269428d176, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2023,8 +2043,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 693246519}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.2, y: -3.3, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalPosition: {x: -3, y: -1.5, z: 0}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -2054,7 +2074,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 693246519}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.2
+  m_Radius: 0.08
   m_Speed: 6
   m_Acceleration: 100000
   avoidancePriority: 50
@@ -2063,8 +2083,8 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 0.8
-  m_BaseOffset: 0
+  m_Height: 0.3
+  m_BaseOffset: 0.14
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 0
 --- !u!114 &693246527
@@ -2079,6 +2099,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 634d4996e8e2d481a97789df38e9f058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 693246520}
 --- !u!4 &700030615 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7811732804729390568, guid: 91428446e72b0f14cb729e39d5e83de4,
@@ -2132,7 +2153,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.06666667
+  m_VoxelSize: 0.026666665
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 23800000, guid: 7d8acc00abd424c24b6faf80e83ae5f3, type: 2}
 --- !u!4 &768416532
