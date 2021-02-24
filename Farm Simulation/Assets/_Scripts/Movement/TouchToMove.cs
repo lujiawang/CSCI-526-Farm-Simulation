@@ -17,9 +17,15 @@ public class TouchToMove : MonoBehaviour
     // public Transform target;
     private NavMeshHit hit;
 
-    private bool isPlayer;
+    public static bool isPlayer;
 
     public Animator animator;
+
+
+
+    /*cropLand info: */
+    public static string landName = "";
+
 
 
     // Start is called before the first frame update
@@ -67,6 +73,10 @@ public class TouchToMove : MonoBehaviour
             {
                 // Debug.Log("Workable Point: "+targetPos);
             }
+
+            targetPos = SnapToLand(targetPos);
+
+
             agent.SetDestination(targetPos);
         }
 
@@ -77,5 +87,42 @@ public class TouchToMove : MonoBehaviour
     {
         isPlayer = !isPlayer;
         Debug.Log("isPlayer: " + isPlayer);
+    }
+
+
+
+
+    /* Set the player's destination to the nearest cropland. */
+    public Vector3 SnapToLand(Vector3 target)
+    {
+
+        //get the current touched object
+        RaycastHit2D hitInformation = Physics2D.Raycast(target, Camera.main.transform.forward);
+
+        if (hitInformation.collider != null)
+        {
+            //We should have hit something with a 2D Physics collider!
+            GameObject touchedObject = hitInformation.transform.gameObject;
+
+            // for those planted lands
+            if (touchedObject.transform.parent != null && touchedObject.transform.parent.CompareTag("cropLand"))
+            {
+                TouchToMove.landName = touchedObject.transform.parent.name;
+                Debug.Log("Go to harvest -> " + landName);
+                return touchedObject.transform.parent.position;
+            }
+
+            else if (touchedObject.CompareTag("cropLand"))
+            {
+                TouchToMove.landName = touchedObject.name;
+                Debug.Log("Go to -> " + landName);
+                return touchedObject.transform.position;
+
+            }
+
+        }
+        landName = "";
+
+        return target;
     }
 }

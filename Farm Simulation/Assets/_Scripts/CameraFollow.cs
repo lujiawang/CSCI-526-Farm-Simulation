@@ -31,18 +31,21 @@ public class CameraFollow : MonoBehaviour
 
     void Update()
     {
-        Vector3 targetPosition = transform.position;
-        Vector3 desiredPosition = target.transform.position + offset;
-        Vector3 smoothedPosition = Vector3.Lerp(targetPosition, desiredPosition, smoothFactor * Time.deltaTime);
-        transform.position = smoothedPosition;
+        if (TouchToMove.isPlayer)
+        {
+            Vector3 targetPosition = transform.position;
+            Vector3 desiredPosition = target.transform.position + offset;
+            Vector3 smoothedPosition = Vector3.Lerp(targetPosition, desiredPosition, smoothFactor * Time.deltaTime);
+            transform.position = smoothedPosition;
 
-        transform.position = new Vector3
-            (
-                Mathf.Clamp(transform.position.x, leftLimit, rightLimit),
-                Mathf.Clamp(transform.position.y, bottomLimit, topLimit),
-                transform.position.z
+            transform.position = new Vector3
+                (
+                    Mathf.Clamp(transform.position.x, leftLimit, rightLimit),
+                    Mathf.Clamp(transform.position.y, bottomLimit, topLimit),
+                    transform.position.z
 
-            );
+                );
+        }
     }
 
     // called every fixed frame rate

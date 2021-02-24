@@ -7,6 +7,7 @@ TagManager:
   - TestTarget
   - cropLand
   - crop
+  - Warning
   layers:
   - Default
   - TransparentFX
