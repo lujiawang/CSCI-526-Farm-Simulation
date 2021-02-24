@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HarvestStats : MonoBehaviour
 {
@@ -20,11 +21,14 @@ public class HarvestStats : MonoBehaviour
 
 
     private Dictionary<string, int> cropCount;
-
+    public GameObject failPanel;
+    public GameObject successPanel;
+    private Text inventoryText;
     private GameObject[] cropLands;
     void Awake()
     {
         cropLands = GameObject.FindGameObjectsWithTag("cropLand");
+        inventoryText = successPanel.transform.GetChild(0).gameObject.GetComponent<Text>();
     }
 
     // Update is called once per frame
@@ -35,6 +39,7 @@ public class HarvestStats : MonoBehaviour
 
     public void Sweep()
     {
+        bool cropExists = false;
         cropCount = new Dictionary<string, int>();
         foreach (GameObject cropLand in cropLands)
         {
@@ -61,8 +66,9 @@ public class HarvestStats : MonoBehaviour
                         {
                             cropCount[name] = 0;
                         }
-                        cropCount[name] += 1;
 
+                        cropCount[name] += 1;
+                        cropExists = true;
                         //put back into original parent and Set inactive
 
 
@@ -80,14 +86,44 @@ public class HarvestStats : MonoBehaviour
                 Debug.Log("None grown yet!");
             }
         }
-
-        PrintCrops(cropCount);
+        if (!cropExists)
+        {
+            StartCoroutine(ActivateFailPanel());
+        }
+        else
+        {
+            PrintCrops(cropCount);
+        }
     }
 
     void PrintCrops(Dictionary<string,int> cropCount)
     {
+        inventoryText.text = "";
+
+        Debug.Log(inventoryText.text);
+        inventoryText.text += "Congrats, you have collected: \n";
+
         foreach(KeyValuePair<string,int> crop in cropCount) {
-            Debug.Log("Congrats, you have collected: " + crop.Value + "x " + crop.Key);
+            inventoryText.text += crop.Value + "x " + crop.Key + "\n";
+           //  Debug.Log("Congrats, you have collected: " + crop.Value + "x " + crop.Key);
         }
+
+        StartCoroutine(ActivateSuccessPanel());
+        
+    }
+
+    private IEnumerator ActivateFailPanel()
+    {
+        failPanel.SetActive(true);
+        yield return new WaitForSeconds(1);
+        inventoryText.text = "";
+        failPanel.SetActive(false);
+    }
+    private IEnumerator ActivateSuccessPanel()
+    {
+        successPanel.SetActive(true);
+        yield return new WaitForSeconds(2);
+
+        successPanel.SetActive(false);
     }
 }

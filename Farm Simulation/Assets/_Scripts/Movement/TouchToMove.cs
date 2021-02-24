@@ -45,9 +45,9 @@ public class TouchToMove : MonoBehaviour
         // animator.SetFloat("Vertical", Input.GetAxis("Vertical"));
         // Debug.Log("Velocity: "+ agent.velocity);
         animator.SetFloat("Horizontal", agent.velocity.normalized.x);
-        Debug.Log("Horizontal: "+ agent.velocity.normalized.x);
+        //Debug.Log("Horizontal: "+ agent.velocity.normalized.x);
         animator.SetFloat("Vertical", agent.velocity.normalized.y);
-        Debug.Log("Vertical: "+ agent.velocity.normalized.y);
+        //Debug.Log("Vertical: "+ agent.velocity.normalized.y);
 
 
         /* Need to do sth like !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId), check Input.touchCount > 0 first */
