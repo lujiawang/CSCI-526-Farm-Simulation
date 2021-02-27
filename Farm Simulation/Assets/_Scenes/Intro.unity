@@ -426,8 +426,6 @@ GameObject:
   - component: {fileID: 499693448}
   - component: {fileID: 499693449}
   - component: {fileID: 499693451}
-  - component: {fileID: 499693453}
-  - component: {fileID: 499693452}
   - component: {fileID: 499693450}
   - component: {fileID: 499693454}
   - component: {fileID: 499693455}
@@ -464,8 +462,7 @@ MonoBehaviour:
     height: 859
   selectedBlocks:
   - {fileID: 499693443}
-  selectedCommands:
-  - {fileID: 499693442}
+  selectedCommands: []
   variables: []
   description: 
   stepPause: 0
@@ -538,8 +535,6 @@ MonoBehaviour:
   - {fileID: 499693442}
   - {fileID: 499693446}
   - {fileID: 499693449}
-  - {fileID: 499693453}
-  - {fileID: 499693452}
   suppressAllAutoSelections: 0
 --- !u!114 &499693444
 MonoBehaviour:
@@ -705,36 +700,6 @@ MonoBehaviour:
   orthoSizeTweenType: 4
   posTweenType: 4
   rotTweenType: 4
---- !u!114 &499693452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 499693440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 083836d4b33584c1aaf7d1eb57b02ba0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 9
-  indentLevel: 0
-  fullscreenMode: 0
---- !u!114 &499693453
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 499693440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 083836d4b33584c1aaf7d1eb57b02ba0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 8
-  indentLevel: 0
-  fullscreenMode: 0
 --- !u!114 &499693454
 MonoBehaviour:
   m_ObjectHideFlags: 0
