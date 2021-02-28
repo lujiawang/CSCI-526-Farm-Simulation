@@ -18,11 +18,11 @@ MonoBehaviour:
   m_GUID: 42cc03a9b5bd184479a9dc3c964326e0
   m_SerializeEntries:
   - m_GUID: ef320b5269778f842a9bb0cf66981501
-    m_Address: Assets/_Sprites/Crops/Crop_Spritesheet.png
+    m_Address: s/Crops/Crop_Spritesheet.pngpritesheet.png
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
+    m_MainAsset: {fileID: 2800000, guid: ef320b5269778f842a9bb0cf66981501, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: ef320b5269778f842a9bb0cf66981501, type: 3}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 03eb5a62010997a409887a68c795d515, type: 2}
   m_SchemaSet:

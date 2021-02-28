@@ -58,7 +58,7 @@ public class TouchToMove : MonoBehaviour
 
         /* Need to do sth like !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId), check Input.touchCount > 0 first */
 
-        if (Input.GetMouseButtonDown(0) && isPlayer && !EventSystem.current.IsPointerOverGameObject())
+        if (Input.GetMouseButtonDown(0) && isPlayer && EventSystem.current.currentSelectedGameObject== null)
         {
             targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             targetPos.z = 0;
