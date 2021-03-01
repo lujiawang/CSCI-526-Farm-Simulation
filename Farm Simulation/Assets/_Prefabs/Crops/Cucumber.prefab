@@ -127,5 +127,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   growTime: 2
-  cropName: 
-  reward: 0
+  cropName: Cucumber
+  reward: 12
+  addrs:
+  - m_AssetGUID: ef320b5269778f842a9bb0cf66981501
+    m_SubObjectName: Cucumber_0
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_AssetGUID: ef320b5269778f842a9bb0cf66981501
+    m_SubObjectName: Cucumber_1
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_AssetGUID: ef320b5269778f842a9bb0cf66981501
+    m_SubObjectName: Cucumber_2
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_AssetGUID: ef320b5269778f842a9bb0cf66981501
+    m_SubObjectName: Cucumber_3
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_AssetGUID: ef320b5269778f842a9bb0cf66981501
+    m_SubObjectName: Cucumber_4
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_AssetGUID: ef320b5269778f842a9bb0cf66981501
+    m_SubObjectName: Cucumber_5
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
