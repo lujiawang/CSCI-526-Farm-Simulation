@@ -58,7 +58,7 @@ public class TouchToMove : MonoBehaviour
 
         /* Need to do sth like !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId), check Input.touchCount > 0 first */
 
-        if (Input.GetMouseButtonDown(0) && isPlayer && EventSystem.current.currentSelectedGameObject== null)
+        if (Input.GetMouseButtonDown(0) && isPlayer && !IsPointerOverGameObject() )
         {
             targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             targetPos.z = 0;
@@ -79,7 +79,23 @@ public class TouchToMove : MonoBehaviour
 
             agent.SetDestination(targetPos);
         }
+        
+        
 
+    }
+
+    public static bool IsPointerOverGameObject(){
+        //check mouse
+        if(EventSystem.current.IsPointerOverGameObject())
+            return true;
+         
+        //check touch
+        if(Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began ){
+            if(EventSystem.current.IsPointerOverGameObject(Input.touches[0].fingerId))
+                return true;
+        }
+         
+        return false;
     }
 
 
