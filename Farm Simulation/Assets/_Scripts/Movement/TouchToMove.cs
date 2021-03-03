@@ -22,9 +22,9 @@ public class TouchToMove : MonoBehaviour
     public Animator animator;
 
 
-
     /*cropLand info: */
     public static string landName = "";
+    public Text cropName;
 
 
 
@@ -58,7 +58,7 @@ public class TouchToMove : MonoBehaviour
 
         /* Need to do sth like !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId), check Input.touchCount > 0 first */
 
-        if (Input.GetMouseButtonDown(0) && isPlayer && !EventSystem.current.IsPointerOverGameObject())
+        if (Input.GetMouseButtonDown(0) && isPlayer && !IsPointerOverGameObject() )
         {
             targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             targetPos.z = 0;
@@ -79,7 +79,23 @@ public class TouchToMove : MonoBehaviour
 
             agent.SetDestination(targetPos);
         }
+        
+        
 
+    }
+
+    public static bool IsPointerOverGameObject(){
+        //check mouse
+        if(EventSystem.current.IsPointerOverGameObject())
+            return true;
+         
+        //check touch
+        if(Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began ){
+            if(EventSystem.current.IsPointerOverGameObject(Input.touches[0].fingerId))
+                return true;
+        }
+         
+        return false;
     }
 
 
@@ -109,6 +125,17 @@ public class TouchToMove : MonoBehaviour
             {
                 TouchToMove.landName = touchedObject.transform.parent.name;
                 Debug.Log("Go to harvest -> " + landName);
+
+
+                CropGrowing cropGrowing = touchedObject.GetComponent<CropGrowing>();
+                if(cropGrowing != null)
+                {
+                    if (cropGrowing.grown)
+                        cropName.text = touchedObject.name + " is grown";
+                    else
+                        cropName.text = touchedObject.name + " is not grown yet";
+                }
+
                 return touchedObject.transform.parent.position;
             }
 

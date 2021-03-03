@@ -15,10 +15,134 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_Data:
     m_SerializedData: []
-  m_GUID: 42cc03a9b5bd184479a9dc3c964326e0
+  m_GUID: 67ced1b88db15874f94da96c60bd1623
   m_SerializeEntries:
   - m_GUID: ef320b5269778f842a9bb0cf66981501
     m_Address: Assets/_Sprites/Crops/Crop_Spritesheet.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 2800000, guid: ef320b5269778f842a9bb0cf66981501, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: ef320b5269778f842a9bb0cf66981501, type: 3}
+  - m_GUID: 429b14349fb236d49b50d9459affab69
+    m_Address: Assets/_Prefabs/Crops/Corn.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 8250538074193522406, guid: 429b14349fb236d49b50d9459affab69,
+      type: 3}
+    m_TargetAsset: {fileID: 8250538074193522406, guid: 429b14349fb236d49b50d9459affab69,
+      type: 3}
+  - m_GUID: 91428446e72b0f14cb729e39d5e83de4
+    m_Address: Assets/_Prefabs/Crops/Cucumber.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 7811732804729390583, guid: 91428446e72b0f14cb729e39d5e83de4,
+      type: 3}
+    m_TargetAsset: {fileID: 7811732804729390583, guid: 91428446e72b0f14cb729e39d5e83de4,
+      type: 3}
+  - m_GUID: fc74febb3e99b2549a503e2b7d372b84
+    m_Address: Assets/_Prefabs/Crops/Avocado.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: dddc937607a4d5641a51767cbbbd6369
+    m_Address: Assets/_Prefabs/Crops/Cassava.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: a3a2b1f6d2b7bee47a324a75c5f52e21
+    m_Address: Assets/_Prefabs/Crops/Coffee.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: af1cbac6e0fed494c90af7e5bfdfc92a
+    m_Address: Assets/_Prefabs/Crops/Eggplant.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 3d9ddaf4d8359654e9eaa83ef6d34704
+    m_Address: Assets/_Prefabs/Crops/Grapes.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 0020b88fc9bc1144cb683f1548692e69
+    m_Address: Assets/_Prefabs/Crops/Lemon.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 8ea1aa8baa0db24418b6388c0b1fec80
+    m_Address: Assets/_Prefabs/Crops/Melon.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 2b0e801867d684145bbad7dd7ac3efa8
+    m_Address: Assets/_Prefabs/Crops/Orange.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 3a72a67b68cf87d41b811cf98386ac10
+    m_Address: Assets/_Prefabs/Crops/Pineapple.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: be728ffe305eafc4486755b73646c024
+    m_Address: Assets/_Prefabs/Crops/Potato.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 6e4698cd61e97d14aad8f7d17ec5cb29
+    m_Address: Assets/_Prefabs/Crops/Rice.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 03793ee8aaa4a80428f0095678082748
+    m_Address: Assets/_Prefabs/Crops/Rose.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 31a7e796c81f230429dce415a5070dd3
+    m_Address: Assets/_Prefabs/Crops/Strawberry.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 92bedd8624b72ca4887cc955104a5204
+    m_Address: Assets/_Prefabs/Crops/Sunflower.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: d56d036218f511f42a208f163991545b
+    m_Address: Assets/_Prefabs/Crops/Tomato.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: eae378b3b265b9346a12d3eb91c5a8b4
+    m_Address: Assets/_Prefabs/Crops/Tulip.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: fed162a7eb19bbd4d973b5abe7e57684
+    m_Address: Assets/_Prefabs/Crops/Turnip.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 8e19985f8be91e647bdb060071757f46
+    m_Address: Assets/_Prefabs/Crops/Wheat.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     m_MainAsset: {fileID: 0}

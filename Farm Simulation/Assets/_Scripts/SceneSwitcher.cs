@@ -17,13 +17,18 @@ public class SceneSwitcher : MonoBehaviour
         
     }
 
-    public void SwitchScene()
+    public void SwitchToMain()
     {
         SceneManager.LoadScene(1);
     }
 
+    public void SwitchScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+
     public void ReloadScene()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

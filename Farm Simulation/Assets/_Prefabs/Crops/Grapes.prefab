@@ -101,7 +101,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.0666667, y: 1.0666667}
+    oldSize: {x: 1.0666667, y: 1}
     newSize: {x: 1.0666667, y: 1.0666667}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -129,3 +129,28 @@ MonoBehaviour:
   growTime: 2
   cropName: Grapes
   reward: 1
+  addrs:
+  - m_AssetGUID: ef320b5269778f842a9bb0cf66981501
+    m_SubObjectName: Grapes_0
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_AssetGUID: ef320b5269778f842a9bb0cf66981501
+    m_SubObjectName: Grapes_1
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_AssetGUID: ef320b5269778f842a9bb0cf66981501
+    m_SubObjectName: Grapes_2
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_AssetGUID: ef320b5269778f842a9bb0cf66981501
+    m_SubObjectName: Grapes_3
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_AssetGUID: ef320b5269778f842a9bb0cf66981501
+    m_SubObjectName: Grapes_4
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_AssetGUID: ef320b5269778f842a9bb0cf66981501
+    m_SubObjectName: Grapes_5
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null

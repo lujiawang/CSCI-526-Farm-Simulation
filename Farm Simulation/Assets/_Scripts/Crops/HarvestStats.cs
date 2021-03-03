@@ -77,6 +77,7 @@ public class HarvestStats : MonoBehaviour
 
                         //Destroy gameobject
                         Destroy(childObject);
+           
                     }
                 }
 
@@ -105,9 +106,9 @@ public class HarvestStats : MonoBehaviour
 
         foreach(KeyValuePair<string,int> crop in cropCount) {
             inventoryText.text += crop.Value + "x " + crop.Key + "\n";
-           //  Debug.Log("Congrats, you have collected: " + crop.Value + "x " + crop.Key);
+           
         }
-
+        inventoryText.text += "Sell your stock at the store.";
         StartCoroutine(ActivateSuccessPanel());
         
     }
