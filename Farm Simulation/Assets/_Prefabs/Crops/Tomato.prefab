@@ -129,3 +129,28 @@ MonoBehaviour:
   growTime: 2
   cropName: Tomato
   reward: 1
+  addrs:
+  - m_AssetGUID: ef320b5269778f842a9bb0cf66981501
+    m_SubObjectName: Tomato_0
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_AssetGUID: ef320b5269778f842a9bb0cf66981501
+    m_SubObjectName: Tomato_1
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_AssetGUID: ef320b5269778f842a9bb0cf66981501
+    m_SubObjectName: Tomato_2
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_AssetGUID: ef320b5269778f842a9bb0cf66981501
+    m_SubObjectName: Tomato_3
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_AssetGUID: ef320b5269778f842a9bb0cf66981501
+    m_SubObjectName: Tomato_4
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - m_AssetGUID: ef320b5269778f842a9bb0cf66981501
+    m_SubObjectName: Tomato_5
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null

@@ -137,7 +137,6 @@ public class CropGrowing : MonoBehaviour
         
         if(cropNum == 6 && started == false)
         {
-            Debug.Log("pepelaugh");
             // Repeat method per 1 second
             assignSprite(0);
             InvokeRepeating("incrementByOne", 1f, 1f);
