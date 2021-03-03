@@ -22,9 +22,9 @@ public class TouchToMove : MonoBehaviour
     public Animator animator;
 
 
-
     /*cropLand info: */
     public static string landName = "";
+    public Text cropName;
 
 
 
@@ -125,6 +125,17 @@ public class TouchToMove : MonoBehaviour
             {
                 TouchToMove.landName = touchedObject.transform.parent.name;
                 Debug.Log("Go to harvest -> " + landName);
+
+
+                CropGrowing cropGrowing = touchedObject.GetComponent<CropGrowing>();
+                if(cropGrowing != null)
+                {
+                    if (cropGrowing.grown)
+                        cropName.text = touchedObject.name + " is grown";
+                    else
+                        cropName.text = touchedObject.name + " is not grown yet";
+                }
+
                 return touchedObject.transform.parent.position;
             }
 

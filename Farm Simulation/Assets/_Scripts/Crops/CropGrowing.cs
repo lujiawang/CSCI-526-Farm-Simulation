@@ -21,7 +21,7 @@ public class CropGrowing : MonoBehaviour
     public int growTime;
     public string cropName;
     //private Dictionary<int, Sprite> cropAssets;
-    private bool grown;
+    public bool grown; //make it public so player will know whether it is grown
     public int reward;
     public AssetReferenceSprite[] addrs = new AssetReferenceSprite[6];
     private int cropNum = 0;
