@@ -76,6 +76,7 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         {
             warning.transform.GetChild(0).gameObject.SetActive(true);//the warning button
             warning.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "Please walk to a crop land first"; //warning text
+            Time.timeScale = 0f;
 
             canvasGroup.alpha = 1f;
             canvasGroup.blocksRaycasts = true;
@@ -97,6 +98,17 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
             canvasGroup.alpha = 1f;
             canvasGroup.blocksRaycasts = true;
             canDrag = false;
+        } else
+        {
+            Debug.Log("drag");
+            canDrag = false;
+        }
+
+
+        if (!canDrag)
+        {
+            rectTransform.anchoredPosition = initialPos;
+            canDrag = true;
         }
     }
 
@@ -119,7 +131,7 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     // Update is called once per frame
     void Update()
     {
-        
+
         if (!inPosition && canDrag)
         {
             Vector2 pos = cam.ScreenToWorldPoint(transform.position);
@@ -140,6 +152,7 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
                     warning.transform.GetChild(0).gameObject.SetActive(true);
                     warning.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "Please walk to an empty crop land";
                     rectTransform.anchoredPosition = initialPos;
+                    Time.timeScale = 0f;
 
                     canvasGroup.alpha = 1f;
                     canvasGroup.blocksRaycasts = true;
