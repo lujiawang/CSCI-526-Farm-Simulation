@@ -115,27 +115,38 @@ public class TouchToMove : MonoBehaviour
         //get the current touched object
         RaycastHit2D hitInformation = Physics2D.Raycast(target, Camera.main.transform.forward);
 
+        GameObject touchedObject = null;
+        
+
         if (hitInformation.collider != null)
         {
             //We should have hit something with a 2D Physics collider!
-            GameObject touchedObject = hitInformation.transform.gameObject;
-
+            touchedObject = hitInformation.transform.gameObject;
+            PassGameObject(touchedObject);
             // for those planted lands
             if (touchedObject.transform.parent != null && touchedObject.transform.parent.CompareTag("cropLand"))
             {
                 TouchToMove.landName = touchedObject.transform.parent.name;
                 Debug.Log("Go to harvest -> " + landName);
 
-
+                
                 CropGrowing cropGrowing = touchedObject.GetComponent<CropGrowing>();
                 if(cropGrowing != null)
                 {
                     if (cropGrowing.grown)
+                    
                         cropName.text = touchedObject.name + " is grown";
+                        
+                    
+                        
+                        
                     else
                         cropName.text = touchedObject.name + " is not grown yet";
+                        
+                    
+                        
                 }
-
+                
                 return touchedObject.transform.parent.position;
             }
 
@@ -146,10 +157,24 @@ public class TouchToMove : MonoBehaviour
                 return touchedObject.transform.position;
 
             }
+            
 
         }
+        PassGameObject(touchedObject);
         landName = "";
 
         return target;
     }
+
+    public void PassGameObject(GameObject touchedObject)
+    {
+        //detect if player is near a crop land that allows for collection
+        
+        GameObject player = GameObject.Find("Player");
+        Harvest hvt = player.GetComponent<Harvest>();
+        hvt.SetObject(touchedObject);
+    }
+    
+
+    
 }
