@@ -516,6 +516,9 @@ GameObject:
   - component: {fileID: 499693458}
   - component: {fileID: 499693459}
   - component: {fileID: 499693450}
+  - component: {fileID: 499693460}
+  - component: {fileID: 499693462}
+  - component: {fileID: 499693461}
   m_Layer: 0
   m_Name: Flowchart
   m_TagString: Untagged
@@ -550,7 +553,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 499693443}
   selectedCommands:
-  - {fileID: 499693442}
+  - {fileID: 499693461}
   variables: []
   description: 
   stepPause: 0
@@ -626,6 +629,9 @@ MonoBehaviour:
   - {fileID: 499693447}
   - {fileID: 499693442}
   - {fileID: 499693446}
+  - {fileID: 499693460}
+  - {fileID: 499693462}
+  - {fileID: 499693461}
   - {fileID: 499693458}
   - {fileID: 499693450}
   - {fileID: 499693449}
@@ -949,6 +955,89 @@ MonoBehaviour:
   atTime: 0
   loop: 1
   fadeDuration: 0
+--- !u!114 &499693460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499693440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec422cd568a9c4a31ad7c36d0572b9da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 23
+  indentLevel: 0
+  storyText: 'I will provide the small land and one plant seed as gifts.
+
+'
+  description: 
+  character: {fileID: 414941533}
+  portrait: {fileID: 21300000, guid: 14e5be412a123b24c9e67a2607ee1167, type: 3}
+  voiceOverClip: {fileID: 0}
+  showAlways: 1
+  showCount: 1
+  extendPrevious: 0
+  fadeWhenDone: 1
+  waitForClick: 1
+  stopVoiceover: 1
+  waitForVO: 0
+  setSayDialog: {fileID: 0}
+--- !u!114 &499693461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499693440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec422cd568a9c4a31ad7c36d0572b9da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 25
+  indentLevel: 0
+  storyText: You don't have money. Don't worry, you can earn money by playing games.
+  description: 
+  character: {fileID: 414941533}
+  portrait: {fileID: 21300000, guid: 14e5be412a123b24c9e67a2607ee1167, type: 3}
+  voiceOverClip: {fileID: 0}
+  showAlways: 1
+  showCount: 1
+  extendPrevious: 0
+  fadeWhenDone: 1
+  waitForClick: 1
+  stopVoiceover: 1
+  waitForVO: 0
+  setSayDialog: {fileID: 0}
+--- !u!114 &499693462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499693440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec422cd568a9c4a31ad7c36d0572b9da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 24
+  indentLevel: 0
+  storyText: If you want more seed, you can buy them at the shop.
+  description: 
+  character: {fileID: 414941533}
+  portrait: {fileID: 21300000, guid: 14e5be412a123b24c9e67a2607ee1167, type: 3}
+  voiceOverClip: {fileID: 0}
+  showAlways: 1
+  showCount: 1
+  extendPrevious: 0
+  fadeWhenDone: 1
+  waitForClick: 1
+  stopVoiceover: 1
+  waitForVO: 0
+  setSayDialog: {fileID: 0}
 --- !u!1 &596400005
 GameObject:
   m_ObjectHideFlags: 0
