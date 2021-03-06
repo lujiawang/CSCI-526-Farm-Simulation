@@ -1,77 +1,100 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Harvest : MonoBehaviour
 {
-    public class Crop
-    {
-        public string cropName;
-        public int reward;
-
-        public Crop(string cn, int rwd)
-        {
-            cropName = cn;
-            reward = rwd;
-        }
-    }
-
-
-
     // Start is called before the first frame update
 
     private GameObject childObject;
-    private CropGrowing gScript;
-    private int gain;
-
-    
+    public Text notificationText;
+    public HarvestStats hs;
     void Start()
     {
         
 
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetObject(GameObject gameObject)
     {
-        
+        childObject = gameObject;
     }
 
-    public void collectCrop()
+    public void CollectCrop()
     {
-        if (this.transform.childCount > 0)
+        
+        //clicked on nothing
+        
+        if (childObject == null || childObject.transform.parent == null)
         {
-            childObject = this.transform.GetChild(0).gameObject;
-            Debug.Log("Just clicked something");
-            if(childObject) gScript = childObject.GetComponent<CropGrowing>();
+            Debug.Log("Not clicking anywhere near the fields");
+            hs.ActivateFail(1);
+            return;
+        }
+        
 
+        //clicked on cropLand instead
 
-            Debug.Log("Time to harvest");
+        if (childObject.CompareTag("cropLand"))
+        {
+            //check for child just in case
 
-            if (childObject == null) return;
-            int reward = gScript.harvestCrop();
-            if (reward > 0)
+            if (childObject.transform.childCount <= 0)
             {
-                
-                gain = reward;
-                Crop crop = new Crop(gScript.cropName, reward);
-                Debug.Log("Sold " + crop.cropName + " for: " + crop.reward + " coins!");
+                Debug.Log("Theres nothing on the field");
+                hs.ActivateFail(2);
+                return;
             }
 
-            //return specifics of the crop. Change function to return Crop object later on.
+            GameObject checkChild = childObject.transform.GetChild(0).gameObject;
+            
+            if (checkChild)
+            {
+                CropGrowing gScript= checkChild.GetComponent<CropGrowing>();
+                if (gScript.grown)
+                {
+                    string cropName = gScript.name;
+                    Debug.Log("Harvesting " + cropName);
+                    hs.AddToInventory(cropName);
+                    notificationText.text = "";
+                    Destroy(checkChild);
+                    return;
+                }
+
+            }
+
 
             
+            
+        } 
+
+
+        //clicked on the crop itself
+
+        CropGrowing cropGrowing = childObject.GetComponent<CropGrowing>();
+
+        if (cropGrowing == null)
+        {
+            Debug.Log("Collecting right after planting");
+            hs.ActivateFail(3);
+            return;
+        }
+
+
+        if (cropGrowing.grown)
+        {
+            string cropName = childObject.name;
+            Debug.Log("Harvesting " + cropName);
+            hs.AddToInventory(cropName);
+            notificationText.text = "";
+            Destroy(childObject);
         }
         else
         {
-            Debug.Log("None grown yet!");
+            Debug.Log("Has yet to grow");
+            hs.ActivateFail(3);
+            return;
         }
-
-       
     }
 
-    public int getReward()
-    {
-        return gain;
-    }
 }
