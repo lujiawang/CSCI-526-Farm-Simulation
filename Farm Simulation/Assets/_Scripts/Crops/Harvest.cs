@@ -4,15 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Harvest : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // Summary: Script checks for the current gameobject that is being interacted and determines whether the player can harvest a crop successfully
+    // Notifications are handled in HarvestStats.cs
 
     private GameObject childObject;
     public Text notificationText;
     public HarvestStats hs;
+
+    private Transform parentInventory;
+
     void Start()
     {
         
-
+        parentInventory = GameObject.Find("HarvestPlaceholder").transform;
     }
 
     public void SetObject(GameObject gameObject)
@@ -57,7 +61,7 @@ public class Harvest : MonoBehaviour
                     Debug.Log("Harvesting " + cropName);
                     hs.AddToInventory(cropName);
                     notificationText.text = "";
-                    Destroy(checkChild);
+                    HideCrop(checkChild);
                     return;
                 }
 
@@ -87,7 +91,7 @@ public class Harvest : MonoBehaviour
             Debug.Log("Harvesting " + cropName);
             hs.AddToInventory(cropName);
             notificationText.text = "";
-            Destroy(childObject);
+            HideCrop(childObject);
         }
         else
         {
@@ -95,6 +99,13 @@ public class Harvest : MonoBehaviour
             hs.ActivateFail(3);
             return;
         }
+    }
+
+    public void HideCrop(GameObject gameObject)
+    {
+        gameObject.transform.SetParent(parentInventory);
+        gameObject.transform.position = parentInventory.position;
+        gameObject.SetActive(false);
     }
 
 }

@@ -5,52 +5,39 @@ using UnityEngine.UI;
 
 public class HarvestStats : MonoBehaviour
 {
+    /// Summary: Script is called when the harvest button is clicked. Different notifications are shown depending on where the player is standing
     
-    //public class Crop
-    //{
-    //    public string cropname;
-    //    public int reward;
-
-    //    public Crop(string cn, int rwd)
-    //    {
-    //        cropname = cn;
-    //        reward = rwd;
-    //    }
-
-    //    public void printCrop(int rwd)
-    //    {
-    //        reward = rwd;
-    //        Debug.Log(reward);
-    //    }
-    //}
 
 
 
-    private Dictionary<string, int> cropCount;
+    //public static Dictionary<string, int> cropCount;
     public GameObject failPanel;
     public GameObject successPanel;
     private Text inventoryText;
     private Text warningText;
-    private GameObject[] cropLands;
+    //private GameObject[] cropLands;
     void Awake()
     {
-        cropLands = GameObject.FindGameObjectsWithTag("cropLand");
+        //cropLands = GameObject.FindGameObjectsWithTag("cropLand");
         inventoryText = successPanel.transform.GetChild(0).gameObject.GetComponent<Text>();
         warningText = failPanel.transform.GetChild(0).gameObject.GetComponent<Text>();
-        cropCount = new Dictionary<string, int>();
+        //cropCount = new Dictionary<string, int>();
     }
 
     
 
     public void AddToInventory(string cropName)
     {
+        //script is attached to the player.
+        //adds crop to the dictionary that represents the current inventory of the player
+        
         if (cropName == "") return;
 
-        if (!cropCount.ContainsKey(cropName))
+        if (!PlayerStats.cropCount.ContainsKey(cropName))
         {
-            cropCount[cropName] = 0;
+            PlayerStats.cropCount[cropName] = 0;
         }
-        cropCount[cropName] += 1;
+        PlayerStats.cropCount[cropName] += 1;
         PrintNotification(cropName);
     }
 
