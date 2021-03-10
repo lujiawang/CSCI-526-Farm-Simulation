@@ -8,6 +8,7 @@ TagManager:
   - cropLand
   - crop
   - Warning
+  - Harvests
   layers:
   - Default
   - TransparentFX

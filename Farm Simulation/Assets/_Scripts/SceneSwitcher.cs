@@ -19,8 +19,14 @@ public class SceneSwitcher : MonoBehaviour
 
     public void SwitchToMain()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("Farming_01_main");
     }
+    public void SwitchToStore()
+    {
+        SceneManager.LoadScene("Farming_02_store");
+
+    }
+
 
     public void SwitchScene(string sceneName)
     {

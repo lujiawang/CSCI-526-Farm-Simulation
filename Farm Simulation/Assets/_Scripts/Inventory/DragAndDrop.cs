@@ -33,7 +33,6 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         warning = GameObject.FindGameObjectWithTag("Warning");
 
 
-
         foreach (Transform child in CropParent.transform)
         {
             if (child.name.Equals(this.name))
