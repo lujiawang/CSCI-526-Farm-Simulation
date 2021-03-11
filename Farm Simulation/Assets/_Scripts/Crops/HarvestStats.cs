@@ -45,13 +45,8 @@ public class HarvestStats : MonoBehaviour
     void PrintNotification(string cropName)
     {
         inventoryText.text = "";
-
-
-        inventoryText.text += "Congrats, you have collected: \n";
-
-        inventoryText.text += 1 + "x " + cropName + "\n";
-        Debug.Log(inventoryText.text);
-        StartCoroutine(ActivateSuccessPanel());
+        inventoryText.text += "Hurray! You have collected:";
+        StartCoroutine(ActivateSuccessPanel(cropName));
     }
 
 
@@ -139,21 +134,20 @@ public class HarvestStats : MonoBehaviour
 
 
 
-    void PrintCrops(Dictionary<string,int> cropCount)
+    void PrintCrops(Dictionary<string, int> cropCount)
     {
         inventoryText.text = "";
 
-        
+
         inventoryText.text += "Congrats, you have collected: \n";
 
-        foreach(KeyValuePair<string,int> crop in cropCount) {
-            inventoryText.text += crop.Value + "x " + crop.Key + "\n";
-           
+        foreach (KeyValuePair<string, int> crop in cropCount)
+        {
+            Debug.Log(crop.Value + "x " + crop.Key + "\n");
+
         }
-        inventoryText.text += "Sell your stock at the store.";
-        Debug.Log(inventoryText.text);
-        StartCoroutine(ActivateSuccessPanel());
         
+
     }
 
     private IEnumerator ActivateFailPanel()
@@ -162,11 +156,15 @@ public class HarvestStats : MonoBehaviour
         yield return new WaitForSeconds(1);
         failPanel.SetActive(false);
     }
-    private IEnumerator ActivateSuccessPanel()
+    private IEnumerator ActivateSuccessPanel(string cropName)
     {
+        GameObject crop = successPanel.transform.Find(cropName).gameObject;
         successPanel.SetActive(true);
+        crop.SetActive(true);
         yield return new WaitForSeconds(2);
 
         successPanel.SetActive(false);
+        crop.SetActive(false);
+        PrintCrops(PlayerStats.cropCount);
     }
 }

@@ -61,7 +61,8 @@ public class Harvest : MonoBehaviour
                     Debug.Log("Harvesting " + cropName);
                     hs.AddToInventory(cropName);
                     notificationText.text = "";
-                    HideCrop(checkChild);
+                    HideCrop(cropName);
+                    Destroy(checkChild);
                     return;
                 }
 
@@ -91,7 +92,8 @@ public class Harvest : MonoBehaviour
             Debug.Log("Harvesting " + cropName);
             hs.AddToInventory(cropName);
             notificationText.text = "";
-            HideCrop(childObject);
+            HideCrop(cropName);
+            Destroy(childObject);
         }
         else
         {
@@ -101,8 +103,10 @@ public class Harvest : MonoBehaviour
         }
     }
 
-    public void HideCrop(GameObject gameObject)
+    public void HideCrop(string cropName)
     {
+        GameObject gameObject = new GameObject();
+        gameObject.name = cropName;
         gameObject.transform.SetParent(parentInventory);
         gameObject.transform.position = parentInventory.position;
         gameObject.SetActive(false);
