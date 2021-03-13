@@ -153,6 +153,37 @@ public class TouchToMove : MonoBehaviour
             else if (touchedObject.CompareTag("cropLand"))
             {
                 TouchToMove.landName = touchedObject.name;
+                Debug.Log("Go to harvest -> " + landName);
+                //handle case where crop land is touched instead of the crop itself 
+                if (touchedObject.transform.childCount > 0)
+                {
+                    GameObject childObject = touchedObject.transform.GetChild(0).gameObject;
+                    CropGrowing cropGrowing = childObject.GetComponent<CropGrowing>();
+
+                    if (cropGrowing != null)
+                    {
+                        if (cropGrowing.grown)
+
+                            cropName.text = cropGrowing.name + " is grown";
+
+
+
+
+                        else
+                            cropName.text = cropGrowing.name + " is not grown yet";
+
+
+
+                    }
+
+                    return childObject.transform.position;
+
+
+
+
+                }
+
+                cropName.text = "Drag a crop here to grow it!";
                 Debug.Log("Go to -> " + landName);
                 return touchedObject.transform.position;
 
