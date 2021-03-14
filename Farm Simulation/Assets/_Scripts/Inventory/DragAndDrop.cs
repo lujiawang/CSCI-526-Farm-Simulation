@@ -22,6 +22,7 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
     private Camera cam;
 
+    Inventory inventory;
     
 
 
@@ -124,7 +125,7 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     // Start is called before the first frame update
     void Start()
     {
-
+        inventory = Inventory.instance;
     }
 
     // Update is called once per frame
@@ -169,6 +170,8 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
                     realCrop.transform.position = cropLand.transform.position; //clip to the position
                     realCrop.transform.SetParent(cropLand.transform);
                     inPosition = true; //and stop dragging
+
+                    inventory.Add(touchedObject.transform.GetChild(0).gameObject.name, -1);
 
 
                 }
