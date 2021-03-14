@@ -42,7 +42,6 @@ public class SceneSwitcher : MonoBehaviour
     {
         SceneManager.UnloadSceneAsync("Store");
         SceneManager.LoadScene("Farming_02_store", LoadSceneMode.Additive);
-
     }
 
 

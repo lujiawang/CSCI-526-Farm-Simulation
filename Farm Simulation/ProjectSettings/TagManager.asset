@@ -9,6 +9,8 @@ TagManager:
   - crop
   - Warning
   - Harvests
+  - Seeds
+  - Inventory
   layers:
   - Default
   - TransparentFX

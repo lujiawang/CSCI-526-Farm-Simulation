@@ -5,17 +5,17 @@ using UnityEngine;
 public class Package : MonoBehaviour
 {
 
-    private GameObject harvesetPalceholder;
+    private GameObject harvPlaceholder;
     private List<GameObject> children;
 
     // Start is called before the first frame update
     void Start()
     {
-        harvesetPalceholder = GameObject.FindGameObjectWithTag("Harvests");
+        harvPlaceholder = GameObject.FindGameObjectWithTag("Harvests");
         foreach (Transform child in this.transform)
         {
             
-            foreach (Transform harvest in harvesetPalceholder.transform)
+            foreach (Transform harvest in harvPlaceholder.transform)
             {
                 if (harvest.name.Equals(child.GetChild(0).GetChild(0).name))
                 {
