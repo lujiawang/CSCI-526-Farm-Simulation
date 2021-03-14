@@ -5,10 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class SceneSwitcher : MonoBehaviour
 {
+    GameObject player;
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
@@ -17,24 +18,40 @@ public class SceneSwitcher : MonoBehaviour
         
     }
 
-    public void SwitchToMain()
+    //Intro to main
+    public void IntroToMain()
     {
         SceneManager.LoadScene("Farming_01_main");
     }
+    
+
+    //To store's intro
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("collide");
+            SceneManager.LoadScene("Store", LoadSceneMode.Additive);
+            TouchToMove.isPlayer = false;
+        }
+    }
+
+
+    //To store
     public void SwitchToStore()
     {
-        SceneManager.LoadScene("Farming_02_store");
+        SceneManager.UnloadSceneAsync("Store");
+        SceneManager.LoadScene("Farming_02_store", LoadSceneMode.Additive);
 
     }
 
 
-    public void SwitchScene(string sceneName)
+    //Back to main
+    public void BackToMain()
     {
-        SceneManager.LoadScene(sceneName);
+        SceneManager.UnloadSceneAsync("Farming_02_store");
+        TouchToMove.isPlayer = true;
     }
 
-    public void ReloadScene()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
+
 }

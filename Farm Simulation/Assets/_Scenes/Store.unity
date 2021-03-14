@@ -275,7 +275,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &894591035
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1201,4 +1201,4 @@ MonoBehaviour:
   indentLevel: 0
   targetObject: {fileID: 229895735}
   methodName: SwitchToStore
-  delay: 1
+  delay: 0
