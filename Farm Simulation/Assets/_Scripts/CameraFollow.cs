@@ -31,8 +31,8 @@ public class CameraFollow : MonoBehaviour
 
     void Update()
     {
-        if (TouchToMove.isPlayer)
-        {
+        // if (TouchToMove.isPlayer)
+        // {
             Vector3 targetPosition = transform.position;
             Vector3 desiredPosition = target.transform.position + offset;
             Vector3 smoothedPosition = Vector3.Lerp(targetPosition, desiredPosition, smoothFactor * Time.deltaTime);
@@ -45,7 +45,7 @@ public class CameraFollow : MonoBehaviour
                     transform.position.z
 
                 );
-        }
+        // }
     }
 
     // called every fixed frame rate

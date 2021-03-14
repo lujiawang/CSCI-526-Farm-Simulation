@@ -10,6 +10,8 @@ public class Inventory : MonoBehaviour
 
 	public static Inventory instance;
 
+	public int stackLimit;
+
 	void Awake()
 	{
 		if(instance != null)
@@ -75,8 +77,15 @@ public class Inventory : MonoBehaviour
 
 				if(items[i].Name() == name)
 				{
-					items[i].AddNum(num);
-					// Remove item if number is reduced to 0
+					// update only if updated num of item <= stackLimit
+					if(num + items[i].Num() <= stackLimit){
+						items[i].AddNum(num);
+					}else if(items[i].Num() != stackLimit){
+						items[i].SetNum(stackLimit);
+					}else{
+						return;
+					}
+					// Remove item if number is reduced to 0 or below 0
 					if(items[i].Num() <= 0)
 					{
 						items.RemoveAt(i);

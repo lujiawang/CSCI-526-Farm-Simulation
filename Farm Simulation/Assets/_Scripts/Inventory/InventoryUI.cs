@@ -11,8 +11,6 @@ public class InventoryUI : MonoBehaviour
 
 	public GameObject slotPrefab;
 
-	public int stackLimit;
-
 	Inventory inventory;
 
 	InventorySlot[] slots;
@@ -56,9 +54,12 @@ public class InventoryUI : MonoBehaviour
 	    		{
 	    			// Convert.ToInt16(ItemButton.Find("Number").gameObject.GetComponent<Text>().text)
 	    			int newNum = inventory.items[i].Num();
-	    			// if newNum > stackLimit, reduce newNum to stackLimit
-	    			newNum = newNum > stackLimit ? stackLimit : newNum;
+                    // update displayed number
 	    			ItemButton.Find("Number").gameObject.GetComponent<Text>().text = "" + newNum;
+                    // update image
+                    // if(ItemButton.Find(name).gameObject.GetComponent<Image>().sprite != inventory.items[i].Icon()){
+                    //     ItemButton.Find(name).gameObject.GetComponent<Image>().sprite = inventory.items[i].Icon();
+                    // }
 
 	    			j = -1;
 	    			break;

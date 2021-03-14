@@ -102,6 +102,7 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
             canDrag = false;
         } else
         {
+            canvasGroup.alpha = 1f;
             Debug.Log("drag");
             canDrag = false;
         }
@@ -111,6 +112,10 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         {
             rectTransform.anchoredPosition = initialPos;
             canDrag = true;
+        }
+        if(inPosition)
+        {
+            inPosition = false;
         }
     }
 
@@ -164,13 +169,13 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
                     touchedObject.GetComponent<AudioSource>().Play();
 
-                    this.gameObject.SetActive(false);
+                    // this.gameObject.SetActive(false);
                     realCrop.SetActive(true);
                     realCrop.transform.position = cropLand.transform.position; //clip to the position
                     realCrop.transform.SetParent(cropLand.transform);
                     inPosition = true; //and stop dragging
 
-                    inventory.Add(touchedObject.transform.GetChild(0).gameObject.name, -1);
+                    inventory.Add(this.name, -1);
 
 
                 }

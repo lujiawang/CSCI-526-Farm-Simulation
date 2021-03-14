@@ -5101,7 +5101,6 @@ MonoBehaviour:
   itemsParent: {fileID: 1820166475}
   slotPrefab: {fileID: 9047899552467516593, guid: 62b5ae40e864048b4ab422fcdedad380,
     type: 3}
-  stackLimit: 99
 --- !u!1 &923679704
 GameObject:
   m_ObjectHideFlags: 0
@@ -16351,6 +16350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 169167c3279c54ed599596b09a844335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stackLimit: 99
 --- !u!4 &1962885969
 Transform:
   m_ObjectHideFlags: 0
