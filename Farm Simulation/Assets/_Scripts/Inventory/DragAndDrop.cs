@@ -162,6 +162,8 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
                 {
                     Debug.Log("plant on: " + cropLand.name);
 
+                    touchedObject.GetComponent<AudioSource>().Play();
+
                     this.gameObject.SetActive(false);
                     realCrop.SetActive(true);
                     realCrop.transform.position = cropLand.transform.position; //clip to the position
