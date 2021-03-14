@@ -26,7 +26,7 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     
 
 
-    private void Awake()
+    private void Start()
     {
         //get pre-defined children
         CropParent = GameObject.Find("CropPlaceholder"); //the placeholder object named Crops in scene
@@ -55,6 +55,8 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         initialPos = rectTransform.anchoredPosition;
 
         cam = Camera.main;
+
+        inventory = Inventory.instance;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -122,11 +124,8 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        inventory = Inventory.instance;
-    }
+
+
 
     // Update is called once per frame
     void Update()
