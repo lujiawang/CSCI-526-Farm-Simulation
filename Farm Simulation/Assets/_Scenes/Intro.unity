@@ -660,7 +660,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 68
     y: 74.1978
-    width: 100.549446
+    width: 60.549446
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
