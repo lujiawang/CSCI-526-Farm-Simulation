@@ -175,6 +175,16 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
                     realCrop.transform.SetParent(cropLand.transform);
                     inPosition = true; //and stop dragging
 
+
+                    //re add the realCrop into the CropPlaceHolder
+                    GameObject copyCrop = Instantiate(realCrop);
+                    copyCrop.name = realCrop.name;
+                    copyCrop.transform.SetParent(CropParent.transform);
+                    copyCrop.SetActive(false);
+
+                    //change reference of the realCrop
+                    realCrop = copyCrop;
+
                     inventory.Add(this.name, -1);
 
 
