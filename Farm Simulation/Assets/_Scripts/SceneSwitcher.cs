@@ -32,7 +32,7 @@ public class SceneSwitcher : MonoBehaviour
         {
             Debug.Log("collide");
             SceneManager.LoadScene("Store", LoadSceneMode.Additive);
-            TouchToMove.isPlayer = false;
+            // TouchToMove.isPlayer = false;
         }
     }
 
@@ -49,7 +49,7 @@ public class SceneSwitcher : MonoBehaviour
     public void BackToMain()
     {
         SceneManager.UnloadSceneAsync("Farming_02_store");
-        TouchToMove.isPlayer = true;
+        // TouchToMove.isPlayer = true;
     }
 
 

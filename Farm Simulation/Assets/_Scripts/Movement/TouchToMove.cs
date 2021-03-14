@@ -17,7 +17,7 @@ public class TouchToMove : MonoBehaviour
     // public Transform target;
     private NavMeshHit hit;
 
-    public static bool isPlayer;
+    // public static bool isPlayer;
 
     public Animator animator;
 
@@ -31,7 +31,7 @@ public class TouchToMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isPlayer = true;
+        // isPlayer = true;
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody2D>();
         agent.updateRotation = false;
@@ -58,7 +58,7 @@ public class TouchToMove : MonoBehaviour
 
         /* Need to do sth like !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId), check Input.touchCount > 0 first */
 
-        if (Input.GetMouseButtonDown(0) && isPlayer && !IsPointerOverGameObject() )
+        if (Input.GetMouseButtonDown(0) && !IsPointerOverGameObject() )
         {
             targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             targetPos.z = 0;
@@ -99,11 +99,11 @@ public class TouchToMove : MonoBehaviour
     }
 
 
-    public void PlayerEnable()
-    {
-        isPlayer = !isPlayer;
-        Debug.Log("isPlayer: " + isPlayer);
-    }
+    // public void PlayerEnable()
+    // {
+    //     isPlayer = !isPlayer;
+    //     Debug.Log("isPlayer: " + isPlayer);
+    // }
 
 
 

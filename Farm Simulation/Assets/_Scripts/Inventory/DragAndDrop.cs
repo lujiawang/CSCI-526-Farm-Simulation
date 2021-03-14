@@ -22,10 +22,11 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
     private Camera cam;
 
+    Inventory inventory;
     
 
 
-    private void Awake()
+    private void Start()
     {
         //get pre-defined children
         CropParent = GameObject.Find("CropPlaceholder"); //the placeholder object named Crops in scene
@@ -54,6 +55,8 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         initialPos = rectTransform.anchoredPosition;
 
         cam = Camera.main;
+
+        inventory = Inventory.instance;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -99,6 +102,7 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
             canDrag = false;
         } else
         {
+            canvasGroup.alpha = 1f;
             Debug.Log("drag");
             canDrag = false;
         }
@@ -108,6 +112,10 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         {
             rectTransform.anchoredPosition = initialPos;
             canDrag = true;
+        }
+        if(inPosition)
+        {
+            inPosition = false;
         }
     }
 
@@ -121,11 +129,8 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
+
 
     // Update is called once per frame
     void Update()
@@ -162,11 +167,15 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
                 {
                     Debug.Log("plant on: " + cropLand.name);
 
-                    this.gameObject.SetActive(false);
+                    touchedObject.GetComponent<AudioSource>().Play();
+
+                    // this.gameObject.SetActive(false);
                     realCrop.SetActive(true);
                     realCrop.transform.position = cropLand.transform.position; //clip to the position
                     realCrop.transform.SetParent(cropLand.transform);
                     inPosition = true; //and stop dragging
+
+                    inventory.Add(this.name, -1);
 
 
                 }
