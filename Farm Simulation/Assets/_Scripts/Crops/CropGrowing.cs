@@ -20,6 +20,8 @@ public class CropGrowing : MonoBehaviour
     private bool inPosition;
     public int growTime;
     public string cropName;
+    public GameObject Notification;
+    private Text notificationText;
     //private Dictionary<int, Sprite> cropAssets;
     public bool grown; //make it public so player will know whether it is grown
     public int reward;
@@ -32,14 +34,14 @@ public class CropGrowing : MonoBehaviour
         setUpAssets();
         //Loading of assets using AssetReferenceSprite
         sr = GetComponent<SpriteRenderer>();
-
-
+        
         foreach (AssetReferenceSprite newSprite in addrs)
         {
             newSprite.LoadAssetAsync().Completed += SpriteLoaded;
         }
-        
-        
+
+        notificationText = Notification.transform.GetChild(0).GetComponent<Text>();
+
         
         stage = 0;
         inPosition = false;
@@ -99,6 +101,11 @@ public class CropGrowing : MonoBehaviour
             CancelInvoke("incrementByOne");
             //signify that crop has fully grown
             grown = true;
+            notificationText.text = "1 or more crops are ready for harvesting.";
+            
+
+
+
         }
         else if (runningPointer == growingCondition[stage])
         {
