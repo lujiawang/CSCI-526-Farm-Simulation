@@ -11,6 +11,7 @@ TagManager:
   - Harvests
   - Seeds
   - Inventory
+  - Notification
   layers:
   - Default
   - TransparentFX
