@@ -5,7 +5,8 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
 
-	AudioSource audioSource;
+	private AudioSource audioSource;
+	public AudioClip addSound, removeSound;
 
 	#region Singleton
 	// Use "SoundManager.instance" to access the SoundManager instance
@@ -23,13 +24,23 @@ public class SoundManager : MonoBehaviour
 
 	void Start()
 	{
-		audioSource = GetComponent<AudioSource>();
+		audioSource = this.GetComponent<AudioSource>();
 	}
 
     public void PlaySound(string sound)
     {
-    	AudioClip audioClip = Resources.Load<AudioClip>("sounds/"+sound);
-    	// audioSource.clip = audioClip;
-    	audioSource.PlayOneShot(audioClip);
-    }
+		Debug.Log("here");
+		//audioSource.PlayOneShot(addSound);
+		/*if (sound.Equals("add"))
+        {
+			audioSource.PlayOneShot(addSound);
+		}*/ 
+		if (sound.Equals("remove"))
+        {
+			audioSource.PlayOneShot(removeSound);
+        }
+		//AudioClip audioClip = Resources.Load<AudioClip>("sounds/"+sound);
+		// audioSource.clip = audioClip;
+		//audioSource.PlayOneShot(audioClip);
+	}
 }

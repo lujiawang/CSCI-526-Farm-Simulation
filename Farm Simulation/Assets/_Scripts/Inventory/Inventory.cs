@@ -109,10 +109,10 @@ public class Inventory : MonoBehaviour
 		// play sound effect
 		if(num > 0)
 		{
-			soundManager.PlaySound("AddItemSound");
+			//soundManager.PlaySound("add");
 		}else
 		{
-			soundManager.PlaySound("RemoveItemSound");
+			soundManager.PlaySound("remove");
 			// Debug.Log("Play remove sound");
 		}
 
