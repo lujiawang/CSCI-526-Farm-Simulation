@@ -26,6 +26,7 @@ public class MenuAppear : MonoBehaviour
             anim.SetBool("isMenu", true);
             Camera.main.transform.position = new Vector3(0f, 0f, Camera.main.transform.position.z);
             DragAndDrop.canDrag = true;
+            CameraFollow.enableCamera = false;
         }
         else
         {
@@ -33,6 +34,7 @@ public class MenuAppear : MonoBehaviour
 
             Camera.main.transform.position = new Vector3(0f, 0f, Camera.main.transform.position.z);
             DragAndDrop.canDrag = false;
+            CameraFollow.enableCamera = true;
         }
     }
 }

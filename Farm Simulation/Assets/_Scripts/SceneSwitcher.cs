@@ -36,6 +36,14 @@ public class SceneSwitcher : MonoBehaviour
         }
     }
 
+    //To store's intro
+    public void ToStoreIntro()
+    {        
+        SceneManager.LoadScene("Store", LoadSceneMode.Additive);
+        CameraFollow.enableCamera = false;
+        MenuAppear.isMenu = false;
+    }
+
 
     //To store
     public void SwitchToStore()
@@ -49,7 +57,7 @@ public class SceneSwitcher : MonoBehaviour
     public void BackToMain()
     {
         SceneManager.UnloadSceneAsync("Farming_02_store");
-        // TouchToMove.isPlayer = true;
+        CameraFollow.enableCamera = true;
     }
 
 

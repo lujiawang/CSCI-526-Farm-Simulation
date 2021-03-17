@@ -21,18 +21,21 @@ public class CameraFollow : MonoBehaviour
 
     Vector3 desiredPosition;
 
+    public static bool enableCamera;
+
     // Use this for initialization
     void Start()
     {
-    //    desiredPosition = target.position;
+        //    desiredPosition = target.position;
+        enableCamera = true;
     }
 
     // Update is called once per frame
 
     void Update()
     {
-        // if (TouchToMove.isPlayer)
-        // {
+        if (enableCamera)
+         {
             Vector3 targetPosition = transform.position;
             Vector3 desiredPosition = target.transform.position + offset;
             Vector3 smoothedPosition = Vector3.Lerp(targetPosition, desiredPosition, smoothFactor * Time.deltaTime);
@@ -45,7 +48,7 @@ public class CameraFollow : MonoBehaviour
                     transform.position.z
 
                 );
-        // }
+        }
     }
 
     // called every fixed frame rate
