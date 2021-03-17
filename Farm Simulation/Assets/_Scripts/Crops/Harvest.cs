@@ -64,6 +64,10 @@ public class Harvest : MonoBehaviour
                     string cropName = gScript.name;
                     Debug.Log("Harvesting " + cropName);
                     hs.AddToInventory(cropName);
+
+                    inventory.Add(cropName, 1, false);
+
+
                     notificationText.text = "";
                     HideCrop(cropName);
                     Destroy(checkChild);
