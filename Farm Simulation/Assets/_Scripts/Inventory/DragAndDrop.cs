@@ -36,7 +36,7 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
         foreach (Transform child in CropParent.transform)
         {
-            if (child.name.Equals(this.name))
+            if (child.name + "Seed" == (this.name))
             {
                 realCrop = child.gameObject;
                 break;
