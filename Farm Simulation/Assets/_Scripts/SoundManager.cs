@@ -5,7 +5,7 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
 
-	private AudioSource audioSource;
+	AudioSource audioSource;
 
 	#region Singleton
 	// Use "SoundManager.instance" to access the SoundManager instance
