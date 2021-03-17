@@ -43,6 +43,11 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
             }
         }
 
+        if(realCrop == null)
+        {
+            this.transform.parent.GetComponent<Button>().interactable = false;
+        }
+
         inPosition = false;
         canDrag = MenuAppear.isMenu;
 
@@ -185,7 +190,7 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
                     //change reference of the realCrop
                     realCrop = copyCrop;
 
-                    inventory.Add(this.name, -1);
+                    inventory.Add(this.name, -1, true);
                     this.canvasGroup.blocksRaycasts = true;
 
                 }

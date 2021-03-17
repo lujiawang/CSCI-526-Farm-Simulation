@@ -326,8 +326,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 162}
-  m_SizeDelta: {x: 1353.6814, y: 340}
+  m_AnchoredPosition: {x: -328.4, y: 15}
+  m_SizeDelta: {x: 978.35986, y: 340}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &145418762
 CanvasRenderer:
@@ -4264,7 +4264,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1704139011
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4902,7 +4902,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 705.56, y: -196.28}
+  m_AnchoredPosition: {x: 770, y: -214}
   m_SizeDelta: {x: 1379.1279, y: 352.56506}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1820166476
@@ -4922,13 +4922,13 @@ MonoBehaviour:
     m_Right: 30
     m_Top: 50
     m_Bottom: 0
-  m_ChildAlignment: 4
+  m_ChildAlignment: 3
   m_StartCorner: 0
-  m_StartAxis: 1
+  m_StartAxis: 0
   m_CellSize: {x: 150, y: 150}
   m_Spacing: {x: 10, y: 10}
-  m_Constraint: 2
-  m_ConstraintCount: 1
+  m_Constraint: 1
+  m_ConstraintCount: 4
 --- !u!1001 &1824265827
 PrefabInstance:
   m_ObjectHideFlags: 0

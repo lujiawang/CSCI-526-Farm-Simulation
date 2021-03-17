@@ -11,12 +11,16 @@ public class Harvest : MonoBehaviour
     public Text notificationText;
     public HarvestStats hs;
 
+    Inventory inventory;
+
     private Transform parentInventory;
 
     void Start()
     {
         
         parentInventory = GameObject.Find("HarvestPlaceholder").transform;
+
+        inventory = Inventory.instance;
     }
 
     public void SetObject(GameObject gameObject)
@@ -91,6 +95,9 @@ public class Harvest : MonoBehaviour
             string cropName = childObject.name;
             Debug.Log("Harvesting " + cropName);
             hs.AddToInventory(cropName);
+
+            inventory.Add(cropName, 1, false);
+
             notificationText.text = "";
             HideCrop(cropName);
             Destroy(childObject);
