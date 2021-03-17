@@ -100,6 +100,8 @@ public class Harvest : MonoBehaviour
             Debug.Log("Harvesting " + cropName);
             hs.AddToInventory(cropName);
 
+            //string inventName = cropName + "Fruit";
+            //Debug.Log(inventName);
             inventory.Add(cropName, 1);
 
             notificationText.text = "";

@@ -54,10 +54,10 @@ public class Inventory : MonoBehaviour
         Sprite[] icons = Resources.LoadAll<Sprite>("Crop_Spritesheet");
         bool seed = name.Contains("Seed");
     	string tempName = name;
-    	if(seed)
-    		tempName = name.Remove(name.IndexOf("Seed"), "Seed".Length);
-    	else
-    		tempName = name.Remove(name.IndexOf("Fruit"), "Fruit".Length);
+        if (seed)
+            tempName = name.Remove(name.IndexOf("Seed"), "Seed".Length);
+        else
+            tempName = name;//.Remove(name.IndexOf("Fruit"), "Fruit".Length);
     	// Debug.Log(tempName);
         foreach (Sprite i in icons)
         {

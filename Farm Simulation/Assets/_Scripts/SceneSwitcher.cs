@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 public class SceneSwitcher : MonoBehaviour
 {
     GameObject player;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,9 +33,7 @@ public class SceneSwitcher : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("collide");
-            SceneManager.LoadScene("Store", LoadSceneMode.Additive);
-            // TouchToMove.isPlayer = false;
+            ToStoreIntro();
         }
     }
 
@@ -40,7 +41,6 @@ public class SceneSwitcher : MonoBehaviour
     public void ToStoreIntro()
     {        
         SceneManager.LoadScene("Store", LoadSceneMode.Additive);
-        CameraFollow.enableCamera = false;
         MenuAppear.isMenu = false;
     }
 
@@ -57,7 +57,6 @@ public class SceneSwitcher : MonoBehaviour
     public void BackToMain()
     {
         SceneManager.UnloadSceneAsync("Farming_02_store");
-        CameraFollow.enableCamera = true;
     }
 
 

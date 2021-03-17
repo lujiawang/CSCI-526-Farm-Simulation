@@ -12,6 +12,7 @@ TagManager:
   - Seeds
   - Inventory
   - Notification
+  - Store
   layers:
   - Default
   - TransparentFX

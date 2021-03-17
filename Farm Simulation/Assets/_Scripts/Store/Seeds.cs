@@ -6,42 +6,39 @@ using UnityEngine.UI;
 
 public class Seeds : MonoBehaviour
 {
-    private GameObject player;
-    private GameObject seedsPlaceholder;
-    private GameObject Inventory;
+    Inventory inventory;
+    
     private Button button;
 
+    private string cropName;
+    private int index;
+
+    StoreInfo store;
 
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        seedsPlaceholder = GameObject.FindGameObjectWithTag("Seeds");
-        Inventory = GameObject.FindGameObjectWithTag("Inventory");
+        inventory = Inventory.instance;
 
-        button = GetComponent<Button>();
+        button = this.GetComponent<Button>();
+        cropName = this.transform.GetChild(0).name;
+
+        store = StoreInfo.instance;
+
+        if (store.isPurchased(cropName))
+            this.gameObject.SetActive(false);
     }
 
 
 
     public void AddSeeds()
     {
-        string seedName = this.transform.GetChild(0).name;
+        string seedName =  cropName + "Seed";
 
-        foreach (Transform child in this.Inventory.transform.GetChild(0).GetChild(0))
-        {
-                if (seedName.Equals(child.GetChild(0).GetChild(0).name))
-                {
-                    child.gameObject.SetActive(true);
-                    break;
-                }
-        }
-        button.interactable = false;
+        inventory.Add(seedName, 1);
+        
+        this.gameObject.SetActive(false);
+        store.Purchase(cropName);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

@@ -29,7 +29,7 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySound(string sound)
     {
-		Debug.Log("here");
+		//Debug.Log("here");
 		//audioSource.PlayOneShot(addSound);
 		/*if (sound.Equals("add"))
         {
