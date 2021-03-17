@@ -84,7 +84,6 @@ public class InventoryUI : MonoBehaviour
     			ItemButton.Find("Item").gameObject.GetComponent<Image>().sprite = inventory.items[i].Icon();
     			// change "Item" to the new name
     			ItemButton.Find("Item").gameObject.name = inventory.items[i].Name();
-
     		}
     		
     	}

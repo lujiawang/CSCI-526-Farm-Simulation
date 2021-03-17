@@ -16,7 +16,7 @@ public class Inventory : MonoBehaviour
 	{
 		if(instance != null)
 		{
-			Debug.LogWarning("> 1 instance found");
+			Debug.LogWarning("> 1 Inventory instance found");
 			return;
 		}
 		instance = this;
@@ -27,12 +27,16 @@ public class Inventory : MonoBehaviour
 
 	public delegate void OnItemChanged();
 	public OnItemChanged onItemChangedCallback;
+
+	SoundManager soundManager; 
+
 	// subscribe any method to this callback to notify self of changes made in inventory
 
 	public List<Item> items = new List<Item>();
 
 	void Start()
 	{
+		soundManager = SoundManager.instance;
 		Add("Corn", 1);
 		Add("Cucumber", 5);
 		Add("Cucumber", 5);
@@ -101,7 +105,16 @@ public class Inventory : MonoBehaviour
 				}
 			}
 		}
-		
+
+		// play sound effect
+		if(num > 0)
+		{
+			soundManager.PlaySound("AddItemSound");
+		}else
+		{
+			soundManager.PlaySound("RemoveItemSound");
+			// Debug.Log("Play remove sound");
+		}
 
 		// Debug.Log(items.Count);
 
