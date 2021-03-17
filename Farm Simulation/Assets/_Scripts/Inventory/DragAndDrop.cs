@@ -190,7 +190,7 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
                     //change reference of the realCrop
                     realCrop = copyCrop;
 
-                    inventory.Add(this.name, -1, true);
+                    inventory.Add(this.name, -1);
                     this.canvasGroup.blocksRaycasts = true;
 
                 }

@@ -37,50 +37,52 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         soundManager = SoundManager.instance;
-        Add("Corn", 1, true);
-        Add("Cucumber", 5, true);
-        Add("Cucumber", 5, true);
-        Add("Avocado", 5, true);
-        // Add("Cassava", 5, true);
-        // Add("Coffee", 5, true);
-        // Add("Eggplant", 5, true);
-        // Add("Grapes", 5, true);
-        // Add("Lemon", 5, true);
-        Add("Melon", 5, true);
+        Add("CornSeed", 1);
+        Add("CucumberSeed", 5);
+        Add("CucumberSeed", 5);
+        Add("AvocadoSeed", 5);
+        // Add("CassavaSeed", 5);
+        // Add("CoffeeSeed", 5);
+        // Add("EggplantSeed", 5);
+        // Add("GrapesSeed", 5);
+        // Add("LemonSeed", 5);
+        Add("MelonSeed", 5);
     }
 
-    public static Sprite GetSeedSprite(string name, bool seed)
+    public static Sprite GetCropSprite(string name)
     {
         Sprite[] icons = Resources.LoadAll<Sprite>("Crop_Spritesheet");
+        bool seed = name.Contains("Seed");
+    	string tempName = name;
+    	if(seed)
+    		tempName = name.Remove(name.IndexOf("Seed"), "Seed".Length);
+    	else
+    		tempName = name.Remove(name.IndexOf("Fruit"), "Fruit".Length);
+    	// Debug.Log(tempName);
         foreach (Sprite i in icons)
         {
-            if (seed) //this is the seed icon
+        	if(seed)
+        	{
+        		if(tempName + "_0" == i.name)
+            		return i;
+        	}
+            else
             {
-
-                if (i.name == name + "_0")
-                    return i;
+        		if(tempName + "_5" == i.name)
+            		return i;
             }
-            else //this is the grown crop icon
-            {
-                if (i.name == name + "_5")
-                    return i;
-            }
+            
         }
         return null;
     }
 
     // num can be negative to perform remove
-    public void Add(string name, int num, bool seed)
+    public void Add(string name, int num)
     {
         Item item = new Item();
-
-        if (seed)
-            item.SetName(name);
-        else
-            item.SetName("grown "+name);
-        
+        item.SetName(name);
         item.SetNum(num);
-        Sprite icon = GetSeedSprite(name, seed);
+        Sprite icon = GetCropSprite(name);
         item.SetIcon(icon);
         int count = items.Count;
 

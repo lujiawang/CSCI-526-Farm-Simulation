@@ -65,7 +65,7 @@ public class Harvest : MonoBehaviour
                     Debug.Log("Harvesting " + cropName);
                     hs.AddToInventory(cropName);
 
-                    inventory.Add(cropName, 1, false);
+                    inventory.Add(cropName, 1);
 
 
                     notificationText.text = "";
@@ -100,7 +100,7 @@ public class Harvest : MonoBehaviour
             Debug.Log("Harvesting " + cropName);
             hs.AddToInventory(cropName);
 
-            inventory.Add(cropName, 1, false);
+            inventory.Add(cropName, 1);
 
             notificationText.text = "";
             HideCrop(cropName);

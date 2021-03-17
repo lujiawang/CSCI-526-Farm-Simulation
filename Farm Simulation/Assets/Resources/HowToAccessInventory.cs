@@ -13,8 +13,12 @@ public class HowToAccessInventory : MonoBehaviour{
 	
 	public void Foo(){
 		// add one corn seed to inventory
-		inventory.Add("Corn", 1, true);
-		// remove one corn from inventory
-		inventory.Add("Corn", -1, true);
+		inventory.Add("CornSeed", 1);
+		// remove one corn seed from inventory
+		inventory.Add("CornSeed", -1);
+		// add one corn fruit to inventory
+		inventory.Add("CornFruit", 1);
+		// remove one corn fruit from inventory
+		inventory.Add("CornFruit", -1);
 	}
 }
