@@ -6,13 +6,12 @@ using UnityEngine.UI;
 
 public class CropGrowing : MonoBehaviour
 {
-    
+    //summary: script starts the growing process of a crop
 
 
-
+    //variables
 
     private SpriteRenderer sr;
-    private Sprite[] sprites;
     private Sprite[] crops;
     private int runningPointer;
     private int stage;
@@ -134,6 +133,16 @@ public class CropGrowing : MonoBehaviour
         //TODO: obtain reward and remove from parent
         return reward;
 
+    }
+    // Get the current stage of the crop
+    public int GetStage()
+    {
+        return stage;
+    }
+    //Get time (in seconds) since crop has started growing
+    public int GetTime()
+    {
+        return runningPointer;
     }
 
 
