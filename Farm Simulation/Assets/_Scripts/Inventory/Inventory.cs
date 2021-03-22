@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class Inventory : MonoBehaviour
 {
@@ -36,17 +37,36 @@ public class Inventory : MonoBehaviour
 
     void Start()
     {
+    	// must initialize this first
         soundManager = SoundManager.instance;
-        Add("CornSeed", 1);
-        Add("CucumberSeed", 5);
-        Add("CucumberSeed", 5);
-        Add("AvocadoSeed", 5);
-        // Add("CassavaSeed", 5);
-        // Add("CoffeeSeed", 5);
-        // Add("EggplantSeed", 5);
-        // Add("GrapesSeed", 5);
-        // Add("LemonSeed", 5);
-        Add("MelonSeed", 5);
+
+        string[] indexArray = new string[0];
+        // if inventoryIndex is already set
+        if(PlayerPrefs.HasKey("inventoryIndex"))
+        	indexArray = PlayerPrefs.GetString("inventoryIndex").Split(new char[1]{' '}, StringSplitOptions.RemoveEmptyEntries);
+        // else, set inventoryIndex and add starter package of seeds
+        else
+        {
+        	PlayerPrefs.SetString("inventoryIndex","");
+
+        	// add starter crops seeds to player's inventory
+        	Add("CornSeed", 1);
+	        Add("CucumberSeed", 5);
+	        Add("CucumberSeed", 5);
+	        Add("AvocadoSeed", 5);
+	        // Add("CassavaSeed", 5);
+	        // Add("CoffeeSeed", 5);
+	        // Add("EggplantSeed", 5);
+	        // Add("GrapesSeed", 5);
+	        // Add("LemonSeed", 5);
+	        Add("MelonSeed", 5);
+        }
+
+        if(indexArray.Length > 0)
+        {
+        	InitializeInventory(indexArray);
+        }
+        
     }
 
     public static Sprite GetCropSprite(string name)
@@ -76,9 +96,57 @@ public class Inventory : MonoBehaviour
         return null;
     }
 
+    private void SaveAddItem(string name, int num)
+    {
+    	string index = PlayerPrefs.GetString("inventoryIndex");
+    	index += " " + name;
+    	PlayerPrefs.SetString("inventoryIndex", index);
+    	PlayerPrefs.SetInt(name, num);
+    }
+
+    private void SaveUpdateItem(string name, int num)
+    {
+    	PlayerPrefs.SetInt(name, num + PlayerPrefs.GetInt(name));
+    }
+
+    private void SaveRemoveItem(string name)
+    {
+    	string index = "";
+    	string[] indexArray = PlayerPrefs.GetString("inventoryIndex").Split(new char[1]{' '}, StringSplitOptions.RemoveEmptyEntries);
+    	foreach(string i in indexArray)
+    	{
+    		if(i != name)
+    			index += " " + i;
+    	}
+    	PlayerPrefs.SetString("inventoryIndex", index);
+    	PlayerPrefs.DeleteKey(name);
+    }
+
+    public void InitializeInventory(string[] indexArray)
+    {
+        foreach(string itemName in indexArray)
+        {
+        	Item item = new Item();
+	        item.SetName(itemName);
+	        item.SetNum(PlayerPrefs.GetInt(itemName));
+	        Sprite icon = GetCropSprite(itemName);
+	        item.SetIcon(icon);
+
+        	items.Add(item);
+        }
+
+        if (onItemChangedCallback != null)
+        {
+            onItemChangedCallback.Invoke();
+        }
+    }
+
     // num can be negative to perform remove
     public void Add(string name, int num)
     {
+    	if(num == 0)
+    		return;
+
         Item item = new Item();
         item.SetName(name);
         item.SetNum(num);
@@ -89,6 +157,7 @@ public class Inventory : MonoBehaviour
         if (count == 0)
         {
             items.Add(item);
+            SaveAddItem(name, num);
         }
         else
         {
@@ -101,10 +170,12 @@ public class Inventory : MonoBehaviour
                     if (num + items[i].Num() <= stackLimit)
                     {
                         items[i].AddNum(num);
+                        SaveUpdateItem(name, num);
                     }
                     else if (items[i].Num() != stackLimit)
                     {
                         items[i].SetNum(stackLimit);
+                        SaveUpdateItem(name, num);
                     }
                     else
                     {
@@ -114,14 +185,17 @@ public class Inventory : MonoBehaviour
                     if (items[i].Num() <= 0)
                     {
                         items.RemoveAt(i);
+                        SaveRemoveItem(name);
                         // Debug.Log("reduced successfully");
                     }
+
                     break;
                 }
 
                 if (i == count - 1)
                 {
                     items.Add(item);
+                    SaveAddItem(name, num);
                     break;
                 }
             }

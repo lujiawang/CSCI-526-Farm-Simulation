@@ -37,6 +37,16 @@ public class TouchToMove : MonoBehaviour
         agent.updateRotation = false;
         agent.updateUpAxis = false;
 
+        // initialize player's starter position
+        if(!PlayerPrefs.HasKey("PlayerPositionX"))
+        {
+            PlayerPrefs.SetFloat("PlayerPositionX", 0.45f);
+            PlayerPrefs.SetFloat("PlayerPositionY", -1.5f);
+            PlayerPrefs.SetFloat("PlayerPositionZ", 0f);
+        }
+        this.transform.position = new Vector3(PlayerPrefs.GetFloat("PlayerPositionX"),
+            PlayerPrefs.GetFloat("PlayerPositionY"),PlayerPrefs.GetFloat("PlayerPositionZ"));
+
         // target = GameObject.FindGameObjectWithTag("TestTarget").transform;
 
     }
@@ -78,10 +88,17 @@ public class TouchToMove : MonoBehaviour
 
 
             agent.SetDestination(targetPos);
-        }
-        
-        
 
+        }
+    }
+
+    // OnDestroy is called before exiting the game
+    void OnDestroy()
+    {
+        // save player's new position
+        PlayerPrefs.SetFloat("PlayerPositionX", this.transform.position.x);
+        PlayerPrefs.SetFloat("PlayerPositionY", this.transform.position.y);
+        PlayerPrefs.SetFloat("PlayerPositionZ", this.transform.position.z);
     }
 
     public static bool IsPointerOverGameObject(){

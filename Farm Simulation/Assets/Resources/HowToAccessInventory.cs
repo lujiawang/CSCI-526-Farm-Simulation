@@ -17,8 +17,8 @@ public class HowToAccessInventory : MonoBehaviour{
 		// remove one corn seed from inventory
 		inventory.Add("CornSeed", -1);
 		// add one corn fruit to inventory
-		inventory.Add("CornFruit", 1);
+		inventory.Add("Corn", 1);
 		// remove one corn fruit from inventory
-		inventory.Add("CornFruit", -1);
+		inventory.Add("Corn", -1);
 	}
 }
