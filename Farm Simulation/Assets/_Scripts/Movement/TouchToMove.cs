@@ -95,6 +95,12 @@ public class TouchToMove : MonoBehaviour
     // OnDestroy is called before exiting the game
     void OnDestroy()
     {
+        SavePlayerPosition();
+    }
+
+    public void SavePlayerPosition()
+    {
+        // GameObject player = GameObject.FindGameObjectsWithTag("Player")[0];
         // save player's new position
         PlayerPrefs.SetFloat("PlayerPositionX", this.transform.position.x);
         PlayerPrefs.SetFloat("PlayerPositionY", this.transform.position.y);

@@ -69,6 +69,25 @@ public class Inventory : MonoBehaviour
         
     }
 
+    // OnDestroy is called before exiting the game
+    void OnDestroy()
+    {
+    	// PlayerPrefs.DeleteAll();
+    	SaveInventory();
+    }
+
+    public void SaveInventory()
+    {
+    	string index = "";
+    	foreach(Item item in items)
+    	{
+    		index += " " + item.Name();
+    		PlayerPrefs.SetInt(item.Name(), item.Num());
+    	}
+    	PlayerPrefs.SetString("inventoryIndex", index);
+    }
+
+
     public static Sprite GetCropSprite(string name)
     {
         Sprite[] icons = Resources.LoadAll<Sprite>("Crop_Spritesheet");
@@ -96,31 +115,31 @@ public class Inventory : MonoBehaviour
         return null;
     }
 
-    private void SaveAddItem(string name, int num)
-    {
-    	string index = PlayerPrefs.GetString("inventoryIndex");
-    	index += " " + name;
-    	PlayerPrefs.SetString("inventoryIndex", index);
-    	PlayerPrefs.SetInt(name, num);
-    }
+    // private void SaveAddItem(string name, int num)
+    // {
+    // 	string index = PlayerPrefs.GetString("inventoryIndex");
+    // 	index += " " + name;
+    // 	PlayerPrefs.SetString("inventoryIndex", index);
+    // 	PlayerPrefs.SetInt(name, num);
+    // }
 
-    private void SaveUpdateItem(string name, int num)
-    {
-    	PlayerPrefs.SetInt(name, num + PlayerPrefs.GetInt(name));
-    }
+    // private void SaveUpdateItem(string name, int num)
+    // {
+    // 	PlayerPrefs.SetInt(name, num + PlayerPrefs.GetInt(name));
+    // }
 
-    private void SaveRemoveItem(string name)
-    {
-    	string index = "";
-    	string[] indexArray = PlayerPrefs.GetString("inventoryIndex").Split(new char[1]{' '}, StringSplitOptions.RemoveEmptyEntries);
-    	foreach(string i in indexArray)
-    	{
-    		if(i != name)
-    			index += " " + i;
-    	}
-    	PlayerPrefs.SetString("inventoryIndex", index);
-    	PlayerPrefs.DeleteKey(name);
-    }
+    // private void SaveRemoveItem(string name)
+    // {
+    // 	string index = "";
+    // 	string[] indexArray = PlayerPrefs.GetString("inventoryIndex").Split(new char[1]{' '}, StringSplitOptions.RemoveEmptyEntries);
+    // 	foreach(string i in indexArray)
+    // 	{
+    // 		if(i != name)
+    // 			index += " " + i;
+    // 	}
+    // 	PlayerPrefs.SetString("inventoryIndex", index);
+    // 	PlayerPrefs.DeleteKey(name);
+    // }
 
     public void InitializeInventory(string[] indexArray)
     {
@@ -157,7 +176,7 @@ public class Inventory : MonoBehaviour
         if (count == 0)
         {
             items.Add(item);
-            SaveAddItem(name, num);
+            // SaveAddItem(name, num);
         }
         else
         {
@@ -170,12 +189,12 @@ public class Inventory : MonoBehaviour
                     if (num + items[i].Num() <= stackLimit)
                     {
                         items[i].AddNum(num);
-                        SaveUpdateItem(name, num);
+                        // SaveUpdateItem(name, num);
                     }
                     else if (items[i].Num() != stackLimit)
                     {
                         items[i].SetNum(stackLimit);
-                        SaveUpdateItem(name, num);
+                        // SaveUpdateItem(name, num);
                     }
                     else
                     {
@@ -185,7 +204,7 @@ public class Inventory : MonoBehaviour
                     if (items[i].Num() <= 0)
                     {
                         items.RemoveAt(i);
-                        SaveRemoveItem(name);
+                        // SaveRemoveItem(name);
                         // Debug.Log("reduced successfully");
                     }
 
@@ -195,7 +214,7 @@ public class Inventory : MonoBehaviour
                 if (i == count - 1)
                 {
                     items.Add(item);
-                    SaveAddItem(name, num);
+                    // SaveAddItem(name, num);
                     break;
                 }
             }
