@@ -24,11 +24,11 @@ public class StoreInventory : MonoBehaviour
 
 
     public static int stackLimit = 99;
-    public static int randomizeSeedsLimit = 10; // when randomizing, the maximum number of seeds that can be generated
-
+    public static int randomizeSeedNumLimit = 10; // when randomizing, the maximum number of seeds that can be generated
+    public static int randomizeSeedTypes = 5; // when randomizing, how many types of seeds that can be generated
     public static int seedTypes = 20; // how many types of seeds there are , used for randomizing store
 
-    public static int storeLimit = 5; // how many items can the store hold
+    public static int storeLimit = 20; // how many items can the store hold
 
     public delegate void OnStoreItemChanged();
     public OnStoreItemChanged onStoreItemChangedCallback;
@@ -76,7 +76,7 @@ public class StoreInventory : MonoBehaviour
     	System.Random rand = new System.Random();
     	items = new List<Item>(); //clear out items list
     	List<int> types = new List<int>(); //store all generated seedType
-    	for (int i = 0; i < storeLimit; i++)
+    	for (int i = 0; i < randomizeSeedTypes; i++)
     	{
     		int type = -1;
     		// loop until generated a unique seedType number
@@ -85,64 +85,14 @@ public class StoreInventory : MonoBehaviour
     		}while(types.Contains(type));
     		types.Add(type);
 
-    		string name = FindCropName(type) + "Seed";
-    		int num = rand.Next(1, randomizeSeedsLimit+1);
+    		string name = Item.GetCropName(type);
+    		int num = rand.Next(1, randomizeSeedNumLimit+1);
 
     		Add(name, num);
 
     		// rand = new Random();
     	}
     	
-    }
-
-    public static string FindCropName(int id)
-    {
-    	switch(id)
-    	{
-    		case 0:
-    			return "Avocado";
-    		case 1:
-    			return "Cassava";
-    		case 2:
-    			return "Coffee";
-    		case 3:
-    			return "Corn";
-    		case 4:
-    			return "Cucumber";
-    		case 5:
-    			return "Eggplant";
-    		case 6:
-    			return "Grapes";
-    		case 7:
-    			return "Lemon";
-    		case 8:
-    			return "Melon";
-    		case 9:
-    			return "Orange";
-    		case 10:
-    			return "Pineapple";
-    		case 11:
-    			return "Potato";
-    		case 12:
-    			return "Rice";
-    		case 13:
-    			return "Rose";
-    		case 14:
-    			return "Strawberry";
-    		case 15:
-    			return "Sunflower";
-    		case 16:
-    			return "Tomato";
-    		case 17:
-    			return "Tulip";
-    		case 18:
-    			return "Turnip";
-    		case 19:
-    			return "Wheat";
-    		default:
-    			Debug.LogWarning("FindCropName() received invalid input!");
-    			return null;
-    	}
     }
 
     public void SaveInventory()
@@ -154,34 +104,6 @@ public class StoreInventory : MonoBehaviour
     		PlayerPrefs.SetInt(item.Name()+"Store", item.Num());
     	}
     	PlayerPrefs.SetString("storeInventoryIndex", index);
-    }
-
-
-    public static Sprite GetCropSprite(string name)
-    {
-        Sprite[] icons = Resources.LoadAll<Sprite>("Crop_Spritesheet");
-        bool seed = name.Contains("Seed");
-    	string tempName = name;
-        if (seed)
-            tempName = name.Remove(name.IndexOf("Seed"), "Seed".Length);
-        else
-            tempName = name;//.Remove(name.IndexOf("Fruit"), "Fruit".Length);
-    	// Debug.Log(tempName);
-        foreach (Sprite i in icons)
-        {
-        	if(seed)
-        	{
-        		if(tempName + "_0" == i.name)
-            		return i;
-        	}
-            else
-            {
-        		if(tempName + "_5" == i.name)
-            		return i;
-            }
-            
-        }
-        return null;
     }
 
     // private void SaveAddItem(string name, int num)
@@ -215,10 +137,7 @@ public class StoreInventory : MonoBehaviour
         foreach(string itemName in indexArray)
         {
         	Item item = new Item();
-	        item.SetName(itemName);
-	        item.SetNum(PlayerPrefs.GetInt(itemName + "Store"));
-	        Sprite icon = GetCropSprite(itemName);
-	        item.SetIcon(icon);
+			item.SetAllFields(itemName, PlayerPrefs.GetInt(itemName + "Store"));
 
         	items.Add(item);
         }
@@ -236,12 +155,9 @@ public class StoreInventory : MonoBehaviour
     		return;
 
         Item item = new Item();
-        item.SetName(name);
-        item.SetNum(num);
-        Sprite icon = GetCropSprite(name);
-        item.SetIcon(icon);
-        int count = items.Count;
+        item.SetAllFields(name, num);
 
+        int count = items.Count;
         if (count == 0)
         {
             items.Add(item);
@@ -280,7 +196,7 @@ public class StoreInventory : MonoBehaviour
                     break;
                 }
 
-                if (i == count - 1)
+                if (i == count - 1 && count < storeLimit)
                 {
                     items.Add(item);
                     // SaveAddItem(name, num);

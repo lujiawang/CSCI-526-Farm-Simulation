@@ -85,34 +85,6 @@ public class Inventory : MonoBehaviour
     	PlayerPrefs.SetString("inventoryIndex", index);
     }
 
-
-    public static Sprite GetCropSprite(string name)
-    {
-        Sprite[] icons = Resources.LoadAll<Sprite>("Crop_Spritesheet");
-        bool seed = name.Contains("Seed");
-    	string tempName = name;
-        if (seed)
-            tempName = name.Remove(name.IndexOf("Seed"), "Seed".Length);
-        else
-            tempName = name;//.Remove(name.IndexOf("Fruit"), "Fruit".Length);
-    	// Debug.Log(tempName);
-        foreach (Sprite i in icons)
-        {
-        	if(seed)
-        	{
-        		if(tempName + "_0" == i.name)
-            		return i;
-        	}
-            else
-            {
-        		if(tempName + "_5" == i.name)
-            		return i;
-            }
-            
-        }
-        return null;
-    }
-
     // private void SaveAddItem(string name, int num)
     // {
     // 	string index = PlayerPrefs.GetString("inventoryIndex");
@@ -144,10 +116,7 @@ public class Inventory : MonoBehaviour
         foreach(string itemName in indexArray)
         {
         	Item item = new Item();
-	        item.SetName(itemName);
-	        item.SetNum(PlayerPrefs.GetInt(itemName));
-	        Sprite icon = GetCropSprite(itemName);
-	        item.SetIcon(icon);
+	        item.SetAllFields(itemName, PlayerPrefs.GetInt(itemName));
 
         	items.Add(item);
         }
@@ -165,12 +134,9 @@ public class Inventory : MonoBehaviour
     		return;
 
         Item item = new Item();
-        item.SetName(name);
-        item.SetNum(num);
-        Sprite icon = GetCropSprite(name);
-        item.SetIcon(icon);
-        int count = items.Count;
+        item.SetAllFields(name, num);
 
+        int count = items.Count;
         if (count == 0)
         {
             items.Add(item);
