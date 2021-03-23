@@ -26,7 +26,7 @@ public class HarvestStats : MonoBehaviour
 
     
 
-    public void AddToInventory(string cropName)
+    public void AddToInventory(string cropName, int reward)
     {
         //script is attached to the player.
         //adds crop to the dictionary that represents the current inventory of the player
@@ -38,6 +38,7 @@ public class HarvestStats : MonoBehaviour
             PlayerStats.cropCount[cropName] = 0;
         }
         PlayerStats.cropCount[cropName] += 1;
+        PlayerStats.ChangeCurrency(reward);
         PrintNotification(cropName);
     }
 
@@ -48,68 +49,6 @@ public class HarvestStats : MonoBehaviour
         inventoryText.text += "Hurray! You have collected:";
         StartCoroutine(ActivateSuccessPanel(cropName));
     }
-
-
-
-    //public void Sweep()
-    //{
-    //    bool cropExists = false;
-    //    cropCount = new Dictionary<string, int>();
-    //    foreach (GameObject cropLand in cropLands)
-    //    {
-    //        if (cropLand.transform.childCount > 0)
-    //        {
-    //            // get the crop from each cropLand
-    //            GameObject childObject = cropLand.transform.GetChild(0).gameObject;
-    //            Debug.Log("Just clicked something");
-    //            if (childObject)
-    //            {
-    //                CropGrowing gScript = childObject.GetComponent<CropGrowing>();
-
-
-    //                Debug.Log("Time to harvest");
-
-    //                if (childObject == null) return;
-    //                int reward = gScript.harvestCrop();
-
-    //                if (reward > 0)
-    //                {
-    //                    //crop is grown
-    //                    string name = gScript.cropName;
-    //                    if (!cropCount.ContainsKey(name))
-    //                    {
-    //                        cropCount[name] = 0;
-    //                    }
-
-    //                    cropCount[name] += 1;
-    //                    cropExists = true;
-    //                    //put back into original parent and Set inactive
-
-
-    //                    //childObject.SetActive(false);
-    //                    //childObject.transform.SetParent(GameObject.Find("CropPlaceholder").transform);
-
-    //                    //Destroy gameobject
-    //                    Destroy(childObject);
-           
-    //                }
-    //            }
-
-    //        }
-    //        else
-    //        {
-    //            Debug.Log("None grown yet!");
-    //        }
-    //    }
-    //    if (!cropExists)
-    //    {
-    //        StartCoroutine(ActivateFailPanel());
-    //    }
-    //    else
-    //    {
-    //        PrintCrops(cropCount);
-    //    }
-    //}
 
     public void ActivateFail(int index)
     {

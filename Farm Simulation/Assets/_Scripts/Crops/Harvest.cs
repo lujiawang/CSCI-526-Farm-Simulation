@@ -62,8 +62,9 @@ public class Harvest : MonoBehaviour
                 if (gScript.grown)
                 {
                     string cropName = gScript.name;
+                    int reward = gScript.reward;
                     Debug.Log("Harvesting " + cropName);
-                    hs.AddToInventory(cropName);
+                    hs.AddToInventory(cropName,reward);
 
                     inventory.Add(cropName, 1);
 
@@ -97,8 +98,9 @@ public class Harvest : MonoBehaviour
         if (cropGrowing.grown)
         {
             string cropName = childObject.name;
+            int reward = cropGrowing.reward;
             Debug.Log("Harvesting " + cropName);
-            hs.AddToInventory(cropName);
+            hs.AddToInventory(cropName,reward);
 
             //string inventName = cropName + "Fruit";
             //Debug.Log(inventName);
