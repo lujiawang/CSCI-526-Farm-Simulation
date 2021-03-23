@@ -128,7 +128,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   growTime: 2
   cropName: Orange
-  reward: 1
+  Notification: {fileID: 0}
+  grown: 0
+  reward: 55
   addrs:
   - m_AssetGUID: ef320b5269778f842a9bb0cf66981501
     m_SubObjectName: Orange_0

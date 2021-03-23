@@ -128,7 +128,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   growTime: 2
   cropName: Tulip
-  reward: 1
+  Notification: {fileID: 0}
+  grown: 0
+  reward: 95
   addrs:
   - m_AssetGUID: ef320b5269778f842a9bb0cf66981501
     m_SubObjectName: Tulip_0
