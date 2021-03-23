@@ -102,6 +102,7 @@ public class TouchToMove : MonoBehaviour
     {
         // GameObject player = GameObject.FindGameObjectsWithTag("Player")[0];
         // save player's new position
+        // this refers to player object
         PlayerPrefs.SetFloat("PlayerPositionX", this.transform.position.x);
         PlayerPrefs.SetFloat("PlayerPositionY", this.transform.position.y);
         PlayerPrefs.SetFloat("PlayerPositionZ", this.transform.position.z);

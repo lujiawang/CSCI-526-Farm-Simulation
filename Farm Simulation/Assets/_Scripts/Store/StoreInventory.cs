@@ -4,28 +4,34 @@ using UnityEngine;
 using System.Linq;
 using System;
 
-public class Inventory : MonoBehaviour
+public class StoreInventory : MonoBehaviour
 {
     #region Singleton
     // Use "Inventory.instance" to access the Inventory instance and perform Add/Remove function
 
-    public static Inventory instance;
+    public static StoreInventory instance;
 
     void Awake()
     {
         if (instance != null)
         {
-            Debug.LogWarning("> 1 Inventory instance found");
+            Debug.LogWarning("> 1 StoreInventory instance found");
             return;
         }
         instance = this;
     }
     #endregion
 
-    public static int stackLimit = 99; //stack limit of items
 
-    public delegate void OnItemChanged();
-    public OnItemChanged onItemChangedCallback;
+    public static int stackLimit = 99;
+    public static int randomizeSeedsLimit = 10; // when randomizing, the maximum number of seeds that can be generated
+
+    public static int seedTypes = 20; // how many types of seeds there are , used for randomizing store
+
+    public static int storeLimit = 5; // how many items can the store hold
+
+    public delegate void OnStoreItemChanged();
+    public OnStoreItemChanged onStoreItemChangedCallback;
 
     SoundManager soundManager;
 
@@ -40,24 +46,15 @@ public class Inventory : MonoBehaviour
 
         string[] indexArray = new string[0];
         // if inventoryIndex is already set
-        if(PlayerPrefs.HasKey("inventoryIndex"))
-        	indexArray = PlayerPrefs.GetString("inventoryIndex").Split(new char[1]{' '}, StringSplitOptions.RemoveEmptyEntries);
+        if(PlayerPrefs.HasKey("storeInventoryIndex"))
+        	indexArray = PlayerPrefs.GetString("storeInventoryIndex").Split(new char[1]{' '}, StringSplitOptions.RemoveEmptyEntries);
         // else, set inventoryIndex and add starter package of seeds
         else
         {
-        	PlayerPrefs.SetString("inventoryIndex","");
+        	PlayerPrefs.SetString("storeInventoryIndex","");
 
-        	// add starter crops seeds to player's inventory
-        	Add("CornSeed", 1);
-	        Add("CucumberSeed", 5);
-	        Add("CucumberSeed", 5);
-	        Add("AvocadoSeed", 5);
-	        // Add("CassavaSeed", 5);
-	        // Add("CoffeeSeed", 5);
-	        // Add("EggplantSeed", 5);
-	        // Add("GrapesSeed", 5);
-	        // Add("LemonSeed", 5);
-	        Add("MelonSeed", 5);
+        	// randomize the store
+        	RandomizeStore();
         }
 
         if(indexArray.Length > 0)
@@ -74,15 +71,89 @@ public class Inventory : MonoBehaviour
     	SaveInventory();
     }
 
+    void RandomizeStore()
+    {
+    	System.Random rand = new System.Random();
+    	items = new List<Item>(); //clear out items list
+    	List<int> types = new List<int>(); //store all generated seedType
+    	for (int i = 0; i < storeLimit; i++)
+    	{
+    		int type = -1;
+    		// loop until generated a unique seedType number
+    		do{
+    			type = rand.Next(seedTypes); //generate integer between 0 - seedsTypes
+    		}while(types.Contains(type));
+    		types.Add(type);
+
+    		string name = FindCropName(type) + "Seed";
+    		int num = rand.Next(1, randomizeSeedsLimit+1);
+
+    		Add(name, num);
+
+    		// rand = new Random();
+    	}
+    	
+    }
+
+    public static string FindCropName(int id)
+    {
+    	switch(id)
+    	{
+    		case 0:
+    			return "Avocado";
+    		case 1:
+    			return "Cassava";
+    		case 2:
+    			return "Coffee";
+    		case 3:
+    			return "Corn";
+    		case 4:
+    			return "Cucumber";
+    		case 5:
+    			return "Eggplant";
+    		case 6:
+    			return "Grapes";
+    		case 7:
+    			return "Lemon";
+    		case 8:
+    			return "Melon";
+    		case 9:
+    			return "Orange";
+    		case 10:
+    			return "Pineapple";
+    		case 11:
+    			return "Potato";
+    		case 12:
+    			return "Rice";
+    		case 13:
+    			return "Rose";
+    		case 14:
+    			return "Strawberry";
+    		case 15:
+    			return "Sunflower";
+    		case 16:
+    			return "Tomato";
+    		case 17:
+    			return "Tulip";
+    		case 18:
+    			return "Turnip";
+    		case 19:
+    			return "Wheat";
+    		default:
+    			Debug.LogWarning("FindCropName() received invalid input!");
+    			return null;
+    	}
+    }
+
     public void SaveInventory()
     {
     	string index = "";
     	foreach(Item item in items)
     	{
     		index += " " + item.Name();
-    		PlayerPrefs.SetInt(item.Name(), item.Num());
+    		PlayerPrefs.SetInt(item.Name()+"Store", item.Num());
     	}
-    	PlayerPrefs.SetString("inventoryIndex", index);
+    	PlayerPrefs.SetString("storeInventoryIndex", index);
     }
 
 
@@ -145,16 +216,16 @@ public class Inventory : MonoBehaviour
         {
         	Item item = new Item();
 	        item.SetName(itemName);
-	        item.SetNum(PlayerPrefs.GetInt(itemName));
+	        item.SetNum(PlayerPrefs.GetInt(itemName + "Store"));
 	        Sprite icon = GetCropSprite(itemName);
 	        item.SetIcon(icon);
 
         	items.Add(item);
         }
 
-        if (onItemChangedCallback != null)
+        if (onStoreItemChangedCallback != null)
         {
-            onItemChangedCallback.Invoke();
+            onStoreItemChangedCallback.Invoke();
         }
     }
 
@@ -225,16 +296,16 @@ public class Inventory : MonoBehaviour
         }
         else
         {
-            soundManager.PlaySound("remove");
+            // soundManager.PlaySound("remove");
             // Debug.Log("Play remove sound");
         }
 
         // Debug.Log(items.Count);
 
 
-        if (onItemChangedCallback != null)
+        if (onStoreItemChangedCallback != null)
         {
-            onItemChangedCallback.Invoke();
+            onStoreItemChangedCallback.Invoke();
         }
 
     }
