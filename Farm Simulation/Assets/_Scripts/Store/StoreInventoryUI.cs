@@ -80,6 +80,8 @@ public class StoreInventoryUI : MonoBehaviour
     			ItemButton.Find("Text").gameObject.GetComponent<Text>().text = storeInventory.items[i].Name();
     			// change Number
     			ItemButton.Find("Number").gameObject.GetComponent<Text>().text = "" + storeInventory.items[i].Num();
+    			// set "Value"
+    			ItemButton.Find("Price").gameObject.GetComponent<Text>().text = "" + storeInventory.items[i].BuyPrice();
     			// change Sprite
     			ItemButton.Find("Item").gameObject.GetComponent<Image>().sprite = storeInventory.items[i].Icon();
     			// change "Item" to the new name

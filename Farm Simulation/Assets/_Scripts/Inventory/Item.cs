@@ -36,29 +36,46 @@ public class Item
 		public string Name(){
 			return this.name;
 		}
+		public int Num(){
+			return this.num;
+		}
 
+		public int Id(){
+			return this.id;
+		}
 		public Sprite Icon(){
 			return this.icon;
 		}
 
-		public int Num(){
-			return this.num;
+		public int SellPrice(){
+			return this.sellPrice;
+		}
+		public int BuyPrice(){
+			return this.buyPrice;
 		}
 
 		public void SetName(string name){
 			this.name = name;
 		}
-
 		public void SetNum(int num){
 			this.num = num;
 		}
-
 		public void AddNum(int num){
 			this.num += num;
 		}
 
+		public void SetId(int id){
+			this.id = id;
+		}
 		public void SetIcon(Sprite icon){
 			this.icon = icon;
+		}
+
+		public void SetSellPrice(int sellPrice){
+			this.sellPrice = sellPrice;
+		}
+		public void SetBuyPrice(int buyPrice){
+			this.buyPrice = buyPrice;
 		}
 
 		public void SetAllFields(string name, int num)

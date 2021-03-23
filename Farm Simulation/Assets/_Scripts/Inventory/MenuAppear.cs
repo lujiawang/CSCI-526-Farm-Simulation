@@ -24,17 +24,17 @@ public class MenuAppear : MonoBehaviour
         if (isMenu)
         {
             anim.SetBool("isMenu", true);
-            Camera.main.transform.position = new Vector3(0f, 0f, Camera.main.transform.position.z);
+            // Camera.main.transform.position = new Vector3(0f, 0f, Camera.main.transform.position.z);
             DragAndDrop.canDrag = true;
-            CameraFollow.enableCamera = false;
+            // CameraFollow.enableCamera = false;
         }
         else
         {
             anim.SetBool("isMenu", false);
 
-            Camera.main.transform.position = new Vector3(0f, 0f, Camera.main.transform.position.z);
+            // Camera.main.transform.position = new Vector3(0f, 0f, Camera.main.transform.position.z);
             DragAndDrop.canDrag = false;
-            CameraFollow.enableCamera = true;
+            // CameraFollow.enableCamera = true;
         }
     }
 }
