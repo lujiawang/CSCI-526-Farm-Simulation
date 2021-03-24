@@ -5,7 +5,7 @@ using UnityEngine;
 public class MenuAppear : MonoBehaviour
 {
     private float minY = -335f;
-    private float maxY = 375f;
+    // private float maxY = 375f;
     public static bool isMenu;
 
     private Animator anim;

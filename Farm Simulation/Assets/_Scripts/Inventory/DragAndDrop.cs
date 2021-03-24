@@ -20,8 +20,6 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
     private Vector3 initialPos;
 
-    private Camera cam;
-
     Inventory inventory;
 
     private int layerMask;
@@ -60,8 +58,6 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         endDrag = false;
         
         initialPos = rectTransform.anchoredPosition;
-
-        cam = Camera.main;
 
         inventory = Inventory.instance;
 
@@ -109,7 +105,7 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
                         canvasGroup.blocksRaycasts = true;
                         rectTransform.anchoredPosition = initialPos;
                     }else // plant the crop
-                        plantCrop(touchedObject);
+                        PlantCrop(touchedObject);
                 }
             }
         }
@@ -133,7 +129,7 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
     }
 
-    private void plantCrop(GameObject cropLand)
+    private void PlantCrop(GameObject cropLand)
     {
         cropLand.GetComponent<AudioSource>().Play();
 

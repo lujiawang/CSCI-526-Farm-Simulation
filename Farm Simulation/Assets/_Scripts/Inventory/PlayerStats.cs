@@ -9,7 +9,7 @@ public static class PlayerStats
     public static Dictionary<string, int> cropCount = new Dictionary<string, int>();
 
 
-    private static bool toSave = false;
+    private static bool toSave = true;
 
     public static bool Save
     {

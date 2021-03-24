@@ -32,10 +32,14 @@ public class StoreInventory : MonoBehaviour
 
     public delegate void OnStoreItemChanged();
     public OnStoreItemChanged onStoreItemChangedCallback;
+    // subscribe any method to this callback to notify self of changes made in inventory
 
     SoundManager soundManager;
 
-    // subscribe any method to this callback to notify self of changes made in inventory
+    InternetTime internetTime;
+
+    // day, hour, minute, second
+    public static TimeSpan storeUpdateInterval = new TimeSpan(0, 0, 0, 10);
 
     public List<Item> items = new List<Item>();
 
@@ -43,6 +47,8 @@ public class StoreInventory : MonoBehaviour
     {
     	// must initialize this first
         soundManager = SoundManager.instance;
+        internetTime = InternetTime.instance;
+        internetTime.onTimeChangedCallback += UpdateStore;
 
         string[] indexArray = new string[0];
         // if inventoryIndex is already set
@@ -87,11 +93,17 @@ public class StoreInventory : MonoBehaviour
 
     		string name = Item.GetCropName(type);
     		int num = rand.Next(1, randomizeSeedNumLimit+1);
+    		Item item = new Item();
+    		item.SetAllFields(name, num);
 
-    		Add(name, num);
+    		items.Add(item);
 
     		// rand = new Random();
     	}
+    	if (onStoreItemChangedCallback != null)
+        {
+            onStoreItemChangedCallback.Invoke();
+        }
     	
     }
 
@@ -105,32 +117,6 @@ public class StoreInventory : MonoBehaviour
     	}
     	PlayerPrefs.SetString("storeInventoryIndex", index);
     }
-
-    // private void SaveAddItem(string name, int num)
-    // {
-    // 	string index = PlayerPrefs.GetString("inventoryIndex");
-    // 	index += " " + name;
-    // 	PlayerPrefs.SetString("inventoryIndex", index);
-    // 	PlayerPrefs.SetInt(name, num);
-    // }
-
-    // private void SaveUpdateItem(string name, int num)
-    // {
-    // 	PlayerPrefs.SetInt(name, num + PlayerPrefs.GetInt(name));
-    // }
-
-    // private void SaveRemoveItem(string name)
-    // {
-    // 	string index = "";
-    // 	string[] indexArray = PlayerPrefs.GetString("inventoryIndex").Split(new char[1]{' '}, StringSplitOptions.RemoveEmptyEntries);
-    // 	foreach(string i in indexArray)
-    // 	{
-    // 		if(i != name)
-    // 			index += " " + i;
-    // 	}
-    // 	PlayerPrefs.SetString("inventoryIndex", index);
-    // 	PlayerPrefs.DeleteKey(name);
-    // }
 
     public void InitializeInventory(string[] indexArray)
     {
@@ -146,6 +132,29 @@ public class StoreInventory : MonoBehaviour
         {
             onStoreItemChangedCallback.Invoke();
         }
+    }
+
+    // update the store inventory when certiain amoutn of time passes
+    public void UpdateStore()
+    {
+    	// if the game continues from last save
+    	if(PlayerPrefs.HasKey("prevTimeStoreUpdate"))
+    	{
+    		DateTime prevTime = DateTime.Parse(PlayerPrefs.GetString("prevTimeStoreUpdate"));
+    		// check if time elapsed is greater than update interval
+    		TimeSpan diffTime = internetTime.GetTime().Subtract(prevTime);
+    		// Debug.Log(diffTime);
+    		if(TimeSpan.Compare(diffTime, storeUpdateInterval) >= 0)
+    		{
+    			PlayerPrefs.SetString("prevTimeStoreUpdate", internetTime.GetTime().ToString());
+    			RandomizeStore();
+    		}    		
+    	}
+    	else //if is new game
+    	{
+    		PlayerPrefs.SetString("prevTimeStoreUpdate", internetTime.GetTime().ToString());
+    		RandomizeStore();
+    	}
     }
 
     // num can be negative to perform remove
@@ -225,15 +234,5 @@ public class StoreInventory : MonoBehaviour
         }
 
     }
-
-
-    // public void Remove(Item item)
-    // {
-    // 	items.Remove(item);
-    // 	if(onItemChangedCallback != null){
-    // 		onItemChangedCallback.Invoke();
-    // 	}
-    // }
-
 
 }

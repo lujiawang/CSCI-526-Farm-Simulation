@@ -80,9 +80,11 @@ public class Inventory : MonoBehaviour
     	foreach(Item item in items)
     	{
     		index += " " + item.Name();
+    		// Debug.Log("name: "+item.Name());
     		PlayerPrefs.SetInt(item.Name(), item.Num());
     	}
     	PlayerPrefs.SetString("inventoryIndex", index);
+    	// Debug.Log("index: "+index);
     }
 
     // private void SaveAddItem(string name, int num)
@@ -115,6 +117,7 @@ public class Inventory : MonoBehaviour
     {
         foreach(string itemName in indexArray)
         {
+        	// Debug.Log("Name + Int: "+ itemName+" "+PlayerPrefs.GetInt(itemName));
         	Item item = new Item();
 	        item.SetAllFields(itemName, PlayerPrefs.GetInt(itemName));
 
