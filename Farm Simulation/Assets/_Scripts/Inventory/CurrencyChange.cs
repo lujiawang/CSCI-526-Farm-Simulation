@@ -34,9 +34,13 @@ public class CurrencyChange : MonoBehaviour
 
     private void OnDestroy()
     {
-        PlayerPrefs.SetInt("Currency", PlayerStats.Currency);
-        PlayerPrefs.Save();
-        Debug.Log("Currency saved " + PlayerPrefs.GetInt("Currency"));
+        if (PlayerStats.Save == true)
+        {
+            PlayerPrefs.SetInt("Currency", PlayerStats.Currency);
+            PlayerPrefs.Save();
+            Debug.Log("Currency saved " + PlayerPrefs.GetInt("Currency"));
+        }
+        
     }
 
     public void SetTrue() {
