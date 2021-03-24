@@ -46,7 +46,7 @@ public class StoreInventory : MonoBehaviour
 
         string[] indexArray = new string[0];
         // if inventoryIndex is already set
-        if(PlayerPrefs.HasKey("storeInventoryIndex"))
+        if(PlayerStats.Save == true && PlayerPrefs.HasKey("storeInventoryIndex"))
         	indexArray = PlayerPrefs.GetString("storeInventoryIndex").Split(new char[1]{' '}, StringSplitOptions.RemoveEmptyEntries);
         // else, set inventoryIndex and add starter package of seeds
         else

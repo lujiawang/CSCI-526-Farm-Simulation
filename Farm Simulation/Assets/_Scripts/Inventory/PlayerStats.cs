@@ -8,7 +8,16 @@ public static class PlayerStats
     
     public static Dictionary<string, int> cropCount = new Dictionary<string, int>();
 
-    private static int currency = PlayerPrefs.GetInt("Currency", 0);
+
+    private static bool toSave = false;
+
+    public static bool Save
+    {
+        get { return toSave;  }
+        set { toSave = value;  }
+    }
+
+    private static int currency = toSave == true? PlayerPrefs.GetInt("Currency", 0): 0;
     public static int Currency
     {
         get { return currency;  }
