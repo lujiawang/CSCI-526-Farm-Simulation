@@ -4652,9 +4652,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 590700673}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!222 &590700676
 CanvasRenderer:
@@ -5079,7 +5079,7 @@ GameObject:
   - component: {fileID: 693246527}
   - component: {fileID: 693246520}
   - component: {fileID: 693246526}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -15598,7 +15598,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1263177376}
   - component: {fileID: 1263177377}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: CropsGained
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15949,9 +15949,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1317845481}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &1317845487
 MonoBehaviour:

@@ -11,28 +11,31 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
 
+    private GameObject player;
+
     GameObject CropParent;
     GameObject realCrop; //the corresponding object that pre-saved inside CropParent;
 
-    private bool inPosition; //whether it is on the land
-    public static bool canDrag; //whether it is on the way
+    private bool endDrag; // flag to end dragging
 
-    GameObject warning;
     private Vector3 initialPos;
 
     private Camera cam;
 
     Inventory inventory;
-    
 
+    private int layerMask;
 
     private void Start()
     {
+        canvas = GetComponentInParent<Canvas>().rootCanvas;
+        rectTransform = GetComponent<RectTransform>();
+        canvasGroup = GetComponent<CanvasGroup>();
+
+        player = GameObject.FindGameObjectsWithTag("Player")[0];
+
         //get pre-defined children
         CropParent = GameObject.Find("CropPlaceholder"); //the placeholder object named Crops in scene
-
-        warning = GameObject.FindGameObjectWithTag("Warning");
-
 
         foreach (Transform child in CropParent.transform)
         {
@@ -54,80 +57,70 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
             this.GetComponent<CanvasGroup>().blocksRaycasts = true;
         }
 
-        inPosition = false;
-        canDrag = MenuAppear.isMenu;
-
-
-        rectTransform = GetComponent<RectTransform>();
-        canvas = GetComponentInParent<Canvas>().rootCanvas;
-        canvasGroup = GetComponent<CanvasGroup>();
-        
+        endDrag = false;
         
         initialPos = rectTransform.anchoredPosition;
 
         cam = Camera.main;
 
         inventory = Inventory.instance;
+
+        layerMask = LayerMask.GetMask("Player")-1;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (!inPosition && canDrag)
-        {
-            canvasGroup.alpha = 0.6f;
-            canvasGroup.blocksRaycasts = false;
-            canDrag = true;
-        }
+        canvasGroup.alpha = 0.6f;
+        canvasGroup.blocksRaycasts = false;
         // Debug.Log("OnBeginDrag");
-
-
     }
 
-    public void OnDrag(PointerEventData eventData)
-    {
-        if (TouchToMove.landName == "")
-        {
-            warning.transform.GetChild(0).gameObject.SetActive(true);//the warning button
-            warning.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "Please walk to a crop land first"; //warning text
-            Time.timeScale = 0f;
+    
 
-            canvasGroup.alpha = 1f;
-            canvasGroup.blocksRaycasts = true;
-            canDrag = false;
-        }
-        
-        else if (!inPosition && canDrag)
-        {
-            // Debug.Log("OnDrag");
-            rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+    public void OnDrag(PointerEventData eventData)
+    {  
+        if(endDrag)
+            return;
+        // continue dragging
+        rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+        if(!TouchToMove.IsPointerOverGameObject()){
+            Vector3 mousePos3D = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            // Vector2 mousePos2D = new Vector2(mousePos3D.x, mousePos3D.y);
+            RaycastHit2D hitInformation = Physics2D.Raycast(mousePos3D, Camera.main.transform.forward);
+
+            if(hitInformation.collider != null)
+            {
+                GameObject touchedObject = hitInformation.transform.gameObject;
+                if (touchedObject.CompareTag("cropLand") && touchedObject.transform.childCount == 0)
+                {
+                    Vector3 playerPos = player.transform.position;
+                    RaycastHit2D hitInfo = Physics2D.Raycast(playerPos, Camera.main.transform.forward, 
+                        Mathf.Infinity, layerMask);
+                    // if player is not on any one cropLand
+                    if(hitInfo.collider == null || !( hitInfo.transform.gameObject.CompareTag("cropLand") || 
+                        ( hitInfo.transform.parent != null && hitInfo.transform.parent.gameObject.CompareTag("cropLand") ) ))
+                    {
+                        // Debug.Log("LayerMask: "+layerMask);
+                        // Debug.Log("Collided: "+hitInfo.transform.gameObject.name);
+                        ShowToast cScript = canvas.GetComponent<ShowToast>();
+                        cScript.showToast("Walk to any cropland to plant!", 1);
+                        endDrag = true;
+                        canvasGroup.alpha = 1f;
+                        canvasGroup.blocksRaycasts = true;
+                        rectTransform.anchoredPosition = initialPos;
+                    }else // plant the crop
+                        plantCrop(touchedObject);
+                }
+            }
         }
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (!inPosition && canDrag) //when drag out from the menu, switch to the real crop
-        {
-            // Debug.Log("OnEndDrag");
-            canvasGroup.alpha = 1f;
-            canvasGroup.blocksRaycasts = true;
-            canDrag = false;
-        } else
-        {
-            canvasGroup.alpha = 1f;
-            Debug.Log("drag");
-            canDrag = false;
-        }
-
-
-        if (!canDrag)
-        {
-            rectTransform.anchoredPosition = initialPos;
-            canDrag = true;
-        }
-        if(inPosition)
-        {
-            inPosition = false;
-        }
+        canvasGroup.alpha = 1f;
+        canvasGroup.blocksRaycasts = true;
+        endDrag = false;
+        rectTransform.anchoredPosition = initialPos;
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -140,68 +133,17 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
     }
 
-
-
-
-    // Update is called once per frame
-    void Update()
+    private void plantCrop(GameObject cropLand)
     {
+        cropLand.GetComponent<AudioSource>().Play();
 
-        if (!inPosition && canDrag)
-        {
-            Vector2 pos = cam.ScreenToWorldPoint(transform.position);
+        GameObject copyCrop = Instantiate(realCrop);
+        copyCrop.name = realCrop.name;
+        copyCrop.transform.position = cropLand.transform.position;
+        copyCrop.transform.SetParent(cropLand.transform);
+        copyCrop.SetActive(true);
 
-            //get the current touched object
-            RaycastHit2D hitInformation = Physics2D.Raycast(pos, Camera.main.transform.forward);
-
-            if (TouchToMove.landName != "" && hitInformation.collider != null)
-            {
-                GameObject cropLand = GameObject.Find(TouchToMove.landName);
-
-                //whether it hit the overall CropLands
-                GameObject touchedObject = hitInformation.transform.gameObject;
-
-                //if trying to plant on non-empty land, return to original position
-                if(cropLand.transform.childCount > 0)
-                {
-                    warning.transform.GetChild(0).gameObject.SetActive(true);
-                    warning.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "Please walk to an empty crop land";
-                    rectTransform.anchoredPosition = initialPos;
-                    Time.timeScale = 0f;
-
-                    canvasGroup.alpha = 1f;
-                    canvasGroup.blocksRaycasts = true;
-                    canDrag = false;
-                }
-
-                else if (touchedObject.CompareTag("cropLand") && cropLand != null)
-                {
-                    Debug.Log("plant on: " + cropLand.name);
-
-                    touchedObject.GetComponent<AudioSource>().Play();
-
-                    // this.gameObject.SetActive(false);
-                    realCrop.SetActive(true);
-                    realCrop.transform.position = cropLand.transform.position; //clip to the position
-                    realCrop.transform.SetParent(cropLand.transform);
-                    inPosition = true; //and stop dragging
-
-
-                    //re add the realCrop into the CropPlaceHolder
-                    GameObject copyCrop = Instantiate(realCrop);
-                    copyCrop.name = realCrop.name;
-                    copyCrop.transform.SetParent(CropParent.transform);
-                    copyCrop.SetActive(false);
-
-                    //change reference of the realCrop
-                    realCrop = copyCrop;
-
-                    inventory.Add(this.name, -1);
-                    this.canvasGroup.blocksRaycasts = true;
-
-                }
-
-            }
-        }
+        inventory.Add(this.name, -1);
     }
+
 }

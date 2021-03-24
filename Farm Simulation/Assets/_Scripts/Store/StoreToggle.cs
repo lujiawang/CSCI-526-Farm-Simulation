@@ -17,7 +17,6 @@ public class StoreToggle : MonoBehaviour
 
     void Start()
     {
-    	// CloseStore();
         inventoryObj = GameObject.FindGameObjectsWithTag("Inventory")[0];
         // storeInventoryObj = StoreInventory.gameObject;
 
