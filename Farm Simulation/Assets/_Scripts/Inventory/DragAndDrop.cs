@@ -43,9 +43,15 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
             }
         }
 
+        // disable dragability of "Item"
         if(realCrop == null)
         {
-            this.transform.parent.GetComponent<Button>().interactable = false;
+            this.GetComponent<CanvasGroup>().interactable = false;
+            this.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        }else // enable dragability of "Item"
+        {
+            this.GetComponent<CanvasGroup>().interactable = true;
+            this.GetComponent<CanvasGroup>().blocksRaycasts = true;
         }
 
         inPosition = false;

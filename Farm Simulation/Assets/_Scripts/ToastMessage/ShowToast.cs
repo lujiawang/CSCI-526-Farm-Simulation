@@ -62,6 +62,7 @@ public class ShowToast : MonoBehaviour
 
 	    txt.enabled = false;
 	    txt.color = orginalColor;
+	    showNumber = 1;
 	}
 
 	public IEnumerator fadeInAndOut(Text targetText, bool fadeIn, float duration)

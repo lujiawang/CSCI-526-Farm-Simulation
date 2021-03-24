@@ -86,6 +86,8 @@ public class StoreInventoryUI : MonoBehaviour
     			ItemButton.Find("Item").gameObject.GetComponent<Image>().sprite = storeInventory.items[i].Icon();
     			// change "Item" to the new name
     			ItemButton.Find("Item").gameObject.name = storeInventory.items[i].Name();
+    			// disable DragAndDrop script
+    			ItemButton.GetChild(0).gameObject.GetComponent<DragAndDrop>().enabled = false;
     		}
     		
     	}

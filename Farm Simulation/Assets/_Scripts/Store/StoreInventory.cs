@@ -67,8 +67,8 @@ public class StoreInventory : MonoBehaviour
     // OnDestroy is called before exiting the game
     void OnDestroy()
     {
-    	// PlayerPrefs.DeleteAll();
     	SaveInventory();
+    	// PlayerPrefs.DeleteAll();
     }
 
     void RandomizeStore()
