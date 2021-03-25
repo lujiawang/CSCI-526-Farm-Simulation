@@ -16,6 +16,8 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     GameObject CropParent;
     GameObject realCrop; //the corresponding object that pre-saved inside CropParent;
 
+    Transform buttonParent; //the itembutton parent
+
     private bool endDrag; // flag to end dragging
 
     private Vector3 initialPos;
@@ -44,6 +46,8 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
             }
         }
 
+        buttonParent = this.transform.parent;
+
         // disable dragability of "Item"
         if(realCrop == null)
         {
@@ -68,6 +72,8 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     {
         canvasGroup.alpha = 0.6f;
         canvasGroup.blocksRaycasts = false;
+        // reparent the crop so it is not affected by Mask component of parentPanel
+        this.transform.SetParent(canvas.transform);
         // Debug.Log("OnBeginDrag");
     }
 
@@ -103,6 +109,8 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
                         endDrag = true;
                         canvasGroup.alpha = 1f;
                         canvasGroup.blocksRaycasts = true;
+                        // set back to original inventoryslot parent
+                        this.transform.SetParent(buttonParent);
                         rectTransform.anchoredPosition = initialPos;
                     }else // plant the crop
                         PlantCrop(touchedObject);
@@ -116,6 +124,8 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
         endDrag = false;
+        // set back to original inventoryslot parent
+        this.transform.SetParent(buttonParent);
         rectTransform.anchoredPosition = initialPos;
     }
 
