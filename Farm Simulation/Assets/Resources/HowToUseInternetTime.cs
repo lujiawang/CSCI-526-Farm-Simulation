@@ -27,4 +27,11 @@ public class HowToUseInternetTime : MonoBehaviour
         DateTime updatedTime = internetTime.GetTime(); 
         // stuff that needs to be updated when time changes
     }
+
+    // if you want to update internet time immediately
+    IEnumerator UpdateTimeImmediately() // note that the function type IEnumerator cannot change
+    {
+        yield return StartCoroutine(internetTime.FetchTime());
+        // This is after internetTime is updated. Do stuff here. 
+    }
 }

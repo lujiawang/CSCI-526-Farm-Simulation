@@ -14,6 +14,7 @@ public class InventoryUI : MonoBehaviour
 	Inventory inventory;
 
 	InventorySlot[] slots;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,13 +22,6 @@ public class InventoryUI : MonoBehaviour
     	inventory.onItemChangedCallback += UpdateUI;
 
     	slots = itemsParent.GetComponentsInChildren<InventorySlot>();
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-    	// slots = itemsParent.GetComponentsInChildren<InventorySlot>();
         
     }
 
@@ -115,6 +109,9 @@ public class InventoryUI : MonoBehaviour
     		}
     	}
 
+        // change scroll height after updating UI
+        StartCoroutine(ScrollHeightRoutine());
+
     	// for(int i = 0; i < slots.Length; i++)
     	// {
     	// 	if(i < inventory.items.Count)
@@ -127,5 +124,12 @@ public class InventoryUI : MonoBehaviour
     	// }
 
 
+    }
+
+    IEnumerator ScrollHeightRoutine()
+    {
+        yield return null;
+        ScrollHeight cScript = GetComponent<ScrollHeight>();
+        cScript.UpdateHeight(itemsParent);
     }
 }

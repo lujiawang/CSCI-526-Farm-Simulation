@@ -37,16 +37,11 @@ public class InternetTime : MonoBehaviour
 	}
 
 	// updates every 10 seconds
-	public IEnumerator UpdateTime()
+	private IEnumerator UpdateTime()
 	{
 		do
 		{
 			yield return StartCoroutine(FetchTime());
-			// Debug.Log(currTime);
-			if (onTimeChangedCallback != null)
-	        {
-	            onTimeChangedCallback.Invoke();
-	        }
 			yield return new WaitForSeconds(10);
 		}while(true);
 		
@@ -63,8 +58,30 @@ public class InternetTime : MonoBehaviour
 	    }
 	    else
 	    {
-	        ReturnTextObj obj = JsonUtility.FromJson<ReturnTextObj>(uwr.downloadHandler.text);
-	        currTime = DateTime.Parse(obj.datetime);
+	    	string jsonData = uwr.downloadHandler.text;
+	    	// Debug.Log(jsonData);
+	    	// delete wrong bytes
+	    	int wrongCharCounter = 0;
+	    	while(true)
+	    	{
+	    		if(jsonData[wrongCharCounter] != '{')
+	    			wrongCharCounter++;
+	    		else
+	    			break;
+	    	}
+	    	jsonData = jsonData.Substring(wrongCharCounter);
+	    	// Debug.Log(jsonData);
+	    	if(jsonData.Contains("datetime"))
+	    	{
+	    		ReturnTextObj obj = JsonUtility.FromJson<ReturnTextObj>(jsonData);
+		        currTime = DateTime.Parse(obj.datetime);
+		        // Debug.Log(currTime);
+				if (onTimeChangedCallback != null)
+		        {
+		            onTimeChangedCallback.Invoke();
+		        }
+	    	}
+	        
 	    }
 	}
 

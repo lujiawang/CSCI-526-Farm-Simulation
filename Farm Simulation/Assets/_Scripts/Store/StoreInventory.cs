@@ -39,7 +39,7 @@ public class StoreInventory : MonoBehaviour
     InternetTime internetTime;
 
     // day, hour, minute, second
-    public static TimeSpan storeUpdateInterval = new TimeSpan(0, 0, 0, 10);
+    public static TimeSpan storeUpdateInterval = new TimeSpan(0, 0, 0, 10); // how much time before store update
 
     public List<Item> items = new List<Item>();
 
@@ -52,7 +52,7 @@ public class StoreInventory : MonoBehaviour
 
         string[] indexArray = new string[0];
         // if inventoryIndex is already set
-        if(PlayerStats.Save == true && PlayerPrefs.HasKey("storeInventoryIndex"))
+        if(PlayerPrefs.HasKey("storeInventoryIndex"))
         	indexArray = PlayerPrefs.GetString("storeInventoryIndex").Split(new char[1]{' '}, StringSplitOptions.RemoveEmptyEntries);
         // else, set inventoryIndex and add starter package of seeds
         else
@@ -102,6 +102,7 @@ public class StoreInventory : MonoBehaviour
     	}
     	if (onStoreItemChangedCallback != null)
         {
+            // StartCoroutine(onStoreItemChangedCallback.Invoke());
             onStoreItemChangedCallback.Invoke();
         }
     	
@@ -130,6 +131,7 @@ public class StoreInventory : MonoBehaviour
 
         if (onStoreItemChangedCallback != null)
         {
+            // StartCoroutine(onStoreItemChangedCallback.Invoke());
             onStoreItemChangedCallback.Invoke();
         }
     }
@@ -230,6 +232,7 @@ public class StoreInventory : MonoBehaviour
 
         if (onStoreItemChangedCallback != null)
         {
+            // StartCoroutine(onStoreItemChangedCallback.Invoke());
             onStoreItemChangedCallback.Invoke();
         }
 
