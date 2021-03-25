@@ -19,27 +19,28 @@ public class CropGrowing : MonoBehaviour
     private bool inPosition;
     public int growTime;
     public string cropName;
-    public GameObject Notification;
-    private Text notificationText;
+    //public GameObject Notification;
+    //private Text notificationText;
     //private Dictionary<int, Sprite> cropAssets;
     public bool grown; //make it public so player will know whether it is grown
     public int reward;
     public AssetReferenceSprite[] addrs = new AssetReferenceSprite[6];
     private int cropNum = 0;
     private bool started;
+    private GameObject canvas;
     // Start is called before the first frame update
     void Start()
     {
-        setUpAssets();
+        SetUpAssets();
         //Loading of assets using AssetReferenceSprite
         sr = GetComponent<SpriteRenderer>();
-        
+        canvas = GameObject.FindGameObjectsWithTag("Canvas")[0];
         foreach (AssetReferenceSprite newSprite in addrs)
         {
             newSprite.LoadAssetAsync().Completed += SpriteLoaded;
         }
 
-        notificationText = Notification.transform.GetChild(0).GetComponent<Text>();
+        //notificationText = Notification.transform.GetChild(0).GetComponent<Text>();
 
         
         stage = 0;
@@ -48,7 +49,7 @@ public class CropGrowing : MonoBehaviour
         
     }
 
-    void setUpAssets()
+    void SetUpAssets()
     {
         //cropAssets = new Dictionary<int, Sprite>();
 
@@ -82,7 +83,7 @@ public class CropGrowing : MonoBehaviour
     }
 
 
-    void assignSprite(int index)
+    void AssignSprite(int index)
     {
         // changing of sprites 
         Sprite sprite = crops[index];
@@ -100,7 +101,8 @@ public class CropGrowing : MonoBehaviour
             CancelInvoke("incrementByOne");
             //signify that crop has fully grown
             grown = true;
-            notificationText.text = "1 or more crops are ready for harvesting.";
+            ShowToast cScript = canvas.GetComponent<ShowToast>();
+            cScript.showToast( name+ " is ready for harvesting.",2);
             
 
 
@@ -109,7 +111,7 @@ public class CropGrowing : MonoBehaviour
         else if (runningPointer == growingCondition[stage])
         {
 
-            assignSprite(stage);
+            AssignSprite(stage);
             stage++;
         }
     }
@@ -154,7 +156,7 @@ public class CropGrowing : MonoBehaviour
         if(cropNum == 6 && started == false)
         {
             // Repeat method per 1 second
-            assignSprite(0);
+            AssignSprite(0);
             InvokeRepeating("incrementByOne", 1f, 1f);
             started = true;
         }
