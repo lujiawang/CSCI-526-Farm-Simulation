@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScrollHeight : MonoBehaviour
 {
@@ -8,9 +9,11 @@ public class ScrollHeight : MonoBehaviour
 	float originalHeight; // original height of itemsParent
 	float originalAnchorX; // original anchorPosition.x of itemsParent
 	float originalAnchorY; // original anchorPosition.y of itemsParent
-	int columnCount = 4;
+	int columnCount; // columns of the inventory
+	float heightOfRow; // how much height to add if one more row is added
 
-	float heightOfOneCell = 180f;
+	float additionalHeight; // compensate for bottom objects that are partially hidden
+	float normalRowCount; //maximum rows the UI can show (including partially hidden rows)
 
 	void Start()
 	{
@@ -25,6 +28,22 @@ public class ScrollHeight : MonoBehaviour
 		originalAnchorY = itemsParentRectTransform.anchoredPosition.y;
 		originalAnchorX = itemsParentRectTransform.anchoredPosition.x;
 		// Debug.Log(originalAnchorY);
+		GridLayoutGroup itemsParentGrid = itemsParentObj.GetComponent<GridLayoutGroup>();
+		columnCount = itemsParentGrid.constraintCount;
+		// Debug.Log(columnCount);
+		heightOfRow = itemsParentGrid.cellSize.y + itemsParentGrid.spacing.y;
+		// Debug.Log(heightOfRow);
+		if(this.name == "Inventory")
+		{
+			additionalHeight = 0f;
+			normalRowCount = 4;
+		}
+		else // StoreInventory
+		{
+			additionalHeight = 80f;
+			normalRowCount = 5;
+		}
+		
 		StartCoroutine(UpdateHeightRoutine(itemsParentObj.transform));
 	}
 
@@ -38,13 +57,17 @@ public class ScrollHeight : MonoBehaviour
 		int rows = (itemsParent.childCount + columnCount - 1) / columnCount;
 		// Debug.Log(rows);
 		RectTransform rectTransform = itemsParent.GetComponent<RectTransform>();
-		if(rows > 4)
+		if(rows > normalRowCount)
 		{
-			float diffHeight = (rows-4) * heightOfOneCell;
-			rectTransform.sizeDelta = new Vector2(originalWidth, originalHeight + diffHeight);
-			rectTransform.anchoredPosition = new Vector2(originalAnchorX, originalAnchorY - diffHeight/2);
-		}
-		else
+			float addHeight = (rows-columnCount) * heightOfRow + additionalHeight;
+			rectTransform.sizeDelta = new Vector2(originalWidth, originalHeight + addHeight);
+			rectTransform.anchoredPosition = new Vector2(originalAnchorX, originalAnchorY - addHeight/2);
+		}else if(rows == normalRowCount)
+		{
+			float addHeight = additionalHeight;
+			rectTransform.sizeDelta = new Vector2(originalWidth, originalHeight + addHeight);
+			rectTransform.anchoredPosition = new Vector2(originalAnchorX, originalAnchorY - addHeight/2);
+		}else
 		{
 			rectTransform.sizeDelta = new Vector2(originalWidth, originalHeight);
 			rectTransform.anchoredPosition = new Vector2(originalAnchorX, originalAnchorY);

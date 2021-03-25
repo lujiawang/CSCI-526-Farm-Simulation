@@ -25,10 +25,10 @@ public class StoreInventory : MonoBehaviour
 
     public static int stackLimit = 99;
     public static int randomizeSeedNumLimit = 10; // when randomizing, the maximum number of seeds that can be generated
-    public static int randomizeSeedTypes = 5; // when randomizing, how many types of seeds that can be generated
-    public static int seedTypes = 20; // how many types of seeds there are , used for randomizing store
+    public static int randomizeSeedTypes = 30; //5 // when randomizing, how many types of seeds that can be generated
+    public static int seedTypes = 40; //20 // how many types of seeds there are , used for randomizing store
 
-    public static int storeLimit = 20; // how many items can the store hold
+    // public static int storeLimit = 20; // how many items can the store hold
 
     public delegate void OnStoreItemChanged();
     public OnStoreItemChanged onStoreItemChangedCallback;
@@ -139,6 +139,7 @@ public class StoreInventory : MonoBehaviour
     // update the store inventory when certiain amoutn of time passes
     public void UpdateStore()
     {
+        // Debug.Log("updatestore");
     	// if the game continues from last save
     	if(PlayerPrefs.HasKey("prevTimeStoreUpdate"))
     	{
@@ -207,7 +208,7 @@ public class StoreInventory : MonoBehaviour
                     break;
                 }
 
-                if (i == count - 1 && count < storeLimit)
+                if (i == count - 1)
                 {
                     items.Add(item);
                     // SaveAddItem(name, num);

@@ -62,8 +62,8 @@ public class BuySellItem : MonoBehaviour
             PlayerStats.ChangeCurrency(price);
         }else //store is closed, show toast message
         {
-            ShowToast cScript = canvas.gameObject.GetComponent<ShowToast>();
-            cScript.showToast("You have to go to the store to sell your items!", 1);
+            // ShowToast cScript = canvas.gameObject.GetComponent<ShowToast>();
+            // cScript.showToast("You have to go to the store to sell your items!", 1);
         }
     }
 }

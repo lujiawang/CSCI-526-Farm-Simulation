@@ -117,7 +117,14 @@ public class StoreInventoryUI : MonoBehaviour
     		}
     	}
 
-        // yield return null;
+        StartCoroutine(ScrollHeightRoutine());
 
+    }
+    
+    IEnumerator ScrollHeightRoutine()
+    {
+        yield return null;
+        ScrollHeight cScript = GetComponent<ScrollHeight>();
+        cScript.UpdateHeight(itemsParent);
     }
 }
