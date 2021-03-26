@@ -344,19 +344,8 @@ public class Item : IComparable<Item>
 	    		return -1;
 	    	else
 	    		return 0;
-	    	// return this.id - item.Id();
-	    	
+	    	// return this.id - item.Id();	    	
 	    }
-
-		// public void SetIcon(string iconName){
-		// 	this.icon = null;
-		// }
-
-		// public Item(int id, string name, int num){
-		// 	this.id = id;
-		// 	this.name = name;
-		// 	this.num = num;
-		// }
 	// }
 	
     
