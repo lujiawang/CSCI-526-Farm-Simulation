@@ -74,7 +74,7 @@ public class StoreInventoryUI : MonoBehaviour
             showHarvests = true;
             showOthers = true;
         }
-        UpdateUI(false);
+        UpdateUI(false, true);
     }
 
     public bool GetShowParam(string showParam)
@@ -112,7 +112,7 @@ public class StoreInventoryUI : MonoBehaviour
         }
     }
 
-    void UpdateUI(bool remainScrollPosition)
+    void UpdateUI(bool remainScrollPosition, bool doDestroyAll)
     {
     	// Debug.Log("Updating Inventory UI");
     	InventorySlot[] slots = itemsParent.GetComponentsInChildren<InventorySlot>(true);
@@ -120,6 +120,18 @@ public class StoreInventoryUI : MonoBehaviour
     	int slotsCount = slots.Length;
 
     	// Debug.Log(itemsCount);
+        if(!doDestroyAll)
+        {
+            for(int i = 0; i < slotsCount; i++)
+            {
+                int newNum = storeInventory.items[i].Num();
+                // update displayed number
+                slots[i].transform.Find("ItemButton").Find("Number").gameObject.GetComponent<Text>().text = "" + newNum;
+            }
+            // change scroll height after updating UI
+            StartCoroutine(ScrollHeightRoutine(remainScrollPosition));
+            return;
+        }
 
         storeInventory.items.Sort();
         // yield return null;

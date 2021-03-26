@@ -74,7 +74,7 @@ public class InventoryUI : MonoBehaviour
             showHarvests = true;
             showOthers = true;
         }
-        UpdateUI(false);
+        UpdateUI(false, true);
     }
 
     public bool GetShowParam(string showParam)
@@ -113,7 +113,7 @@ public class InventoryUI : MonoBehaviour
     }
 
     // PARAM remainScrollPosition indicates whether to maintain previous scrollView position
-    void UpdateUI(bool remainScrollPosition)
+    void UpdateUI(bool remainScrollPosition, bool doDestroyAll)
     {
 
     	// Debug.Log("Updating Inventory UI");
@@ -123,6 +123,18 @@ public class InventoryUI : MonoBehaviour
     	int slotsCount = slots.Length;
 
     	// Debug.Log(itemsCount);
+        if(!doDestroyAll)
+        {
+            for(int i = 0; i < slotsCount; i++)
+            {
+                int newNum = inventory.items[i].Num();
+                // update displayed number
+                slots[i].transform.Find("ItemButton").Find("Number").gameObject.GetComponent<Text>().text = "" + newNum;
+            }
+            // change scroll height after updating UI
+            StartCoroutine(ScrollHeightRoutine(remainScrollPosition));
+            return;
+        }
 
         inventory.items.Sort();
     	// yield return null;

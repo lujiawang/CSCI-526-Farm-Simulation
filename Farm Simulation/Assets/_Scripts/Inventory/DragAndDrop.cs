@@ -113,7 +113,20 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
                         this.transform.SetParent(buttonParent);
                         rectTransform.anchoredPosition = initialPos;
                     }else // plant the crop
+                    {
                         PlantCrop(touchedObject);
+                        bool droppedToZero = true;
+                        foreach(Item item in inventory.items)
+                        {
+                            if(item.Name() == this.name)
+                            {
+                                droppedToZero = false;
+                                break;
+                            }
+                        }
+                        if(droppedToZero)
+                            Destroy(this.gameObject);
+                    }
                 }
             }
         }
@@ -125,6 +138,11 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         canvasGroup.blocksRaycasts = true;
         endDrag = false;
         // set back to original inventoryslot parent
+        if(buttonParent != null && buttonParent.name != "ItemButton")
+        {
+            Destroy(this.gameObject);
+            return;
+        }
         this.transform.SetParent(buttonParent);
         rectTransform.anchoredPosition = initialPos;
     }

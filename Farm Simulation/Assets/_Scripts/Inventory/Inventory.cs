@@ -24,7 +24,7 @@ public class Inventory : MonoBehaviour
 
     public static int stackLimit = 99; //stack limit of items
 
-    public delegate void OnItemChanged(bool remainScrollPosition);
+    public delegate void OnItemChanged(bool remainScrollPosition, bool doDestroyAll);
     public OnItemChanged onItemChangedCallback;
 
     SoundManager soundManager;
@@ -155,7 +155,7 @@ public class Inventory : MonoBehaviour
         if (onItemChangedCallback != null)
         {
             // StartCoroutine(onItemChangedCallback.Invoke());
-            onItemChangedCallback.Invoke(false);
+            onItemChangedCallback.Invoke(false, true);
         }
     }
 
@@ -172,6 +172,10 @@ public class Inventory : MonoBehaviour
         if (count == 0)
         {
             items.Add(item);
+            if (onItemChangedCallback != null)
+	        {
+	            onItemChangedCallback.Invoke(true, true);
+	        }
             // SaveAddItem(name, num);
         }
         else
@@ -185,11 +189,19 @@ public class Inventory : MonoBehaviour
                     if (num + items[i].Num() <= stackLimit)
                     {
                         items[i].AddNum(num);
+                        if (onItemChangedCallback != null)
+				        {
+				            onItemChangedCallback.Invoke(true, false);
+				        }
                         // SaveUpdateItem(name, num);
                     }
                     else if (items[i].Num() != stackLimit)
                     {
                         items[i].SetNum(stackLimit);
+                        if (onItemChangedCallback != null)
+				        {
+				            onItemChangedCallback.Invoke(true, false);
+				        }
                         // SaveUpdateItem(name, num);
                     }
                     else
@@ -200,6 +212,10 @@ public class Inventory : MonoBehaviour
                     if (items[i].Num() <= 0)
                     {
                         items.RemoveAt(i);
+                        if (onItemChangedCallback != null)
+				        {
+				            onItemChangedCallback.Invoke(true, true);
+				        }
                         // SaveRemoveItem(name);
                         // Debug.Log("reduced successfully");
                     }
@@ -210,6 +226,10 @@ public class Inventory : MonoBehaviour
                 if (i == count - 1)
                 {
                     items.Add(item);
+                    if (onItemChangedCallback != null)
+			        {
+			            onItemChangedCallback.Invoke(true, true);
+			        }
                     // SaveAddItem(name, num);
                     break;
                 }
@@ -228,12 +248,6 @@ public class Inventory : MonoBehaviour
         }
 
         // Debug.Log(items.Count);
-
-
-        if (onItemChangedCallback != null)
-        {
-            onItemChangedCallback.Invoke(true);
-        }
 
     }
 

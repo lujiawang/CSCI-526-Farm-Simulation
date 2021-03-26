@@ -25,12 +25,12 @@ public class StoreInventory : MonoBehaviour
 
     public static int stackLimit = 99;
     public static int randomizeSeedNumLimit = 10; // when randomizing, the maximum number of seeds that can be generated
-    public static int randomizeSeedTypes = 30; //5 // when randomizing, how many types of seeds that can be generated
+    public static int randomizeSeedTypes = 40; //5 // when randomizing, how many types of seeds that can be generated
     public static int seedTypes = 40; //20 // how many types of seeds there are , used for randomizing store
 
     // public static int storeLimit = 20; // how many items can the store hold
 
-    public delegate void OnStoreItemChanged(bool remainScrollPosition);
+    public delegate void OnStoreItemChanged(bool remainScrollPosition, bool doDestroyAll);
     public OnStoreItemChanged onStoreItemChangedCallback;
     // subscribe any method to this callback to notify self of changes made in inventory
 
@@ -103,7 +103,7 @@ public class StoreInventory : MonoBehaviour
     	if (onStoreItemChangedCallback != null)
         {
             // StartCoroutine(onStoreItemChangedCallback.Invoke(false));
-            onStoreItemChangedCallback.Invoke(false);
+            onStoreItemChangedCallback.Invoke(false, true);
         }
     	
     }
@@ -132,7 +132,7 @@ public class StoreInventory : MonoBehaviour
         if (onStoreItemChangedCallback != null)
         {
             // StartCoroutine(onStoreItemChangedCallback.Invoke());
-            onStoreItemChangedCallback.Invoke(false);
+            onStoreItemChangedCallback.Invoke(false, true);
         }
     }
 
@@ -173,6 +173,11 @@ public class StoreInventory : MonoBehaviour
         if (count == 0)
         {
             items.Add(item);
+            if (onStoreItemChangedCallback != null)
+            {
+                // StartCoroutine(onStoreItemChangedCallback.Invoke());
+                onStoreItemChangedCallback.Invoke(true, true);
+            }
             // SaveAddItem(name, num);
         }
         else
@@ -186,11 +191,21 @@ public class StoreInventory : MonoBehaviour
                     if (num + items[i].Num() <= stackLimit)
                     {
                         items[i].AddNum(num);
+                        if (onStoreItemChangedCallback != null)
+                        {
+                            // StartCoroutine(onStoreItemChangedCallback.Invoke());
+                            onStoreItemChangedCallback.Invoke(true, false);
+                        }
                         // SaveUpdateItem(name, num);
                     }
                     else if (items[i].Num() != stackLimit)
                     {
                         items[i].SetNum(stackLimit);
+                        if (onStoreItemChangedCallback != null)
+                        {
+                            // StartCoroutine(onStoreItemChangedCallback.Invoke());
+                            onStoreItemChangedCallback.Invoke(true, false);
+                        }
                         // SaveUpdateItem(name, num);
                     }
                     else
@@ -201,6 +216,11 @@ public class StoreInventory : MonoBehaviour
                     if (items[i].Num() <= 0)
                     {
                         items.RemoveAt(i);
+                        if (onStoreItemChangedCallback != null)
+                        {
+                            // StartCoroutine(onStoreItemChangedCallback.Invoke());
+                            onStoreItemChangedCallback.Invoke(true, true);
+                        }
                         // SaveRemoveItem(name);
                         // Debug.Log("reduced successfully");
                     }
@@ -211,6 +231,11 @@ public class StoreInventory : MonoBehaviour
                 if (i == count - 1)
                 {
                     items.Add(item);
+                    if (onStoreItemChangedCallback != null)
+                    {
+                        // StartCoroutine(onStoreItemChangedCallback.Invoke());
+                        onStoreItemChangedCallback.Invoke(true, true);
+                    }
                     // SaveAddItem(name, num);
                     break;
                 }
@@ -229,14 +254,6 @@ public class StoreInventory : MonoBehaviour
         }
 
         // Debug.Log(items.Count);
-
-
-        if (onStoreItemChangedCallback != null)
-        {
-            // StartCoroutine(onStoreItemChangedCallback.Invoke());
-            onStoreItemChangedCallback.Invoke(true);
-        }
-
     }
 
 }
