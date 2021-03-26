@@ -23,6 +23,9 @@ public class InternetTime : MonoBehaviour
     private string url = "http://worldtimeapi.org/api/ip";
     private DateTime currTime;
 
+    public int fetchInterval;
+    private int minimumInterval = 3;
+
     public delegate void OnTimeChanged();
     public OnTimeChanged onTimeChangedCallback;
 
@@ -42,7 +45,7 @@ public class InternetTime : MonoBehaviour
 		do
 		{
 			yield return StartCoroutine(FetchTime());
-			yield return new WaitForSeconds(10);
+			yield return new WaitForSeconds(fetchInterval>minimumInterval?fetchInterval:minimumInterval);
 		}while(true);
 		
 	}

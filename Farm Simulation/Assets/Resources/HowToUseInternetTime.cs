@@ -1,7 +1,8 @@
 ﻿// this file demonstrates how to subscribe to InternetTime.cs
 
-// SUMMARY: InternetTime fetches time from internet every 10 seconds. You can update
-// certain stuff based on the change of internet time by subscribing your function to
+// SUMMARY: InternetTime fetches time from internet every few seconds, defined by FetchInterval. 
+// FetchInterval can be defined in GameManager.
+// You can update certain stuff based on the change of internet time by subscribing your function to
 // InternetTime.cs
 
 

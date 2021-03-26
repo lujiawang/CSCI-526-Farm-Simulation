@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
+using System.Collections;
 
 public class CropGrowing : MonoBehaviour
 {
@@ -13,21 +14,23 @@ public class CropGrowing : MonoBehaviour
 
     private SpriteRenderer sr;
     private Sprite[] crops;
-    private int runningPointer;
-    private int stage;
+    private int runningPointer = 0;
+    private int stage = 0;
     private int[] growingCondition;
-    private bool inPosition;
+    private bool inPosition = false;
     public int growTime;
     public string cropName;
     //public GameObject Notification;
     //private Text notificationText;
     //private Dictionary<int, Sprite> cropAssets;
-    public bool grown; //make it public so player will know whether it is grown
+    public bool grown = false; //make it public so player will know whether it is grown
     public int reward;
     public AssetReferenceSprite[] addrs = new AssetReferenceSprite[6];
     private int cropNum = 0;
-    private bool started;
+    private bool started = false;
     private GameObject canvas;
+
+    private bool doReassignSprite = false; // For RestoreCropGrowing.cs
     // Start is called before the first frame update
     void Start()
     {
@@ -42,10 +45,9 @@ public class CropGrowing : MonoBehaviour
 
         //notificationText = Notification.transform.GetChild(0).GetComponent<Text>();
 
-        
-        stage = 0;
-        inPosition = false;
-        grown = false;
+        // stage = 0;
+        // inPosition = false;
+        // grown = false;
         
     }
 
@@ -54,7 +56,7 @@ public class CropGrowing : MonoBehaviour
         //cropAssets = new Dictionary<int, Sprite>();
 
         crops = new Sprite[6];
-        runningPointer = 0;
+        // runningPointer = 0;
         growingCondition = new int[6];
 
         //initialize to random variable if not specified in the inspector;
@@ -63,7 +65,7 @@ public class CropGrowing : MonoBehaviour
         {
             growingCondition[i] = growingCondition[i - 1] + growTime;
         }
-        started = false;
+        // started = false;
 
     }
 
@@ -103,14 +105,9 @@ public class CropGrowing : MonoBehaviour
             grown = true;
             ShowToast cScript = canvas.GetComponent<ShowToast>();
             cScript.showToast( name+ " is ready for harvesting.",2);
-            
-
-
-
         }
         else if (runningPointer == growingCondition[stage])
         {
-
             AssignSprite(stage);
             stage++;
         }
@@ -146,13 +143,48 @@ public class CropGrowing : MonoBehaviour
     {
         return runningPointer;
     }
+    public bool GetStartedParam()
+    {
+        return started;
+    }
+
+    // this should manually set the crop stage and renders image correctly
+    public void SetState(int runningPointer, int stage, bool started)
+    {
+        // this.grown = grown;
+        this.runningPointer = runningPointer;
+        this.stage = stage;
+        this.started = started;
+
+        this.doReassignSprite = true;
+        this.GetComponent<SpriteRenderer>().sprite = null;
+
+        // Debug.Log("runningPointer: "+runningPointer);
+        // Debug.Log("stage: "+stage);
+        // Debug.Log("started: "+started);
+
+        if(started)
+        {
+            InvokeRepeating("incrementByOne", 1f, 1f);
+        }
+    }
 
 
 
     // Update is called once per frame
     void Update()
     {
-        
+        // Debug.Log("runningPointer: "+runningPointer);
+        // Debug.Log("stage: "+stage);
+        // Debug.Log("started: "+started);
+
+        // Assigne Sprite if sprite is incorrect
+        if(doReassignSprite && cropNum == 6)
+        {
+            AssignSprite(stage>5?5:stage);
+            doReassignSprite = false;
+        }
+
         if(cropNum == 6 && started == false)
         {
             // Repeat method per 1 second

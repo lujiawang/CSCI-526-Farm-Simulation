@@ -136,13 +136,13 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     {
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
-        endDrag = false;
-        // set back to original inventoryslot parent
+        endDrag = false;      
         if(buttonParent != null && buttonParent.name != "ItemButton")
         {
             Destroy(this.gameObject);
             return;
         }
+        // set back to original inventoryslot parent
         this.transform.SetParent(buttonParent);
         rectTransform.anchoredPosition = initialPos;
     }

@@ -25,7 +25,7 @@ public class StoreInventory : MonoBehaviour
 
     public static int stackLimit = 99;
     public static int randomizeSeedNumLimit = 10; // when randomizing, the maximum number of seeds that can be generated
-    public static int randomizeSeedTypes = 40; //5 // when randomizing, how many types of seeds that can be generated
+    public static int randomizeSeedTypes = 30; //5 // when randomizing, how many types of seeds that can be generated
     public static int seedTypes = 40; //20 // how many types of seeds there are , used for randomizing store
 
     // public static int storeLimit = 20; // how many items can the store hold
