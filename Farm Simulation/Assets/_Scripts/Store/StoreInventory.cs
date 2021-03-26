@@ -102,7 +102,7 @@ public class StoreInventory : MonoBehaviour
     	}
     	if (onStoreItemChangedCallback != null)
         {
-            // StartCoroutine(onStoreItemChangedCallback.Invoke());
+            // StartCoroutine(onStoreItemChangedCallback.Invoke(false));
             onStoreItemChangedCallback.Invoke(false);
         }
     	

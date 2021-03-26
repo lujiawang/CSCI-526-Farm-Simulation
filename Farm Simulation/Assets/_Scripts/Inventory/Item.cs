@@ -6,7 +6,7 @@ using System;
 // [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Item") ]
 
 // public class Item : ScriptableObject
-public class Item
+public class Item : IComparable<Item>
 {
 	
 	// new public string name = "New Item";
@@ -330,6 +330,22 @@ public class Item
 	    public static int GetCropBuyPrice(int sellPrice)
 	    {
 	    	return (int)(sellPrice * sellToBuyFactor);
+	    }
+
+	    public int CompareTo(Item item)
+	    {
+	    	float generatedThisId = (this.id > seedIdUpperLimit && this.id <= harvestIdUpperLimit) ? 
+	    	(float)(this.id - seedIdUpperLimit - 0.5f) : (float) this.id;
+	    	float generatedItemId = (item.Id() > seedIdUpperLimit && this.id <= harvestIdUpperLimit) ? 
+	    	(float)(item.Id() - seedIdUpperLimit - 0.5f) : (float) item.Id();
+	    	if(generatedThisId - generatedItemId > 0)
+	    		return 1;
+	    	else if(generatedThisId - generatedItemId < 0)
+	    		return -1;
+	    	else
+	    		return 0;
+	    	// return this.id - item.Id();
+	    	
 	    }
 
 		// public void SetIcon(string iconName){

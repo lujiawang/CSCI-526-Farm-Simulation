@@ -50,7 +50,7 @@ public class StoreToggle : MonoBehaviour
         if(!MenuAppear.isMenu)
             cScript.MenuHideAndShow();
         // disable all InventorySlots' Items so they can't be dragged
-        SwitchSlotsInteractability(inventoryObj, false);
+        StartCoroutine(SwitchSlotsInteractability(inventoryObj, false));
         // SwitchSlotsInteractability(storeInventoryObj, false);
     }
 
@@ -65,12 +65,15 @@ public class StoreToggle : MonoBehaviour
         if(MenuAppear.isMenu)
             cScript.MenuHideAndShow();
         // enable all InventorySlots' Items so they can be dragged
-        SwitchSlotsInteractability(inventoryObj, true);
+        StartCoroutine(SwitchSlotsInteractability(inventoryObj, true));
     }
 
-    public void SwitchSlotsInteractability(GameObject inventory, bool onOrOff)
+    public IEnumerator SwitchSlotsInteractability(GameObject inventory, bool onOrOff)
     {
+        // Debug.Log(onOrOff);
+        yield return null;
         Transform itemsParentObj = inventory.transform.GetChild(0).GetChild(0);
+        // Debug.Log(itemsParentObj.childCount);
         foreach(Transform slot in itemsParentObj)
         {
             GameObject itemObj = slot.GetChild(0).GetChild(0).gameObject;

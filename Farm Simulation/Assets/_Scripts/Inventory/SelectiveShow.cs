@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+// using UnityEngine.EventSystems;
 
 public class SelectiveShow : MonoBehaviour
 {
@@ -19,12 +21,38 @@ public class SelectiveShow : MonoBehaviour
 		{
 			GameObject inventoryObj = this.transform.parent.gameObject;
 			InventoryUI cScript = inventoryObj.GetComponent<InventoryUI>();
-			cScript.ReverseShowParam(buttonName);
+			cScript.SetShowParam(buttonName);
+
+			foreach(Transform child in cScript.transform)
+			{
+				if(child.gameObject.name.Contains("SelectiveShowButton"))
+				{
+					string childButtonName = child.GetChild(0).gameObject.name;
+					Button button = child.GetComponent<Button>();
+					bool buttonOn = cScript.GetShowParam(childButtonName) && !cScript.AreAllShowParamsOn();
+					Image buttonImg = child.GetComponent<Image>();
+					buttonImg.color = buttonOn ? button.colors.highlightedColor : button.colors.normalColor;
+				}
+			}
 		}else //storeInventory
 		{
 			GameObject storeInventoryObj = this.transform.parent.gameObject;
 			StoreInventoryUI cScript = storeInventoryObj.GetComponent<StoreInventoryUI>();
-			cScript.ReverseShowParam(buttonName);
+			cScript.SetShowParam(buttonName);
+
+			foreach(Transform child in cScript.transform)
+			{
+				if(child.gameObject.name.Contains("SelectiveShowButton"))
+				{
+					string childButtonName = child.GetChild(0).gameObject.name;
+					Button button = child.GetComponent<Button>();
+					bool buttonOn = cScript.GetShowParam(childButtonName) && !cScript.AreAllShowParamsOn();
+					Image buttonImg = child.GetComponent<Image>();
+					buttonImg.color = buttonOn ? button.colors.highlightedColor : button.colors.normalColor;
+				}
+			}
 		}
+
 	}
+
 }
