@@ -13,28 +13,72 @@ public class StoreInventoryUI : MonoBehaviour
 
 	StoreInventory storeInventory;
 
-	InventorySlot[] slots;
+    bool showSeeds = true;
+    bool showHarvests = true;
+    bool showOthers = true;
+
     // Start is called before the first frame update
     void Start()
     {
     	storeInventory = StoreInventory.instance;
     	storeInventory.onStoreItemChangedCallback += UpdateUI;
-
-    	slots = itemsParent.GetComponentsInChildren<InventorySlot>();
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ReverseShowParam(string showParam)
     {
-    	// slots = itemsParent.GetComponentsInChildren<InventorySlot>();
-        
+        switch(showParam)
+        {
+            case "Seeds":
+                showSeeds = !showSeeds;
+                break;
+            case "Harvests":
+                showHarvests = !showHarvests;
+                break;
+            case "Others":
+                showOthers = !showOthers;
+                break;
+            default:
+                Debug.LogWarning("InventoryUI:ReverseShowParam() argument error");
+                break;
+        }
+        UpdateUI(false);
     }
 
-    void UpdateUI()
+    public bool GetShowParam(string showParam)
+    {
+        switch(showParam)
+        {
+            case "Seeds":
+                return showSeeds;
+            case "Harvests":
+                return showHarvests;
+            case "Others":
+                return showOthers;
+            default:
+                Debug.LogWarning("InventoryUI:GetShowParam() argument error");
+                return false;
+        }
+    }
+
+    void ShowHide(GameObject slot, int id)
+    {
+        if(id <= Item.seedIdUpperLimit) //slot is a seed
+        {
+            slot.SetActive(showSeeds);
+        }else if(id <= Item.harvestIdUpperLimit) //slot is a harvest
+        {
+            slot.SetActive(showHarvests);
+        }else //other
+        {
+            slot.SetActive(showOthers);
+        }
+    }
+
+    void UpdateUI(bool remainScrollPosition)
     {
     	// Debug.Log("Updating Inventory UI");
-    	slots = itemsParent.GetComponentsInChildren<InventorySlot>();
+    	InventorySlot[] slots = itemsParent.GetComponentsInChildren<InventorySlot>(true);
     	int itemsCount = storeInventory.items.Count;
     	int slotsCount = slots.Length;
 
@@ -60,6 +104,9 @@ public class StoreInventoryUI : MonoBehaviour
                     // if(ItemButton.Find(name).gameObject.GetComponent<Image>().sprite != inventory.items[i].Icon()){
                     //     ItemButton.Find(name).gameObject.GetComponent<Image>().sprite = inventory.items[i].Icon();
                     // }
+
+                    // determine whether Show or hide the slot based on showParams
+                    ShowHide(slots[j].gameObject, storeInventory.items[i].Id());
 
 	    			j = -1;
 	    			break;
@@ -88,12 +135,15 @@ public class StoreInventoryUI : MonoBehaviour
     			ItemButton.Find("Item").gameObject.name = storeInventory.items[i].Name();
     			// disable DragAndDrop script
     			ItemButton.GetChild(0).gameObject.GetComponent<DragAndDrop>().enabled = false;
+
+                // determine whether Show or hide the slot based on showParams
+                ShowHide(newSlot, storeInventory.items[i].Id());
     		}
     		
     	}
 
     	// clear out all the unmatched slots
-    	slots = itemsParent.GetComponentsInChildren<InventorySlot>();
+    	slots = itemsParent.GetComponentsInChildren<InventorySlot>(true);
     	for(int i = 0; i < slotsCount; i++)
     	{
     		Transform ItemButton = slots[i].transform.Find("ItemButton");
@@ -117,14 +167,14 @@ public class StoreInventoryUI : MonoBehaviour
     		}
     	}
 
-        StartCoroutine(ScrollHeightRoutine());
+        StartCoroutine(ScrollHeightRoutine(remainScrollPosition));
 
     }
-    
-    IEnumerator ScrollHeightRoutine()
+
+    IEnumerator ScrollHeightRoutine(bool remainScrollPosition)
     {
         yield return null;
         ScrollHeight cScript = GetComponent<ScrollHeight>();
-        cScript.UpdateHeight(itemsParent);
+        cScript.UpdateHeight(itemsParent, remainScrollPosition);
     }
 }

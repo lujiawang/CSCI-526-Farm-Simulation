@@ -24,12 +24,10 @@ public class Inventory : MonoBehaviour
 
     public static int stackLimit = 99; //stack limit of items
 
-    public delegate void OnItemChanged();
+    public delegate void OnItemChanged(bool remainScrollPosition);
     public OnItemChanged onItemChangedCallback;
 
     SoundManager soundManager;
-
-    // subscribe any method to this callback to notify self of changes made in inventory
 
     public List<Item> items = new List<Item>();
 
@@ -157,7 +155,7 @@ public class Inventory : MonoBehaviour
         if (onItemChangedCallback != null)
         {
             // StartCoroutine(onItemChangedCallback.Invoke());
-            onItemChangedCallback.Invoke();
+            onItemChangedCallback.Invoke(false);
         }
     }
 
@@ -234,7 +232,7 @@ public class Inventory : MonoBehaviour
 
         if (onItemChangedCallback != null)
         {
-            onItemChangedCallback.Invoke();
+            onItemChangedCallback.Invoke(true);
         }
 
     }

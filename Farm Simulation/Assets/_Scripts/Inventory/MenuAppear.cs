@@ -35,12 +35,12 @@ public class MenuAppear : MonoBehaviour
             // CameraFollow.enableCamera = true;
         }
         // reset scrollview position
-        ScrollHeight cScript = GetComponent<ScrollHeight>();
-        if(this.transform.GetChild(0).GetChild(0).gameObject.name != "ItemsParent")
-        {
-            Debug.LogWarning("fatal: wrong object!!");
-            return;
-        }
-        cScript.UpdateHeight(this.transform.GetChild(0).GetChild(0));
+        // ScrollHeight cScript = GetComponent<ScrollHeight>();
+        // if(this.transform.GetChild(0).GetChild(0).gameObject.name != "ItemsParent")
+        // {
+        //     Debug.LogWarning("fatal: wrong object!!");
+        //     return;
+        // }
+        // cScript.UpdateHeight(this.transform.GetChild(0).GetChild(0), false);
     }
 }

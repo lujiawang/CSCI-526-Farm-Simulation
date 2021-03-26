@@ -30,7 +30,7 @@ public class StoreInventory : MonoBehaviour
 
     // public static int storeLimit = 20; // how many items can the store hold
 
-    public delegate void OnStoreItemChanged();
+    public delegate void OnStoreItemChanged(bool remainScrollPosition);
     public OnStoreItemChanged onStoreItemChangedCallback;
     // subscribe any method to this callback to notify self of changes made in inventory
 
@@ -103,7 +103,7 @@ public class StoreInventory : MonoBehaviour
     	if (onStoreItemChangedCallback != null)
         {
             // StartCoroutine(onStoreItemChangedCallback.Invoke());
-            onStoreItemChangedCallback.Invoke();
+            onStoreItemChangedCallback.Invoke(false);
         }
     	
     }
@@ -132,7 +132,7 @@ public class StoreInventory : MonoBehaviour
         if (onStoreItemChangedCallback != null)
         {
             // StartCoroutine(onStoreItemChangedCallback.Invoke());
-            onStoreItemChangedCallback.Invoke();
+            onStoreItemChangedCallback.Invoke(false);
         }
     }
 
@@ -234,7 +234,7 @@ public class StoreInventory : MonoBehaviour
         if (onStoreItemChangedCallback != null)
         {
             // StartCoroutine(onStoreItemChangedCallback.Invoke());
-            onStoreItemChangedCallback.Invoke();
+            onStoreItemChangedCallback.Invoke(true);
         }
 
     }

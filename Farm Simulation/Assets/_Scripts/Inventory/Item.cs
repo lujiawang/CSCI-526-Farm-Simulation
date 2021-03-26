@@ -32,6 +32,9 @@ public class Item
 		public static float tierUpPriceFactor = 1.7f;
 		public static float seedToFruitFactor = 2.5f;
 		public static float sellToBuyFactor = 1.9f;
+		
+		public static int seedIdUpperLimit = 19;
+		public static int harvestIdUpperLimit = 39;
 
 		public string Name(){
 			return this.name;

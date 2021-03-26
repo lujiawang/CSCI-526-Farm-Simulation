@@ -19,7 +19,7 @@ public class ScrollHeight : MonoBehaviour
 	{
 		GameObject itemsParentObj = this.transform.GetChild(0).GetChild(0).gameObject;
 		if(itemsParentObj.name != "ItemsParent")
-			Debug.LogWarning("Fatal error: fecthed wrong object.");
+			Debug.LogWarning("Fatal error: fetched wrong object.");
 		RectTransform itemsParentRectTransform = itemsParentObj.GetComponent<RectTransform>();
 		originalWidth = itemsParentRectTransform.sizeDelta.x;
 		originalHeight = itemsParentRectTransform.sizeDelta.y;
@@ -44,19 +44,31 @@ public class ScrollHeight : MonoBehaviour
 			normalRowCount = 5;
 		}
 		
-		StartCoroutine(UpdateHeightRoutine(itemsParentObj.transform));
+		// UpdateHeightRoutine(itemsParentObj.transform, false);
 	}
 
-	public void UpdateHeight(Transform itemsParent)
+	public float currentAnchorY()
 	{
-		StartCoroutine(UpdateHeightRoutine(itemsParent));
+		float currAnchorY =  this.transform.GetChild(0).GetChild(0).gameObject.GetComponent<RectTransform>().anchoredPosition.y;
+		// Debug.Log("current anchor Y= " + currAnchorY);
+		return currAnchorY;
 	}
 
-	public IEnumerator UpdateHeightRoutine(Transform itemsParent)
+	public void UpdateHeight(Transform itemsParent, bool remainScrollPosition)
 	{
-		int rows = (itemsParent.childCount + columnCount - 1) / columnCount;
+		StartCoroutine(UpdateHeightRoutine(itemsParent, remainScrollPosition));
+	}
+
+	public IEnumerator UpdateHeightRoutine(Transform itemsParent, bool remainScrollPosition)
+	{
+		// don't get inactive children
+		InventorySlot[] slots = itemsParent.GetComponentsInChildren<InventorySlot>(false);
+        // Debug.Log("slotsCount: "+slots.Length);
+        int rows = (slots.Length + columnCount - 1) / columnCount;
+		// int rows = (itemsParent.childCount + columnCount - 1) / columnCount;
 		// Debug.Log(rows);
 		RectTransform rectTransform = itemsParent.GetComponent<RectTransform>();
+		float prevAnchorY = rectTransform.anchoredPosition.y;
 		if(rows > normalRowCount)
 		{
 			float addHeight = (rows-columnCount) * heightOfRow + additionalHeight;
@@ -72,8 +84,13 @@ public class ScrollHeight : MonoBehaviour
 			rectTransform.sizeDelta = new Vector2(originalWidth, originalHeight);
 			rectTransform.anchoredPosition = new Vector2(originalAnchorX, originalAnchorY);
 		}
+
+		// remain at scroll position per request
+		if(remainScrollPosition && rows >= normalRowCount)
+			rectTransform.anchoredPosition = new Vector2(originalAnchorX, prevAnchorY);
+
 		yield return null;
-		// Debug.Log(rectTransform.anchoredPosition.y);
+		// Debug.Log("current anchor Y= "+rectTransform.anchoredPosition.y);
 		// Debug.Log(rectTransform.offsetMax);
 		// Debug.Log(rectTransform.sizeDelta.y);
 		// Debug.Log(rectTransform.sizeDelta.y);

@@ -13,7 +13,9 @@ public class InventoryUI : MonoBehaviour
 
 	Inventory inventory;
 
-	InventorySlot[] slots;
+    bool showSeeds = true;
+    bool showHarvests = true;
+    bool showOthers = true;
 
     // Start is called before the first frame update
     void Start()
@@ -21,14 +23,68 @@ public class InventoryUI : MonoBehaviour
     	inventory = Inventory.instance;
     	inventory.onItemChangedCallback += UpdateUI;
 
-    	slots = itemsParent.GetComponentsInChildren<InventorySlot>();
+    	// slots = itemsParent.GetComponentsInChildren<InventorySlot>();
+        // Debug.Log("slotsCount: "+slots.Length);
         
     }
 
-    void UpdateUI()
+    public void ReverseShowParam(string showParam)
     {
+        switch(showParam)
+        {
+            case "Seeds":
+                showSeeds = !showSeeds;
+                break;
+            case "Harvests":
+                showHarvests = !showHarvests;
+                break;
+            case "Others":
+                showOthers = !showOthers;
+                break;
+            default:
+                Debug.LogWarning("InventoryUI:ReverseShowParam() argument error");
+                break;
+        }
+        UpdateUI(false);
+    }
+
+    public bool GetShowParam(string showParam)
+    {
+        switch(showParam)
+        {
+            case "Seeds":
+                return showSeeds;
+            case "Harvests":
+                return showHarvests;
+            case "Others":
+                return showOthers;
+            default:
+                Debug.LogWarning("InventoryUI:GetShowParam() argument error");
+                return false;
+        }
+    }
+
+    void ShowHide(GameObject slot, int id)
+    {
+        if(id <= Item.seedIdUpperLimit) //slot is a seed
+        {
+            slot.SetActive(showSeeds);
+        }else if(id <= Item.harvestIdUpperLimit) //slot is a harvest
+        {
+            slot.SetActive(showHarvests);
+        }else //other
+        {
+            slot.SetActive(showOthers);
+        }
+    }
+
+    // PARAM remainScrollPosition indicates whether to maintain previous scrollView position
+    void UpdateUI(bool remainScrollPosition)
+    {
+
     	// Debug.Log("Updating Inventory UI");
-    	slots = itemsParent.GetComponentsInChildren<InventorySlot>();
+        InventorySlot[] slots = itemsParent.GetComponentsInChildren<InventorySlot>(true);//must include inactive children
+        // Debug.Log("slotsCount: "+slots.Length);
     	int itemsCount = inventory.items.Count;
     	int slotsCount = slots.Length;
 
@@ -55,6 +111,9 @@ public class InventoryUI : MonoBehaviour
                     //     ItemButton.Find(name).gameObject.GetComponent<Image>().sprite = inventory.items[i].Icon();
                     // }
 
+                    // determine whether Show or hide the slot based on showParams
+                    ShowHide(slots[j].gameObject, inventory.items[i].Id());
+
 	    			j = -1;
 	    			break;
 	    			
@@ -80,12 +139,17 @@ public class InventoryUI : MonoBehaviour
     			ItemButton.Find("Item").gameObject.GetComponent<Image>().sprite = inventory.items[i].Icon();
     			// change "Item" to the new name
     			ItemButton.Find("Item").gameObject.name = inventory.items[i].Name();
+
+                // determine whether Show or hide the slot based on showParams
+                ShowHide(newSlot, inventory.items[i].Id());
     		}
     		
     	}
 
-    	// clear out all the unmatched slots
-    	slots = itemsParent.GetComponentsInChildren<InventorySlot>();
+    	// re-fetch the slots children
+    	slots = itemsParent.GetComponentsInChildren<InventorySlot>(true); //must include inactive children
+        // Debug.Log("slotsCount: "+slots.Length);
+        // clear out all the unmatched slots
     	for(int i = 0; i < slotsCount; i++)
     	{
     		Transform ItemButton = slots[i].transform.Find("ItemButton");
@@ -110,7 +174,7 @@ public class InventoryUI : MonoBehaviour
     	}
 
         // change scroll height after updating UI
-        StartCoroutine(ScrollHeightRoutine());
+        StartCoroutine(ScrollHeightRoutine(remainScrollPosition));
 
     	// for(int i = 0; i < slots.Length; i++)
     	// {
@@ -126,10 +190,10 @@ public class InventoryUI : MonoBehaviour
 
     }
 
-    IEnumerator ScrollHeightRoutine()
+    IEnumerator ScrollHeightRoutine(bool remainScrollPosition)
     {
         yield return null;
         ScrollHeight cScript = GetComponent<ScrollHeight>();
-        cScript.UpdateHeight(itemsParent);
+        cScript.UpdateHeight(itemsParent, remainScrollPosition);
     }
 }

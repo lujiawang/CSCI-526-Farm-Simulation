@@ -21,24 +21,20 @@ MonoBehaviour:
     m_Address: Assets/_Sprites/Crops/Crop_Spritesheet.png
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 2800000, guid: ef320b5269778f842a9bb0cf66981501, type: 3}
-    m_TargetAsset: {fileID: 2800000, guid: ef320b5269778f842a9bb0cf66981501, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: 429b14349fb236d49b50d9459affab69
     m_Address: Assets/_Prefabs/Crops/Corn.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 8250538074193522406, guid: 429b14349fb236d49b50d9459affab69,
-      type: 3}
-    m_TargetAsset: {fileID: 8250538074193522406, guid: 429b14349fb236d49b50d9459affab69,
-      type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: 91428446e72b0f14cb729e39d5e83de4
     m_Address: Assets/_Prefabs/Crops/Cucumber.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 7811732804729390583, guid: 91428446e72b0f14cb729e39d5e83de4,
-      type: 3}
-    m_TargetAsset: {fileID: 7811732804729390583, guid: 91428446e72b0f14cb729e39d5e83de4,
-      type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: fc74febb3e99b2549a503e2b7d372b84
     m_Address: Assets/_Prefabs/Crops/Avocado.prefab
     m_ReadOnly: 0
@@ -143,6 +139,12 @@ MonoBehaviour:
     m_TargetAsset: {fileID: 0}
   - m_GUID: 8e19985f8be91e647bdb060071757f46
     m_Address: Assets/_Prefabs/Crops/Wheat.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 8e6d4ed35406e47999312a7705b72522
+    m_Address: Assets/_Sprites/Crops/Crop_Pack.png
     m_ReadOnly: 0
     m_SerializedLabels: []
     m_MainAsset: {fileID: 0}
