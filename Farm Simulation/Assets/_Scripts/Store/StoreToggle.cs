@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class StoreToggle : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class StoreToggle : MonoBehaviour
         // SwitchSlotsInteractability(inventoryObj, true);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    /*private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
@@ -37,10 +38,11 @@ public class StoreToggle : MonoBehaviour
         {
             CloseStore();
         }
-    }
+    }*/
 
     public void OpenStore()
     {
+
         BackButton.alpha = 1f;
     	BackButton.blocksRaycasts = true;
     	StoreInventory.alpha = 1f;

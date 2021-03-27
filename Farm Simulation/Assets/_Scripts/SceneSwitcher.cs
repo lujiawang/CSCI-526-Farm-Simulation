@@ -6,19 +6,21 @@ using UnityEngine.SceneManagement;
 public class SceneSwitcher : MonoBehaviour
 {
     GameObject player;
-
+    GameObject storeobj;
 
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+
+        storeobj = GameObject.FindGameObjectWithTag("Store");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     //Intro to main
@@ -26,7 +28,7 @@ public class SceneSwitcher : MonoBehaviour
     {
         SceneManager.LoadScene("Farming_01_main");
     }
-    
+
 
     //To store's intro
     private void OnTriggerEnter2D(Collider2D other)
@@ -39,7 +41,7 @@ public class SceneSwitcher : MonoBehaviour
 
     //To store's intro
     public void ToStoreIntro()
-    {        
+    {
         SceneManager.LoadScene("Store", LoadSceneMode.Additive);
         MenuAppear.isMenu = false;
     }
@@ -49,7 +51,14 @@ public class SceneSwitcher : MonoBehaviour
     public void SwitchToStore()
     {
         SceneManager.UnloadSceneAsync("Store");
-        SceneManager.LoadScene("Farming_02_store", LoadSceneMode.Additive);
+        Debug.Log(storeobj.name);
+
+        if (storeobj != null)
+        {
+            StoreToggle store = storeobj.GetComponent<StoreToggle>();
+            store.OpenStore();
+        }
+
     }
 
 
