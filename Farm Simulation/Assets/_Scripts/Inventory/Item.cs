@@ -32,7 +32,7 @@ public class Item : IComparable<Item>
 		
 		public static int basicPrice = 15;
 		public static float tierUpPriceFactor = 1.7f;
-		public static float seedToFruitFactor = 2.5f;
+		public static float seedToFruitFactor = 2.5f / 4; //4 = Expectation of randomharvest amount
 		public static float sellToBuyFactor = 1.9f;
 		
 		public static int seedIdUpperLimit = 19;
@@ -311,19 +311,14 @@ public class Item : IComparable<Item>
 	    	{
 	    		Debug.LogWarning("invalid input! id cannot be negative");
 	    		return -1;
-	    	}else if(id < 4) //lowest priced crops
-	    		return basicPrice;
-	    	else if(id < 8) //second tier priced crops
-	    		return (int)(basicPrice * tierUpPriceFactor);
-	    	else if(id < 12) //third tier priced crops
-	    		return (int)(basicPrice * Math.Pow(tierUpPriceFactor, 2));
-	    	else if(id < 16) //fourth tier priced crops
-	    		return (int)(basicPrice * Math.Pow(tierUpPriceFactor, 3));
-	    	else if(id < 20) //fifth tier priced crops
-	    		return (int)(basicPrice * Math.Pow(tierUpPriceFactor, 4));
-	    	else if(id < 40) //for grown crops(fruits)
+	    	}else if(id <= seedIdUpperLimit) //seeds
 	    	{
-	    		return (int)(GetCropSellPrice(id - 20) * seedToFruitFactor);
+	    		double multiplier = Math.Pow( tierUpPriceFactor, (id / tierDivideLength) );
+	    		if(multiplier < 1.0d) multiplier = 1.0d;
+	    		return (int) (basicPrice * multiplier);
+	    	}else if(id <= harvestIdUpperLimit) //for grown crops(fruits)
+	    	{
+	    		return (int)(GetCropSellPrice(id - seedIdUpperLimit - 1) * seedToFruitFactor);
 	    	}else
 	    	{
 	    		Debug.LogWarning("id >= 40 are not defined yet");
@@ -350,10 +345,18 @@ public class Item : IComparable<Item>
 	    		return -1;
 	    	}else //falls between harvests id
 	    	{
-	    		double multiplier = Math.Pow(tierUpGrowTimeFactor, 
-	    			((id - seedIdUpperLimit + tierDivideLength - 1) / tierDivideLength));
+	    		double multiplier = Math.Pow( tierUpGrowTimeFactor, 
+	    			((id - seedIdUpperLimit - 1) / tierDivideLength) );
+	    		if(multiplier < 1.0d) multiplier = 1.0d;
 	    		return (float) (basicGrowTime * multiplier);
 	    	}
+	    }
+
+	    public static int RandomHarvest(string name)
+	    {
+	    	// int id = GetCropId(name);
+	    	System.Random rand = new System.Random();
+	        return rand.Next(3,6);
 	    }
 
 	    public int CompareTo(Item item)

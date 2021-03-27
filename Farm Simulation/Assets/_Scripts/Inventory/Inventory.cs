@@ -27,6 +27,14 @@ public class Inventory : MonoBehaviour
     public delegate void OnItemChanged(bool remainScrollPosition, bool doDestroyAll);
     public OnItemChanged onItemChangedCallback;
 
+    // Define how many things you want to add to inventory at the beginning.
+    [Range(1,20)]
+    public int StarterPackageSize;
+
+    // Whether restart the inventory when restarting game
+    [SerializeField]
+    private bool resetInventoryAfterRestart = false;
+
     SoundManager soundManager;
 
     public List<Item> items = new List<Item>();
@@ -35,10 +43,14 @@ public class Inventory : MonoBehaviour
     {
     	// must initialize this first
         soundManager = SoundManager.instance;
+        if(resetInventoryAfterRestart)
+    	{
+    		PlayerPrefs.DeleteKey("inventoryIndex");
+    	}
 
         string[] indexArray = new string[0];
         // if inventoryIndex is already set
-        if(PlayerStats.Save == true &&  PlayerPrefs.HasKey("inventoryIndex"))
+        if(PlayerPrefs.HasKey("inventoryIndex"))
         	indexArray = PlayerPrefs.GetString("inventoryIndex").Split(new char[1]{' '}, StringSplitOptions.RemoveEmptyEntries);
         // else, set inventoryIndex and add starter package of seeds
         else
@@ -46,46 +58,8 @@ public class Inventory : MonoBehaviour
         	PlayerPrefs.SetString("inventoryIndex","");
 
         	// add starter crops seeds to player's inventory
-        	Add("CornSeed", 1);
-	        Add("CucumberSeed", 5);
-	        Add("AvocadoSeed", 5);
-	        Add("CassavaSeed", 5);
-	        Add("CoffeeSeed", 5);
-	        Add("EggplantSeed", 5);
-	        Add("GrapesSeed", 5);
-	        Add("LemonSeed", 5);
-	        Add("MelonSeed", 5);
-	        Add("PineappleSeed", 5);
-	        Add("PotatoSeed", 5);
-	        Add("RiceSeed", 5);
-	        Add("WheatSeed", 5);
-	        Add("OrangeSeed", 5);
-	        Add("TomatoSeed", 5);
-	        Add("SunflowerSeed", 5);
-	        Add("StrawberrySeed", 5);
-	        Add("TurnipSeed", 5);
-	        Add("TulipSeed", 5);
-	        Add("RoseSeed", 5);
-	        Add("Corn", 1);
-	        Add("Cucumber", 5);
-	        Add("Avocado", 5);
-	        Add("Cassava", 5);
-	        Add("Coffee", 5);
-	        Add("Eggplant", 5);
-	        Add("Grapes", 5);
-	        Add("Lemon", 5);
-	        Add("Melon", 5);
-	        Add("Pineapple", 5);
-	        Add("Potato", 5);
-	        Add("Rice", 5);
-	        Add("Wheat", 5);
-	        Add("Orange", 5);
-	        Add("Tomato", 5);
-	        Add("Sunflower", 5);
-	        Add("Strawberry", 5);
-	        Add("Turnip", 5);
-	        Add("Tulip", 5);
-	        Add("Rose", 5);
+        	AddStarterPackage(StarterPackageSize);
+        	
         }
 
         if(indexArray.Length > 0)
@@ -99,7 +73,6 @@ public class Inventory : MonoBehaviour
     void OnDestroy()
     {
     	SaveInventory();
-    	// PlayerPrefs.DeleteAll();
     }
 
     public void SaveInventory()
@@ -115,33 +88,25 @@ public class Inventory : MonoBehaviour
     	// Debug.Log("index: "+index);
     }
 
-    // private void SaveAddItem(string name, int num)
-    // {
-    // 	string index = PlayerPrefs.GetString("inventoryIndex");
-    // 	index += " " + name;
-    // 	PlayerPrefs.SetString("inventoryIndex", index);
-    // 	PlayerPrefs.SetInt(name, num);
-    // }
+    void AddStarterPackage(int StarterPackageSize)
+    {
+    	for(int i = 0; i < StarterPackageSize; i++)
+    	{
+    		Item newItem = new Item();
+    		newItem.SetAllFields(Item.GetCropName(i), 5);
+    		items.Add(newItem);
+    		newItem = new Item();
+    		newItem.SetAllFields(Item.GetCropName(i+20), 5);
+    		items.Add(newItem);
+    	}
+    	if (onItemChangedCallback != null)
+        {
+            // StartCoroutine(onItemChangedCallback.Invoke());
+            onItemChangedCallback.Invoke(false, true);
+        }
+    }
 
-    // private void SaveUpdateItem(string name, int num)
-    // {
-    // 	PlayerPrefs.SetInt(name, num + PlayerPrefs.GetInt(name));
-    // }
-
-    // private void SaveRemoveItem(string name)
-    // {
-    // 	string index = "";
-    // 	string[] indexArray = PlayerPrefs.GetString("inventoryIndex").Split(new char[1]{' '}, StringSplitOptions.RemoveEmptyEntries);
-    // 	foreach(string i in indexArray)
-    // 	{
-    // 		if(i != name)
-    // 			index += " " + i;
-    // 	}
-    // 	PlayerPrefs.SetString("inventoryIndex", index);
-    // 	PlayerPrefs.DeleteKey(name);
-    // }
-
-    public void InitializeInventory(string[] indexArray)
+    void InitializeInventory(string[] indexArray)
     {
         foreach(string itemName in indexArray)
         {

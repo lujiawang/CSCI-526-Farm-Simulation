@@ -4918,6 +4918,7 @@ GameObject:
   - component: {fileID: 693246527}
   - component: {fileID: 693246520}
   - component: {fileID: 693246526}
+  - component: {fileID: 693246528}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -5096,6 +5097,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 693246520}
   cropName: {fileID: 1458885218}
+--- !u!114 &693246528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693246519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ad6cd7ed6887499390f4d104c776944, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &704636102
 GameObject:
   m_ObjectHideFlags: 0
@@ -19579,6 +19592,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 169167c3279c54ed599596b09a844335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StarterPackageSize: 3
+  resetInventoryAfterRestart: 1
 --- !u!4 &1962885969
 Transform:
   m_ObjectHideFlags: 0

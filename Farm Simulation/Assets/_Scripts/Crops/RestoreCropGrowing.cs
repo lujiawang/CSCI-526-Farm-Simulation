@@ -7,6 +7,8 @@ public class RestoreCropGrowing : MonoBehaviour
 {
     // Start is called before the first frame update
 	InternetTime internetTime;
+	[SerializeField]
+    private bool useInternetTime = false;
     void Start()
     {
         if(PlayerPrefs.HasKey(this.name))
@@ -38,27 +40,29 @@ public class RestoreCropGrowing : MonoBehaviour
 
 		        CropGrowing cScript = copyCrop.GetComponent<CropGrowing>();
 	            
-		        // Uncomment the following block to enable internet time for growing crops
-
-		        // internetTime = InternetTime.instance;
-		        // yield return StartCoroutine(internetTime.FetchTime());
-		        // if(PlayerPrefs.HasKey("exitInternetTime"))
-		        // {
-		        // 	// Debug.Log("exitInternetTime: "+PlayerPrefs.GetString("exitInternetTime"));
-		        // 	DateTime prevInternetTime = DateTime.Parse(PlayerPrefs.GetString("exitInternetTime"));
-		        // 	TimeSpan diffInternetTime = internetTime.GetTime().Subtract(prevInternetTime);
-		        // 	Debug.Log("diffInternetTime: "+diffInternetTime.TotalSeconds);
-		        // 	double diffSeconds = diffInternetTime.TotalSeconds;
-		        // 	if(diffSeconds < 0)
-		        // 		diffSeconds = 0d;
-
-		        // 	float totalSecondsForGrowth = cScript.GetTotalSecondsForGrowth();
-		        // 	int totalStages = cScript.GetTotalStages();
-		        // 	runningPointer += (int)diffSeconds;
-		        // 	stage += (int)(diffSeconds / cScript.growTime);
-		        // 	runningPointer = runningPointer>totalSecondsForGrowth?(int)totalSecondsForGrowth:runningPointer;
-		        // 	stage = stage>totalStages?totalStages:stage;
-		        // }
+		        // the following block uses internet time for growing crops
+		        if(useInternetTime)
+		        {
+    		        internetTime = InternetTime.instance;
+    		        yield return StartCoroutine(internetTime.FetchTime());
+    		        if(PlayerPrefs.HasKey("exitInternetTime"))
+    		        {
+    		        	// Debug.Log("exitInternetTime: "+PlayerPrefs.GetString("exitInternetTime"));
+    		        	DateTime prevInternetTime = DateTime.Parse(PlayerPrefs.GetString("exitInternetTime"));
+    		        	TimeSpan diffInternetTime = internetTime.GetTime().Subtract(prevInternetTime);
+    		        	Debug.Log("diffInternetTime: "+diffInternetTime.TotalSeconds);
+    		        	double diffSeconds = diffInternetTime.TotalSeconds;
+    		        	if(diffSeconds < 0)
+    		        		diffSeconds = 0d;
+    
+    		        	float totalSecondsForGrowth = cScript.GetTotalSecondsForGrowth();
+    		        	int totalStages = cScript.GetTotalStages();
+    		        	runningPointer += (int)diffSeconds;
+    		        	stage += (int)(diffSeconds / cScript.growTime);
+    		        	runningPointer = runningPointer>totalSecondsForGrowth?(int)totalSecondsForGrowth:runningPointer;
+    		        	stage = stage>totalStages?totalStages:stage;
+    		        }
+		        }
 
 		        cScript.SetState(runningPointer, stage);
 
