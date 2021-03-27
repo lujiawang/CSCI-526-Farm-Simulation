@@ -27,6 +27,8 @@ public class Item : IComparable<Item>
 
 		private int sellPrice;
 		private int buyPrice;
+
+		public static int tierDivideLength = 4;
 		
 		public static int basicPrice = 15;
 		public static float tierUpPriceFactor = 1.7f;
@@ -35,6 +37,9 @@ public class Item : IComparable<Item>
 		
 		public static int seedIdUpperLimit = 19;
 		public static int harvestIdUpperLimit = 39;
+
+		public static float basicGrowTime = 2f;
+		public static float tierUpGrowTimeFactor = 1.3f;
 
 		public string Name(){
 			return this.name;
@@ -330,6 +335,25 @@ public class Item : IComparable<Item>
 	    public static int GetCropBuyPrice(int sellPrice)
 	    {
 	    	return (int)(sellPrice * sellToBuyFactor);
+	    }
+
+	    public static float GetGrowTime(string name)
+	    {
+	    	int id = GetCropId(name);
+	    	if(id <= seedIdUpperLimit)
+	    	{
+	    		Debug.LogWarning("invalid input! id cannot be negative");
+	    		return -1;
+	    	}else if(id > harvestIdUpperLimit)
+	    	{
+	    		Debug.LogWarning("invalid input! id overbounds");
+	    		return -1;
+	    	}else //falls between harvests id
+	    	{
+	    		double multiplier = Math.Pow(tierUpGrowTimeFactor, 
+	    			((id - seedIdUpperLimit + tierDivideLength - 1) / tierDivideLength));
+	    		return (float) (basicGrowTime * multiplier);
+	    	}
 	    }
 
 	    public int CompareTo(Item item)

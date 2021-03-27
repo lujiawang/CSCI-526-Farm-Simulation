@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class RestoreCropGrowing : MonoBehaviour
 {
     // Start is called before the first frame update
-
+	InternetTime internetTime;
     void Start()
     {
         if(PlayerPrefs.HasKey(this.name))
@@ -13,11 +14,11 @@ public class RestoreCropGrowing : MonoBehaviour
         	string cropName = PlayerPrefs.GetString(this.name);
         	if(cropName == "") 
         		return;
-        	RestoreCrop(cropName);
+        	StartCoroutine(RestoreCrop(cropName));
         }
     }
 
-    void RestoreCrop(string cropName)
+    IEnumerator RestoreCrop(string cropName)
     {
     	GameObject CropParent = GameObject.Find("CropPlaceholder");
     	// Debug.Log(CropParent.name);
@@ -34,21 +35,38 @@ public class RestoreCropGrowing : MonoBehaviour
 		        // handle CropGrowing related stats
 		        int runningPointer = PlayerPrefs.GetInt(this.name + "runningPointer");
 		        int stage = PlayerPrefs.GetInt(this.name +"stage");
-		        bool started = PlayerPrefs.GetInt(this.name +"started")==1?true:false;
-
-		     //    IEnumerator UpdateTimeImmediately() // note that the function type IEnumerator cannot change
-			    // {
-			    //     yield return StartCoroutine(internetTime.FetchTime());
-			    //     // This is after internetTime is updated. Do stuff here. 
-			    // }
 
 		        CropGrowing cScript = copyCrop.GetComponent<CropGrowing>();
-	            cScript.SetState(runningPointer, stage, started);
+	            
+		        // Uncomment the following block to enable internet time for growing crops
+
+		        // internetTime = InternetTime.instance;
+		        // yield return StartCoroutine(internetTime.FetchTime());
+		        // if(PlayerPrefs.HasKey("exitInternetTime"))
+		        // {
+		        // 	// Debug.Log("exitInternetTime: "+PlayerPrefs.GetString("exitInternetTime"));
+		        // 	DateTime prevInternetTime = DateTime.Parse(PlayerPrefs.GetString("exitInternetTime"));
+		        // 	TimeSpan diffInternetTime = internetTime.GetTime().Subtract(prevInternetTime);
+		        // 	Debug.Log("diffInternetTime: "+diffInternetTime.TotalSeconds);
+		        // 	double diffSeconds = diffInternetTime.TotalSeconds;
+		        // 	if(diffSeconds < 0)
+		        // 		diffSeconds = 0d;
+
+		        // 	float totalSecondsForGrowth = cScript.GetTotalSecondsForGrowth();
+		        // 	int totalStages = cScript.GetTotalStages();
+		        // 	runningPointer += (int)diffSeconds;
+		        // 	stage += (int)(diffSeconds / cScript.growTime);
+		        // 	runningPointer = runningPointer>totalSecondsForGrowth?(int)totalSecondsForGrowth:runningPointer;
+		        // 	stage = stage>totalStages?totalStages:stage;
+		        // }
+
+		        cScript.SetState(runningPointer, stage);
 
 		        copyCrop.SetActive(true);
 	            break;
 	        }
-	    }        
+	    }
+	    yield return null;
     }
 
     void OnDestroy()
@@ -70,8 +88,6 @@ public class RestoreCropGrowing : MonoBehaviour
     	PlayerPrefs.SetString(landName, crop.name);
     	PlayerPrefs.SetInt(landName+"runningPointer", cScript.GetTime());
     	PlayerPrefs.SetInt(landName+"stage", cScript.GetStage());
-    	PlayerPrefs.SetInt(landName+"started", cScript.GetStartedParam()?1:0);
-
     }
 
 }

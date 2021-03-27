@@ -66,7 +66,7 @@ public class Harvest : MonoBehaviour
                     Debug.Log("Harvesting " + cropName);
                     hs.AddToInventory(cropName,reward);
 
-                    inventory.Add(cropName, 1);
+                    inventory.Add(cropName, RandomHarvest());
 
 
                     notificationText.text = "";
@@ -104,7 +104,7 @@ public class Harvest : MonoBehaviour
 
             //string inventName = cropName + "Fruit";
             //Debug.Log(inventName);
-            inventory.Add(cropName, 1);
+            inventory.Add(cropName, RandomHarvest());
 
             notificationText.text = "";
             HideCrop(cropName);
@@ -116,6 +116,12 @@ public class Harvest : MonoBehaviour
             hs.ActivateFail(3);
             return;
         }
+    }
+
+    public int RandomHarvest()
+    {
+        System.Random rand = new System.Random();
+        return rand.Next(3,6);
     }
 
     public void HideCrop(string cropName)

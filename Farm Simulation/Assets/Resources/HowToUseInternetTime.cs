@@ -19,7 +19,11 @@ public class HowToUseInternetTime : MonoBehaviour
     {
         internetTime = InternetTime.instance;
         // "UpdateXXX" is the function that is subscribed to internetTime.onTimeChangedCallback
-        internetTime.onTimeChangedCallback += UpdateXXX; 
+        internetTime.onTimeChangedCallback += UpdateXXX;
+        if(PlayerPrefs.HasKey("exitInternetTime"))
+        {
+            DateTime lastRecordedTimeBeforeExitGame = DateTime.Parse(PlayerPrefs.GetString("exitInternetTime"));
+        }
     }
 
     // "UpdateXXX" will be called each time InternetTime updates the current internet time

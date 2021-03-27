@@ -34,6 +34,19 @@ public class InternetTime : MonoBehaviour
 		StartCoroutine(UpdateTime());
 	}
 
+	void OnDestroy()
+	{
+		SaveInternetTime();
+	}
+
+	void SaveInternetTime()
+	{
+		// yield return StartCoroutine(FetchTime());
+		// save exit internet time
+    	PlayerPrefs.SetString("exitInternetTime", currTime.ToString());
+    	// Debug.Log(currTime);
+	}
+
 	public DateTime GetTime()
 	{
 		return currTime;
