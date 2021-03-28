@@ -15,8 +15,8 @@ public class CropGrowing : MonoBehaviour
     private SpriteRenderer sr;
     private Sprite[] crops;
     private int runningPointer = 0;
-    private int stage = 0;
-    private float[] growingCondition;
+    public int stage = 0;
+    public float[] growingCondition;
     private bool inPosition = false;
     public float growTime;
     public string cropName;

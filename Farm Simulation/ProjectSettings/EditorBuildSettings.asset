@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/Store.unity
     guid: 6ae01cad6acf61349b3dce8cc5a82160
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/unused/Farming_02_store.unity
     guid: 5485ae3c180b9aa4087f34920cf6d357
   m_configObjects:
