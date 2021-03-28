@@ -15,6 +15,7 @@ public class SelectiveShow : MonoBehaviour
 		isInventory = this.transform.parent.gameObject.name == "Inventory";
 	}
 
+
 	public void ShowHide()
 	{
 		if(isInventory)
