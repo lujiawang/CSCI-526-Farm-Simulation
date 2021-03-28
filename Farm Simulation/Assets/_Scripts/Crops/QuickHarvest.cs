@@ -11,6 +11,8 @@ public class QuickHarvest : MonoBehaviour
 
 	Inventory inventory;
 
+	public AudioClip HarvestSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -71,7 +73,10 @@ public class QuickHarvest : MonoBehaviour
 	            {
 	            	inventory.Add(cropObj.name, Item.RandomHarvest(cropObj.name));
 	            	Destroy(cropObj);
-	            }
+
+					AudioSource audioSource = this.GetComponent<AudioSource>();
+					audioSource.PlayOneShot(HarvestSound);
+				}
 			}
 			
 		}

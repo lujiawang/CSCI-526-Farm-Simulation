@@ -14,6 +14,7 @@ public class Harvest : MonoBehaviour
     Inventory inventory;
 
     private Transform parentInventory;
+    public AudioClip HarvestSound;
 
     void Start()
     {
@@ -26,6 +27,25 @@ public class Harvest : MonoBehaviour
     public void SetObject(GameObject gameObject)
     {
         childObject = gameObject;
+    }
+
+    void HarvestSingleCrop(CropGrowing cropGrowing)
+    {
+        string cropName = childObject.name;
+        int reward = cropGrowing.reward;
+        Debug.Log("Harvesting " + cropName);
+        hs.AddToInventory(cropName, reward);
+
+        //string inventName = cropName + "Fruit";
+        //Debug.Log(inventName);
+        inventory.Add(cropName, Item.RandomHarvest(cropName));
+
+        notificationText.text = "";
+        HideCrop(cropName);
+        Destroy(childObject);
+
+        AudioSource audioSource = this.GetComponent<AudioSource>();
+        audioSource.PlayOneShot(HarvestSound);
     }
 
     public void CollectCrop()
@@ -61,24 +81,11 @@ public class Harvest : MonoBehaviour
                 CropGrowing gScript= checkChild.GetComponent<CropGrowing>();
                 if (gScript.grown)
                 {
-                    string cropName = gScript.name;
-                    int reward = gScript.reward;
-                    Debug.Log("Harvesting " + cropName);
-                    hs.AddToInventory(cropName,reward);
-
-                    inventory.Add(cropName, Item.RandomHarvest(cropName));
-
-
-                    notificationText.text = "";
-                    HideCrop(cropName);
-                    Destroy(checkChild);
+                    HarvestSingleCrop(gScript);
                     return;
                 }
 
-            }
-
-
-            
+            }            
             
         } 
 
@@ -97,18 +104,7 @@ public class Harvest : MonoBehaviour
 
         if (cropGrowing.grown)
         {
-            string cropName = childObject.name;
-            int reward = cropGrowing.reward;
-            Debug.Log("Harvesting " + cropName);
-            hs.AddToInventory(cropName,reward);
-
-            //string inventName = cropName + "Fruit";
-            //Debug.Log(inventName);
-            inventory.Add(cropName, Item.RandomHarvest(cropName));
-
-            notificationText.text = "";
-            HideCrop(cropName);
-            Destroy(childObject);
+            HarvestSingleCrop(cropGrowing);
         }
         else
         {
