@@ -129,7 +129,7 @@ public class StoreInventoryUI : MonoBehaviour
                 slots[i].transform.Find("ItemButton").Find("Number").gameObject.GetComponent<Text>().text = "" + newNum;
             }
             // change scroll height after updating UI
-            StartCoroutine(ScrollHeightRoutine(remainScrollPosition));
+            // StartCoroutine(ScrollHeightRoutine(remainScrollPosition));
             return;
         }
 

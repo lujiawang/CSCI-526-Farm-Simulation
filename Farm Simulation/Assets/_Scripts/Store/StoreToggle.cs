@@ -12,6 +12,8 @@ public class StoreToggle : MonoBehaviour
 
     GameObject inventoryObj;
 
+    public static bool isStoreOpen;
+
     // GameObject storeInventoryObj;
 
 
@@ -52,6 +54,7 @@ public class StoreToggle : MonoBehaviour
         // disable all InventorySlots' Items so they can't be dragged
         StartCoroutine(SwitchSlotsInteractability(inventoryObj, false));
         // SwitchSlotsInteractability(storeInventoryObj, false);
+        isStoreOpen = true;
     }
 
     public void CloseStore()
@@ -66,6 +69,7 @@ public class StoreToggle : MonoBehaviour
             cScript.MenuHideAndShow();
         // enable all InventorySlots' Items so they can be dragged
         StartCoroutine(SwitchSlotsInteractability(inventoryObj, true));
+        isStoreOpen = false;
     }
 
     public IEnumerator SwitchSlotsInteractability(GameObject inventory, bool onOrOff)
@@ -76,12 +80,14 @@ public class StoreToggle : MonoBehaviour
         // Debug.Log(itemsParentObj.childCount);
         foreach(Transform slot in itemsParentObj)
         {
+            // Debug.Log("switched!");
             GameObject itemObj = slot.GetChild(0).GetChild(0).gameObject;
             if(itemObj.name.Contains("Seed"))
             {
                 CanvasGroup itemCanvasGroup = itemObj.GetComponent<CanvasGroup>();
                 itemCanvasGroup.interactable = onOrOff;
                 itemCanvasGroup.blocksRaycasts = onOrOff;
+                // Debug.Log(itemCanvasGroup.blocksRaycasts);
             }
         }
     }

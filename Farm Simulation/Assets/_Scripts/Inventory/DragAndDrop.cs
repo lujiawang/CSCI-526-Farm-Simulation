@@ -53,7 +53,7 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         {
             this.GetComponent<CanvasGroup>().interactable = false;
             this.GetComponent<CanvasGroup>().blocksRaycasts = false;
-        }else // enable dragability of "Item"
+        }else if(!StoreToggle.isStoreOpen) // enable dragability of "Item" if store is closed
         {
             this.GetComponent<CanvasGroup>().interactable = true;
             this.GetComponent<CanvasGroup>().blocksRaycasts = true;

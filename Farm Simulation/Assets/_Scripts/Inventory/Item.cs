@@ -98,6 +98,23 @@ public class Item : IComparable<Item>
 			this.buyPrice = GetCropBuyPrice(this.sellPrice);
 		}
 
+		public void SetAllFields(int id, int num)
+		{
+			if(id < 0 || id > harvestIdUpperLimit)
+			{
+				Debug.LogWarning("id out of bounds!");
+				return;
+			}
+			this.id = id;
+			this.num = num;
+
+			this.name = GetCropName(id);
+			this.icon = GetCropSprite(name);
+
+			this.sellPrice = GetCropSellPrice(this.id);
+			this.buyPrice = GetCropBuyPrice(this.sellPrice);
+		}
+
 		public static Sprite GetCropSprite(string name)
 	    {
 	        Sprite[] icons = Resources.LoadAll<Sprite>("Crop_Spritesheet");

@@ -19592,8 +19592,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 169167c3279c54ed599596b09a844335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StarterPackageSize: 3
-  resetInventoryAfterRestart: 1
+  StarterPackageSize: 15
+  resetInventory: 1
 --- !u!4 &1962885969
 Transform:
   m_ObjectHideFlags: 0
@@ -19743,6 +19743,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fetchInterval: 5
+  useTimeForCrops: 0
 --- !u!1 &1970810936
 GameObject:
   m_ObjectHideFlags: 0

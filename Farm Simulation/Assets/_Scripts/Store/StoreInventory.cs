@@ -24,9 +24,9 @@ public class StoreInventory : MonoBehaviour
 
 
     public static int stackLimit = 99;
-    public static int randomizeSeedNumLimit = 10; // when randomizing, the maximum number of seeds that can be generated
-    public static int randomizeSeedTypes = 30; //5 // when randomizing, how many types of seeds that can be generated
-    public static int seedTypes = 40; //20 // how many types of seeds there are , used for randomizing store
+    public static int randomizeItemNumLimit = 10; // when randomizing, the maximum number of crops that can be generated
+    public static int randomizeItemTypes = 30; //5 // when randomizing, how many types of crops that can be generated
+    public static int randomizeItemTypesUpperLimit = 40; //how many types of items could be generated, used for randomizing store
 
     // public static int storeLimit = 20; // how many items can the store hold
 
@@ -81,20 +81,19 @@ public class StoreInventory : MonoBehaviour
     {
     	System.Random rand = new System.Random();
     	items = new List<Item>(); //clear out items list
-    	List<int> types = new List<int>(); //store all generated seedType
-    	for (int i = 0; i < randomizeSeedTypes; i++)
+    	List<int> ids = new List<int>(); //store all generated ids
+    	for (int i = 0; i < randomizeItemTypes; i++)
     	{
-    		int type = -1;
-    		// loop until generated a unique seedType number
+    		int id = -1;
+    		// loop until generated a unique id number
     		do{
-    			type = rand.Next(seedTypes); //generate integer between 0 - seedsTypes
-    		}while(types.Contains(type));
-    		types.Add(type);
+    			id = rand.Next(randomizeItemTypesUpperLimit); //generate integer between 0 - randomizeItemTypesUpperLimit
+    		}while(ids.Contains(id));
+    		ids.Add(id);
 
-    		string name = Item.GetCropName(type);
-    		int num = rand.Next(1, randomizeSeedNumLimit+1);
+    		int num = rand.Next(1, randomizeItemNumLimit+1);
     		Item item = new Item();
-    		item.SetAllFields(name, num);
+    		item.SetAllFields(id, num);
 
     		items.Add(item);
 

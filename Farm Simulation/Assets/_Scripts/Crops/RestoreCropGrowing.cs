@@ -7,8 +7,7 @@ public class RestoreCropGrowing : MonoBehaviour
 {
     // Start is called before the first frame update
 	InternetTime internetTime;
-	[SerializeField]
-    private bool useInternetTime = false;
+	
     void Start()
     {
         if(PlayerPrefs.HasKey(this.name))
@@ -41,9 +40,9 @@ public class RestoreCropGrowing : MonoBehaviour
 		        CropGrowing cScript = copyCrop.GetComponent<CropGrowing>();
 	            
 		        // the following block uses internet time for growing crops
-		        if(useInternetTime)
+                internetTime = InternetTime.instance;
+		        if(internetTime.useTimeForCrops)
 		        {
-    		        internetTime = InternetTime.instance;
     		        yield return StartCoroutine(internetTime.FetchTime());
     		        if(PlayerPrefs.HasKey("exitInternetTime"))
     		        {

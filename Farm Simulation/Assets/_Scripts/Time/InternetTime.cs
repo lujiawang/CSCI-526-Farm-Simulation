@@ -29,6 +29,9 @@ public class InternetTime : MonoBehaviour
     public delegate void OnTimeChanged();
     public OnTimeChanged onTimeChangedCallback;
 
+    [SerializeField]
+    public bool useTimeForCrops = false;
+
 	void Start()
 	{
 		StartCoroutine(UpdateTime());

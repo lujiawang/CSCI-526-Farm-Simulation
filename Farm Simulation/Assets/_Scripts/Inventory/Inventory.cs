@@ -33,7 +33,7 @@ public class Inventory : MonoBehaviour
 
     // Whether restart the inventory when restarting game
     [SerializeField]
-    private bool resetInventoryAfterRestart = false;
+    private bool resetInventory = false;
 
     SoundManager soundManager;
 
@@ -43,7 +43,7 @@ public class Inventory : MonoBehaviour
     {
     	// must initialize this first
         soundManager = SoundManager.instance;
-        if(resetInventoryAfterRestart)
+        if(resetInventory)
     	{
     		PlayerPrefs.DeleteKey("inventoryIndex");
     	}
@@ -93,10 +93,10 @@ public class Inventory : MonoBehaviour
     	for(int i = 0; i < StarterPackageSize; i++)
     	{
     		Item newItem = new Item();
-    		newItem.SetAllFields(Item.GetCropName(i), 5);
+    		newItem.SetAllFields(i, 5);
     		items.Add(newItem);
     		newItem = new Item();
-    		newItem.SetAllFields(Item.GetCropName(i+20), 5);
+    		newItem.SetAllFields(i+20, 5);
     		items.Add(newItem);
     	}
     	if (onItemChangedCallback != null)
