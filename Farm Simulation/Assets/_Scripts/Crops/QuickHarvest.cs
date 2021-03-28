@@ -11,7 +11,6 @@ public class QuickHarvest : MonoBehaviour
 
 	Inventory inventory;
 
-	public AudioClip HarvestSound;
 
     // Start is called before the first frame update
     void Start()
@@ -71,11 +70,11 @@ public class QuickHarvest : MonoBehaviour
 	                cScript.showToast("Walk to any cropland to harvest!", 1);
 	            }else //harvest the crop
 	            {
-	            	inventory.Add(cropObj.name, Item.RandomHarvest(cropObj.name));
-	            	Destroy(cropObj);
+	            	inventory.Add(cropObj.name, Item.RandomHarvest(cropObj.name));				
 
-					AudioSource audioSource = this.GetComponent<AudioSource>();
-					audioSource.PlayOneShot(HarvestSound);
+
+					Animator anim = cropObj.GetComponent<Animator>();
+					anim.Play("Harvest");
 				}
 			}
 			

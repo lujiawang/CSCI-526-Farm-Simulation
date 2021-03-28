@@ -42,10 +42,9 @@ public class Harvest : MonoBehaviour
 
         notificationText.text = "";
         HideCrop(cropName);
-        Destroy(childObject);
 
-        AudioSource audioSource = this.GetComponent<AudioSource>();
-        audioSource.PlayOneShot(HarvestSound);
+        Animator anim = childObject.GetComponent<Animator>();
+        anim.Play("Harvest");
     }
 
     public void CollectCrop()

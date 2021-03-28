@@ -30,6 +30,9 @@ public class CropGrowing : MonoBehaviour
     private bool started = false;
     private GameObject canvas;
 
+
+    public AudioClip HarvestSound;
+
     private bool doReassignSprite = false; // For RestoreCropGrowing.cs
     // Start is called before the first frame update
     void Start()
@@ -206,5 +209,15 @@ public class CropGrowing : MonoBehaviour
             growCrop();
             
         }
+    }
+
+    public void HarvestAudio()
+    {
+        AudioSource audioSource = this.GetComponent<AudioSource>();
+        audioSource.PlayOneShot(HarvestSound);
+    }
+    public void HarvestAnim()
+    {
+        Destroy(this.gameObject);
     }
 }
