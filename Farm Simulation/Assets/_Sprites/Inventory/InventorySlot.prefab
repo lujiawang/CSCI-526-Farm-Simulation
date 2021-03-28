@@ -245,6 +245,7 @@ GameObject:
   - component: {fileID: 8515498776522731719}
   - component: {fileID: 3388435854247607697}
   - component: {fileID: 8293954896837174693}
+  - component: {fileID: 1235322549012324343}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -312,6 +313,18 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: CucumberSeed
+--- !u!225 &1235322549012324343
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8268286432924830188}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &9047899552467516593
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,6 +634,7 @@ GameObject:
   - component: {fileID: 9047899554471715366}
   - component: {fileID: 9047899554471715369}
   - component: {fileID: 9047899554471715368}
+  - component: {fileID: 7408624073385271181}
   m_Layer: 5
   m_Name: DeleteButton
   m_TagString: Untagged
@@ -645,7 +659,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 66, y: 66}
-  m_SizeDelta: {x: 50, y: 50}
+  m_SizeDelta: {x: 65, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9047899554471715366
 CanvasRenderer:
@@ -726,4 +740,27 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9047899554471715369}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7408624073385271181}
+        m_MethodName: DeleteThisSlot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7408624073385271181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9047899554471715370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2187e4efb919472bb7069ab5ef9d400, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -96,7 +96,7 @@ public class StoreInventoryUI : MonoBehaviour
             case "Others":
                 return showOthers;
             default:
-                Debug.LogWarning("InventoryUI:GetShowParam() argument error");
+                // Debug.LogWarning("InventoryUI:GetShowParam() argument error");
                 return false;
         }
     }

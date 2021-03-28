@@ -163,9 +163,9 @@ public class CropGrowing : MonoBehaviour
     {
         return harvested;
     }
-    public bool SetHarvested()
+    public void SetHarvested()
     {
-        return harvested = true;
+        harvested = true;
     }
 
     // this should manually set the crop stage and renders image correctly

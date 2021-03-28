@@ -77,7 +77,7 @@ public class QuickHarvest : MonoBehaviour
 	            }else if(!cropObj.GetComponent<CropGrowing>().Harvested())//harvest the crop
 	            {
 	            	cropObj.GetComponent<CropGrowing>().SetHarvested();
-	            	Debug.Log("Harvest");
+	            	// Debug.Log("Harvest");
 	            	int randomHarvest = Item.RandomHarvest(cropObj.name);
 	            	inventory.Add(cropObj.name, randomHarvest);
 

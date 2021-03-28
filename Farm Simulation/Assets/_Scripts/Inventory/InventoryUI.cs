@@ -16,6 +16,7 @@ public class InventoryUI : MonoBehaviour
     bool showSeeds = true;
     bool showHarvests = true;
     bool showOthers = true;
+    bool showDelete = false;
 
     // Start is called before the first frame update
     void Start()
@@ -96,7 +97,7 @@ public class InventoryUI : MonoBehaviour
             case "Others":
                 return showOthers;
             default:
-                Debug.LogWarning("InventoryUI:GetShowParam() argument error");
+                // Debug.LogWarning("InventoryUI:GetShowParam() argument error");
                 return false;
         }
     }
@@ -104,6 +105,13 @@ public class InventoryUI : MonoBehaviour
     public bool AreAllShowParamsOn()
     {
         return showSeeds && showHarvests && showOthers;
+    }
+
+    public bool SetDeleteParam()
+    {
+        showDelete = !showDelete;
+        UpdateUI(true, false);
+        return showDelete;
     }
 
     void ShowHide(GameObject slot, int id)
@@ -118,6 +126,8 @@ public class InventoryUI : MonoBehaviour
         {
             slot.SetActive(showOthers);
         }
+        Button deleteButton = slot.transform.Find("ItemButton").Find("DeleteButton").GetComponent<Button>();
+        deleteButton.interactable = showDelete;
     }
 
     // PARAM remainScrollPosition indicates whether to maintain previous scrollView position
@@ -138,6 +148,7 @@ public class InventoryUI : MonoBehaviour
                 int newNum = inventory.items[i].Num();
                 // update displayed number
                 slots[i].transform.Find("ItemButton").Find("Number").gameObject.GetComponent<Text>().text = "" + newNum;
+                ShowHide(slots[i].gameObject, inventory.items[i].Id());
             }
             // change scroll height after updating UI
             // StartCoroutine(ScrollHeightRoutine(remainScrollPosition));
