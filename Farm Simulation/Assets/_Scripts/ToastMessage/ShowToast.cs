@@ -21,6 +21,38 @@ public class ShowToast : MonoBehaviour
 		StartCoroutine(showToastCOR(text, duration));	    
 	}
 
+	public void showFixedToast(Text textComponent, string text, int duration)
+	{
+		StartCoroutine(showToastCOR(textComponent, text, duration));
+	}
+
+	public IEnumerator showToastCOR(Text txt, string text, int duration)
+	{
+		txt.gameObject.GetComponent<CanvasGroup>().alpha = 1f;
+		
+	    Color orginalColor = txt.color;
+
+	    txt.text = text;
+	    txt.enabled = true;
+
+	    //Fade in
+	    yield return fadeInAndOut(txt, true, 0.5f);
+
+	    //Wait for the duration
+	    float counter = 0;
+	    while (counter < duration)
+	    {
+	        counter += Time.deltaTime;
+	        yield return null;
+	    }
+
+	    //Fade out
+	    yield return fadeInAndOut(txt, false, 0.5f);
+
+	    txt.enabled = false;
+	    txt.color = orginalColor;
+	}
+
 	public IEnumerator showToastCOR(string text, int duration)
 	{
 		Text txt;

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-// using UnityEngine.UI;
+using UnityEngine.UI;
 
 public class QuickHarvest : MonoBehaviour
 {
@@ -10,7 +10,6 @@ public class QuickHarvest : MonoBehaviour
 	GameObject canvas;
 
 	Inventory inventory;
-
 
     // Start is called before the first frame update
     void Start()
@@ -21,25 +20,32 @@ public class QuickHarvest : MonoBehaviour
         canvas = GameObject.FindGameObjectsWithTag("Canvas")[0];
 
         inventory = Inventory.instance;
+
+        StartCoroutine(UpdateCOR());
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator UpdateCOR()
     {
-    	// for desktop, when left key is held down
-    	// Debug.Log(Input.GetKey(KeyCode.Mouse0));
-    	if(Input.GetKey(KeyCode.Mouse0) && !TouchToMove.IsPointerOverGameObject())
+    	while(true)
     	{
-    		HarvestCrop();
+    		// for desktop, when left key is held down
+	    	// Debug.Log(Input.GetKey(KeyCode.Mouse0));
+	    	if(Input.GetKey(KeyCode.Mouse0) && !TouchToMove.IsPointerOverGameObject())
+	    	{
+	    		// Debug.Log("MouseDown");
+	    		yield return StartCoroutine(HarvestCrop());
+	    	}
+	    	// for mobile
+	    	else if (Input.touchCount > 0 && Input.GetTouch(0).phase != TouchPhase.Ended && !TouchToMove.IsPointerOverGameObject())
+	        {
+	        	yield return StartCoroutine(HarvestCrop());
+	    	}
+	    	yield return null;
     	}
-    	// for mobile
-    	else if (Input.touchCount > 0 && Input.GetTouch(0).phase != TouchPhase.Ended && !TouchToMove.IsPointerOverGameObject())
-        {
-        	HarvestCrop();
-    	}
+    	
     }
 
-    void HarvestCrop()
+    IEnumerator HarvestCrop()
     {
     	// Debug.Log("HarvestCrop");
 		Vector3 mousePos3D = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -68,13 +74,28 @@ public class QuickHarvest : MonoBehaviour
 	            {
 	            	ShowToast cScript = canvas.GetComponent<ShowToast>();
 	                cScript.showToast("Walk to any cropland to harvest!", 1);
-	            }else //harvest the crop
+	            }else if(!cropObj.GetComponent<CropGrowing>().Harvested())//harvest the crop
 	            {
-	            	inventory.Add(cropObj.name, Item.RandomHarvest(cropObj.name));				
+	            	cropObj.GetComponent<CropGrowing>().SetHarvested();
+	            	Debug.Log("Harvest");
+	            	int randomHarvest = Item.RandomHarvest(cropObj.name);
+	            	inventory.Add(cropObj.name, randomHarvest);
 
+	            	// show harvest number message
+	            	GameObject progressCanvas = GameObject.Find("ProgressCanvas");
+	            	if(progressCanvas == null)
+	            		Debug.LogWarning("Cannot find progressCanvas!!");
+            		string cropLandName = cropObj.transform.parent.name;
+            		int index = cropLandName[cropLandName.Length - 2] - '0';
+            		Text text = progressCanvas.transform.GetChild(index).Find("HarvestNum").GetComponent<Text>();
+
+            		ShowToast cScript = canvas.GetComponent<ShowToast>();
+            		cScript.showFixedToast(text, "+"+randomHarvest, 1);
 
 					Animator anim = cropObj.GetComponent<Animator>();
 					anim.Play("Harvest");
+
+					yield return null;
 				}
 			}
 			

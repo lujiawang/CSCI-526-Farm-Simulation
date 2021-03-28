@@ -8,10 +8,11 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3373638454376015686}
+  - component: {fileID: 3240242441145868977}
   - component: {fileID: 4105768759867929287}
   - component: {fileID: 3437164348443706468}
   - component: {fileID: 8934646461193301228}
+  - component: {fileID: 155568640573190257}
   m_Layer: 0
   m_Name: Avocado
   m_TagString: Untagged
@@ -19,20 +20,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3373638454376015686
-Transform:
+--- !u!224 &3240242441145868977
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1967313386008702673}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.542446, y: -1.3291805, z: -0.1901954}
+  m_LocalPosition: {x: 0, y: 0, z: -0.1901954}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -2.542446, y: -1.3291805}
+  m_SizeDelta: {x: 1.0666667, y: 1.0666667}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &4105768759867929287
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -126,9 +132,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a24d8db036957e45b181aabc27079f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stage: 0
+  growingCondition: []
   growTime: 2
   cropName: Avocado
-  Notification: {fileID: 0}
   grown: 0
   reward: 10
   addrs:
@@ -156,3 +163,12 @@ MonoBehaviour:
     m_SubObjectName: Avocado_5
     m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  HarvestSound: {fileID: 0}
+--- !u!222 &155568640573190257
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967313386008702673}
+  m_CullTransparentMesh: 0

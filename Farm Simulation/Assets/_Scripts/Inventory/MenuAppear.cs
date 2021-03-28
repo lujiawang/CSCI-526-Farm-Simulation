@@ -10,12 +10,17 @@ public class MenuAppear : MonoBehaviour
 
     private Animator anim;
 
+    CanvasGroup parentPanel;
+
     // Start is called before the first frame update
     void Start()
     {
         isMenu = false;
         transform.position = new Vector2(transform.position.x, minY);
         anim = GetComponent<Animator>();
+
+        parentPanel = this.transform.Find("ParentPanel").gameObject.GetComponent<CanvasGroup>();
+        parentPanel.blocksRaycasts = isMenu;
     }
 
     public void MenuHideAndShow()
@@ -30,10 +35,10 @@ public class MenuAppear : MonoBehaviour
         else
         {
             anim.SetBool("isMenu", false);
-
             // Camera.main.transform.position = new Vector3(0f, 0f, Camera.main.transform.position.z);
             // CameraFollow.enableCamera = true;
         }
+        parentPanel.blocksRaycasts = isMenu;
         // reset scrollview position
         // ScrollHeight cScript = GetComponent<ScrollHeight>();
         // if(this.transform.GetChild(0).GetChild(0).gameObject.name != "ItemsParent")

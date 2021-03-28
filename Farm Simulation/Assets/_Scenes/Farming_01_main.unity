@@ -2219,6 +2219,7 @@ GameObject:
   - component: {fileID: 273187183}
   - component: {fileID: 273187185}
   - component: {fileID: 273187186}
+  - component: {fileID: 273187187}
   m_Layer: 5
   m_Name: ParentPanel
   m_TagString: Untagged
@@ -2314,7 +2315,7 @@ MonoBehaviour:
   m_Vertical: 1
   m_MovementType: 1
   m_Elasticity: 0.02
-  m_Inertia: 1
+  m_Inertia: 0
   m_DecelerationRate: 1
   m_ScrollSensitivity: 50
   m_Viewport: {fileID: 273187182}
@@ -2327,6 +2328,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!225 &273187187
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273187181}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &279534609
 GameObject:
   m_ObjectHideFlags: 0
@@ -17544,6 +17557,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SelectiveShowButton (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 3150364604181521271, guid: 0145bad5134e540a4b963bc2da9376d5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3150364604181521272, guid: 0145bad5134e540a4b963bc2da9376d5,
         type: 3}
       propertyPath: m_Pivot.x
@@ -19206,6 +19224,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SelectiveShowButton (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 3150364604181521271, guid: 0145bad5134e540a4b963bc2da9376d5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3150364604181521272, guid: 0145bad5134e540a4b963bc2da9376d5,
         type: 3}
       propertyPath: m_Pivot.x
@@ -20128,7 +20151,7 @@ MonoBehaviour:
   m_Vertical: 1
   m_MovementType: 1
   m_Elasticity: 0.02
-  m_Inertia: 1
+  m_Inertia: 0
   m_DecelerationRate: 1
   m_ScrollSensitivity: 50
   m_Viewport: {fileID: 1833477114}

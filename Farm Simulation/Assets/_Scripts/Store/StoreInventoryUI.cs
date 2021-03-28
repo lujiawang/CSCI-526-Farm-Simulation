@@ -41,9 +41,9 @@ public class StoreInventoryUI : MonoBehaviour
                 showOthers = !showOthers;
                 param = 3;
                 break;
-            case "All":
-                param = 4;
-                break;
+            // case "All":
+            //     param = 4;
+            //     break;
             default:
                 Debug.LogWarning("InventoryUI:ReverseShowParam() argument error");
                 return;
@@ -68,11 +68,11 @@ public class StoreInventoryUI : MonoBehaviour
                     showHarvests = false;
                     showOthers = true;
                     break;
-                case 4:
-                    showSeeds = true;
-                    showHarvests = true;
-                    showOthers = true;
-                    break;
+                // case 4:
+                //     showSeeds = true;
+                //     showHarvests = true;
+                //     showOthers = true;
+                //     break;
                 default:
                     return;
             }

@@ -33,6 +33,8 @@ public class CropGrowing : MonoBehaviour
 
     public AudioClip HarvestSound;
 
+    private bool harvested = false;
+
     private bool doReassignSprite = false; // For RestoreCropGrowing.cs
     // Start is called before the first frame update
     void Start()
@@ -147,10 +149,6 @@ public class CropGrowing : MonoBehaviour
     {
         return runningPointer;
     }
-    public bool GetStartedParam()
-    {
-        return started;
-    }
     public float GetTotalSecondsForGrowth()
     {
         SetUpAssets();
@@ -160,6 +158,14 @@ public class CropGrowing : MonoBehaviour
     {
         SetUpAssets();
         return growingCondition.Length;
+    }
+    public bool Harvested()
+    {
+        return harvested;
+    }
+    public bool SetHarvested()
+    {
+        return harvested = true;
     }
 
     // this should manually set the crop stage and renders image correctly
