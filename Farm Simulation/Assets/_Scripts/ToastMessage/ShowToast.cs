@@ -16,14 +16,45 @@ public class ShowToast : MonoBehaviour
 	public Text txt1;
 	public Text txt2;
 
+	Coroutine a;
+	Coroutine b;
+	Coroutine customized;
+
 	public void showToast(string text, int duration)
 	{
-		StartCoroutine(showToastCOR(text, duration));	    
+		Text txt = null;
+		switch(showNumber)
+		{
+			case 1:
+				txt = txt1;
+				break;
+			case 2:
+				txt = txt2;
+				break;
+			default:
+				txt = txt1;
+				break;
+		}
+		
+		if(showNumber == 1)
+		{
+			if(a != null) StopCoroutine(a);
+			a = StartCoroutine(showToastCOR(txt, text, duration));
+		}
+		else if(showNumber == 2)
+		{
+			if(b != null) StopCoroutine(b);
+			b = StartCoroutine(showToastCOR(txt, text, duration));
+		}
+		showNumber++;
+		if(showNumber > 2)
+			showNumber = 1;
 	}
 
-	public void showFixedToast(Text textComponent, string text, int duration)
+	public void showCustomizedToast(Text textComponent, string text, int duration)
 	{
-		StartCoroutine(showToastCOR(textComponent, text, duration));
+		if(customized != null) StopCoroutine(customized);
+		customized = StartCoroutine(showToastCOR(textComponent, text, duration));
 	}
 
 	public IEnumerator showToastCOR(Text txt, string text, int duration)
@@ -51,50 +82,9 @@ public class ShowToast : MonoBehaviour
 
 	    txt.enabled = false;
 	    txt.color = orginalColor;
-	}
 
-	public IEnumerator showToastCOR(string text, int duration)
-	{
-		Text txt;
-		switch(showNumber)
-		{
-			case 1:
-				txt = txt1;
-				break;
-			case 2:
-				txt = txt2;
-				break;
-			default:
-				txt = txt1;
-				break;
-		}
-		showNumber++;
-		if(showNumber > 2)
-			showNumber = 1;
-		txt.gameObject.GetComponent<CanvasGroup>().alpha = 1f;
-		
-	    Color orginalColor = txt.color;
-
-	    txt.text = text;
-	    txt.enabled = true;
-
-	    //Fade in
-	    yield return fadeInAndOut(txt, true, 0.5f);
-
-	    //Wait for the duration
-	    float counter = 0;
-	    while (counter < duration)
-	    {
-	        counter += Time.deltaTime;
-	        yield return null;
-	    }
-
-	    //Fade out
-	    yield return fadeInAndOut(txt, false, 0.5f);
-
-	    txt.enabled = false;
-	    txt.color = orginalColor;
-	    showNumber = 1;
+	    if(txt == txt1)
+	    	showNumber = 1;
 	}
 
 	public IEnumerator fadeInAndOut(Text targetText, bool fadeIn, float duration)

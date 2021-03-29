@@ -22,6 +22,6 @@ public class HowToShowToastMessage : MonoBehaviour
         cScript.showToast("The toast message you want to display", 1); //the int value is the duration of the message
     
         // if you have a customized Text comopnent you want to display
-        cScript.showFixedToast(text, "The toast message you want to display", 1);
+        cScript.showCustomizedToast(text, "The toast message you want to display", 1);
     }
 }

@@ -39,7 +39,8 @@ public class DeleteShow : MonoBehaviour
 		while(!endLoop)
 		{
 			// Debug.Log("disable deletebutton loop running");
-			if (Input.GetKey(KeyCode.Mouse0) || (Input.touchCount > 0 && Input.GetTouch(0).phase != TouchPhase.Ended) )
+			if (Input.GetKey(KeyCode.Mouse0) || (Input.touchCount > 0 && Input.GetTouch(0).phase != TouchPhase.Ended
+				 && Input.GetTouch(0).phase != TouchPhase.Canceled) )
 	        {
 	            //Set up the new Pointer Event
 	            m_PointerEventData = new PointerEventData(m_EventSystem);

@@ -36,7 +36,8 @@ public class QuickHarvest : MonoBehaviour
 	    		yield return StartCoroutine(HarvestCrop());
 	    	}
 	    	// for mobile
-	    	else if (Input.touchCount > 0 && Input.GetTouch(0).phase != TouchPhase.Ended && !TouchToMove.IsPointerOverGameObject())
+	    	else if (Input.touchCount > 0 && Input.GetTouch(0).phase != TouchPhase.Ended && 
+	    		Input.GetTouch(0).phase != TouchPhase.Canceled && !TouchToMove.IsPointerOverGameObject())
 	        {
 	        	yield return StartCoroutine(HarvestCrop());
 	    	}
@@ -90,7 +91,7 @@ public class QuickHarvest : MonoBehaviour
             		Text text = progressCanvas.transform.GetChild(index).Find("HarvestNum").GetComponent<Text>();
 
             		ShowToast cScript = canvas.GetComponent<ShowToast>();
-            		cScript.showFixedToast(text, "+"+randomHarvest, 1);
+            		cScript.showCustomizedToast(text, "+"+randomHarvest, 1);
 
 					Animator anim = cropObj.GetComponent<Animator>();
 					anim.Play("Harvest");
