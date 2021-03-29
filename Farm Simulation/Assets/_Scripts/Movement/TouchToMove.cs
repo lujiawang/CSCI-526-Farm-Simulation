@@ -26,6 +26,7 @@ public class TouchToMove : MonoBehaviour
     public static string landName = "";
     public Text cropName;
 
+    public static bool disablePlayerMovement = false;
 
 
     // Start is called before the first frame update
@@ -54,6 +55,8 @@ public class TouchToMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(disablePlayerMovement)
+            return;
         Vector3 targetPos = rb.position;
         
         animator.SetFloat("Horizontal", agent.velocity.normalized.x);

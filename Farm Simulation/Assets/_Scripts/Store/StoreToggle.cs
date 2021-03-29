@@ -44,7 +44,8 @@ public class StoreToggle : MonoBehaviour
 
     public void OpenStore()
     {
-
+        if(isStoreOpen)
+            return;
         BackButton.alpha = 1f;
     	BackButton.blocksRaycasts = true;
     	StoreInventory.alpha = 1f;
@@ -57,21 +58,27 @@ public class StoreToggle : MonoBehaviour
         StartCoroutine(SwitchSlotsInteractability(inventoryObj, false));
         // SwitchSlotsInteractability(storeInventoryObj, false);
         isStoreOpen = true;
+        this.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        TouchToMove.disablePlayerMovement = true;
     }
 
     public void CloseStore()
     {
+        if(!isStoreOpen)
+            return;
     	BackButton.alpha = 0f;
     	BackButton.blocksRaycasts = false;
     	StoreInventory.alpha = 0f;
     	StoreInventory.blocksRaycasts = false;
         // close inventory menu
         MenuAppear cScript = inventoryObj.GetComponent<MenuAppear>();
-        if(MenuAppear.isMenu)
-            cScript.MenuHideAndShow();
+        // if(MenuAppear.isMenu)
+        //     cScript.MenuHideAndShow();
         // enable all InventorySlots' Items so they can be dragged
         StartCoroutine(SwitchSlotsInteractability(inventoryObj, true));
         isStoreOpen = false;
+        this.GetComponent<CanvasGroup>().blocksRaycasts = true;
+        TouchToMove.disablePlayerMovement = false;
     }
 
     public IEnumerator SwitchSlotsInteractability(GameObject inventory, bool onOrOff)
