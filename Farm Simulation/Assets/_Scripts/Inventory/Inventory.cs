@@ -58,7 +58,7 @@ public class Inventory : MonoBehaviour
         	PlayerPrefs.SetString("inventoryIndex","");
 
         	// add starter crops seeds to player's inventory
-        	AddStarterPackage(StarterPackageSize);
+        	StartCoroutine(AddStarterPackage(StarterPackageSize));
         	
         }
 
@@ -88,7 +88,7 @@ public class Inventory : MonoBehaviour
     	// Debug.Log("index: "+index);
     }
 
-    void AddStarterPackage(int StarterPackageSize)
+    IEnumerator AddStarterPackage(int StarterPackageSize)
     {
     	for(int i = 0; i < StarterPackageSize; i++)
     	{
@@ -104,10 +104,16 @@ public class Inventory : MonoBehaviour
             // StartCoroutine(onItemChangedCallback.Invoke());
             onItemChangedCallback.Invoke(false, true);
         }
-        // soundManager.PlaySound("AddStarterPackageSound");
+        // soundManager.PlaySound(8);
         MenuAppear cScript = GameObject.Find("Canvas").transform.Find("Inventory").GetComponent<MenuAppear>();
         if(!MenuAppear.isMenu)
             cScript.MenuHideAndShow();
+        bool endLoop = false;
+        while(!endLoop)
+        {
+            endLoop = soundManager.PlaySound(8);
+            yield return null; 
+        }
     }
 
     void InitializeInventory(string[] indexArray)

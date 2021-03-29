@@ -64,11 +64,18 @@ public class SoundManager : MonoBehaviour
 		PlaySound(index);
 	}
 
-	public void PlaySound(int index)
+	// returns false if the did not play sound successfully
+	public bool PlaySound(int index)
 	{
-		// Debug.Log(audioSources[8]);
-		AudioSource audioSource = audioSources[index];
-		audioSource.PlayOneShot(audioSource.clip);
+		// if(audioSources != null && audioSources.Length > index && audioSources[index] != null && audioSources[index].clip != null)
+		if(audioSources != null)
+		{
+			AudioSource audioSource = audioSources[index];
+			audioSource.PlayOneShot(audioSource.clip);
+			return true;
+		}
+		return false;
+		
 		// Debug.Log("index:"+index);
 	}
 

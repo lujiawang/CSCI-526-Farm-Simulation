@@ -80,7 +80,7 @@ public class QuickHarvest : MonoBehaviour
 	            	cropObj.GetComponent<CropGrowing>().SetHarvested();
 	            	// Debug.Log("Harvest");
 	            	int randomHarvest = Item.RandomHarvest(cropObj.name);
-	            	inventory.Add(cropObj.name, randomHarvest, false);
+	            	inventory.Add(cropObj.name, randomHarvest);
 
 	            	// show harvest number message
 	            	GameObject progressCanvas = GameObject.Find("ProgressCanvas");

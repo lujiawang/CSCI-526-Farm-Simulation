@@ -167,7 +167,7 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         copyCrop.transform.SetParent(cropLand.transform);
         copyCrop.SetActive(true);
 
-        inventory.Add(this.name, -1, false);
+        inventory.Add(this.name, -1);
     }
 
 }
