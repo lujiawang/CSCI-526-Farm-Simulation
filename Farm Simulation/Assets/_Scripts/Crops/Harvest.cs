@@ -38,7 +38,7 @@ public class Harvest : MonoBehaviour
 
         //string inventName = cropName + "Fruit";
         //Debug.Log(inventName);
-        inventory.Add(cropName, Item.RandomHarvest(cropName));
+        inventory.Add(cropName, Item.RandomHarvest(cropName), false);
 
         notificationText.text = "";
         HideCrop(cropName);

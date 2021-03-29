@@ -35,7 +35,7 @@ public class Seeds : MonoBehaviour
     {
         string seedName =  cropName + "Seed";
 
-        inventory.Add(seedName, 1);
+        inventory.Add(seedName, 1, true);
         
         this.gameObject.SetActive(false);
         store.Purchase(cropName);

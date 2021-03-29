@@ -9,15 +9,20 @@ public class SelectiveShow : MonoBehaviour
 	string buttonName;
 	bool isInventory;
 
+	SoundManager soundManager;
+
 	void Start()
 	{
 		buttonName = this.transform.GetChild(0).gameObject.name;
 		isInventory = this.transform.parent.gameObject.name == "Inventory";
+
+		soundManager = SoundManager.instance;
 	}
 
 
 	public void ShowHide()
 	{
+		soundManager.PlaySound(6);
 		if(isInventory)
 		{
 			GameObject inventoryObj = this.transform.parent.gameObject;

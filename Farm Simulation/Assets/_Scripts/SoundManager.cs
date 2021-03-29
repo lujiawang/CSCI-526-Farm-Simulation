@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-
-	private AudioSource audioSource;
-	public AudioClip addSound, removeSound;
-
 	#region Singleton
 	// Use "SoundManager.instance" to access the SoundManager instance
 	public static SoundManager instance;
@@ -22,25 +18,58 @@ public class SoundManager : MonoBehaviour
 	}
 	#endregion
 
+	AudioSource[] audioSources;
+
 	void Start()
 	{
-		audioSource = this.GetComponent<AudioSource>();
+		audioSources = this.transform.Find("SoundPlayer").GetComponents<AudioSource>();
 	}
 
-    public void PlaySound(string sound)
-    {
-		//Debug.Log("here");
-		//audioSource.PlayOneShot(addSound);
-		/*if (sound.Equals("add"))
-        {
-			audioSource.PlayOneShot(addSound);
-		}*/ 
-		if (sound.Equals("remove"))
-        {
-			audioSource.PlayOneShot(removeSound);
-        }
-		//AudioClip audioClip = Resources.Load<AudioClip>("sounds/"+sound);
-		// audioSource.clip = audioClip;
-		//audioSource.PlayOneShot(audioClip);
+	public void PlaySound(string clipName)
+	{
+		int index;
+		switch(clipName)
+		{
+			case "AddItemSound":
+				index = 0;
+				break;
+			case "RemoveItemSound":
+				index = 1;
+				break;
+			case "RemoveItemToZeroSound":
+				index = 2;
+				break;
+			case "BuyItemSound":
+				index = 3;
+				break;
+			case "SellItemSound":
+				index = 4;
+				break;
+			case "RefreshStoreSound":
+				index = 5;
+				break;
+			case "ClickTabSound":
+				index = 6;
+				break;
+			case "DeleteItemSound":
+				index = 7;
+				break;
+			case "AddStarterPackageSound":
+				index = 8;
+				break;
+			default:
+				Debug.LogWarning("invalid clip name!");
+				return;
+		}
+		PlaySound(index);
 	}
+
+	public void PlaySound(int index)
+	{
+		// Debug.Log(audioSources[8]);
+		AudioSource audioSource = audioSources[index];
+		audioSource.PlayOneShot(audioSource.clip);
+		// Debug.Log("index:"+index);
+	}
+
 }
