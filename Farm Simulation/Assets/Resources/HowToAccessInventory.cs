@@ -11,6 +11,7 @@ public class HowToAccessInventory : MonoBehaviour{
 		inventory = Inventory.instance;
 	}
 	
+
 	public void Foo(){
 		// add one corn seed to inventory
 		inventory.Add("CornSeed", 1);
@@ -20,5 +21,9 @@ public class HowToAccessInventory : MonoBehaviour{
 		inventory.Add("Corn", 1);
 		// remove one corn fruit from inventory
 		inventory.Add("Corn", -1);
+
+		// NOTE: the last boolean parameter is used to tell inventory if it should play the default add item sound
+		// If you  don't want it to play the sound, set it to false
+		inventory.Add("Corn", -1, false);
 	}
 }

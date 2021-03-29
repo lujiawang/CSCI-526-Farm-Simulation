@@ -13,7 +13,7 @@ public class StoreToggle : MonoBehaviour
 
     GameObject inventoryObj;
 
-    public static bool isStoreOpen;
+    public static bool isStoreOpen = false;
 
     // GameObject storeInventoryObj;
 
@@ -71,7 +71,7 @@ public class StoreToggle : MonoBehaviour
     	StoreInventory.alpha = 0f;
     	StoreInventory.blocksRaycasts = false;
         // close inventory menu
-        MenuAppear cScript = inventoryObj.GetComponent<MenuAppear>();
+        // MenuAppear cScript = inventoryObj.GetComponent<MenuAppear>();
         // if(MenuAppear.isMenu)
         //     cScript.MenuHideAndShow();
         // enable all InventorySlots' Items so they can be dragged

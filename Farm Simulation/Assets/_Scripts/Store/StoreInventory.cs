@@ -25,10 +25,9 @@ public class StoreInventory : MonoBehaviour
 
     public static int stackLimit = 99;
     public static int randomizeItemNumLimit = 10; // when randomizing, the maximum number of crops that can be generated
-    public static int randomizeItemTypes = 30; //5 // when randomizing, how many types of crops that can be generated
-    public static int randomizeItemTypesUpperLimit = 40; //how many types of items could be generated, used for randomizing store
-
-    // public static int storeLimit = 20; // how many items can the store hold
+    public static int randomizeItemTypesUpperLimit = 40; //how many types of items could be generated, used for randomizing store    
+    [Range(1, 40)]
+    public int randomizeItemTypes = 30; //5 // when randomizing, how many types of crops that can be generated
 
     public delegate void OnStoreItemChanged(bool remainScrollPosition, bool doDestroyAll);
     public OnStoreItemChanged onStoreItemChangedCallback;
@@ -39,7 +38,9 @@ public class StoreInventory : MonoBehaviour
     InternetTime internetTime;
 
     // day, hour, minute, second
-    public static TimeSpan storeUpdateInterval = new TimeSpan(0, 0, 0, 10); // how much time before store update
+    [Range(10,100)]
+    public double updateIntervalSecs = 10d;
+    private TimeSpan storeUpdateInterval; // how much time before store update
 
     public List<Item> items = new List<Item>();
 
@@ -49,6 +50,8 @@ public class StoreInventory : MonoBehaviour
         soundManager = SoundManager.instance;
         internetTime = InternetTime.instance;
         internetTime.onTimeChangedCallback += UpdateStore;
+
+        storeUpdateInterval = TimeSpan.FromSeconds(updateIntervalSecs);
 
         string[] indexArray = new string[0];
         // if inventoryIndex is already set
@@ -104,6 +107,8 @@ public class StoreInventory : MonoBehaviour
             // StartCoroutine(onStoreItemChangedCallback.Invoke(false));
             onStoreItemChangedCallback.Invoke(false, true);
         }
+        if(StoreToggle.isStoreOpen)
+            soundManager.PlaySound(5);
     	
     }
 
@@ -118,7 +123,7 @@ public class StoreInventory : MonoBehaviour
     	PlayerPrefs.SetString("storeInventoryIndex", index);
     }
 
-    public void InitializeInventory(string[] indexArray)
+    void InitializeInventory(string[] indexArray)
     {
         foreach(string itemName in indexArray)
         {
@@ -136,7 +141,7 @@ public class StoreInventory : MonoBehaviour
     }
 
     // update the store inventory when certiain amoutn of time passes
-    public void UpdateStore()
+    void UpdateStore()
     {
         // Debug.Log("updatestore");
     	// if the game continues from last save
@@ -159,100 +164,173 @@ public class StoreInventory : MonoBehaviour
     	}
     }
 
-    // num can be negative to perform remove
-    public void Add(string name, int num)
+    public void Add(string name, int num, bool playDefaultSound)
     {
-    	if(num == 0)
-    		return;
+        if(num == 0)
+            return;
 
         Item item = new Item();
-        item.SetAllFields(name, num);
+        item.SetAllFields(name, num>stackLimit?stackLimit:num);
 
         int count = items.Count;
-        if (count == 0)
+        if (count == 0 && num > 0)
         {
             items.Add(item);
             if (onStoreItemChangedCallback != null)
             {
-                // StartCoroutine(onStoreItemChangedCallback.Invoke());
                 onStoreItemChangedCallback.Invoke(true, true);
             }
-            // SaveAddItem(name, num);
-        }
-        else
-        {
-            for (int i = 0; i < count; i++)
-            {
+            // Play sounds
+            if(playDefaultSound)
+                soundManager.PlaySound(4);
 
-                if (items[i].Name().Equals(item.Name()))
+            return;
+        }
+        for (int i = 0; i < count; i++)
+        {
+            if (items[i].Name().Equals(item.Name()))
+            {
+                // update only if updated num of item <= stackLimit
+                if (num + items[i].Num() <= stackLimit)
                 {
-                    // update only if updated num of item <= stackLimit
-                    if (num + items[i].Num() <= stackLimit)
-                    {
-                        items[i].AddNum(num);
-                        if (onStoreItemChangedCallback != null)
-                        {
-                            // StartCoroutine(onStoreItemChangedCallback.Invoke());
-                            onStoreItemChangedCallback.Invoke(true, false);
-                        }
-                        // SaveUpdateItem(name, num);
-                    }
-                    else if (items[i].Num() != stackLimit)
-                    {
-                        items[i].SetNum(stackLimit);
-                        if (onStoreItemChangedCallback != null)
-                        {
-                            // StartCoroutine(onStoreItemChangedCallback.Invoke());
-                            onStoreItemChangedCallback.Invoke(true, false);
-                        }
-                        // SaveUpdateItem(name, num);
-                    }
-                    else
-                    {
-                        return;
-                    }
+                    items[i].AddNum(num);
                     // Remove item if number is reduced to 0 or below 0
                     if (items[i].Num() <= 0)
                     {
                         items.RemoveAt(i);
                         if (onStoreItemChangedCallback != null)
                         {
-                            // StartCoroutine(onStoreItemChangedCallback.Invoke());
                             onStoreItemChangedCallback.Invoke(true, true);
                         }
-                        // SaveRemoveItem(name);
-                        // Debug.Log("reduced successfully");
+                        // Play sounds
+                        if(playDefaultSound)
+                            soundManager.PlaySound(3);
+                        return;
                     }
-
-                    break;
-                }
-
-                if (i == count - 1)
-                {
-                    items.Add(item);
                     if (onStoreItemChangedCallback != null)
                     {
-                        // StartCoroutine(onStoreItemChangedCallback.Invoke());
-                        onStoreItemChangedCallback.Invoke(true, true);
+                        onStoreItemChangedCallback.Invoke(true, false);
                     }
-                    // SaveAddItem(name, num);
-                    break;
+                    // Play sounds
+                    if(playDefaultSound)
+                        soundManager.PlaySound(num>0?4:3);
                 }
+                else if (items[i].Num() < stackLimit) // added total is over stackLimit
+                {
+                    items[i].SetNum(stackLimit);
+                    if (onStoreItemChangedCallback != null)
+                    {
+                        onStoreItemChangedCallback.Invoke(true, false);
+                    }
+                    // Play sounds
+                    if(playDefaultSound)
+                        soundManager.PlaySound(4);
+                }
+                else // original number of item is already at stackLimit
+                {
+                    if(playDefaultSound)
+                        soundManager.PlaySound(4);
+                    return;
+                }
+
+                return;
+            }
+
+            if (i == count - 1 && num > 0)
+            {
+                items.Add(item);
+                if (onStoreItemChangedCallback != null)
+                {
+                    onStoreItemChangedCallback.Invoke(true, true);
+                }
+                if(playDefaultSound)
+                    soundManager.PlaySound(4);
+                break;
             }
         }
 
-        // play sound effect
-        if (num > 0)
+    }
+
+    public void Add(string name, int num)
+    {
+        if(num == 0)
+            return;
+
+        Item item = new Item();
+        item.SetAllFields(name, num>stackLimit?stackLimit:num);
+
+        int count = items.Count;
+        if (count == 0 && num > 0)
         {
-            //soundManager.PlaySound("add");
+            items.Add(item);
+            if (onStoreItemChangedCallback != null)
+            {
+                onStoreItemChangedCallback.Invoke(true, true);
+            }
+            // Play sounds
+            soundManager.PlaySound(4);
+
+            return;
         }
-        else
+        for (int i = 0; i < count; i++)
         {
-            // soundManager.PlaySound("remove");
-            // Debug.Log("Play remove sound");
+            if (items[i].Name().Equals(item.Name()))
+            {
+                // update only if updated num of item <= stackLimit
+                if (num + items[i].Num() <= stackLimit)
+                {
+                    items[i].AddNum(num);
+                    // Remove item if number is reduced to 0 or below 0
+                    if (items[i].Num() <= 0)
+                    {
+                        items.RemoveAt(i);
+                        if (onStoreItemChangedCallback != null)
+                        {
+                            onStoreItemChangedCallback.Invoke(true, true);
+                        }
+                        // Play sounds
+                        soundManager.PlaySound(3);
+                        return;
+                    }
+                    if (onStoreItemChangedCallback != null)
+                    {
+                        onStoreItemChangedCallback.Invoke(true, false);
+                    }
+                    // Play sounds
+                    soundManager.PlaySound(num>0?4:3);
+                }
+                else if (items[i].Num() < stackLimit) // added total is over stackLimit
+                {
+                    items[i].SetNum(stackLimit);
+                    if (onStoreItemChangedCallback != null)
+                    {
+                        onStoreItemChangedCallback.Invoke(true, false);
+                    }
+                    // Play sounds
+                    soundManager.PlaySound(4);
+                }
+                else // original number of item is already at stackLimit
+                {
+                    soundManager.PlaySound(4);
+                    return;
+                }
+
+                return;
+            }
+
+            if (i == count - 1 && num > 0)
+            {
+                items.Add(item);
+                if (onStoreItemChangedCallback != null)
+                {
+                    onStoreItemChangedCallback.Invoke(true, true);
+                }
+                soundManager.PlaySound(4);
+                break;
+            }
         }
 
-        // Debug.Log(items.Count);
     }
+
 
 }

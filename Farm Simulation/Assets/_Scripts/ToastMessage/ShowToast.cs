@@ -20,6 +20,8 @@ public class ShowToast : MonoBehaviour
 	Coroutine b;
 	Coroutine customized;
 
+	Text lastCustomizedText;
+
 	public void showToast(string text, int duration)
 	{
 		Text txt = null;
@@ -53,8 +55,9 @@ public class ShowToast : MonoBehaviour
 
 	public void showCustomizedToast(Text textComponent, string text, int duration)
 	{
-		if(customized != null) StopCoroutine(customized);
+		if(textComponent == lastCustomizedText && customized != null) StopCoroutine(customized);
 		customized = StartCoroutine(showToastCOR(textComponent, text, duration));
+		lastCustomizedText = textComponent;
 	}
 
 	public IEnumerator showToastCOR(Text txt, string text, int duration)

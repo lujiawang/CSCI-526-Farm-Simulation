@@ -11,16 +11,21 @@ public class DeleteShow : MonoBehaviour
 	EventSystem m_EventSystem;
 	PointerEventData m_PointerEventData;
 
+	SoundManager soundManager;
+
 	void Start()
 	{
 		cScript = this.transform.parent.gameObject.GetComponent<InventoryUI>();
 		m_Raycaster = GameObject.Find("Canvas").GetComponent<GraphicRaycaster>();
 		m_EventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+
+		soundManager = SoundManager.instance;
 	}
 
 
 	public void ShowHide()
 	{
+		soundManager.PlaySound(6);
 		bool isOn = cScript.SetDeleteParam();
 		// start listening for events if deletebuttons are on
 		if(isOn)
