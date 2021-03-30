@@ -11,7 +11,7 @@ public class SoundManager : MonoBehaviour
 	{
 		if(instance != null)
 		{
-			Debug.LogWarning("> 1 SoundManager instance found");
+			// Debug.LogWarning("> 1 SoundManager instance found");
 			return;
 		}
 		instance = this;

@@ -40,6 +40,8 @@ public class HowToUseSoundManager : MonoBehaviour
         while(!endLoop)
         {
             endLoop = soundManager.PlaySound(index);
+            // Or
+            endLoop = soundManager.PlaySound(clipName);
             yield return null; 
         }
     }

@@ -89,7 +89,7 @@ public class StoreToggle : MonoBehaviour
         // Debug.Log(itemsParentObj.childCount);
         foreach(Transform slot in itemsParentObj)
         {
-            // Debug.Log("switched!");
+            Debug.Log("switched!");
             GameObject itemObj = slot.GetChild(0).GetChild(0).gameObject;
             if(itemObj.name.Contains("Seed"))
             {

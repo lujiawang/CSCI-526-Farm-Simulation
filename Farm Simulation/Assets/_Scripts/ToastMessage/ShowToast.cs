@@ -5,12 +5,19 @@ using UnityEngine.UI;
 
 public class ShowToast : MonoBehaviour
 {
-    void Start()
-	{
-	    // showToast("Hello", 2);
-	    // showToast("dfbaj", 3);
-	    // showToast("ohpogprejig", 2);
-	}
+	private static GameObject instance;
+	void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+        if (instance == null)
+		    instance = this.gameObject;
+		else
+		{
+		    Destroy(this.gameObject);
+		    // Destroy(instance);
+		    // instance = gameObject;
+		}
+    }
 
 	public static int showNumber = 1;
 	public Text txt1;

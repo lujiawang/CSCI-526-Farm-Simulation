@@ -11,10 +11,10 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
 
-    private GameObject player;
+    // private GameObject player;
 
-    GameObject CropParent;
-    GameObject realCrop; //the corresponding object that pre-saved inside CropParent;
+    // GameObject CropParent;
+    // GameObject realCrop; //the corresponding object that pre-saved inside CropParent;
 
     Transform buttonParent; //the itembutton parent
 
@@ -32,24 +32,24 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
 
-        player = GameObject.FindGameObjectsWithTag("Player")[0];
+        // player = GameObject.FindGameObjectsWithTag("Player")[0];
 
-        //get pre-defined children
-        CropParent = GameObject.Find("CropPlaceholder"); //the placeholder object named Crops in scene
+        // //get pre-defined children
+        // CropParent = GameObject.Find("CropPlaceholder"); //the placeholder object named Crops in scene
 
-        foreach (Transform child in CropParent.transform)
-        {
-            if (child.name + "Seed" == (this.name))
-            {
-                realCrop = child.gameObject;
-                break;
-            }
-        }
+        // foreach (Transform child in CropParent.transform)
+        // {
+        //     if (child.name + "Seed" == (this.name))
+        //     {
+        //         realCrop = child.gameObject;
+        //         break;
+        //     }
+        // }
 
         buttonParent = this.transform.parent;
 
-        // disable dragability of "Item"
-        if(realCrop == null)
+        // disable dragability of "Item" if is not seed
+        if(!this.name.Contains("Seed"))
         {
             this.GetComponent<CanvasGroup>().interactable = false;
             this.GetComponent<CanvasGroup>().blocksRaycasts = false;
@@ -95,6 +95,7 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
                 GameObject touchedObject = hitInformation.transform.gameObject;
                 if (touchedObject.CompareTag("cropLand") && touchedObject.transform.childCount == 0)
                 {
+                    GameObject player = GameObject.FindGameObjectsWithTag("Player")[0];
                     Vector3 playerPos = player.transform.position;
                     RaycastHit2D hitInfo = Physics2D.Raycast(playerPos, Camera.main.transform.forward, 
                         Mathf.Infinity, layerMask);
@@ -161,13 +162,22 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     {
         cropLand.GetComponent<AudioSource>().Play();
 
-        GameObject copyCrop = Instantiate(realCrop);
-        copyCrop.name = realCrop.name;
-        copyCrop.transform.position = cropLand.transform.position;
-        copyCrop.transform.SetParent(cropLand.transform);
-        copyCrop.SetActive(true);
+        GameObject CropParent = GameObject.Find("CropPlaceholder"); //the placeholder object named Crops in scene
+        foreach (Transform child in CropParent.transform)
+        {
+            if (child.name + "Seed" == (this.name))
+            {
+                GameObject copyCrop = Instantiate(child.gameObject);
+                copyCrop.name = child.gameObject.name;
+                copyCrop.transform.position = cropLand.transform.position;
+                copyCrop.transform.SetParent(cropLand.transform);
+                copyCrop.SetActive(true);
 
-        inventory.Add(this.name, -1);
+                inventory.Add(this.name, -1);
+                break;
+            }
+        }
+        
     }
 
 }

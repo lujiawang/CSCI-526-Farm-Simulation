@@ -13,12 +13,21 @@ public class Inventory : MonoBehaviour
 
     void Awake()
     {
-        if (instance != null)
+        DontDestroyOnLoad(this.gameObject);
+        if (instance == null)
+             instance = this;
+        else
         {
-            Debug.LogWarning("> 1 Inventory instance found");
-            return;
+            Destroy(this.gameObject);
+            // Destroy(instance.gameObject);
+            // instance = this;
         }
-        instance = this;
+        // if (instance != null)
+        // {
+        //     Debug.LogWarning("> 1 Inventory instance found");
+        //     return;
+        // }
+        // instance = this;
     }
     #endregion
 
@@ -73,6 +82,7 @@ public class Inventory : MonoBehaviour
     void OnDestroy()
     {
     	SaveInventory();
+        // PlayerPrefs.DeleteAll();
     }
 
     public void SaveInventory()

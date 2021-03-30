@@ -24,7 +24,7 @@ public class TouchToMove : MonoBehaviour
 
     /*cropLand info: */
     public static string landName = "";
-    public Text cropName;
+    Text cropName;
 
     public static bool disablePlayerMovement = false;
 
@@ -47,6 +47,8 @@ public class TouchToMove : MonoBehaviour
         }
         this.transform.position = new Vector3(PlayerPrefs.GetFloat("PlayerPositionX"),
             PlayerPrefs.GetFloat("PlayerPositionY"),PlayerPrefs.GetFloat("PlayerPositionZ"));
+
+        cropName = GameObject.Find("CropNotification").transform.Find("Crop status").GetComponent<Text>();
 
         // target = GameObject.FindGameObjectWithTag("TestTarget").transform;
 

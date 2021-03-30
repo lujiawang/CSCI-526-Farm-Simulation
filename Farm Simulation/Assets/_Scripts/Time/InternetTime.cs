@@ -13,7 +13,7 @@ public class InternetTime : MonoBehaviour
     {
         if (instance != null)
         {
-            Debug.LogWarning("> 1 InternetTime instance found");
+            // Debug.LogWarning("> 1 InternetTime instance found");
             return;
         }
         instance = this;
