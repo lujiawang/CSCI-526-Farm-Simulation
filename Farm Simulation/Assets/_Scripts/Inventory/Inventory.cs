@@ -104,7 +104,6 @@ public class Inventory : MonoBehaviour
             // StartCoroutine(onItemChangedCallback.Invoke());
             onItemChangedCallback.Invoke(false, true);
         }
-        // soundManager.PlaySound(8);
         MenuAppear cScript = GameObject.Find("Canvas").transform.Find("Inventory").GetComponent<MenuAppear>();
         if(!MenuAppear.isMenu)
             cScript.MenuHideAndShow();

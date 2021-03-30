@@ -114,6 +114,11 @@ public class InventoryUI : MonoBehaviour
         return showDelete;
     }
 
+    public bool GetDeleteParam()
+    {
+        return showDelete;
+    }
+
     void ShowHide(GameObject slot, int id)
     {
         if(id <= Item.seedIdUpperLimit) //slot is a seed

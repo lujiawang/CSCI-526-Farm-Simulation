@@ -75,11 +75,20 @@ public class DeleteShow : MonoBehaviour
 	            	endLoop = true;
 	            else if(!clickedDeleteButton) //else if did not click any deletebuttons
 	            {
+	            	// Debug.Log("clickedElseWhere");
 	            	endLoop = true;
+	            	yield return null;
+	            	yield return null;
 	            	ShowHide();
 	            }else{ //reset flags for the next event
 	            	clickedDeleteButton = false;
 	            	clickedDeleteShowButton = false;
+	            }
+	            if(endLoop && cScript.GetDeleteParam()) //cannot end loop if the delete buttons are still on
+	            {
+	            	clickedDeleteButton = false;
+	            	clickedDeleteShowButton = false;
+	            	endLoop = false;
 	            }
 	        }
 	        yield return null;

@@ -25,7 +25,7 @@ public class SoundManager : MonoBehaviour
 		audioSources = this.transform.Find("SoundPlayer").GetComponents<AudioSource>();
 	}
 
-	public void PlaySound(string clipName)
+	public bool PlaySound(string clipName)
 	{
 		int index;
 		switch(clipName)
@@ -59,9 +59,9 @@ public class SoundManager : MonoBehaviour
 				break;
 			default:
 				Debug.LogWarning("invalid clip name!");
-				return;
+				return false;
 		}
-		PlaySound(index);
+		return PlaySound(index);
 	}
 
 	// returns false if the did not play sound successfully
