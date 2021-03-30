@@ -13,7 +13,7 @@ public class InternetTime : MonoBehaviour
     {
         if (instance != null)
         {
-            Debug.LogWarning("> 1 InternetTime instance found");
+            // Debug.LogWarning("> 1 InternetTime instance found");
             return;
         }
         instance = this;
@@ -47,7 +47,7 @@ public class InternetTime : MonoBehaviour
 		// yield return StartCoroutine(FetchTime());
 		// save exit internet time
     	PlayerPrefs.SetString("exitInternetTime", currTime.ToString());
-    	// Debug.Log(currTime);
+    	// Debug.Log(System.DateTime.Now.ToString());
 	}
 
 	public DateTime GetTime()

@@ -15,7 +15,7 @@ public class StoreInventory : MonoBehaviour
     {
         if (instance != null)
         {
-            Debug.LogWarning("> 1 StoreInventory instance found");
+            // Debug.LogWarning("> 1 StoreInventory instance found");
             return;
         }
         instance = this;

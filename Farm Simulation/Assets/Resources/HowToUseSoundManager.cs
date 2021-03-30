@@ -7,6 +7,7 @@ using UnityEngine;
 public class HowToUseSoundManager : MonoBehaviour
 {
     // FIRST THING to do: You MUST attach a new AudioSource component to GameManager->SoundPlayer
+    // Uncheck "Play on Awake"
     // And set the AudioClip you want to play in the new AudioSource 
     // SECOND: Update the first PlaySound() funtion of SoundManager.cs to have a new case
 
@@ -40,6 +41,8 @@ public class HowToUseSoundManager : MonoBehaviour
         while(!endLoop)
         {
             endLoop = soundManager.PlaySound(index);
+            // Or
+            endLoop = soundManager.PlaySound(clipName);
             yield return null; 
         }
     }

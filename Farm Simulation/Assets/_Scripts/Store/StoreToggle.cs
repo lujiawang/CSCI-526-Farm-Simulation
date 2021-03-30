@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 using UnityEngine.SceneManagement;
 
@@ -90,7 +91,8 @@ public class StoreToggle : MonoBehaviour
         foreach(Transform slot in itemsParentObj)
         {
             // Debug.Log("switched!");
-            GameObject itemObj = slot.GetChild(0).GetChild(0).gameObject;
+            string itemName = slot.GetChild(0).Find("Text").GetComponent<Text>().text;
+            GameObject itemObj = slot.GetChild(0).Find(itemName).gameObject;
             if(itemObj.name.Contains("Seed"))
             {
                 CanvasGroup itemCanvasGroup = itemObj.GetComponent<CanvasGroup>();

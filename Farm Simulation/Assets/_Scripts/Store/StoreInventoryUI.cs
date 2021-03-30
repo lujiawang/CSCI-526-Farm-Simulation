@@ -161,13 +161,13 @@ public class StoreInventoryUI : MonoBehaviour
             ItemButton.Find("Number").gameObject.GetComponent<Text>().text = "" + storeInventory.items[i].Num();
             // set "Value"
             ItemButton.Find("Price").gameObject.GetComponent<Text>().text = "" + storeInventory.items[i].BuyPrice();
+            // disable DragAndDrop script
+            ItemButton.Find("Item").gameObject.GetComponent<DragAndDrop>().enabled = false;
             // change Sprite
             ItemButton.Find("Item").gameObject.GetComponent<Image>().sprite = storeInventory.items[i].Icon();
             // change "Item" to the new name
             ItemButton.Find("Item").gameObject.name = storeInventory.items[i].Name();
-            // disable DragAndDrop script
-            ItemButton.GetChild(0).gameObject.GetComponent<DragAndDrop>().enabled = false;
-
+            
             // determine whether Show or hide the slot based on showParams
             ShowHide(newSlot, storeInventory.items[i].Id());
         }

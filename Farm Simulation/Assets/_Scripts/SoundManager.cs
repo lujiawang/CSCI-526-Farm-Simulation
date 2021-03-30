@@ -11,7 +11,7 @@ public class SoundManager : MonoBehaviour
 	{
 		if(instance != null)
 		{
-			Debug.LogWarning("> 1 SoundManager instance found");
+			// Debug.LogWarning("> 1 SoundManager instance found");
 			return;
 		}
 		instance = this;
@@ -56,6 +56,12 @@ public class SoundManager : MonoBehaviour
 				break;
 			case "AddStarterPackageSound":
 				index = 8;
+				break;
+			case "planting-seeds": // plant seed
+				index = 9;
+				break;
+            case "Bell": // harvest crop
+				index = 10;
 				break;
 			default:
 				Debug.LogWarning("invalid clip name!");
