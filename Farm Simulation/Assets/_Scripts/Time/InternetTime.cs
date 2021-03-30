@@ -47,7 +47,7 @@ public class InternetTime : MonoBehaviour
 		// yield return StartCoroutine(FetchTime());
 		// save exit internet time
     	PlayerPrefs.SetString("exitInternetTime", currTime.ToString());
-    	// Debug.Log(currTime);
+    	// Debug.Log(System.DateTime.Now.ToString());
 	}
 
 	public DateTime GetTime()

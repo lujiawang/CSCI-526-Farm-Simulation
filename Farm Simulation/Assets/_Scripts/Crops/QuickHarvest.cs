@@ -77,7 +77,7 @@ public class QuickHarvest : MonoBehaviour
 	                cScript.showToast("Walk to any cropland to harvest!", 1);
 	            }else if(!cropObj.GetComponent<CropGrowing>().Harvested())//harvest the crop
 	            {
-	            	cropObj.GetComponent<CropGrowing>().SetHarvested();
+	            	cropObj.GetComponent<CropGrowing>().SetHarvested(true);
 	            	// Debug.Log("Harvest");
 	            	int randomHarvest = Item.RandomHarvest(cropObj.name);
 	            	inventory.Add(cropObj.name, randomHarvest);
@@ -92,6 +92,19 @@ public class QuickHarvest : MonoBehaviour
 
             		ShowToast cScript = canvas.GetComponent<ShowToast>();
             		cScript.showCustomizedToast(text, "+"+randomHarvest, 1);
+
+					// GameObject animObj = Instantiate(cropObj, cropObj.transform.position, cropObj.transform.rotation);
+					// animObj.name = cropObj.name;
+					// animObj.GetComponent<CropGrowing>().SetHarvested(true);
+					// Sprite sprite = cropObj.GetComponent<CropGrowing>().GetSprite();
+					// StartCoroutine(animObj.GetComponent<CropGrowing>().SetSprite(sprite));
+					// Debug.Log("RealCrop: "+cropObj.transform.position);
+					// Debug.Log("RealCrop: "+cropObj.transform.localPosition);
+					// Debug.Log("AnimCrop: "+animObj.transform.position);
+					// Debug.Log("AnimCrop: "+animObj.transform.localPosition);
+					// Destroy(cropObj);
+					// Animator anim = animObj.GetComponent<Animator>();
+					// anim.Play("Harvest");
 
 					Animator anim = cropObj.GetComponent<Animator>();
 					anim.Play("Harvest");

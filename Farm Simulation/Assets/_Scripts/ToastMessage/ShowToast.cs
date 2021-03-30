@@ -2,23 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ShowToast : MonoBehaviour
 {
-	private static GameObject instance;
-	void Awake()
-    {
-        DontDestroyOnLoad(this.gameObject);
-        if (instance == null)
-		    instance = this.gameObject;
-		else
-		{
-		    Destroy(this.gameObject);
-		    // Destroy(instance);
-		    // instance = gameObject;
-		}
-    }
-
 	public static int showNumber = 1;
 	public Text txt1;
 	public Text txt2;
@@ -62,6 +49,8 @@ public class ShowToast : MonoBehaviour
 
 	public void showCustomizedToast(Text textComponent, string text, int duration)
 	{
+		if(textComponent == null)
+			return;
 		if(textComponent == lastCustomizedText && customized != null) StopCoroutine(customized);
 		customized = StartCoroutine(showToastCOR(textComponent, text, duration));
 		lastCustomizedText = textComponent;
@@ -69,6 +58,8 @@ public class ShowToast : MonoBehaviour
 
 	public IEnumerator showToastCOR(Text txt, string text, int duration)
 	{
+		if(txt == null)
+			yield break;
 		txt.gameObject.GetComponent<CanvasGroup>().alpha = 1f;
 		
 	    Color orginalColor = txt.color;
@@ -90,6 +81,8 @@ public class ShowToast : MonoBehaviour
 	    //Fade out
 	    yield return fadeInAndOut(txt, false, 0.5f);
 
+	    if(txt == null)
+			yield break;
 	    txt.enabled = false;
 	    txt.color = orginalColor;
 
@@ -99,6 +92,8 @@ public class ShowToast : MonoBehaviour
 
 	public IEnumerator fadeInAndOut(Text targetText, bool fadeIn, float duration)
 	{
+		if(targetText == null)
+			yield break;
 	    //Set Values depending on if fadeIn or fadeOut
 	    float a, b;
 	    if (fadeIn)
@@ -117,6 +112,8 @@ public class ShowToast : MonoBehaviour
 
 	    while (counter < duration)
 	    {
+	    	if(targetText == null)
+				yield break;
 	        counter += Time.deltaTime;
 	        float alpha = Mathf.Lerp(a, b, counter / duration);
 
