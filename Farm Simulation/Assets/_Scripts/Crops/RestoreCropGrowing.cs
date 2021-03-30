@@ -61,7 +61,21 @@ public class RestoreCropGrowing : MonoBehaviour
     		        	runningPointer = runningPointer>totalSecondsForGrowth?(int)totalSecondsForGrowth:runningPointer;
     		        	stage = stage>totalStages?totalStages:stage;
     		        }
-		        }
+		        }else if(PlayerPrefs.HasKey("exitLocalTime")) //use local time
+                {
+                    DateTime prevLocalTime = DateTime.Parse(PlayerPrefs.GetString("exitLocalTime"));
+                    DateTime currLocalTime = System.DateTime.Now;
+                    TimeSpan diffLocalTime = currLocalTime.Subtract(prevLocalTime);
+                    double diffSeconds = diffLocalTime.TotalSeconds;
+                    if(diffSeconds < 0)
+                        diffSeconds = 0d;
+                    float totalSecondsForGrowth = cScript.GetTotalSecondsForGrowth();
+                    int totalStages = cScript.GetTotalStages();
+                    runningPointer += (int)diffSeconds;
+                    stage += (int)(diffSeconds / cScript.growTime);
+                    runningPointer = runningPointer>totalSecondsForGrowth?(int)totalSecondsForGrowth:runningPointer;
+                    stage = stage>totalStages?totalStages:stage;
+                }
 
 		        cScript.SetState(runningPointer, stage);
 
@@ -80,7 +94,7 @@ public class RestoreCropGrowing : MonoBehaviour
     void SaveCropGrowing()
     {
     	string landName = this.name;
-    	if(this.transform.childCount == 0)
+    	if(this.transform.childCount == 0 || this.transform.GetChild(0).GetComponent<CropGrowing>().Harvested())
     	{
     		PlayerPrefs.SetString(landName, "");
     		return;

@@ -165,9 +165,25 @@ public class CropGrowing : MonoBehaviour
     {
         return harvested;
     }
-    public void SetHarvested()
+    public void SetHarvested(bool isHarvested)
     {
-        harvested = true;
+        harvested = isHarvested;
+    }
+    public Sprite GetSprite()
+    {
+        // Debug.Log(sr.sprite.name);
+        return sr.sprite;
+    }
+    public IEnumerator SetSprite(Sprite icon)
+    {
+        bool endLoop = false;
+        while(!endLoop)
+        {
+            endLoop = sr != null;
+            yield return null;
+        }
+        sr.sprite = icon;
+        // Debug.Log(sr.sprite.name);
     }
 
     // this should manually set the crop stage and renders image correctly
