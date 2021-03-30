@@ -26,6 +26,8 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
     private int layerMask;
 
+    SoundManager soundManager;
+
     private void Start()
     {
         canvas = GetComponentInParent<Canvas>().rootCanvas;
@@ -66,6 +68,8 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         inventory = Inventory.instance;
 
         layerMask = LayerMask.GetMask("Player")-1;
+
+        soundManager = SoundManager.instance;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -160,7 +164,7 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
     private void PlantCrop(GameObject cropLand)
     {
-        cropLand.GetComponent<AudioSource>().Play();
+        soundManager.PlaySound(9);
 
         GameObject CropParent = GameObject.Find("CropPlaceholder"); //the placeholder object named Crops in scene
         foreach (Transform child in CropParent.transform)

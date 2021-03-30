@@ -30,8 +30,8 @@ public class CropGrowing : MonoBehaviour
     private bool started = false;
     private GameObject canvas;
 
+    SoundManager soundManager;
 
-    public AudioClip HarvestSound;
 
     private bool harvested = false;
 
@@ -53,6 +53,8 @@ public class CropGrowing : MonoBehaviour
         // stage = 0;
         // inPosition = false;
         // grown = false;
+
+        soundManager = SoundManager.instance;
         
     }
 
@@ -219,8 +221,7 @@ public class CropGrowing : MonoBehaviour
 
     public void HarvestAudio()
     {
-        AudioSource audioSource = this.GetComponent<AudioSource>();
-        audioSource.PlayOneShot(HarvestSound);
+        soundManager.PlaySound(10);
     }
     public void HarvestAnim()
     {

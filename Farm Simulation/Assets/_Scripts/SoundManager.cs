@@ -57,6 +57,12 @@ public class SoundManager : MonoBehaviour
 			case "AddStarterPackageSound":
 				index = 8;
 				break;
+			case "planting-seeds": // plant seed
+				index = 9;
+				break;
+            case "Bell": // harvest crop
+				index = 10;
+				break;
 			default:
 				Debug.LogWarning("invalid clip name!");
 				return false;
