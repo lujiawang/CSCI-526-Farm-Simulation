@@ -3133,7 +3133,7 @@ GameObject:
   - component: {fileID: 1773631843}
   - component: {fileID: 1773631842}
   m_Layer: 0
-  m_Name: New Sprite
+  m_Name: Land_object2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
