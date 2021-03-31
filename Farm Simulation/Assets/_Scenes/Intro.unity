@@ -714,7 +714,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 499693443}
   selectedCommands:
-  - {fileID: 499693473}
+  - {fileID: 499693465}
   variables: []
   description: 
   stepPause: 0
@@ -1272,7 +1272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 31
   indentLevel: 0
-  storyText: Once you click on the inventory on the right bottom of the screen
+  storyText: Once you click the inventory sign on the right bottom of the screen
   description: 
   character: {fileID: 414941533}
   portrait: {fileID: 0}
