@@ -66,10 +66,10 @@ public class TouchToMove : MonoBehaviour
         animator.SetFloat("Vertical", agent.velocity.normalized.y);
         //Debug.Log("Vertical: "+ agent.velocity.normalized.y);
 
-
         /* Need to do sth like !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId), check Input.touchCount > 0 first */
 
-        if (Input.GetMouseButtonDown(0) && !IsPointerOverGameObject() )
+        if (!IsPointerOverGameObject() && ( Input.GetKey(KeyCode.Mouse0) || (Input.touchCount > 0 && 
+            Input.GetTouch(0).phase != TouchPhase.Ended && Input.GetTouch(0).phase != TouchPhase.Canceled )))
         {
             targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             targetPos.z = 0;
@@ -86,7 +86,6 @@ public class TouchToMove : MonoBehaviour
             }
 
             targetPos = SnapToLand(targetPos);
-
 
             agent.SetDestination(targetPos);
 
@@ -115,23 +114,15 @@ public class TouchToMove : MonoBehaviour
             return true;
          
         //check touch
-        if(Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began ){
+        if(Input.touchCount > 0 && Input.GetTouch(0).phase != TouchPhase.Ended 
+            && Input.GetTouch(0).phase != TouchPhase.Canceled )
+        {
             if(EventSystem.current.IsPointerOverGameObject(Input.touches[0].fingerId))
                 return true;
         }
          
         return false;
     }
-
-
-    // public void PlayerEnable()
-    // {
-    //     isPlayer = !isPlayer;
-    //     Debug.Log("isPlayer: " + isPlayer);
-    // }
-
-
-
 
     /* Set the player's destination to the nearest cropland. */
     public Vector3 SnapToLand(Vector3 target)
@@ -141,7 +132,6 @@ public class TouchToMove : MonoBehaviour
         RaycastHit2D hitInformation = Physics2D.Raycast(target, Camera.main.transform.forward);
 
         GameObject touchedObject = null;
-        
 
         if (hitInformation.collider != null)
         {
@@ -153,25 +143,14 @@ public class TouchToMove : MonoBehaviour
             {
                 TouchToMove.landName = touchedObject.transform.parent.name;
                 Debug.Log("Go to harvest -> " + landName);
-
-                
                 CropGrowing cropGrowing = touchedObject.GetComponent<CropGrowing>();
                 if(cropGrowing != null)
                 {
                     if (cropGrowing.grown)
-                    
                         cropName.text = touchedObject.name + " is grown";
-                        
-                    
-                        
-                        
                     else
-                        cropName.text = touchedObject.name + " is not grown yet";
-                        
-                    
-                        
+                        cropName.text = touchedObject.name + " is not grown yet";       
                 }
-                
                 return touchedObject.transform.parent.position;
             }
 
@@ -184,37 +163,19 @@ public class TouchToMove : MonoBehaviour
                 {
                     GameObject childObject = touchedObject.transform.GetChild(0).gameObject;
                     CropGrowing cropGrowing = childObject.GetComponent<CropGrowing>();
-
                     if (cropGrowing != null)
                     {
                         if (cropGrowing.grown)
-
                             cropName.text = cropGrowing.name + " is grown";
-
-
-
-
                         else
                             cropName.text = cropGrowing.name + " is not grown yet";
-
-
-
                     }
-
                     return childObject.transform.position;
-
-
-
-
                 }
-
                 cropName.text = "Drag a crop here to grow it!";
                 Debug.Log("Go to -> " + landName);
                 return touchedObject.transform.position;
-
             }
-            
-
         }
         PassGameObject(touchedObject);
         landName = "";

@@ -74,6 +74,8 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        TouchToMove.disablePlayerMovement = true;
+        QuickHarvest.disableQuickHarvest = true;
         canvasGroup.alpha = 0.6f;
         canvasGroup.blocksRaycasts = false;
         // reparent the crop so it is not affected by Mask component of parentPanel
@@ -97,6 +99,21 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
             if(hitInformation.collider != null)
             {
                 GameObject touchedObject = hitInformation.transform.gameObject;
+                // // touched occupied land or crop itslef
+                // if( (touchedObject.CompareTag("cropLand") && touchedObject.transform.childCount != 0) || 
+                //     ( touchedObject.transform.parent != null && touchedObject.transform.parent.CompareTag("cropLand") ))
+                // {
+                //     ShowToast cScript = canvas.GetComponent<ShowToast>();
+                //     cScript.showToast("Cannot plant on occupied land!", 1);
+                //     endDrag = true;
+                //     canvasGroup.alpha = 1f;
+                //     canvasGroup.blocksRaycasts = true;
+                //     // set back to original inventoryslot parent
+                //     this.transform.SetParent(buttonParent);
+                //     rectTransform.anchoredPosition = initialPos;
+                // }
+
+                // touched empty land
                 if (touchedObject.CompareTag("cropLand") && touchedObject.transform.childCount == 0)
                 {
                     GameObject player = GameObject.FindGameObjectsWithTag("Player")[0];
@@ -139,6 +156,8 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        TouchToMove.disablePlayerMovement = false;
+        QuickHarvest.disableQuickHarvest = false;
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
         endDrag = false;      

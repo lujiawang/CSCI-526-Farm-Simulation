@@ -11,6 +11,8 @@ public class QuickHarvest : MonoBehaviour
 
 	Inventory inventory;
 
+	public static bool disableQuickHarvest = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,13 +32,13 @@ public class QuickHarvest : MonoBehaviour
     	{
     		// for desktop, when left key is held down
 	    	// Debug.Log(Input.GetKey(KeyCode.Mouse0));
-	    	if(Input.GetKey(KeyCode.Mouse0) && !TouchToMove.IsPointerOverGameObject())
+	    	if(!disableQuickHarvest && Input.GetKey(KeyCode.Mouse0) && !TouchToMove.IsPointerOverGameObject())
 	    	{
 	    		// Debug.Log("MouseDown");
 	    		yield return StartCoroutine(HarvestCrop());
 	    	}
 	    	// for mobile
-	    	else if (Input.touchCount > 0 && Input.GetTouch(0).phase != TouchPhase.Ended && 
+	    	else if(!disableQuickHarvest && Input.touchCount > 0 && Input.GetTouch(0).phase != TouchPhase.Ended && 
 	    		Input.GetTouch(0).phase != TouchPhase.Canceled && !TouchToMove.IsPointerOverGameObject())
 	        {
 	        	yield return StartCoroutine(HarvestCrop());
