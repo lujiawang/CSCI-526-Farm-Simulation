@@ -147,7 +147,12 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
                             }
                         }
                         if(droppedToZero)
+                        {
                             Destroy(this.gameObject);
+                            TouchToMove.disablePlayerMovement = false;
+                            QuickHarvest.disableQuickHarvest = false;
+                            endDrag = false;
+                        }
                     }
                 }
             }
@@ -156,11 +161,12 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        // Debug.Log("onenddrag");
         TouchToMove.disablePlayerMovement = false;
         QuickHarvest.disableQuickHarvest = false;
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
-        endDrag = false;      
+        endDrag = false;
         if(buttonParent != null && buttonParent.name != "ItemButton")
         {
             Destroy(this.gameObject);
@@ -197,7 +203,7 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
                 copyCrop.SetActive(true);
 
                 inventory.Add(this.name, -1);
-                break;
+                break; 
             }
         }
         

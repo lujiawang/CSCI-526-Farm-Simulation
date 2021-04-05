@@ -20369,7 +20369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 169167c3279c54ed599596b09a844335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StarterPackageSize: 15
+  StarterPackageSize: 20
   resetInventory: 1
 --- !u!4 &1962885969
 Transform:
