@@ -102,6 +102,48 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
+    public void ToggleRespectiveShowButton(int id)
+    {
+        if(AreAllShowParamsOn())
+            return;
+        else if(id >= 0 && id <= Item.seedIdUpperLimit && !showSeeds)
+        {
+            foreach(Transform child in this.transform)
+            {
+                if(child.childCount > 0 && child.GetChild(0).name == "Seeds")
+                {
+                    SelectiveShow cScript = child.GetComponent<SelectiveShow>();
+                    cScript.ShowHide();
+                    return;
+                }
+            }
+        }
+        else if(id > Item.seedIdUpperLimit && id <= Item.harvestIdUpperLimit && !showHarvests)
+        {
+            foreach(Transform child in this.transform)
+            {
+                if(child.childCount > 0 && child.GetChild(0).name == "Harvests")
+                {
+                    SelectiveShow cScript = child.GetComponent<SelectiveShow>();
+                    cScript.ShowHide();
+                    return;
+                }
+            }
+        }
+        else if(id > Item.harvestIdUpperLimit && id <= Item.allIdUpperLimit && !showOthers)
+        {
+            foreach(Transform child in this.transform)
+            {
+                if(child.childCount > 0 && child.GetChild(0).name == "Others")
+                {
+                    SelectiveShow cScript = child.GetComponent<SelectiveShow>();
+                    cScript.ShowHide();
+                    return;
+                }
+            }
+        }
+    }
+
     public bool AreAllShowParamsOn()
     {
         return showSeeds && showHarvests && showOthers;

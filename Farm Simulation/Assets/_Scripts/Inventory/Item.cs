@@ -37,6 +37,7 @@ public class Item : IComparable<Item>
 		
 		public static int seedIdUpperLimit = 19;
 		public static int harvestIdUpperLimit = 39;
+		public static int allIdUpperLimit = 39;
 
 		public static float basicGrowTime = 2f;
 		public static float tierUpGrowTimeFactor = 1.3f;

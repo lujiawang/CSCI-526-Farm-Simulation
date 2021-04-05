@@ -41,6 +41,10 @@ public class BuySellItem : MonoBehaviour
             storeInventory.Add(name, -1);
             inventory.Add(name, 1);
             PlayerStats.ChangeCurrency(-price);
+
+            // change tab if necessary
+            InventoryUI cScript = canvas.Find("Inventory").GetComponent<InventoryUI>();
+            cScript.ToggleRespectiveShowButton(Item.GetCropId(name));
         }else
         {
             ShowToast cScript = canvas.gameObject.GetComponent<ShowToast>();
@@ -60,6 +64,10 @@ public class BuySellItem : MonoBehaviour
             storeInventory.Add(name, 1);
             inventory.Add(name, -1);
             PlayerStats.ChangeCurrency(price);
+
+            // change tab if necessary
+            StoreInventoryUI cScript = canvas.Find("StoreInventory").GetComponent<StoreInventoryUI>();
+            cScript.ToggleRespectiveShowButton(Item.GetCropId(name));
         }else //store is closed, show toast message
         {
             // ShowToast cScript = canvas.gameObject.GetComponent<ShowToast>();
