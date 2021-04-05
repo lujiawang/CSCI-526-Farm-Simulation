@@ -12,6 +12,9 @@ public class MenuAppear : MonoBehaviour
 
     CanvasGroup parentPanel;
 
+    [SerializeField]
+    bool resetScrollHeight = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,12 +43,14 @@ public class MenuAppear : MonoBehaviour
         }
         parentPanel.blocksRaycasts = isMenu;
         // reset scrollview position
-        // ScrollHeight cScript = GetComponent<ScrollHeight>();
-        // if(this.transform.GetChild(0).GetChild(0).gameObject.name != "ItemsParent")
-        // {
-        //     Debug.LogWarning("fatal: wrong object!!");
-        //     return;
-        // }
-        // cScript.UpdateHeight(this.transform.GetChild(0).GetChild(0), false);
+        if(!resetScrollHeight)
+            return;
+        ScrollHeight cScript = GetComponent<ScrollHeight>();
+        if(this.transform.GetChild(0).GetChild(0).gameObject.name != "ItemsParent")
+        {
+            Debug.LogWarning("fatal: wrong object!!");
+            return;
+        }
+        cScript.UpdateHeight(this.transform.GetChild(0).GetChild(0), false);
     }
 }
