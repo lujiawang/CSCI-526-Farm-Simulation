@@ -1,37 +1,37 @@
 fileFormatVersion: 2
-guid: db710ae09576f0247a921bbd98a21901
+guid: 70df68f1b3ee84ccc9996fc5de405f64
 TextureImporter:
   internalIDToNameTable:
   - first:
       213: 8097480954453427457
-    second: meals-grouped_0
+    second: FruitSalads
   - first:
       213: 3282267989790118515
-    second: meals-grouped_1
+    second: Salmagundi
   - first:
       213: 4033441145643441408
-    second: meals-grouped_2
+    second: VeggieRisotto
   - first:
       213: 6711085788245295554
-    second: meals-grouped_3
+    second: CornSuccotash
   - first:
       213: -4230775444145395344
-    second: meals-grouped_4
+    second: VeggieKebab
   - first:
       213: 7551538454633175213
-    second: meals-grouped_5
+    second: Hodgepodge
   - first:
       213: 6184550079158513224
-    second: meals-grouped_6
+    second: TomatoSandwich
   - first:
       213: -5043194844048900221
-    second: meals-grouped_7
+    second: CucumBurger
   - first:
       213: 4064040163312216022
-    second: meals-grouped_8
+    second: TurnipRamen
   - first:
       213: -5252263145145181992
-    second: meals-grouped_9
+    second: EggplantSoup
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -153,7 +153,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: meals-grouped_0
+      name: FruitSalads
       rect:
         serializedVersion: 2
         x: 0
@@ -161,7 +161,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -174,7 +174,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: meals-grouped_1
+      name: Salmagundi
       rect:
         serializedVersion: 2
         x: 32
@@ -182,7 +182,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -195,7 +195,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: meals-grouped_2
+      name: VeggieRisotto
       rect:
         serializedVersion: 2
         x: 96
@@ -203,7 +203,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -216,7 +216,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: meals-grouped_3
+      name: CornSuccotash
       rect:
         serializedVersion: 2
         x: 0
@@ -224,7 +224,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -237,7 +237,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: meals-grouped_4
+      name: VeggieKebab
       rect:
         serializedVersion: 2
         x: 32
@@ -245,7 +245,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -258,7 +258,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: meals-grouped_5
+      name: Hodgepodge
       rect:
         serializedVersion: 2
         x: 96
@@ -266,7 +266,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -279,7 +279,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: meals-grouped_6
+      name: TomatoSandwich
       rect:
         serializedVersion: 2
         x: 0
@@ -287,7 +287,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -300,7 +300,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: meals-grouped_7
+      name: CucumBurger
       rect:
         serializedVersion: 2
         x: 32
@@ -308,7 +308,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -321,7 +321,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: meals-grouped_8
+      name: TurnipRamen
       rect:
         serializedVersion: 2
         x: 96
@@ -329,7 +329,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -342,7 +342,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: meals-grouped_9
+      name: EggplantSoup
       rect:
         serializedVersion: 2
         x: 0
@@ -350,7 +350,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

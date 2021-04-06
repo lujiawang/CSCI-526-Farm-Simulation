@@ -99,6 +99,7 @@ public class Inventory : MonoBehaviour
 
     IEnumerator AddStarterPackage(int StarterPackageSize)
     {
+        // Debug.Log("AddStarterPackage");
     	for(int i = 0; i < StarterPackageSize; i++)
     	{
     		Item newItem = new Item();
@@ -124,14 +125,14 @@ public class Inventory : MonoBehaviour
                 cScript.MenuHideAndShow();
                 break;
             }
-            yield return null; 
+            yield return null;
         }
         // play sound
         endLoop = false;
         while(!endLoop)
         {
             endLoop = soundManager.PlaySound(8);
-            yield return null; 
+            yield return null;
         }
     }
 

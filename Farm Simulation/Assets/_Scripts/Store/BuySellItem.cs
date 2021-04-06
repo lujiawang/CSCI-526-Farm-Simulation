@@ -11,16 +11,25 @@ public class BuySellItem : MonoBehaviour
     Transform canvas;
     CanvasGroup storeInventoryCanvasGroup;
 
+    bool enableBuySell = false;
+
 	void Start()
     {
     	inventory = Inventory.instance;
     	storeInventory = StoreInventory.instance;
-        canvas = this.transform.parent.parent.parent.parent.parent;
-        storeInventoryCanvasGroup = canvas.Find("StoreInventory").gameObject.GetComponent<CanvasGroup>();
+        if(GameObject.Find("Canvas") != null)
+        {
+            canvas = GameObject.Find("Canvas").transform;
+            storeInventoryCanvasGroup = canvas.Find("StoreInventory").gameObject.GetComponent<CanvasGroup>();
+        }
+        enableBuySell = this.GetComponentInParent<Canvas>().rootCanvas.name == "Canvas";
+        // Debug.Log(this.GetComponentInParent<Canvas>().rootCanvas.name);
     }
 
     public void BuySell()
     {
+        if(!enableBuySell)
+            return;
     	// Debug.Log("Buy");
         if(this.transform.parent.parent.parent.parent.gameObject.name == "Inventory")
         {
@@ -44,7 +53,7 @@ public class BuySellItem : MonoBehaviour
 
             // change tab if necessary
             InventoryUI cScript = canvas.Find("Inventory").GetComponent<InventoryUI>();
-            cScript.ToggleRespectiveShowButton(Item.GetCropId(name));
+            cScript.ToggleRespectiveShowButton(Item.GetItemId(name));
         }else
         {
             ShowToast cScript = canvas.gameObject.GetComponent<ShowToast>();
@@ -67,7 +76,7 @@ public class BuySellItem : MonoBehaviour
 
             // change tab if necessary
             StoreInventoryUI cScript = canvas.Find("StoreInventory").GetComponent<StoreInventoryUI>();
-            cScript.ToggleRespectiveShowButton(Item.GetCropId(name));
+            cScript.ToggleRespectiveShowButton(Item.GetItemId(name));
         }else //store is closed, show toast message
         {
             // ShowToast cScript = canvas.gameObject.GetComponent<ShowToast>();

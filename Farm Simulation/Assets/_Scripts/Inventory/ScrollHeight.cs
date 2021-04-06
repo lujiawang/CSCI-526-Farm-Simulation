@@ -38,10 +38,14 @@ public class ScrollHeight : MonoBehaviour
 			additionalHeight = 0f;
 			normalRowCount = 4;
 		}
-		else // StoreInventory
+		else if(this.name == "StoreInventory")// StoreInventory
 		{
 			additionalHeight = 80f;
 			normalRowCount = 5;
+		}else //Recipes
+		{
+			additionalHeight = 40f;
+			normalRowCount = 4;
 		}
 		
 		// UpdateHeightRoutine(itemsParentObj.transform, false);
@@ -61,17 +65,24 @@ public class ScrollHeight : MonoBehaviour
 
 	public IEnumerator UpdateHeightRoutine(Transform itemsParent, bool remainScrollPosition)
 	{
-		// don't get inactive children
-		InventorySlot[] slots = itemsParent.GetComponentsInChildren<InventorySlot>(false);
-        // Debug.Log("slotsCount: "+slots.Length);
-        int rows = (slots.Length + columnCount - 1) / columnCount;
-		// int rows = (itemsParent.childCount + columnCount - 1) / columnCount;
+		int rows = 0;
+		if(this.name == "Inventory" || this.name == "StoreInventory")
+		{
+			// don't get inactive children
+			InventorySlot[] slots = itemsParent.GetComponentsInChildren<InventorySlot>(false);
+	        // Debug.Log("slotsCount: "+slots.Length);
+	        rows = (slots.Length + columnCount - 1) / columnCount;
+		}else // Recipes
+		{
+			rows = itemsParent.childCount / 2;
+			// Debug.Log(rows);
+		}
 		// Debug.Log(rows);
 		RectTransform rectTransform = itemsParent.GetComponent<RectTransform>();
 		float prevAnchorY = rectTransform.anchoredPosition.y;
 		if(rows > normalRowCount)
 		{
-			float addHeight = (rows-columnCount) * heightOfRow + additionalHeight;
+			float addHeight = (rows - normalRowCount) * heightOfRow + additionalHeight;
 			rectTransform.sizeDelta = new Vector2(originalWidth, originalHeight + addHeight);
 			rectTransform.anchoredPosition = new Vector2(originalAnchorX, originalAnchorY - addHeight/2);
 		}else if(rows == normalRowCount)

@@ -61,6 +61,13 @@ public class StoreToggle : MonoBehaviour
         isStoreOpen = true;
         this.GetComponent<CanvasGroup>().blocksRaycasts = false;
         TouchToMove.disablePlayerMovement = true;
+
+        // disable Recipe menu
+        if(GameObject.Find("Recipes") != null)
+        {
+            GameObject.Find("Recipes").GetComponent<CanvasGroup>().alpha = 0f;
+            GameObject.Find("Recipes").GetComponent<CanvasGroup>().blocksRaycasts = false;
+        }
     }
 
     public void CloseStore()
@@ -80,6 +87,13 @@ public class StoreToggle : MonoBehaviour
         isStoreOpen = false;
         this.GetComponent<CanvasGroup>().blocksRaycasts = true;
         TouchToMove.disablePlayerMovement = false;
+
+        // enable Recipe menu
+        if(GameObject.Find("Recipes") != null)
+        {
+            GameObject.Find("Recipes").GetComponent<CanvasGroup>().alpha = 1f;
+            GameObject.Find("Recipes").GetComponent<CanvasGroup>().blocksRaycasts = true;
+        }
     }
 
     public IEnumerator SwitchSlotsInteractability(GameObject inventory, bool onOrOff)

@@ -20,6 +20,9 @@ public class RecipesInventoryUI : MonoBehaviour
     {
     	if(resetRecipes)
     		PlayerPrefs.DeleteKey("recipesInventoryIndex");
+    	PlayerPrefs.SetString("recipesInventoryIndex", "FruitSalads CornSuccotash EggplantSoup CucumBurger TurnipRamen TomatoSandwich VeggieKebab Salmagundi VeggieRisotto Hodgepodge");
+    	// PlayerPrefs.SetString("recipesInventoryIndex", "FruitSalads CornSuccotash EggplantSoup CucumBurger");
+    	// PlayerPrefs.SetString("recipesInventoryIndex", "FruitSalads CornSuccotash");
     	UpdateUI(false);
     }
 
@@ -28,8 +31,7 @@ public class RecipesInventoryUI : MonoBehaviour
     {
     	if(!PlayerPrefs.HasKey("recipesInventoryIndex"))
     		return;
-    	string[] indexArray = new string[0];
-    	indexArray = PlayerPrefs.GetString("recipesInventoryIndex").Split(new char[1]{' '}, StringSplitOptions.RemoveEmptyEntries);
+    	string[] indexArray = PlayerPrefs.GetString("recipesInventoryIndex").Split(new char[1]{' '}, StringSplitOptions.RemoveEmptyEntries);
     	List<Recipe> recipes = new List<Recipe>();
     	foreach(string name in indexArray)
     	{
@@ -37,57 +39,66 @@ public class RecipesInventoryUI : MonoBehaviour
     		recipe.SetAllFields(name);
     		recipes.Add(recipe);
     	}
+    	recipes.Sort();
 
     	foreach(Transform child in itemsParent)
     	{
     		Destroy(child.gameObject);
     	}
 
-		recipes.Sort();
-
 		foreach(Recipe recipe in recipes)
 		{
-			GameObject newSlot = Instantiate(slotPrefab, itemsParent) as GameObject;
-			Transform ItemButton = newSlot.transform.Find("ItemButton");
+			Item item = new Item();
+			item.SetAllFields(recipe.Name(), 0);
+			InstantiateSlot(item, itemsParent, false);
+
 			// instantiate the corresponding recipe bar
 			InstantiateBar(recipe);
 		}
 
-        // for(int i = 0; i < itemsCount; i++)
-        // {
-        //     GameObject newSlot = Instantiate(slotPrefab, itemsParent) as GameObject;
-        //     if(newSlot == null){
-        //         Debug.LogWarning("NULL");
-        //     }
-        //     Transform ItemButton = newSlot.transform.Find("ItemButton");
-        //     // change Name
-        //     ItemButton.Find("Text").gameObject.GetComponent<Text>().text = inventory.items[i].Name();
-        //     // change Number
-        //     ItemButton.Find("Number").gameObject.GetComponent<Text>().text = "" + inventory.items[i].Num();
-        //     // set "Value"
-        //     ItemButton.Find("Price").gameObject.GetComponent<Text>().text = "" + inventory.items[i].SellPrice();
-        //     // change Sprite
-        //     ItemButton.Find("Item").gameObject.GetComponent<Image>().sprite = inventory.items[i].Icon();
-        //     // change "Item" to the new name
-        //     ItemButton.Find("Item").gameObject.name = inventory.items[i].Name();
-
-        //     // determine whether Show or hide the slot based on showParams
-        //     ShowHide(newSlot, inventory.items[i].Id());
-        // }
-
         // change scroll height after updating UI
-        // StartCoroutine(ScrollHeightRoutine(remainScrollPosition));
+        StartCoroutine(ScrollHeightRoutine(remainScrollPosition));
     }
 
     void InstantiateBar(Recipe recipe)
     {
-		GameObject bar = Instantiate(recipeBarPrefab, itemsParent) as GameObject;
+		GameObject bar = Instantiate(recipeBarPrefab, itemsParent);
+		foreach(string name in recipe.Ingredients())
+		{
+			Item item = new Item();
+			item.SetAllFields(name, 0);
+			InstantiateSlot(item, bar.transform, true);
+		}
     }
 
-    // IEnumerator ScrollHeightRoutine(bool remainScrollPosition)
-    // {
-    //     yield return null;
-    //     ScrollHeight cScript = GetComponent<ScrollHeight>();
-    //     cScript.UpdateHeight(itemsParent, remainScrollPosition);
-    // }
+    void InstantiateSlot(Item item, Transform parent, bool belongsToBar)
+    {
+    	GameObject slot = Instantiate(slotPrefab, parent);
+    	Transform ItemButton = slot.transform.Find("ItemButton");
+    	// change Name
+        ItemButton.Find("Text").GetComponent<Text>().text = item.Name();
+        // change/disable Number
+        if(item.Num() > 0)
+	    	ItemButton.Find("Number").GetComponent<Text>().text = "" + item.Num();
+	    else
+	    	ItemButton.Find("Number").GetComponent<Text>().text = "";
+        // set "Value"
+        ItemButton.Find("Price").GetComponent<Text>().text = "" + item.SellPrice();
+        // change Sprite
+        ItemButton.Find("Item").GetComponent<Image>().sprite = item.Icon();
+        // change "Item" to the new name
+        ItemButton.Find("Item").gameObject.name = item.Name();
+
+        if(!belongsToBar) // is recipe item
+        {
+        	ItemButton.Find("EqualSign").GetComponent<CanvasGroup>().alpha = 1f;
+        }
+    }
+
+    IEnumerator ScrollHeightRoutine(bool remainScrollPosition)
+    {
+        yield return null;
+        ScrollHeight cScript = GetComponent<ScrollHeight>();
+        cScript.UpdateHeight(itemsParent, remainScrollPosition);
+    }
 }

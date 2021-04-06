@@ -28,19 +28,27 @@ public class Item : IComparable<Item>
 		private int sellPrice;
 		private int buyPrice;
 
+		public static int seedIdUpperLimit = 19;
+		public static int harvestIdUpperLimit = 39;
+		public static int foodIdUpperLimit = 49;
+		public static int allIdUpperLimit = 49;
+
+		public static float sellToBuyFactor = 1.9f;
+
+		// for seeds and harvets
 		public static int tierDivideLength = 4;
-		
 		public static int basicPrice = 15;
 		public static float tierUpPriceFactor = 1.7f;
 		public static float seedToFruitFactor = 2.5f / 4; //4 = Expectation of randomharvest amount
-		public static float sellToBuyFactor = 1.9f;
-		
-		public static int seedIdUpperLimit = 19;
-		public static int harvestIdUpperLimit = 39;
-		public static int allIdUpperLimit = 39;
 
 		public static float basicGrowTime = 2f;
 		public static float tierUpGrowTimeFactor = 1.3f;
+
+		// for foods
+		public static float cropToFoodFactor = 2.5f;
+		// public static int foodTierDivideLength = 3;
+		// public static int foodBasicPrice = 325;
+		// public static float foodTierUpPriceFactor = 1.3f;
 
 		public string Name(){
 			return this.name;
@@ -92,16 +100,16 @@ public class Item : IComparable<Item>
 			this.name = name;
 			this.num = num;
 
-			this.id = GetCropId(name);
-			this.icon = GetCropSprite(name);
+			this.id = GetItemId(name);
+			this.icon = GetItemSprite(name);
 
-			this.sellPrice = GetCropSellPrice(this.id);
-			this.buyPrice = GetCropBuyPrice(this.sellPrice);
+			this.sellPrice = GetItemSellPrice(this.id);
+			this.buyPrice = GetItemBuyPrice(this.sellPrice);
 		}
 
 		public void SetAllFields(int id, int num)
 		{
-			if(id < 0 || id > harvestIdUpperLimit)
+			if(id < 0 || id > allIdUpperLimit)
 			{
 				Debug.LogWarning("id out of bounds!");
 				return;
@@ -109,14 +117,28 @@ public class Item : IComparable<Item>
 			this.id = id;
 			this.num = num;
 
-			this.name = GetCropName(id);
-			this.icon = GetCropSprite(name);
+			this.name = GetItemName(id);
+			this.icon = GetItemSprite(this.name);
 
-			this.sellPrice = GetCropSellPrice(this.id);
-			this.buyPrice = GetCropBuyPrice(this.sellPrice);
+			this.sellPrice = GetItemSellPrice(this.id);
+			this.buyPrice = GetItemBuyPrice(this.sellPrice);
 		}
 
-		public static Sprite GetCropSprite(string name)
+		public int CompareTo(Item item)
+	    {
+	    	float generatedThisId = (this.id > seedIdUpperLimit && this.id <= harvestIdUpperLimit) ? 
+	    	(float)(this.id - seedIdUpperLimit - 0.5f) : (float) this.id;
+	    	float generatedItemId = (item.Id() > seedIdUpperLimit && this.id <= harvestIdUpperLimit) ? 
+	    	(float)(item.Id() - seedIdUpperLimit - 0.5f) : (float) item.Id();
+	    	if(generatedThisId - generatedItemId > 0)
+	    		return 1;
+	    	else if(generatedThisId - generatedItemId < 0)
+	    		return -1;
+	    	else
+	    		return 0;
+	    }
+
+		public static Sprite GetItemSprite(string name)
 	    {
 	        Sprite[] icons = Resources.LoadAll<Sprite>("Crop_Spritesheet");
 	        bool seed = name.Contains("Seed");
@@ -124,7 +146,7 @@ public class Item : IComparable<Item>
 	        if (seed)
 	            tempName = name.Remove(name.IndexOf("Seed"), "Seed".Length);
 	        else
-	            tempName = name;//.Remove(name.IndexOf("Fruit"), "Fruit".Length);
+	            tempName = name;
 	    	// Debug.Log(tempName);
 	        foreach (Sprite i in icons)
 	        {
@@ -140,10 +162,86 @@ public class Item : IComparable<Item>
 	            }
 	            
 	        }
+	        // failed in finding sprite from Crop_Spritesheet. Proceed to Meals_Spritesheet
+	        icons = Resources.LoadAll<Sprite>("Meals_Spritesheet");
+	        foreach(Sprite i in icons)
+	        {
+	        	if(tempName == i.name)
+	        		return i;
+	        }
+	        Debug.LogWarning(name + " doesn't exist");
 	        return null;
 	    }
 
-	    public static string GetCropName(int id)
+	    public static int GetItemSellPrice(int id)
+	    {
+	    	if(id < 0)
+	    	{
+	    		Debug.LogWarning("invalid input! id cannot be negative");
+	    		return -1;
+	    	}else if(id <= seedIdUpperLimit) //seeds
+	    	{
+	    		double multiplier = Math.Pow( tierUpPriceFactor, (id / tierDivideLength) );
+	    		if(multiplier < 1.0d) multiplier = 1.0d;
+	    		return (int) (basicPrice * multiplier);
+	    	}else if(id <= harvestIdUpperLimit) //for grown crops(fruits)
+	    	{
+	    		return (int)(GetItemSellPrice(id - seedIdUpperLimit - 1) * seedToFruitFactor);
+	    	}else if(id <= foodIdUpperLimit) //for foods
+	    	{
+	    		string[] ingredients = Recipe.GetRecipeIngredients(GetItemName(id));
+	    		int price = 0;
+	    		foreach(string name in ingredients)
+	    		{
+	    			price += GetItemSellPrice(GetItemId(name));
+	    		}
+	    		return (int) (price * cropToFoodFactor);
+
+	    		// double multiplier = Math.Pow(foodTierUpPriceFactor, ( (id - harvestIdUpperLimit - 1) / tierDivideLength));
+	    		// if(multiplier < 1.0d) multiplier = 1.0d;
+	    		// return (int) (foodBasicPrice * multiplier);
+    		}else
+	    	{
+	    		Debug.LogWarning("id: " + id + "is overbounds");
+	    		return -1;
+	    	}
+	    }
+
+	    public static int GetItemBuyPrice(int sellPrice)
+	    {
+	    	return (int)(sellPrice * sellToBuyFactor);
+	    }
+
+	    public static float GetGrowTime(string name)
+	    {
+	    	int id = GetItemId(name);
+	    	if(0 <= id && id <= seedIdUpperLimit)
+	    	{
+	    		double multiplier = Math.Pow( tierUpGrowTimeFactor, 
+	    			(id / tierDivideLength) );
+	    		if(multiplier < 1.0d) multiplier = 1.0d;
+	    		return (float) (basicGrowTime * multiplier);
+	    	}else if(id <= harvestIdUpperLimit)
+	    	{
+	    		double multiplier = Math.Pow( tierUpGrowTimeFactor, 
+	    			((id - seedIdUpperLimit - 1) / tierDivideLength) );
+	    		if(multiplier < 1.0d) multiplier = 1.0d;
+	    		return (float) (basicGrowTime * multiplier);
+    		}else
+    		{
+    			Debug.LogWarning("invalid input! name: " + name);
+	    		return -1;
+    		}
+	    }
+
+	    public static int RandomHarvest(string name)
+	    {
+	    	// int id = GetCropId(name);
+	    	System.Random rand = new System.Random();
+	        return rand.Next(3,6);
+	    }
+
+	    public static string GetItemName(int id)
 	    {
 	    	switch(id)
 	    	{
@@ -187,6 +285,7 @@ public class Item : IComparable<Item>
 	    			return "RoseSeed";
 	    		case 19:
 	    			return "TulipSeed";
+
 	    		case 20:
 	    			return "Corn";
 	    		case 21:
@@ -227,13 +326,34 @@ public class Item : IComparable<Item>
 	    			return "Rose";
 	    		case 39:
 	    			return "Tulip";
+
+	    		case 40:
+	    			return "FruitSalads";
+	    		case 41:
+	    			return "CornSuccotash";
+	    		case 42:
+	    			return "EggplantSoup";
+	    		case 43:
+	    			return "CucumBurger";
+	    		case 44:
+	    			return "TurnipRamen";
+	    		case 45:
+	    			return "TomatoSandwich";
+	    		case 46:
+	    			return "VeggieKebab";
+	    		case 47:
+	    			return "Salmagundi";
+	    		case 48:
+	    			return "VeggieRisotto";
+	    		case 49:
+	    			return "Hodgepodge";
 	    		default:
-	    			Debug.LogWarning("GetCropName() received invalid input!");
+	    			Debug.LogWarning("GetItemName() received invalid input: " + id);
 	    			return null;
 	    	}
 	    }
 
-	    public static int GetCropId(string name)
+	    public static int GetItemId(string name)
 	    {
 	    	switch(name)
 	    	{
@@ -277,6 +397,7 @@ public class Item : IComparable<Item>
 	    			return 18;
 	    		case "TulipSeed":
 	    			return 19;
+
 	    		case "Corn":
 	    			return 20;
 	    		case "Potato":
@@ -317,79 +438,31 @@ public class Item : IComparable<Item>
 	    			return 38;
 	    		case "Tulip":
 	    			return 39;
+
+	    		case "FruitSalads":
+	    			return 40;
+	    		case "CornSuccotash":
+	    			return 41;
+	    		case "EggplantSoup":
+	    			return 42;
+	    		case "CucumBurger":
+	    			return 43;
+	    		case "TurnipRamen":
+	    			return 44;
+	    		case "TomatoSandwich":
+	    			return 45;
+	    		case "VeggieKebab":
+	    			return 46;
+	    		case "Salmagundi":
+	    			return 47;
+	    		case "VeggieRisotto":
+	    			return 48;
+	    		case "Hodgepodge":
+	    			return 49;
 	    		default:
-	    			Debug.LogWarning("GetCropId() received invalid input!");
+	    			Debug.LogWarning("GetItemId() received invalid input: " + name);
 	    			return -1;
 	    	}
-	    }
-
-	    public static int GetCropSellPrice(int id)
-	    {
-	    	if(id < 0)
-	    	{
-	    		Debug.LogWarning("invalid input! id cannot be negative");
-	    		return -1;
-	    	}else if(id <= seedIdUpperLimit) //seeds
-	    	{
-	    		double multiplier = Math.Pow( tierUpPriceFactor, (id / tierDivideLength) );
-	    		if(multiplier < 1.0d) multiplier = 1.0d;
-	    		return (int) (basicPrice * multiplier);
-	    	}else if(id <= harvestIdUpperLimit) //for grown crops(fruits)
-	    	{
-	    		return (int)(GetCropSellPrice(id - seedIdUpperLimit - 1) * seedToFruitFactor);
-	    	}else
-	    	{
-	    		Debug.LogWarning("id >= 40 are not defined yet");
-	    		return -1;
-	    	}
-	    	
-	    }
-
-	    public static int GetCropBuyPrice(int sellPrice)
-	    {
-	    	return (int)(sellPrice * sellToBuyFactor);
-	    }
-
-	    public static float GetGrowTime(string name)
-	    {
-	    	int id = GetCropId(name);
-	    	if(id <= seedIdUpperLimit)
-	    	{
-	    		Debug.LogWarning("invalid input! id cannot be negative");
-	    		return -1;
-	    	}else if(id > harvestIdUpperLimit)
-	    	{
-	    		Debug.LogWarning("invalid input! id overbounds");
-	    		return -1;
-	    	}else //falls between harvests id
-	    	{
-	    		double multiplier = Math.Pow( tierUpGrowTimeFactor, 
-	    			((id - seedIdUpperLimit - 1) / tierDivideLength) );
-	    		if(multiplier < 1.0d) multiplier = 1.0d;
-	    		return (float) (basicGrowTime * multiplier);
-	    	}
-	    }
-
-	    public static int RandomHarvest(string name)
-	    {
-	    	// int id = GetCropId(name);
-	    	System.Random rand = new System.Random();
-	        return rand.Next(3,6);
-	    }
-
-	    public int CompareTo(Item item)
-	    {
-	    	float generatedThisId = (this.id > seedIdUpperLimit && this.id <= harvestIdUpperLimit) ? 
-	    	(float)(this.id - seedIdUpperLimit - 0.5f) : (float) this.id;
-	    	float generatedItemId = (item.Id() > seedIdUpperLimit && this.id <= harvestIdUpperLimit) ? 
-	    	(float)(item.Id() - seedIdUpperLimit - 0.5f) : (float) item.Id();
-	    	if(generatedThisId - generatedItemId > 0)
-	    		return 1;
-	    	else if(generatedThisId - generatedItemId < 0)
-	    		return -1;
-	    	else
-	    		return 0;
-	    	// return this.id - item.Id();	    	
 	    }
 	// }
 	
