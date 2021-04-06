@@ -40,17 +40,24 @@ public class MenuAppear : MonoBehaviour
             anim.SetBool("isMenu", false);
             // Camera.main.transform.position = new Vector3(0f, 0f, Camera.main.transform.position.z);
             // CameraFollow.enableCamera = true;
+
+            // reset scrollview position
+            if(resetScrollHeight)
+            {
+                ScrollHeight cScript = GetComponent<ScrollHeight>();
+                if(this.transform.GetChild(0).GetChild(0).gameObject.name != "ItemsParent")
+                {
+                    Debug.LogWarning("fatal: wrong object!!");
+                    return;
+                }
+                cScript.UpdateHeight(this.transform.GetChild(0).GetChild(0), false);
+            }
         }
         parentPanel.blocksRaycasts = isMenu;
-        // reset scrollview position
-        if(!resetScrollHeight)
-            return;
-        ScrollHeight cScript = GetComponent<ScrollHeight>();
-        if(this.transform.GetChild(0).GetChild(0).gameObject.name != "ItemsParent")
-        {
-            Debug.LogWarning("fatal: wrong object!!");
-            return;
-        }
-        cScript.UpdateHeight(this.transform.GetChild(0).GetChild(0), false);
+    }
+
+    public Animator GetAnimator()
+    {
+        return anim;
     }
 }

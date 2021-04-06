@@ -113,10 +113,21 @@ public class Inventory : MonoBehaviour
             // StartCoroutine(onItemChangedCallback.Invoke());
             onItemChangedCallback.Invoke(false, true);
         }
-        MenuAppear cScript = GameObject.Find("Canvas").transform.Find("Inventory").GetComponent<MenuAppear>();
-        if(!MenuAppear.isMenu)
-            cScript.MenuHideAndShow();
+        
         bool endLoop = false;
+        // show inventory menu if not already shown
+        while(!endLoop)
+        {
+            MenuAppear cScript = GameObject.Find("Canvas").transform.Find("Inventory").GetComponent<MenuAppear>();
+            if(!MenuAppear.isMenu && cScript.GetAnimator() != null)
+            {
+                cScript.MenuHideAndShow();
+                break;
+            }
+            yield return null; 
+        }
+        // play sound
+        endLoop = false;
         while(!endLoop)
         {
             endLoop = soundManager.PlaySound(8);
