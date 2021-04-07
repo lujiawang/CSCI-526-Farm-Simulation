@@ -102,12 +102,8 @@ public class Inventory : MonoBehaviour
         // Debug.Log("AddStarterPackage");
     	for(int i = 0; i < StarterPackageSize; i++)
     	{
-    		Item newItem = new Item();
-    		newItem.SetAllFields(i, 5);
-    		items.Add(newItem);
-    		newItem = new Item();
-    		newItem.SetAllFields(i+20, 5);
-    		items.Add(newItem);
+    		items.Add(new Item(i, 5));
+    		items.Add(new Item(i+20, 5));
     	}
     	if (onItemChangedCallback != null)
         {
@@ -141,9 +137,7 @@ public class Inventory : MonoBehaviour
         foreach(string itemName in indexArray)
         {
         	// Debug.Log("Name + Int: "+ itemName+" "+PlayerPrefs.GetInt(itemName));
-        	Item item = new Item();
-	        item.SetAllFields(itemName, PlayerPrefs.GetInt(itemName));
-
+        	Item item = new Item(itemName, PlayerPrefs.GetInt(itemName));
         	items.Add(item);
         }
 
@@ -160,8 +154,7 @@ public class Inventory : MonoBehaviour
     	if(num == 0)
     		return;
 
-        Item item = new Item();
-        item.SetAllFields(name, num>stackLimit?stackLimit:num);
+        Item item = new Item(name, num>stackLimit?stackLimit:num);
 
         int count = items.Count;
         if (count == 0 && num > 0)
@@ -247,8 +240,7 @@ public class Inventory : MonoBehaviour
         if(num == 0)
             return;
 
-        Item item = new Item();
-        item.SetAllFields(name, num>stackLimit?stackLimit:num);
+        Item item = new Item(name, num>stackLimit?stackLimit:num);
 
         int count = items.Count;
         if (count == 0 && num > 0)

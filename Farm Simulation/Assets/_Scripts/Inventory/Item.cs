@@ -50,6 +50,16 @@ public class Item : IComparable<Item>, IEquatable<Item>
 		// public static int foodBasicPrice = 325;
 		// public static float foodTierUpPriceFactor = 1.3f;
 
+		public Item(string name, int num)
+		{
+			SetAllFields(name, num);
+		}
+
+		public Item(int id, int num)
+		{
+			SetAllFields(id, num);
+		}
+
 		public string Name(){
 			return this.name;
 		}

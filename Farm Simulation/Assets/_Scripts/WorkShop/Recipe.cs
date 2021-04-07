@@ -2,11 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 public class Recipe : IComparable<Recipe>
 {
     private string name;
     private string[] ingredients;
+
+    public static List<Recipe> allRecipes = new List<Recipe>()
+    {
+        new Recipe("FruitSalads"),
+        new Recipe("CornSuccotash"),
+        new Recipe("EggplantSoup"),
+        new Recipe("CucumBurger"),
+        new Recipe("TurnipRamen"),
+        new Recipe("TomatoSandwich"),
+        new Recipe("VeggieKebab"),
+        new Recipe("Salmagundi"),
+        new Recipe("VeggieRisotto"),
+        new Recipe("Hodgepodge")
+    };
+
+    public Recipe(string name)
+    {
+        SetAllFields(name);
+    }
 
     public string Name()
     {
@@ -65,5 +85,35 @@ public class Recipe : IComparable<Recipe>
     			Debug.LogWarning("Recipe->SetIngredients() error! " + name + "not exists");
     			return null;
     	}
+    }
+
+    public static Recipe MatchRecipe(List<string> ingredients)
+    {
+        foreach(Recipe recipe in allRecipes)
+        {
+            if(recipe.Ingredients().SequenceEqual(ingredients))
+                return new Recipe(recipe.Name());
+        }
+        return null;
+    }
+
+    // returns true if is a new recipe
+    public static bool StoreRecipe(string recipeName)
+    {
+        if(!PlayerPrefs.HasKey("recipesInventoryIndex"))
+        {
+            PlayerPrefs.SetString("recipesInventoryIndex", recipeName);
+            return true;
+        }
+        string storedRecipeIndex = PlayerPrefs.GetString("recipesInventoryIndex");
+        string[] indexArray = storedRecipeIndex.Split(new char[1]{' '}, StringSplitOptions.RemoveEmptyEntries);
+        // check if Recipe already exists
+        foreach(string storedRecipe in indexArray)
+        {
+            if(storedRecipe == recipeName)
+                return false;
+        }
+        PlayerPrefs.SetString("recipesInventoryIndex", storedRecipeIndex + " " + recipeName);
+        return true;
     }
 }

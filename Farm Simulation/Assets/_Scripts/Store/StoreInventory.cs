@@ -95,10 +95,7 @@ public class StoreInventory : MonoBehaviour
     		ids.Add(id);
 
     		int num = rand.Next(1, randomizeItemNumLimit+1);
-    		Item item = new Item();
-    		item.SetAllFields(id, num);
-
-    		items.Add(item);
+    		items.Add(new Item(id, num));
 
     		// rand = new Random();
     	}
@@ -127,9 +124,7 @@ public class StoreInventory : MonoBehaviour
     {
         foreach(string itemName in indexArray)
         {
-        	Item item = new Item();
-			item.SetAllFields(itemName, PlayerPrefs.GetInt(itemName + "Store"));
-
+        	Item item = new Item(itemName, PlayerPrefs.GetInt(itemName + "Store"));
         	items.Add(item);
         }
 
@@ -169,8 +164,7 @@ public class StoreInventory : MonoBehaviour
         if(num == 0)
             return;
 
-        Item item = new Item();
-        item.SetAllFields(name, num>stackLimit?stackLimit:num);
+        Item item = new Item(name, num>stackLimit?stackLimit:num);
 
         int count = items.Count;
         if (count == 0 && num > 0)
@@ -256,8 +250,7 @@ public class StoreInventory : MonoBehaviour
         if(num == 0)
             return;
 
-        Item item = new Item();
-        item.SetAllFields(name, num>stackLimit?stackLimit:num);
+        Item item = new Item(name, num>stackLimit?stackLimit:num);
 
         int count = items.Count;
         if (count == 0 && num > 0)

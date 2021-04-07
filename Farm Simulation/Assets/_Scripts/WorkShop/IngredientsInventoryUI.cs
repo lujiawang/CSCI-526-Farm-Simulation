@@ -12,7 +12,8 @@ public class IngredientsInventoryUI : MonoBehaviour
 	public GameObject slotPrefab;
 
 	public List<Item> ingredients = new List<Item>();
-	static int ingredientLimit = 3;
+	public static int ingredientUpperLimit = 3;
+	public static int ingredientLowerLimit = 2;
 
 	ShowToast showToastScript;
 
@@ -48,9 +49,9 @@ public class IngredientsInventoryUI : MonoBehaviour
 
     public bool AddItem(string name)
     {
-    	if(ingredients.Count >= ingredientLimit)
+    	if(ingredients.Count >= ingredientUpperLimit)
     	{
-    		showToastScript.showToast("Cannot add more than " + ingredientLimit + " ingredients!", 1);
+    		showToastScript.showToast("Cannot add more than " + ingredientUpperLimit + " ingredients!", 1);
     		return false;
     	}
     	else if(Item.GetItemId(name) <= Item.seedIdUpperLimit || Item.GetItemId(name) > Item.harvestIdUpperLimit){
@@ -65,8 +66,7 @@ public class IngredientsInventoryUI : MonoBehaviour
 	    		return false;
     		}
     	}
-    	Item newItem = new Item();
-    	newItem.SetAllFields(name, 1);
+    	Item newItem = new Item(name, 1);
     	ingredients.Add(newItem);
 
     	InstantiateSlot(newItem);
@@ -85,6 +85,15 @@ public class IngredientsInventoryUI : MonoBehaviour
     			return;
     		}
     	}
+    }
+
+    public void DestroyAll()
+    {
+    	foreach(Transform slot in itemsParent)
+    	{
+    		Destroy(slot.gameObject);
+    	}
+    	ingredients = new List<Item>();
     }
 
     void InstantiateSlot(Item item)

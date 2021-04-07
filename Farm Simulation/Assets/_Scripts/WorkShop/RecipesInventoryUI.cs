@@ -20,23 +20,22 @@ public class RecipesInventoryUI : MonoBehaviour
     {
     	if(resetRecipes)
     		PlayerPrefs.DeleteKey("recipesInventoryIndex");
-    	PlayerPrefs.SetString("recipesInventoryIndex", "FruitSalads CornSuccotash EggplantSoup CucumBurger TurnipRamen TomatoSandwich VeggieKebab Salmagundi VeggieRisotto Hodgepodge");
+    	// PlayerPrefs.SetString("recipesInventoryIndex", "FruitSalads CornSuccotash EggplantSoup CucumBurger TurnipRamen TomatoSandwich VeggieKebab Salmagundi VeggieRisotto Hodgepodge");
     	// PlayerPrefs.SetString("recipesInventoryIndex", "FruitSalads CornSuccotash EggplantSoup CucumBurger");
     	// PlayerPrefs.SetString("recipesInventoryIndex", "FruitSalads CornSuccotash");
     	UpdateUI(false);
     }
 
     // PARAM remainScrollPosition indicates whether to maintain previous scrollView position
-    void UpdateUI(bool remainScrollPosition)
+    public void UpdateUI(bool remainScrollPosition)
     {
-    	if(!PlayerPrefs.HasKey("recipesInventoryIndex"))
+    	if(!PlayerPrefs.HasKey("recipesInventoryIndex") || PlayerPrefs.GetString("recipesInventoryIndex").Length <= 0)
     		return;
     	string[] indexArray = PlayerPrefs.GetString("recipesInventoryIndex").Split(new char[1]{' '}, StringSplitOptions.RemoveEmptyEntries);
     	List<Recipe> recipes = new List<Recipe>();
     	foreach(string name in indexArray)
     	{
-    		Recipe recipe = new Recipe();
-    		recipe.SetAllFields(name);
+    		Recipe recipe = new Recipe(name);
     		recipes.Add(recipe);
     	}
     	recipes.Sort();
@@ -48,8 +47,7 @@ public class RecipesInventoryUI : MonoBehaviour
 
 		foreach(Recipe recipe in recipes)
 		{
-			Item item = new Item();
-			item.SetAllFields(recipe.Name(), 0);
+			Item item = new Item(recipe.Name(), 0);
 			InstantiateSlot(item, itemsParent, false);
 
 			// instantiate the corresponding recipe bar
@@ -65,8 +63,7 @@ public class RecipesInventoryUI : MonoBehaviour
 		GameObject bar = Instantiate(recipeBarPrefab, itemsParent);
 		foreach(string name in recipe.Ingredients())
 		{
-			Item item = new Item();
-			item.SetAllFields(name, 0);
+			Item item = new Item(name, 0);
 			InstantiateSlot(item, bar.transform, true);
 		}
     }
