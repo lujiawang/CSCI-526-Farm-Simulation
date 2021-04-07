@@ -65,18 +65,7 @@ public class ScrollHeight : MonoBehaviour
 
 	public IEnumerator UpdateHeightRoutine(Transform itemsParent, bool remainScrollPosition)
 	{
-		int rows = 0;
-		if(this.name == "Inventory" || this.name == "StoreInventory")
-		{
-			// don't get inactive children
-			InventorySlot[] slots = itemsParent.GetComponentsInChildren<InventorySlot>(false);
-	        // Debug.Log("slotsCount: "+slots.Length);
-	        rows = (slots.Length + columnCount - 1) / columnCount;
-		}else // Recipes
-		{
-			rows = itemsParent.childCount / 2;
-			// Debug.Log(rows);
-		}
+		int rows = (itemsParent.childCount + columnCount - 1) / columnCount;
 		// Debug.Log(rows);
 		RectTransform rectTransform = itemsParent.GetComponent<RectTransform>();
 		float prevAnchorY = rectTransform.anchoredPosition.y;

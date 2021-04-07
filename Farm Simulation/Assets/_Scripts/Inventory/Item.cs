@@ -6,7 +6,7 @@ using System;
 // [CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Item") ]
 
 // public class Item : ScriptableObject
-public class Item : IComparable<Item>
+public class Item : IComparable<Item>, IEquatable<Item>
 {
 	
 	// new public string name = "New Item";
@@ -124,18 +124,25 @@ public class Item : IComparable<Item>
 			this.buyPrice = GetItemBuyPrice(this.sellPrice);
 		}
 
-		public int CompareTo(Item item)
+		public int CompareTo(Item other)
 	    {
 	    	float generatedThisId = (this.id > seedIdUpperLimit && this.id <= harvestIdUpperLimit) ? 
 	    	(float)(this.id - seedIdUpperLimit - 0.5f) : (float) this.id;
-	    	float generatedItemId = (item.Id() > seedIdUpperLimit && this.id <= harvestIdUpperLimit) ? 
-	    	(float)(item.Id() - seedIdUpperLimit - 0.5f) : (float) item.Id();
-	    	if(generatedThisId - generatedItemId > 0)
+	    	float generatedOtherId = (other.Id() > seedIdUpperLimit && other.Id() <= harvestIdUpperLimit) ? 
+	    	(float)(other.Id() - seedIdUpperLimit - 0.5f) : (float) other.Id();
+	    	if(generatedThisId - generatedOtherId > 0)
 	    		return 1;
-	    	else if(generatedThisId - generatedItemId < 0)
+	    	else if(generatedThisId - generatedOtherId < 0)
 	    		return -1;
 	    	else
 	    		return 0;
+	    }
+
+	    // NOTE: difference in this.num does not affect equality
+	    public bool Equals(Item other)
+	    {
+	    	if(this.id == other.Id()) return true;
+	    	return false;
 	    }
 
 		public static Sprite GetItemSprite(string name)

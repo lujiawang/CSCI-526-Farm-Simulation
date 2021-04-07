@@ -86,8 +86,10 @@ public class RecipesInventoryUI : MonoBehaviour
         ItemButton.Find("Price").GetComponent<Text>().text = "" + item.SellPrice();
         // change Sprite
         ItemButton.Find("Item").GetComponent<Image>().sprite = item.Icon();
+        // disable DragAndDrop
+        ItemButton.Find("Item").GetComponent<DragAndDrop>().enabled = false;
         // change "Item" to the new name
-        ItemButton.Find("Item").gameObject.name = item.Name();
+        ItemButton.Find("Item").name = item.Name();
 
         if(!belongsToBar) // is recipe item
         {

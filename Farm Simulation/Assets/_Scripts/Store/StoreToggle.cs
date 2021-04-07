@@ -68,6 +68,17 @@ public class StoreToggle : MonoBehaviour
             GameObject.Find("Recipes").GetComponent<CanvasGroup>().alpha = 0f;
             GameObject.Find("Recipes").GetComponent<CanvasGroup>().blocksRaycasts = false;
         }
+        // disable Ingredients menu
+        if(GameObject.Find("Ingredients") != null)
+        {
+            GameObject.Find("Ingredients").GetComponent<CanvasGroup>().alpha = 0f;
+            GameObject.Find("Ingredients").GetComponent<CanvasGroup>().blocksRaycasts = false;
+        }
+        // disable WorkshopToggle
+        if(GameObject.Find("WorkshopToggle") != null)
+        {
+            GameObject.Find("WorkshopToggle").GetComponent<CanvasGroup>().blocksRaycasts = false;
+        }
     }
 
     public void CloseStore()
@@ -82,8 +93,10 @@ public class StoreToggle : MonoBehaviour
         // MenuAppear cScript = inventoryObj.GetComponent<MenuAppear>();
         // if(MenuAppear.isMenu)
         //     cScript.MenuHideAndShow();
-        // enable all InventorySlots' Items so they can be dragged
-        StartCoroutine(SwitchSlotsInteractability(inventoryObj, true));
+        
+        // enable all InventorySlots' Items so they can be dragged, but only if CropLands is present
+        if(GameObject.Find("CropLands") != null)
+            StartCoroutine(SwitchSlotsInteractability(inventoryObj, true));
         isStoreOpen = false;
         this.GetComponent<CanvasGroup>().blocksRaycasts = true;
         TouchToMove.disablePlayerMovement = false;
@@ -93,6 +106,17 @@ public class StoreToggle : MonoBehaviour
         {
             GameObject.Find("Recipes").GetComponent<CanvasGroup>().alpha = 1f;
             GameObject.Find("Recipes").GetComponent<CanvasGroup>().blocksRaycasts = true;
+        }
+        // enable Ingredients menu
+        if(GameObject.Find("Ingredients") != null)
+        {
+            GameObject.Find("Ingredients").GetComponent<CanvasGroup>().alpha = 1f;
+            GameObject.Find("Ingredients").GetComponent<CanvasGroup>().blocksRaycasts = true;
+        }
+        // enable WorkshopToggle
+        if(GameObject.Find("WorkshopToggle") != null)
+        {
+            GameObject.Find("WorkshopToggle").GetComponent<CanvasGroup>().blocksRaycasts = true;
         }
     }
 

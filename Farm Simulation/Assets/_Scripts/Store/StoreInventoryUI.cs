@@ -148,70 +148,65 @@ public class StoreInventoryUI : MonoBehaviour
         return showSeeds && showHarvests && showOthers;
     }
 
-    void ShowHide(GameObject slot, int id)
+    bool ShouldShow(int id)
     {
         if(id <= Item.seedIdUpperLimit) //slot is a seed
         {
-            slot.SetActive(showSeeds);
+            return showSeeds;
         }else if(id <= Item.harvestIdUpperLimit) //slot is a harvest
         {
-            slot.SetActive(showHarvests);
+            return showHarvests;
         }else //other
         {
-            slot.SetActive(showOthers);
+            return showOthers;
         }
     }
 
     void UpdateUI(bool remainScrollPosition, bool doDestroyAll)
     {
     	// Debug.Log("Updating Inventory UI");
-    	InventorySlot[] slots = itemsParent.GetComponentsInChildren<InventorySlot>(true);
-    	int itemsCount = storeInventory.items.Count;
-    	int slotsCount = slots.Length;
+    	InventorySlot[] slots = itemsParent.GetComponentsInChildren<InventorySlot>(false);
 
     	// Debug.Log(itemsCount);
         if(!doDestroyAll)
         {
-            for(int i = 0; i < slotsCount; i++)
+            int i = 0;
+            foreach(Item item in storeInventory.items)
             {
-                int newNum = storeInventory.items[i].Num();
+                if(!ShouldShow(item.Id()))
+                    continue;
                 // update displayed number
-                slots[i].transform.Find("ItemButton").Find("Number").gameObject.GetComponent<Text>().text = "" + newNum;
+                slots[i].transform.Find("ItemButton").Find("Number").GetComponent<Text>().text = "" + item.Num();
+                i++;
             }
-            // change scroll height after updating UI
-            // StartCoroutine(ScrollHeightRoutine(remainScrollPosition));
             return;
         }
 
         storeInventory.items.Sort();
-        // yield return null;
-        for(int i = 0; i < slotsCount; i++)
+
+        foreach(Transform slot in itemsParent)
         {
-            Destroy(slots[i].gameObject);
+            Destroy(slot.gameObject);
         }
 
-        for(int i = 0; i < itemsCount; i++)
+        foreach(Item item in storeInventory.items)
         {
-            GameObject newSlot = Instantiate(slotPrefab, itemsParent) as GameObject;
-            if(newSlot == null){
-                Debug.LogWarning("NULL");
-            }
+            if(!ShouldShow(item.Id()))
+                continue;
+            GameObject newSlot = Instantiate(slotPrefab, itemsParent);
             Transform ItemButton = newSlot.transform.Find("ItemButton");
             // change Name
-            ItemButton.Find("Text").gameObject.GetComponent<Text>().text = storeInventory.items[i].Name();
+            ItemButton.Find("Text").GetComponent<Text>().text = item.Name();
             // change Number
-            ItemButton.Find("Number").gameObject.GetComponent<Text>().text = "" + storeInventory.items[i].Num();
+            ItemButton.Find("Number").GetComponent<Text>().text = "" + item.Num();
             // set "Value"
-            ItemButton.Find("Price").gameObject.GetComponent<Text>().text = "" + storeInventory.items[i].BuyPrice();
+            ItemButton.Find("Price").GetComponent<Text>().text = "" + item.BuyPrice();
             // disable DragAndDrop script
-            ItemButton.Find("Item").gameObject.GetComponent<DragAndDrop>().enabled = false;
+            ItemButton.Find("Item").GetComponent<DragAndDrop>().enabled = false;
             // change Sprite
-            ItemButton.Find("Item").gameObject.GetComponent<Image>().sprite = storeInventory.items[i].Icon();
+            ItemButton.Find("Item").GetComponent<Image>().sprite = item.Icon();
             // change "Item" to the new name
-            ItemButton.Find("Item").gameObject.name = storeInventory.items[i].Name();
-            
-            // determine whether Show or hide the slot based on showParams
-            ShowHide(newSlot, storeInventory.items[i].Id());
+            ItemButton.Find("Item").name = item.Name();
         }
 
         StartCoroutine(ScrollHeightRoutine(remainScrollPosition));

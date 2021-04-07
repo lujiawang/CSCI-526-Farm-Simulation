@@ -161,74 +161,75 @@ public class InventoryUI : MonoBehaviour
         return showDelete;
     }
 
-    void ShowHide(GameObject slot, int id)
+    void ShowHideDeleteBtn(GameObject slot)
+    {
+        Button deleteButton = slot.transform.Find("ItemButton").Find("DeleteButton").GetComponent<Button>();
+        deleteButton.interactable = showDelete;
+    }
+
+    bool ShouldShow(int id)
     {
         if(id <= Item.seedIdUpperLimit) //slot is a seed
         {
-            slot.SetActive(showSeeds);
+            return showSeeds;
         }else if(id <= Item.harvestIdUpperLimit) //slot is a harvest
         {
-            slot.SetActive(showHarvests);
+            return showHarvests;
         }else //other
         {
-            slot.SetActive(showOthers);
+            return showOthers;
         }
-        Button deleteButton = slot.transform.Find("ItemButton").Find("DeleteButton").GetComponent<Button>();
-        deleteButton.interactable = showDelete;
     }
 
     // PARAM remainScrollPosition indicates whether to maintain previous scrollView position
     void UpdateUI(bool remainScrollPosition, bool doDestroyAll)
     {
-
     	// Debug.Log("Updating Inventory UI");
-        InventorySlot[] slots = itemsParent.GetComponentsInChildren<InventorySlot>(true);//must include inactive children
-        // Debug.Log("slotsCount: "+slots.Length);
-    	int itemsCount = inventory.items.Count;
-    	int slotsCount = slots.Length;
+        InventorySlot[] slots = itemsParent.GetComponentsInChildren<InventorySlot>(false);
 
     	// Debug.Log(itemsCount);
         if(!doDestroyAll)
         {
-            for(int i = 0; i < slotsCount; i++)
+            int i = 0;
+            foreach(Item item in inventory.items)
             {
-                int newNum = inventory.items[i].Num();
+                if(!ShouldShow(item.Id()))
+                    continue;
                 // update displayed number
-                slots[i].transform.Find("ItemButton").Find("Number").gameObject.GetComponent<Text>().text = "" + newNum;
-                ShowHide(slots[i].gameObject, inventory.items[i].Id());
+                slots[i].transform.Find("ItemButton").Find("Number").GetComponent<Text>().text = "" + item.Num();
+                // determine whether Show or hide the delete button
+                ShowHideDeleteBtn(slots[i].gameObject);
+                i++;
             }
-            // change scroll height after updating UI
-            // StartCoroutine(ScrollHeightRoutine(remainScrollPosition));
             return;
         }
 
         inventory.items.Sort();
-    	// yield return null;
-        for(int i = 0; i < slotsCount; i++)
+
+        foreach(Transform slot in itemsParent)
         {
-            Destroy(slots[i].gameObject);
+            Destroy(slot.gameObject);
         }
 
-        for(int i = 0; i < itemsCount; i++)
+        foreach(Item item in inventory.items)
         {
-            GameObject newSlot = Instantiate(slotPrefab, itemsParent) as GameObject;
-            if(newSlot == null){
-                Debug.LogWarning("NULL");
-            }
+            if(!ShouldShow(item.Id()))
+                continue;
+            GameObject newSlot = Instantiate(slotPrefab, itemsParent);
             Transform ItemButton = newSlot.transform.Find("ItemButton");
             // change Name
-            ItemButton.Find("Text").gameObject.GetComponent<Text>().text = inventory.items[i].Name();
+            ItemButton.Find("Text").GetComponent<Text>().text = item.Name();
             // change Number
-            ItemButton.Find("Number").gameObject.GetComponent<Text>().text = "" + inventory.items[i].Num();
+            ItemButton.Find("Number").GetComponent<Text>().text = "" + item.Num();
             // set "Value"
-            ItemButton.Find("Price").gameObject.GetComponent<Text>().text = "" + inventory.items[i].SellPrice();
+            ItemButton.Find("Price").GetComponent<Text>().text = "" + item.SellPrice();
             // change Sprite
-            ItemButton.Find("Item").gameObject.GetComponent<Image>().sprite = inventory.items[i].Icon();
+            ItemButton.Find("Item").GetComponent<Image>().sprite = item.Icon();
             // change "Item" to the new name
-            ItemButton.Find("Item").gameObject.name = inventory.items[i].Name();
+            ItemButton.Find("Item").name = item.Name();
 
-            // determine whether Show or hide the slot based on showParams
-            ShowHide(newSlot, inventory.items[i].Id());
+            // determine whether Show or hide the delete button
+            ShowHideDeleteBtn(newSlot); 
         }
 
         // change scroll height after updating UI

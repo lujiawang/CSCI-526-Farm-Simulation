@@ -478,6 +478,7 @@ GameObject:
   - component: {fileID: 9047899552595965898}
   - component: {fileID: 9047899552595965896}
   - component: {fileID: 8954377585769859063}
+  - component: {fileID: 4146930400443905519}
   m_Layer: 5
   m_Name: ItemButton
   m_TagString: Untagged
@@ -602,6 +603,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4146930400443905519}
+        m_MethodName: Select
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8954377585769859063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -612,6 +624,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 24eb86097bc2742bbb4253162a763726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4146930400443905519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9047899552595965900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb3eeaf2bc6f142f4a4f229fef535f6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &9047899552615858188
