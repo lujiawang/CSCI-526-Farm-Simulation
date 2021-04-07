@@ -137,7 +137,7 @@ public class TouchToMove : MonoBehaviour
         {
             //We should have hit something with a 2D Physics collider!
             touchedObject = hitInformation.transform.gameObject;
-            PassGameObject(touchedObject);
+            //PassGameObject(touchedObject);
             // for those planted lands
             if (touchedObject.transform.parent != null && touchedObject.transform.parent.CompareTag("cropLand"))
             {
@@ -147,7 +147,10 @@ public class TouchToMove : MonoBehaviour
                 if(cropGrowing != null)
                 {
                     if (cropGrowing.grown)
-                        cropName.text = touchedObject.name + " is grown";
+                    {
+                        if (PlayerStats.Harvest == false)
+                            cropName.text = "Turn on harvest mode to collect " + touchedObject.name + "!";
+                    }
                     else
                         cropName.text = touchedObject.name + " is not grown yet";       
                 }
@@ -166,7 +169,10 @@ public class TouchToMove : MonoBehaviour
                     if (cropGrowing != null)
                     {
                         if (cropGrowing.grown)
-                            cropName.text = cropGrowing.name + " is grown";
+                        {
+                            if (PlayerStats.Harvest == false)
+                                cropName.text = "Turn on harvest mode to collect " + cropGrowing.name +"!";
+                        }
                         else
                             cropName.text = cropGrowing.name + " is not grown yet";
                     }
@@ -177,7 +183,11 @@ public class TouchToMove : MonoBehaviour
                 return touchedObject.transform.position;
             }
         }
-        PassGameObject(touchedObject);
+        else
+        {
+            cropName.text = "";
+        }
+        //PassGameObject(touchedObject);
         landName = "";
 
         return target;

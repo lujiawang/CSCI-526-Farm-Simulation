@@ -8,6 +8,13 @@ public static class PlayerStats
     
     public static Dictionary<string, int> cropCount = new Dictionary<string, int>();
 
+    public static bool harvest = false;
+
+    public static bool Harvest
+    {
+        get { return harvest;  }
+        set { harvest = value;  }
+    }
 
     private static bool toSave = true;
 

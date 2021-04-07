@@ -12,7 +12,7 @@ public class QuickHarvest : MonoBehaviour
 	Inventory inventory;
 
 	public static bool disableQuickHarvest = false;
-
+	public Text cropNotification;
     // Start is called before the first frame update
     void Start()
     {
@@ -77,7 +77,7 @@ public class QuickHarvest : MonoBehaviour
 	            {
 	            	ShowToast cScript = canvas.GetComponent<ShowToast>();
 	                cScript.showToast("Walk to any cropland to harvest!", 1);
-	            }else if(!cropObj.GetComponent<CropGrowing>().Harvested())//harvest the crop
+	            }else if(PlayerStats.Harvest && !cropObj.GetComponent<CropGrowing>().Harvested())//harvest the crop
 	            {
 	            	cropObj.GetComponent<CropGrowing>().SetHarvested(true);
 	            	// Debug.Log("Harvest");
@@ -94,7 +94,7 @@ public class QuickHarvest : MonoBehaviour
 
             		ShowToast cScript = canvas.GetComponent<ShowToast>();
             		cScript.showCustomizedToast(text, "+"+randomHarvest, 1);
-
+					
 					// GameObject animObj = Instantiate(cropObj, cropObj.transform.position, cropObj.transform.rotation);
 					// animObj.name = cropObj.name;
 					// animObj.GetComponent<CropGrowing>().SetHarvested(true);
@@ -110,7 +110,7 @@ public class QuickHarvest : MonoBehaviour
 
 					Animator anim = cropObj.GetComponent<Animator>();
 					anim.Play("Harvest");
-
+					cropNotification.text = "";
 					yield return null;
 				}
 			}
