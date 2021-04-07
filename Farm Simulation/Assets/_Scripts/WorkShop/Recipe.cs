@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using System.Linq;
 
 public class Recipe : IComparable<Recipe>
 {
@@ -91,7 +90,28 @@ public class Recipe : IComparable<Recipe>
     {
         foreach(Recipe recipe in allRecipes)
         {
-            if(recipe.Ingredients().SequenceEqual(ingredients))
+            if(recipe.Ingredients().Length != ingredients.Count)
+                continue;
+            bool ingredientMatch = false;
+            foreach(string ingredient in recipe.Ingredients())
+            {
+                ingredientMatch = false;
+                foreach(string otherIngredient in ingredients)
+                {
+                    if(otherIngredient == ingredient)
+                    {
+                        ingredientMatch = true;
+                        break;
+                    }
+                }
+                // no match for this ingredient
+                if(!ingredientMatch)
+                    break;
+                // else, continue loop to find match for the rest ingredients
+            }
+            if(!ingredientMatch)
+                continue;
+            else //found the match recipe
                 return new Recipe(recipe.Name());
         }
         return null;
