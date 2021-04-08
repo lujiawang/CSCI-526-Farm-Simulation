@@ -1,16 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Cook : MonoBehaviour
 {
+    public Transform congratPanel;
+
 	IngredientsInventoryUI ingredientsUIScript;
 	RecipesInventoryUI recipesUIScript;
+
+    ZoomObj zoomScript;
+    FadeObj fadeScript;
 
 	Inventory inventory;
     // Start is called before the first frame update
     void Start()
     {
+        zoomScript = GetComponentInParent<Canvas>().rootCanvas.GetComponent<ZoomObj>();
+        fadeScript = GetComponentInParent<Canvas>().rootCanvas.GetComponent<FadeObj>();
+
         ingredientsUIScript = this.GetComponent<IngredientsInventoryUI>();
         recipesUIScript = GameObject.Find("Recipes").GetComponent<RecipesInventoryUI>();
 
@@ -44,10 +53,11 @@ public class Cook : MonoBehaviour
 
     	if(matchRecipe != null) //successfully cooked an item
     	{
-    		// store recipe; Update RecipesUI if is a newly found recipe
+    		// store recipe; Update RecipesUI and show congratulations if is a newly found recipe
     		if(Recipe.StoreRecipe(matchRecipe.Name()))
     		{
 	    		recipesUIScript.UpdateUI(false);
+                StartCoroutine(ShowCongrats(matchRecipe));
     		}
 
     		// Destroy ingredients menu objects
@@ -65,5 +75,26 @@ public class Cook : MonoBehaviour
 
     		// show some notifications
     	}
+    }
+
+    IEnumerator ShowCongrats(Recipe recipe)
+    {
+        string name = recipe.Name();
+        Sprite sprite = Item.GetItemSprite(name);
+        Transform itemButton = congratPanel.Find("InventorySlot").Find("ItemButton");
+        itemButton.Find("Text").GetComponent<Text>().text = name;
+        itemButton.Find("Item").GetComponent<Image>().sprite = sprite;
+
+        // Animations
+        congratPanel.GetComponent<CanvasGroup>().alpha = 1f;
+        yield return StartCoroutine(zoomScript.Zoom(congratPanel, true, 0.4f));
+        float counter = 0f;
+        float duration = 2f;
+        while (counter < duration)
+        {
+            counter += Time.deltaTime;
+            yield return null;
+        }
+        yield return StartCoroutine(fadeScript.Fade(congratPanel, false, 0.4f));
     }
 }

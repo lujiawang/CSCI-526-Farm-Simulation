@@ -76,6 +76,8 @@ public class AccentObj : MonoBehaviour
 	        counter += Time.deltaTime;
 	        yield return null;
 	    }
+	    if(target == null)
+			yield break;
 	    target.localScale = originalScale;
 	}
 

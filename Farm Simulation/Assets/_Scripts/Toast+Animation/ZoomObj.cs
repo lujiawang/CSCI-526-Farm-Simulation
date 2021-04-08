@@ -33,7 +33,7 @@ public class ZoomObj : MonoBehaviour
 		yield return lastCOR;
 	}
 
-	IEnumerator ZoomInOrOut(Transform target, bool zoomIn, float duration)
+	public IEnumerator ZoomInOrOut(Transform target, bool zoomIn, float duration)
 	{
 		if(target == null)
 			yield break;
