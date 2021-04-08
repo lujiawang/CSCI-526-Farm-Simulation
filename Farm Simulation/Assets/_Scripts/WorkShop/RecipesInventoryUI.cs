@@ -15,9 +15,12 @@ public class RecipesInventoryUI : MonoBehaviour
 	[SerializeField]
 	private bool resetRecipes = false;
 
+    ZoomObj zoomScript;
+
     // Start is called before the first frame update
     void Start()
     {
+        zoomScript = GetComponentInParent<Canvas>().rootCanvas.GetComponent<ZoomObj>();
     	if(resetRecipes)
     		PlayerPrefs.DeleteKey("recipesInventoryIndex");
     	// PlayerPrefs.SetString("recipesInventoryIndex", "FruitSalads CornSuccotash EggplantSoup CucumBurger TurnipRamen TomatoSandwich VeggieKebab Salmagundi VeggieRisotto Hodgepodge");
@@ -40,25 +43,62 @@ public class RecipesInventoryUI : MonoBehaviour
     	}
     	recipes.Sort();
 
-    	foreach(Transform child in itemsParent)
-    	{
-    		Destroy(child.gameObject);
-    	}
+        Coroutine lastDestoryCOR = null;
 
-		foreach(Recipe recipe in recipes)
-		{
-			Item item = new Item(recipe.Name(), 0);
-			InstantiateSlot(item, itemsParent, false);
+        // Delete recipes that are not in recipes list
+        for(int i = 0; i < itemsParent.childCount; i += 2)
+        {
+            string name = itemsParent.GetChild(i).GetChild(0).Find("Text").GetComponent<Text>().text;
+            bool doDestroy = true;
+            foreach(Recipe recipe in recipes)
+            {
+                if(name == recipe.Name())
+                {
+                    doDestroy = false;
+                    break;
+                }
+            }
+            if(doDestroy)
+            {
+                StartCoroutine(zoomScript.Zoom(itemsParent.GetChild(i), false));
+                lastDestoryCOR = StartCoroutine(zoomScript.Zoom(itemsParent.GetChild(i+1), false));
+            }
+        }
 
-			// instantiate the corresponding recipe bar
-			InstantiateBar(recipe);
-		}
+        int firstAddedRecipeIndex = -1;
+        // Add/Update recipes
+        for(int i = 0; i < recipes.Count; i++)
+        {
+            bool foundMatch = false;
+            for(int j = 0; j < itemsParent.childCount; j += 2)
+            {
+                string name = itemsParent.GetChild(j).GetChild(0).Find("Text").GetComponent<Text>().text;
+                if(name == recipes[i].Name()) // skip the child
+                {
+                    foundMatch = true;
+                    break;
+                }
+            }
+            if(!foundMatch) //instantiate a new recipe and its bar
+            {
+                GameObject newSlot = InstantiateSlot(new Item(recipes[i].Name(), 0), itemsParent, false);
+                newSlot.transform.SetSiblingIndex(i * 2);
+                GameObject newBar = InstantiateBar(recipes[i]);
+                newBar.transform.SetSiblingIndex(i * 2 + 1);
+
+                if(firstAddedRecipeIndex == -1)
+                    firstAddedRecipeIndex = i * 2;
+            }
+        }
 
         // change scroll height after updating UI
-        StartCoroutine(ScrollHeightRoutine(remainScrollPosition));
+        if(firstAddedRecipeIndex == -1)
+            StartCoroutine(ScrollHeightRoutine(remainScrollPosition, lastDestoryCOR));
+        else
+            StartCoroutine(ScrollHeightRoutine(firstAddedRecipeIndex, lastDestoryCOR));
     }
 
-    void InstantiateBar(Recipe recipe)
+    GameObject InstantiateBar(Recipe recipe)
     {
 		GameObject bar = Instantiate(recipeBarPrefab, itemsParent);
 		foreach(string name in recipe.Ingredients())
@@ -66,9 +106,14 @@ public class RecipesInventoryUI : MonoBehaviour
 			Item item = new Item(name, 0);
 			InstantiateSlot(item, bar.transform, true);
 		}
+
+        // animate: zoom in
+        StartCoroutine(zoomScript.Zoom(bar.transform, true));
+
+        return bar;
     }
 
-    void InstantiateSlot(Item item, Transform parent, bool belongsToBar)
+    GameObject InstantiateSlot(Item item, Transform parent, bool belongsToBar)
     {
     	GameObject slot = Instantiate(slotPrefab, parent);
     	Transform ItemButton = slot.transform.Find("ItemButton");
@@ -92,12 +137,28 @@ public class RecipesInventoryUI : MonoBehaviour
         {
         	ItemButton.Find("EqualSign").GetComponent<CanvasGroup>().alpha = 1f;
         }
+
+        // animate: zoom in
+        StartCoroutine(zoomScript.Zoom(slot.transform, true));
+
+        return slot;
     }
 
-    IEnumerator ScrollHeightRoutine(bool remainScrollPosition)
+    IEnumerator ScrollHeightRoutine(bool remainScrollPosition, Coroutine waitTillAfter)
     {
+        if(waitTillAfter != null)
+            yield return waitTillAfter;
         yield return null;
         ScrollHeight cScript = GetComponent<ScrollHeight>();
         cScript.UpdateHeight(itemsParent, remainScrollPosition);
+    }
+
+    IEnumerator ScrollHeightRoutine(int jumpToItemNumber, Coroutine waitTillAfter)
+    {
+        if(waitTillAfter != null)
+            yield return waitTillAfter;
+        yield return null;
+        ScrollHeight cScript = GetComponent<ScrollHeight>();
+        cScript.UpdateHeight(itemsParent, jumpToItemNumber);
     }
 }

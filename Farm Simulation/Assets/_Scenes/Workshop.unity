@@ -1713,6 +1713,7 @@ GameObject:
   - component: {fileID: 1491411571}
   - component: {fileID: 1491411570}
   - component: {fileID: 1491411569}
+  - component: {fileID: 1491411573}
   m_Layer: 5
   m_Name: WorkshopCanvas
   m_TagString: Untagged
@@ -1803,6 +1804,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1491411573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1491411568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dfb8f51d58cc4ec1b5ae08c1e397e5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultDuration: 0.3
 --- !u!1 &1566039055
 GameObject:
   m_ObjectHideFlags: 0

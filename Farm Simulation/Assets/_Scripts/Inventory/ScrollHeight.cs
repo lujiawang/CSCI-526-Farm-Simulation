@@ -12,6 +12,8 @@ public class ScrollHeight : MonoBehaviour
 	int columnCount; // columns of the inventory
 	float heightOfRow; // how much height to add if one more row is added
 
+	float lastBaselineY; //the baseline anchorY that places the scrollRect at the very top
+
 	float additionalHeight; // compensate for bottom objects that are partially hidden
 	float normalRowCount; //maximum rows the UI can show (including partially hidden rows)
 
@@ -33,6 +35,7 @@ public class ScrollHeight : MonoBehaviour
 		// Debug.Log(columnCount);
 		heightOfRow = itemsParentGrid.cellSize.y + itemsParentGrid.spacing.y;
 		// Debug.Log(heightOfRow);
+		lastBaselineY = originalAnchorY;
 		if(this.name == "Inventory")
 		{
 			additionalHeight = 0f;
@@ -53,9 +56,9 @@ public class ScrollHeight : MonoBehaviour
 
 	public float currentAnchorY()
 	{
-		float currAnchorY =  this.transform.GetChild(0).GetChild(0).gameObject.GetComponent<RectTransform>().anchoredPosition.y;
+		return this.transform.GetChild(0).GetChild(0).gameObject.GetComponent<RectTransform>().anchoredPosition.y;
 		// Debug.Log("current anchor Y= " + currAnchorY);
-		return currAnchorY;
+		// return currAnchorY;
 	}
 
 	public void UpdateHeight(Transform itemsParent, bool remainScrollPosition)
@@ -63,12 +66,18 @@ public class ScrollHeight : MonoBehaviour
 		StartCoroutine(UpdateHeightRoutine(itemsParent, remainScrollPosition));
 	}
 
+	public void UpdateHeight(Transform itemsParent, int jumpToItemNumber)
+	{
+		StartCoroutine(UpdateHeightRoutine(itemsParent, jumpToItemNumber));
+	}
+
 	public IEnumerator UpdateHeightRoutine(Transform itemsParent, bool remainScrollPosition)
 	{
 		int rows = (itemsParent.childCount + columnCount - 1) / columnCount;
 		// Debug.Log(rows);
 		RectTransform rectTransform = itemsParent.GetComponent<RectTransform>();
-		float prevAnchorY = rectTransform.anchoredPosition.y;
+		// float prevAnchorY = rectTransform.anchoredPosition.y;
+		float diffAnchorY = currentAnchorY() - lastBaselineY;
 		if(rows > normalRowCount)
 		{
 			float addHeight = (rows - normalRowCount) * heightOfRow + additionalHeight;
@@ -85,15 +94,45 @@ public class ScrollHeight : MonoBehaviour
 			rectTransform.anchoredPosition = new Vector2(originalAnchorX, originalAnchorY);
 		}
 
+		lastBaselineY = currentAnchorY();
+
 		// remain at scroll position per request
-		if(remainScrollPosition && rows >= normalRowCount)
-			rectTransform.anchoredPosition = new Vector2(originalAnchorX, prevAnchorY);
+		if(remainScrollPosition)
+			rectTransform.anchoredPosition = new Vector2(originalAnchorX, diffAnchorY + currentAnchorY());
+		// if(remainScrollPosition && rows >= normalRowCount)
+		// 	rectTransform.anchoredPosition = new Vector2(originalAnchorX, prevAnchorY);
 
 		yield return null;
-		// Debug.Log("current anchor Y= "+rectTransform.anchoredPosition.y);
-		// Debug.Log(rectTransform.offsetMax);
-		// Debug.Log(rectTransform.sizeDelta.y);
-		// Debug.Log(rectTransform.sizeDelta.y);
+	}
+
+	public IEnumerator UpdateHeightRoutine(Transform itemsParent, int jumpToItemNumber)
+	{
+		int rows = (itemsParent.childCount + columnCount - 1) / columnCount;
+		RectTransform rectTransform = itemsParent.GetComponent<RectTransform>();
+		int jumpToRow = (jumpToItemNumber + columnCount) / columnCount; //start from row 1
+		float diffAnchorY = (jumpToRow - 1) * heightOfRow;
+		if(rows > normalRowCount)
+		{
+			float addHeight = (rows - normalRowCount) * heightOfRow + additionalHeight;
+			rectTransform.sizeDelta = new Vector2(originalWidth, originalHeight + addHeight);
+			rectTransform.anchoredPosition = new Vector2(originalAnchorX, originalAnchorY - addHeight/2);
+		}else if(rows == normalRowCount)
+		{
+			float addHeight = additionalHeight;
+			rectTransform.sizeDelta = new Vector2(originalWidth, originalHeight + addHeight);
+			rectTransform.anchoredPosition = new Vector2(originalAnchorX, originalAnchorY - addHeight/2);
+		}else
+		{
+			rectTransform.sizeDelta = new Vector2(originalWidth, originalHeight);
+			rectTransform.anchoredPosition = new Vector2(originalAnchorX, originalAnchorY);
+		}
+
+		lastBaselineY = currentAnchorY();
+
+		// jump to position per request
+		rectTransform.anchoredPosition = new Vector2(originalAnchorX, diffAnchorY + currentAnchorY());
+
+		yield return null;
 	}
 
 }

@@ -32,7 +32,7 @@ public class Inventory : MonoBehaviour
 
     public static int stackLimit = 99; //stack limit of items
 
-    public delegate void OnItemChanged(bool remainScrollPosition, bool doDestroyAll);
+    public delegate void OnItemChanged(bool remainScrollPosition);
     public OnItemChanged onItemChangedCallback;
 
     // Define how many things you want to add to inventory at the beginning.
@@ -108,7 +108,7 @@ public class Inventory : MonoBehaviour
     	if (onItemChangedCallback != null)
         {
             // StartCoroutine(onItemChangedCallback.Invoke());
-            onItemChangedCallback.Invoke(false, true);
+            onItemChangedCallback.Invoke(false);
         }
         
         bool endLoop = false;
@@ -144,7 +144,7 @@ public class Inventory : MonoBehaviour
         if (onItemChangedCallback != null)
         {
             // StartCoroutine(onItemChangedCallback.Invoke());
-            onItemChangedCallback.Invoke(false, true);
+            onItemChangedCallback.Invoke(false);
         }
     }
 
@@ -162,7 +162,7 @@ public class Inventory : MonoBehaviour
             items.Add(item);
             if (onItemChangedCallback != null)
 	        {
-	            onItemChangedCallback.Invoke(true, true);
+	            onItemChangedCallback.Invoke(true);
 	        }
             // Play sounds
             if(playDefaultSound)
@@ -184,7 +184,7 @@ public class Inventory : MonoBehaviour
                         items.RemoveAt(i);
                         if (onItemChangedCallback != null)
                         {
-                            onItemChangedCallback.Invoke(true, true);
+                            onItemChangedCallback.Invoke(true);
                         }
                         // Play sounds
                         if(playDefaultSound)
@@ -193,7 +193,7 @@ public class Inventory : MonoBehaviour
                     }
                     if (onItemChangedCallback != null)
 			        {
-			            onItemChangedCallback.Invoke(true, false);
+			            onItemChangedCallback.Invoke(true);
 			        }
                     // Play sounds
                     if(playDefaultSound)
@@ -204,7 +204,7 @@ public class Inventory : MonoBehaviour
                     items[i].SetNum(stackLimit);
                     if (onItemChangedCallback != null)
 			        {
-			            onItemChangedCallback.Invoke(true, false);
+			            onItemChangedCallback.Invoke(true);
 			        }
                     // Play sounds
                     if(playDefaultSound)
@@ -225,7 +225,7 @@ public class Inventory : MonoBehaviour
                 items.Add(item);
                 if (onItemChangedCallback != null)
 		        {
-		            onItemChangedCallback.Invoke(true, true);
+		            onItemChangedCallback.Invoke(true);
 		        }
                 if(playDefaultSound)
                     soundManager.PlaySound(0);
@@ -248,7 +248,7 @@ public class Inventory : MonoBehaviour
             items.Add(item);
             if (onItemChangedCallback != null)
             {
-                onItemChangedCallback.Invoke(true, true);
+                onItemChangedCallback.Invoke(true);
             }
             // Play sounds
             soundManager.PlaySound(0);
@@ -269,7 +269,7 @@ public class Inventory : MonoBehaviour
                         items.RemoveAt(i);
                         if (onItemChangedCallback != null)
                         {
-                            onItemChangedCallback.Invoke(true, true);
+                            onItemChangedCallback.Invoke(true);
                         }
                         // Play sounds
                         soundManager.PlaySound(2);
@@ -277,7 +277,7 @@ public class Inventory : MonoBehaviour
                     }
                     if (onItemChangedCallback != null)
                     {
-                        onItemChangedCallback.Invoke(true, false);
+                        onItemChangedCallback.Invoke(true);
                     }
                     // Play sounds
                     soundManager.PlaySound(num>0?0:1);
@@ -287,7 +287,7 @@ public class Inventory : MonoBehaviour
                     items[i].SetNum(stackLimit);
                     if (onItemChangedCallback != null)
                     {
-                        onItemChangedCallback.Invoke(true, false);
+                        onItemChangedCallback.Invoke(true);
                     }
                     // Play sounds
                     soundManager.PlaySound(0);
@@ -306,7 +306,7 @@ public class Inventory : MonoBehaviour
                 items.Add(item);
                 if (onItemChangedCallback != null)
                 {
-                    onItemChangedCallback.Invoke(true, true);
+                    onItemChangedCallback.Invoke(true);
                 }
                 soundManager.PlaySound(0);
                 break;

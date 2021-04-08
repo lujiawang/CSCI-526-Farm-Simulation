@@ -47,13 +47,13 @@ public class BuySellItem : MonoBehaviour
         if(PlayerStats.Currency >= price)
         {
             string name = this.transform.Find("Text").gameObject.GetComponent<Text>().text;
-            storeInventory.Add(name, -1);
-            inventory.Add(name, 1);
-            PlayerStats.ChangeCurrency(-price);
-
             // change tab if necessary
             InventoryUI cScript = canvas.Find("Inventory").GetComponent<InventoryUI>();
             cScript.ToggleRespectiveShowButton(Item.GetItemId(name));
+
+            storeInventory.Add(name, -1);
+            inventory.Add(name, 1);
+            PlayerStats.ChangeCurrency(-price);
         }else
         {
             ShowToast cScript = canvas.gameObject.GetComponent<ShowToast>();
@@ -70,13 +70,13 @@ public class BuySellItem : MonoBehaviour
         if(storeInventoryCanvasGroup.blocksRaycasts)
         {
             string name = this.transform.Find("Text").gameObject.GetComponent<Text>().text;
-            storeInventory.Add(name, 1);
-            inventory.Add(name, -1);
-            PlayerStats.ChangeCurrency(price);
-
             // change tab if necessary
             StoreInventoryUI cScript = canvas.Find("StoreInventory").GetComponent<StoreInventoryUI>();
             cScript.ToggleRespectiveShowButton(Item.GetItemId(name));
+
+            storeInventory.Add(name, 1);
+            inventory.Add(name, -1);
+            PlayerStats.ChangeCurrency(price);
         }else //store is closed, show toast message
         {
             // ShowToast cScript = canvas.gameObject.GetComponent<ShowToast>();

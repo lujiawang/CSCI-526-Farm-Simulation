@@ -31,10 +31,13 @@ public class SelectAsIngredient : MonoBehaviour
     	if(motherInventory.name == "Ingredients") //Deselect item from ingredients
     	{
     		uiScript.RemoveItem(name, this.transform.parent.gameObject);
+            // change tab if necessary
+            InventoryUI cScript = GameObject.Find("Inventory").GetComponent<InventoryUI>();
+            cScript.ToggleRespectiveShowButton(Item.GetItemId(name));
+
     		inventory.Add(name, 1);
 
-    		InventoryUI cScript = GameObject.Find("Inventory").GetComponent<InventoryUI>();
-            cScript.ToggleRespectiveShowButton(Item.GetItemId(name));
+    		
     	}else //Select item from inventory as ingredient
     	{
     		if(uiScript.AddItem(name))

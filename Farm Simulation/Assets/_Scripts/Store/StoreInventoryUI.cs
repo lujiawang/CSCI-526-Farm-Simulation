@@ -11,6 +11,8 @@ public class StoreInventoryUI : MonoBehaviour
 
 	public GameObject slotPrefab;
 
+    ZoomObj zoomScript;
+
 	StoreInventory storeInventory;
 
     bool showSeeds = true;
@@ -20,6 +22,7 @@ public class StoreInventoryUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        zoomScript = GetComponentInParent<Canvas>().rootCanvas.GetComponent<ZoomObj>();
     	storeInventory = StoreInventory.instance;
     	storeInventory.onStoreItemChangedCallback += UpdateUI;
     }
@@ -82,7 +85,7 @@ public class StoreInventoryUI : MonoBehaviour
             showHarvests = true;
             showOthers = true;
         }
-        UpdateUI(false, true);
+        UpdateUI(false);
     }
 
     public bool GetShowParam(string showParam)
@@ -162,61 +165,107 @@ public class StoreInventoryUI : MonoBehaviour
         }
     }
 
-    void UpdateUI(bool remainScrollPosition, bool doDestroyAll)
+    void UpdateUI(bool remainScrollPosition)
     {
-    	// Debug.Log("Updating Inventory UI");
-    	InventorySlot[] slots = itemsParent.GetComponentsInChildren<InventorySlot>(false);
-
-    	// Debug.Log(itemsCount);
-        if(!doDestroyAll)
-        {
-            int i = 0;
-            foreach(Item item in storeInventory.items)
-            {
-                if(!ShouldShow(item.Id()))
-                    continue;
-                // update displayed number
-                slots[i].transform.Find("ItemButton").Find("Number").GetComponent<Text>().text = "" + item.Num();
-                i++;
-            }
-            return;
-        }
-
+        Coroutine lastDestoryCOR = null;
         storeInventory.items.Sort();
-
-        foreach(Transform slot in itemsParent)
-        {
-            Destroy(slot.gameObject);
-        }
-
+        // inventory.items should always be sorted
+        List<Item> showItems = new List<Item>();
         foreach(Item item in storeInventory.items)
         {
-            if(!ShouldShow(item.Id()))
-                continue;
-            GameObject newSlot = Instantiate(slotPrefab, itemsParent);
-            Transform ItemButton = newSlot.transform.Find("ItemButton");
-            // change Name
-            ItemButton.Find("Text").GetComponent<Text>().text = item.Name();
-            // change Number
-            ItemButton.Find("Number").GetComponent<Text>().text = "" + item.Num();
-            // set "Value"
-            ItemButton.Find("Price").GetComponent<Text>().text = "" + item.BuyPrice();
-            // disable DragAndDrop script
-            ItemButton.Find("Item").GetComponent<DragAndDrop>().enabled = false;
-            // change Sprite
-            ItemButton.Find("Item").GetComponent<Image>().sprite = item.Icon();
-            // change "Item" to the new name
-            ItemButton.Find("Item").name = item.Name();
+            if(ShouldShow(item.Id()))
+                showItems.Add(item);
         }
 
-        StartCoroutine(ScrollHeightRoutine(remainScrollPosition));
+        // Delete items that are not in showItems list
+        foreach(Transform slot in itemsParent)
+        {
+            string name = slot.GetChild(0).Find("Text").GetComponent<Text>().text;
+            bool doDestroy = true;
+            foreach(Item item in showItems)
+            {
+                if(name == item.Name())
+                {
+                    doDestroy = false;
+                    break;
+                }
+            }
+            if(doDestroy)
+                lastDestoryCOR = StartCoroutine(zoomScript.Zoom(slot, false));
+        }
 
+        int firstAddedItemIndex = -1;
+        // Add/Update items
+        for(int i = 0; i < showItems.Count; i++)
+        {
+            bool foundMatch = false;
+            foreach(Transform slot in itemsParent)
+            {
+                string name = slot.GetChild(0).Find("Text").GetComponent<Text>().text;
+                if(name == showItems[i].Name()) // update matches, without rerendering them
+                {
+                    int prevNum = Convert.ToInt16(slot.GetChild(0).Find("Number").GetComponent<Text>().text);
+                    if(prevNum < showItems[i].Num() && firstAddedItemIndex == -1)
+                        firstAddedItemIndex = i;
+                    slot.GetChild(0).Find("Number").GetComponent<Text>().text = "" + showItems[i].Num();
+                    foundMatch = true;
+                    break;
+                }
+            }
+            if(!foundMatch) //instantiate a new slot
+            {
+                if(firstAddedItemIndex == -1)
+                    firstAddedItemIndex = i;
+                GameObject newSlot = InstantiateSlot(showItems[i]);
+                newSlot.transform.SetSiblingIndex(i);
+            }
+        }
+
+        // change scroll height after updating UI
+        if(firstAddedItemIndex == -1)
+            StartCoroutine(ScrollHeightRoutine(remainScrollPosition, lastDestoryCOR));
+        else
+            StartCoroutine(ScrollHeightRoutine(firstAddedItemIndex, lastDestoryCOR));
     }
 
-    IEnumerator ScrollHeightRoutine(bool remainScrollPosition)
+    GameObject InstantiateSlot(Item item)
     {
+        GameObject slot = Instantiate(slotPrefab, itemsParent);
+        Transform ItemButton = slot.transform.Find("ItemButton");
+        // change Name
+        ItemButton.Find("Text").GetComponent<Text>().text = item.Name();
+        // change Number
+        ItemButton.Find("Number").GetComponent<Text>().text = "" + item.Num();
+        // set "Value"
+        ItemButton.Find("Price").GetComponent<Text>().text = "" + item.BuyPrice();
+        // disable DragAndDrop script
+        ItemButton.Find("Item").GetComponent<DragAndDrop>().enabled = false;
+        // change Sprite
+        ItemButton.Find("Item").GetComponent<Image>().sprite = item.Icon();
+        // change "Item" to the new name
+        ItemButton.Find("Item").name = item.Name();
+
+        // animate: zoom in
+        StartCoroutine(zoomScript.Zoom(slot.transform, true));
+
+        return slot;
+    }
+
+    IEnumerator ScrollHeightRoutine(bool remainScrollPosition, Coroutine waitTillAfter)
+    {
+        if(waitTillAfter != null)
+            yield return waitTillAfter;
         yield return null;
         ScrollHeight cScript = GetComponent<ScrollHeight>();
         cScript.UpdateHeight(itemsParent, remainScrollPosition);
+    }
+
+    IEnumerator ScrollHeightRoutine(int firstAddedItemIndex, Coroutine waitTillAfter)
+    {
+        if(waitTillAfter != null)
+            yield return waitTillAfter;
+        yield return null;
+        ScrollHeight cScript = GetComponent<ScrollHeight>();
+        cScript.UpdateHeight(itemsParent, firstAddedItemIndex);
     }
 }

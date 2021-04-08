@@ -16,10 +16,12 @@ public class IngredientsInventoryUI : MonoBehaviour
 	public static int ingredientLowerLimit = 2;
 
 	ShowToast showToastScript;
+    ZoomObj zoomScript;
 
     // Start is called before the first frame update
     void Start()
     {
+        zoomScript = GetComponentInParent<Canvas>().rootCanvas.GetComponent<ZoomObj>();
     	if(GameObject.Find("Canvas") != null)
     		showToastScript = GameObject.Find("Canvas").GetComponent<ShowToast>();
     	if(PlayerPrefs.HasKey("ingredientsInventoryIndex"))
@@ -81,7 +83,7 @@ public class IngredientsInventoryUI : MonoBehaviour
     		{
     			ingredients.RemoveAt(i);
     			// Debug.Log("Removed. The rest ingredients: " + ingredients.Count);
-    			Destroy(slot);	
+                StartCoroutine(zoomScript.Zoom(slot.transform, false));
     			return;
     		}
     	}
@@ -112,6 +114,9 @@ public class IngredientsInventoryUI : MonoBehaviour
         ItemButton.Find("Item").GetComponent<Image>().sprite = item.Icon();
         // change "Item" to the new name
         ItemButton.Find("Item").gameObject.name = item.Name();
+
+        // animate: zoom in
+        StartCoroutine(zoomScript.Zoom(slot.transform, true));
     }
 
 }

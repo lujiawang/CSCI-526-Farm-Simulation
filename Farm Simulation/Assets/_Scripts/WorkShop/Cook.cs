@@ -52,6 +52,10 @@ public class Cook : MonoBehaviour
 
     		// Destroy ingredients menu objects
     		ingredientsUIScript.DestroyAll();
+
+    		// change tab if necessary
+            InventoryUI cScript = GameObject.Find("Inventory").GetComponent<InventoryUI>();
+            cScript.ToggleRespectiveShowButton(Item.GetItemId(matchRecipe.Name()));
     		// Add cooked food to inventory
     		inventory.Add(matchRecipe.Name(), 1);
     	}else //failed in cooking

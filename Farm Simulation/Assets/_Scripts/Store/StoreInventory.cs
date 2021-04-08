@@ -29,7 +29,7 @@ public class StoreInventory : MonoBehaviour
     [Range(1, 40)]
     public int randomizeItemTypes = 30; //5 // when randomizing, how many types of crops that can be generated
 
-    public delegate void OnStoreItemChanged(bool remainScrollPosition, bool doDestroyAll);
+    public delegate void OnStoreItemChanged(bool remainScrollPosition);
     public OnStoreItemChanged onStoreItemChangedCallback;
     // subscribe any method to this callback to notify self of changes made in inventory
 
@@ -102,7 +102,7 @@ public class StoreInventory : MonoBehaviour
     	if (onStoreItemChangedCallback != null)
         {
             // StartCoroutine(onStoreItemChangedCallback.Invoke(false));
-            onStoreItemChangedCallback.Invoke(false, true);
+            onStoreItemChangedCallback.Invoke(false);
         }
         if(StoreToggle.isStoreOpen)
             soundManager.PlaySound(5);
@@ -131,7 +131,7 @@ public class StoreInventory : MonoBehaviour
         if (onStoreItemChangedCallback != null)
         {
             // StartCoroutine(onStoreItemChangedCallback.Invoke());
-            onStoreItemChangedCallback.Invoke(false, true);
+            onStoreItemChangedCallback.Invoke(false);
         }
     }
 
@@ -172,7 +172,7 @@ public class StoreInventory : MonoBehaviour
             items.Add(item);
             if (onStoreItemChangedCallback != null)
             {
-                onStoreItemChangedCallback.Invoke(true, true);
+                onStoreItemChangedCallback.Invoke(true);
             }
             // Play sounds
             if(playDefaultSound)
@@ -194,7 +194,7 @@ public class StoreInventory : MonoBehaviour
                         items.RemoveAt(i);
                         if (onStoreItemChangedCallback != null)
                         {
-                            onStoreItemChangedCallback.Invoke(true, true);
+                            onStoreItemChangedCallback.Invoke(true);
                         }
                         // Play sounds
                         if(playDefaultSound)
@@ -203,7 +203,7 @@ public class StoreInventory : MonoBehaviour
                     }
                     if (onStoreItemChangedCallback != null)
                     {
-                        onStoreItemChangedCallback.Invoke(true, false);
+                        onStoreItemChangedCallback.Invoke(true);
                     }
                     // Play sounds
                     if(playDefaultSound)
@@ -214,7 +214,7 @@ public class StoreInventory : MonoBehaviour
                     items[i].SetNum(stackLimit);
                     if (onStoreItemChangedCallback != null)
                     {
-                        onStoreItemChangedCallback.Invoke(true, false);
+                        onStoreItemChangedCallback.Invoke(true);
                     }
                     // Play sounds
                     if(playDefaultSound)
@@ -235,7 +235,7 @@ public class StoreInventory : MonoBehaviour
                 items.Add(item);
                 if (onStoreItemChangedCallback != null)
                 {
-                    onStoreItemChangedCallback.Invoke(true, true);
+                    onStoreItemChangedCallback.Invoke(true);
                 }
                 if(playDefaultSound)
                     soundManager.PlaySound(4);
@@ -258,7 +258,7 @@ public class StoreInventory : MonoBehaviour
             items.Add(item);
             if (onStoreItemChangedCallback != null)
             {
-                onStoreItemChangedCallback.Invoke(true, true);
+                onStoreItemChangedCallback.Invoke(true);
             }
             // Play sounds
             soundManager.PlaySound(4);
@@ -279,7 +279,7 @@ public class StoreInventory : MonoBehaviour
                         items.RemoveAt(i);
                         if (onStoreItemChangedCallback != null)
                         {
-                            onStoreItemChangedCallback.Invoke(true, true);
+                            onStoreItemChangedCallback.Invoke(true);
                         }
                         // Play sounds
                         soundManager.PlaySound(3);
@@ -287,7 +287,7 @@ public class StoreInventory : MonoBehaviour
                     }
                     if (onStoreItemChangedCallback != null)
                     {
-                        onStoreItemChangedCallback.Invoke(true, false);
+                        onStoreItemChangedCallback.Invoke(true);
                     }
                     // Play sounds
                     soundManager.PlaySound(num>0?4:3);
@@ -297,7 +297,7 @@ public class StoreInventory : MonoBehaviour
                     items[i].SetNum(stackLimit);
                     if (onStoreItemChangedCallback != null)
                     {
-                        onStoreItemChangedCallback.Invoke(true, false);
+                        onStoreItemChangedCallback.Invoke(true);
                     }
                     // Play sounds
                     soundManager.PlaySound(4);
@@ -316,7 +316,7 @@ public class StoreInventory : MonoBehaviour
                 items.Add(item);
                 if (onStoreItemChangedCallback != null)
                 {
-                    onStoreItemChangedCallback.Invoke(true, true);
+                    onStoreItemChangedCallback.Invoke(true);
                 }
                 soundManager.PlaySound(4);
                 break;
