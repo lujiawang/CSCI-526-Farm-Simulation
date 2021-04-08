@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3360789966346913380}
   - component: {fileID: 3360789966346913403}
   - component: {fileID: 238350636376866736}
+  - component: {fileID: 1617473302832374463}
   m_Layer: 5
   m_Name: RecipeBar
   m_TagString: Untagged
@@ -69,3 +70,15 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3360789966346913381}
   m_CullTransparentMesh: 0
+--- !u!225 &1617473302832374463
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3360789966346913381}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0

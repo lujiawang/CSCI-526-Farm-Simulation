@@ -203,7 +203,7 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
                 copyCrop.SetActive(true);
 
                 inventory.Add(this.name, -1);
-                break; 
+                break;
             }
         }
         

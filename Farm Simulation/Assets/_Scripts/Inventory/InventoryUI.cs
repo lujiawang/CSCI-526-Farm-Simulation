@@ -12,6 +12,7 @@ public class InventoryUI : MonoBehaviour
 	public GameObject slotPrefab;
 
     ZoomObj zoomScript;
+    AccentObj accentScript;
 
 	Inventory inventory;
 
@@ -24,6 +25,7 @@ public class InventoryUI : MonoBehaviour
     void Start()
     {
         zoomScript = GetComponentInParent<Canvas>().rootCanvas.GetComponent<ZoomObj>();
+        accentScript = GetComponentInParent<Canvas>().rootCanvas.GetComponent<AccentObj>();
     	inventory = Inventory.instance;
     	inventory.onItemChangedCallback += UpdateUI;    
     }
@@ -225,9 +227,14 @@ public class InventoryUI : MonoBehaviour
                 if(name == showItems[i].Name()) // update matches, without rerendering them
                 {
                     int prevNum = Convert.ToInt16(slot.GetChild(0).Find("Number").GetComponent<Text>().text);
+                    // mark the firstAddedItem
                     if(prevNum < showItems[i].Num() && firstAddedItemIndex == -1)
                         firstAddedItemIndex = i;
+                    // Accent the number change
+                    if(prevNum != showItems[i].Num())
+                        StartCoroutine(accentScript.Accent(slot.GetChild(0).Find("Number")));
                     slot.GetChild(0).Find("Number").GetComponent<Text>().text = "" + showItems[i].Num();
+                    // slot.SetSiblingIndex(i);
                     ShowHideDeleteBtn(slot.gameObject);
                     foundMatch = true;
                     break;

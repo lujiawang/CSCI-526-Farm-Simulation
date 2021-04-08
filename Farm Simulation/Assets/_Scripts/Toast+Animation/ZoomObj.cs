@@ -16,7 +16,7 @@ public class ZoomObj : MonoBehaviour
 		if(target == null)
 			yield break;
 		if(target == lastTarget && lastCOR != null) StopCoroutine(lastCOR);
-		lastCOR = StartCoroutine(zoomInOrOut(target, zoomIn, defaultDuration));
+		lastCOR = StartCoroutine(ZoomInOrOut(target, zoomIn, defaultDuration));
 		lastTarget = target;
 
 		yield return lastCOR;
@@ -27,13 +27,13 @@ public class ZoomObj : MonoBehaviour
 		if(target == null)
 			yield break;
 		if(target == lastTarget && lastCOR != null) StopCoroutine(lastCOR);
-		lastCOR = StartCoroutine(zoomInOrOut(target, zoomIn, duration));
+		lastCOR = StartCoroutine(ZoomInOrOut(target, zoomIn, duration));
 		lastTarget = target;
 
 		yield return lastCOR;
 	}
 
-	IEnumerator zoomInOrOut(Transform target, bool zoomIn, float duration)
+	IEnumerator ZoomInOrOut(Transform target, bool zoomIn, float duration)
 	{
 		if(target == null)
 			yield break;
@@ -66,8 +66,11 @@ public class ZoomObj : MonoBehaviour
 	        yield return null;
 	    }
 	    // destroy target when zooming out
-	    if(!zoomIn)
+	    if(!zoomIn && target != null)
+	    {
+	    	// Debug.Log("deleted");
 	    	Destroy(target.gameObject);
+	    }
 	}
 
 }
