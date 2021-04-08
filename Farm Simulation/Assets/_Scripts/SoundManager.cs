@@ -63,6 +63,18 @@ public class SoundManager : MonoBehaviour
             case "Bell": // harvest crop
 				index = 10;
 				break;
+			case "FoundRecipeSound":
+				index = 11;
+				break;
+			case "CookSuccessSound":
+				index = 12;
+				break;
+			case "CookFailureSound":
+				index = 13;
+				break;
+			case "CookStartSound":
+				index = 14;
+				break;
 			default:
 				Debug.LogWarning("invalid clip name!");
 				return false;

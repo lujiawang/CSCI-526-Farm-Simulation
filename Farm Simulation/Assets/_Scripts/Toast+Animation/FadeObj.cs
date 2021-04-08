@@ -10,7 +10,6 @@ public class FadeObj : MonoBehaviour
 
 	[Range(0,1)]
 	public float defaultDuration = 0.3f;
-	float stayStillDuration = 0.1f;
 
 	public IEnumerator Fade(Transform target, bool fadeIn)
 	{

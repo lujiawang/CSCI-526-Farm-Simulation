@@ -6,7 +6,10 @@ using UnityEngine.UI;
 public class Cook : MonoBehaviour
 {
     public Transform congratPanel;
-
+    Coroutine showCongratsCOR;
+    public Text failureToast;
+    string failureMessage = "An unpleasant smell overwhelmed you as you approached the pot. You had to throw all this garbage out...";
+    
 	IngredientsInventoryUI ingredientsUIScript;
 	RecipesInventoryUI recipesUIScript;
 
@@ -14,6 +17,7 @@ public class Cook : MonoBehaviour
     FadeObj fadeScript;
 
 	Inventory inventory;
+    SoundManager soundManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +28,7 @@ public class Cook : MonoBehaviour
         recipesUIScript = GameObject.Find("Recipes").GetComponent<RecipesInventoryUI>();
 
         inventory = Inventory.instance;
+        soundManager = SoundManager.instance;
     }
 
     public void Cooking()
@@ -48,16 +53,22 @@ public class Cook : MonoBehaviour
     		return;
     	}
 
+        // play sound as cooing starts
+        soundManager.PlaySound(14);
+
     	Recipe matchRecipe = Recipe.MatchRecipe(ingredients);
     	// Debug.Log(matchRecipe);
 
     	if(matchRecipe != null) //successfully cooked an item
     	{
     		// store recipe; Update RecipesUI and show congratulations if is a newly found recipe
-    		if(Recipe.StoreRecipe(matchRecipe.Name()))
+            bool isNewRecipe = Recipe.StoreRecipe(matchRecipe.Name());
+    		if(isNewRecipe)
     		{
 	    		recipesUIScript.UpdateUI(false);
-                StartCoroutine(ShowCongrats(matchRecipe));
+                showCongratsCOR = StartCoroutine(ShowCongrats(matchRecipe, showCongratsCOR));
+                // play sound
+                soundManager.PlaySound(11);
     		}
 
     		// Destroy ingredients menu objects
@@ -68,13 +79,29 @@ public class Cook : MonoBehaviour
             cScript.ToggleRespectiveShowButton(Item.GetItemId(matchRecipe.Name()));
     		// Add cooked food to inventory
     		inventory.Add(matchRecipe.Name(), 1);
+
+            // play sound
+            if(!isNewRecipe)
+                soundManager.PlaySound(12);
     	}else //failed in cooking
     	{
     		// Destroy ingredients menu objects
     		ingredientsUIScript.DestroyAll();
 
-    		// show some notifications
+    		// show notifications
+            ShowToast cScript = GameObject.Find("Canvas").GetComponent<ShowToast>();
+            cScript.showCustomizedToast(failureToast, failureMessage, 2);
+
+            // play sound
+            soundManager.PlaySound(13);
     	}
+    }
+
+    IEnumerator ShowCongrats(Recipe recipe, Coroutine waitTillAfter)
+    {
+        if(waitTillAfter != null)
+            yield return waitTillAfter;
+        yield return ShowCongrats(recipe);
     }
 
     IEnumerator ShowCongrats(Recipe recipe)
