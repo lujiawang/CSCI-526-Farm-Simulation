@@ -77,7 +77,9 @@ public class ScrollHeight : MonoBehaviour
 		// Debug.Log(rows);
 		RectTransform rectTransform = itemsParent.GetComponent<RectTransform>();
 		// float prevAnchorY = rectTransform.anchoredPosition.y;
+
 		float diffAnchorY = currentAnchorY() - lastBaselineY;
+
 		if(rows > normalRowCount)
 		{
 			float addHeight = (rows - normalRowCount) * heightOfRow + additionalHeight;
@@ -95,6 +97,10 @@ public class ScrollHeight : MonoBehaviour
 		}
 
 		lastBaselineY = currentAnchorY();
+
+		// adjust diffAnchorY in case it goes out of bounds
+		float maxDiffAnchorY = rectTransform.sizeDelta.y - originalHeight;
+		diffAnchorY = diffAnchorY > maxDiffAnchorY ? maxDiffAnchorY : diffAnchorY;
 
 		// remain at scroll position per request
 		if(remainScrollPosition)
@@ -110,7 +116,9 @@ public class ScrollHeight : MonoBehaviour
 		int rows = (itemsParent.childCount + columnCount - 1) / columnCount;
 		RectTransform rectTransform = itemsParent.GetComponent<RectTransform>();
 		int jumpToRow = (jumpToItemNumber + columnCount) / columnCount; //start from row 1
+
 		float diffAnchorY = (jumpToRow - 1) * heightOfRow;
+
 		if(rows > normalRowCount)
 		{
 			float addHeight = (rows - normalRowCount) * heightOfRow + additionalHeight;
@@ -128,6 +136,10 @@ public class ScrollHeight : MonoBehaviour
 		}
 
 		lastBaselineY = currentAnchorY();
+
+		// adjust diffAnchorY in case it goes out of bounds
+		float maxDiffAnchorY = rectTransform.sizeDelta.y - originalHeight;
+		diffAnchorY = diffAnchorY > maxDiffAnchorY ? maxDiffAnchorY : diffAnchorY;
 
 		// jump to position per request
 		rectTransform.anchoredPosition = new Vector2(originalAnchorX, diffAnchorY + currentAnchorY());

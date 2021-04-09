@@ -1323,6 +1323,7 @@ GameObject:
   - component: {fileID: 145418765}
   - component: {fileID: 145418766}
   - component: {fileID: 145418767}
+  - component: {fileID: 145418768}
   m_Layer: 5
   m_Name: Inventory
   m_TagString: Inventory
@@ -1435,6 +1436,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5f1dbde9c63e4e54987f518924a90d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &145418768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145418760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80f1602c325aa48ccbff647aa27412d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultDuration: 0.3
 --- !u!1 &151789006
 GameObject:
   m_ObjectHideFlags: 0
@@ -3620,6 +3634,7 @@ GameObject:
   - component: {fileID: 590700675}
   - component: {fileID: 590700677}
   - component: {fileID: 590700678}
+  - component: {fileID: 590700679}
   m_Layer: 5
   m_Name: StoreInventory
   m_TagString: Untagged
@@ -3699,6 +3714,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5f1dbde9c63e4e54987f518924a90d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &590700679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590700673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80f1602c325aa48ccbff647aa27412d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultDuration: 0.3
 --- !u!1 &609456504
 GameObject:
   m_ObjectHideFlags: 0
@@ -6573,7 +6601,6 @@ GameObject:
   - component: {fileID: 898836069}
   - component: {fileID: 898836071}
   - component: {fileID: 898836072}
-  - component: {fileID: 898836073}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Canvas
@@ -6729,19 +6756,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8dfb8f51d58cc4ec1b5ae08c1e397e5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultDuration: 0.3
---- !u!114 &898836073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 898836064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80f1602c325aa48ccbff647aa27412d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   defaultDuration: 0.3

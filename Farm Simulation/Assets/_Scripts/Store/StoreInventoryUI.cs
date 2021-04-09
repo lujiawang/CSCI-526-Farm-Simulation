@@ -24,7 +24,7 @@ public class StoreInventoryUI : MonoBehaviour
     void Start()
     {
         zoomScript = GetComponentInParent<Canvas>().rootCanvas.GetComponent<ZoomObj>();
-        accentScript = GetComponentInParent<Canvas>().rootCanvas.GetComponent<AccentObj>();
+        accentScript = this.GetComponent<AccentObj>();
     	storeInventory = StoreInventory.instance;
     	storeInventory.onStoreItemChangedCallback += UpdateUI;
     }

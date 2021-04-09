@@ -505,7 +505,7 @@ MonoBehaviour:
     type: 3}
   recipeBarPrefab: {fileID: 3360789966346913381, guid: a62337e43aab5448da242edd653b29e8,
     type: 3}
-  resetRecipes: 1
+  resetRecipes: 0
 --- !u!114 &507549311
 MonoBehaviour:
   m_ObjectHideFlags: 0
