@@ -680,6 +680,9 @@ GameObject:
   - component: {fileID: 499693478}
   - component: {fileID: 499693479}
   - component: {fileID: 499693480}
+  - component: {fileID: 499693481}
+  - component: {fileID: 499693483}
+  - component: {fileID: 499693482}
   m_Layer: 0
   m_Name: Flowchart
   m_TagString: Untagged
@@ -711,7 +714,8 @@ MonoBehaviour:
     y: -340
     width: 1114
     height: 859
-  selectedBlocks: []
+  selectedBlocks:
+  - {fileID: 499693443}
   selectedCommands: []
   variables: []
   description: 
@@ -738,7 +742,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 1
   indentLevel: 0
-  storyText: Welcome to the Farmtopia!
+  storyText: Welcome to Farmtopia!
   description: 
   character: {fileID: 414941533}
   portrait: {fileID: 21300000, guid: 14e5be412a123b24c9e67a2607ee1167, type: 3}
@@ -808,6 +812,9 @@ MonoBehaviour:
   - {fileID: 499693469}
   - {fileID: 499693470}
   - {fileID: 499693472}
+  - {fileID: 499693483}
+  - {fileID: 499693481}
+  - {fileID: 499693482}
   - {fileID: 499693462}
   - {fileID: 499693458}
   - {fileID: 499693450}
@@ -1137,7 +1144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 23
   indentLevel: 0
-  storyText: 'I will provide the small land and one plant seed as gifts.
+  storyText: 'I will provide a small piece of land and one plant seed as gifts.
 
 '
   description: 
@@ -1166,7 +1173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 25
   indentLevel: 0
-  storyText: Make sure you stand on the farming ground when you plant the seed!
+  storyText: Make sure you stand on the farming ground when you plant the seeds!
   description: 
   character: {fileID: 414941533}
   portrait: {fileID: 21300000, guid: 14e5be412a123b24c9e67a2607ee1167, type: 3}
@@ -1193,7 +1200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 24
   indentLevel: 0
-  storyText: If you want more seed, you can buy them at the store.
+  storyText: If you want more seeds, you can buy them at the store.
   description: 
   character: {fileID: 414941533}
   portrait: {fileID: 21300000, guid: 14e5be412a123b24c9e67a2607ee1167, type: 3}
@@ -1270,7 +1277,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 31
   indentLevel: 0
-  storyText: Once you click the inventory sign on the right bottom of the screen
+  storyText: Once you click the inventory sign on the right bottom of the screen,
   description: 
   character: {fileID: 414941533}
   portrait: {fileID: 0}
@@ -1324,7 +1331,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 34
   indentLevel: 0
-  storyText: "The first item \nCornSeed is the free gift"
+  storyText: The first item, CornSeed, is a free gift
   description: 
   character: {fileID: 414941533}
   portrait: {fileID: 0}
@@ -1393,8 +1400,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 36
   indentLevel: 0
-  storyText: Don't worry, you can earn money by playing games at the workshop or
-    sell crops after harvest.
+  storyText: 'Don''t worry, you can earn money by '
   description: 
   character: {fileID: 414941533}
   portrait: {fileID: 21300000, guid: 14e5be412a123b24c9e67a2607ee1167, type: 3}
@@ -1447,7 +1453,7 @@ MonoBehaviour:
   itemId: 40
   indentLevel: 0
   duration: 1
-  targetView: {fileID: 2053138880}
+  targetView: {fileID: 1405250971}
   waitUntilFinished: 1
   targetCamera: {fileID: 1797714617}
   orthoSizeTweenType: 4
@@ -1497,7 +1503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 43
   indentLevel: 0
-  storyText: You can harvest them when they are ripe.
+  storyText: You can harvest them when they are ripe
   description: 
   character: {fileID: 414941533}
   portrait: {fileID: 21300000, guid: 14e5be412a123b24c9e67a2607ee1167, type: 3}
@@ -1524,7 +1530,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 42
   indentLevel: 0
-  storyText: Right now, You don't have any money.
+  storyText: Right now, You don't have any money
   description: 
   character: {fileID: 414941533}
   portrait: {fileID: 21300000, guid: 14e5be412a123b24c9e67a2607ee1167, type: 3}
@@ -1572,7 +1578,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 44
   indentLevel: 0
-  storyText: drag the cornseed from the invnentory to the farming land.
+  storyText: Drag the CornSeed from the inventory to the farming land
   description: 
   character: {fileID: 414941533}
   portrait: {fileID: 21300000, guid: 14e5be412a123b24c9e67a2607ee1167, type: 3}
@@ -1661,6 +1667,81 @@ MonoBehaviour:
   move: 1
   shiftIntoPlace: 1
   waitUntilFinished: 0
+--- !u!114 &499693481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499693440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45c952ea1ad444e479b570fa242679c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 49
+  indentLevel: 0
+  duration: 1
+  targetView: {fileID: 2053138880}
+  waitUntilFinished: 1
+  targetCamera: {fileID: 1797714617}
+  orthoSizeTweenType: 4
+  posTweenType: 4
+  rotTweenType: 4
+--- !u!114 &499693482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499693440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec422cd568a9c4a31ad7c36d0572b9da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 51
+  indentLevel: 0
+  storyText: Selling crops to the store after harvesting
+  description: 
+  character: {fileID: 414941533}
+  portrait: {fileID: 21300000, guid: 14e5be412a123b24c9e67a2607ee1167, type: 3}
+  voiceOverClip: {fileID: 0}
+  showAlways: 1
+  showCount: 1
+  extendPrevious: 0
+  fadeWhenDone: 1
+  waitForClick: 1
+  stopVoiceover: 1
+  waitForVO: 0
+  setSayDialog: {fileID: 0}
+--- !u!114 &499693483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499693440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec422cd568a9c4a31ad7c36d0572b9da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 50
+  indentLevel: 0
+  storyText: 'Playing games at the workshop or '
+  description: 
+  character: {fileID: 414941533}
+  portrait: {fileID: 21300000, guid: 14e5be412a123b24c9e67a2607ee1167, type: 3}
+  voiceOverClip: {fileID: 0}
+  showAlways: 1
+  showCount: 1
+  extendPrevious: 0
+  fadeWhenDone: 1
+  waitForClick: 1
+  stopVoiceover: 1
+  waitForVO: 0
+  setSayDialog: {fileID: 0}
 --- !u!1 &596400005
 GameObject:
   m_ObjectHideFlags: 0
@@ -2789,6 +2870,52 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &1405250970
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1405250972}
+  - component: {fileID: 1405250971}
+  m_Layer: 0
+  m_Name: View_workshop
+  m_TagString: Untagged
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1405250971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405250970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95c387d3e32404bcc91c60318d766bb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewSize: 1.7365425
+  primaryAspectRatio: {x: 4, y: 3}
+  secondaryAspectRatio: {x: 2, y: 1}
+--- !u!4 &1405250972
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405250970}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 12.73, y: -4.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 34
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1509576602
 GameObject:
   m_ObjectHideFlags: 0
@@ -3611,7 +3738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95c387d3e32404bcc91c60318d766bb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewSize: 1.56777
+  viewSize: 1.6119928
   primaryAspectRatio: {x: 4, y: 3}
   secondaryAspectRatio: {x: 2, y: 1}
 --- !u!4 &2053138881
