@@ -71,6 +71,11 @@ public class SceneSwitcher : MonoBehaviour
 
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
 
     //Back to main
     public void BackToMain()
