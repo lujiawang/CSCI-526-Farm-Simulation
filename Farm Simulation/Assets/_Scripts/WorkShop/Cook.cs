@@ -18,6 +18,9 @@ public class Cook : MonoBehaviour
 
 	Inventory inventory;
     SoundManager soundManager;
+
+    public GameObject Fire;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,9 +57,27 @@ public class Cook : MonoBehaviour
     	}
 
         // play sound as cooing starts
-        soundManager.PlaySound(14);
+        soundManager.PlayMultiple(14, 5);
 
-    	Recipe matchRecipe = Recipe.MatchRecipe(ingredients);
+        Fire.SetActive(true);
+        StartCoroutine(CookingAnimation(4f, ingredients));
+
+    }
+
+
+
+    private IEnumerator CookingAnimation(float waitTime, List<string> ingredients)
+    {
+        yield return new WaitForSeconds(waitTime);
+
+        Fire.SetActive(false);
+        CookResult(ingredients);
+    }
+
+    private void CookResult(List<string> ingredients)
+    {
+
+        Recipe matchRecipe = Recipe.MatchRecipe(ingredients);
     	// Debug.Log(matchRecipe);
 
     	if(matchRecipe != null) //successfully cooked an item
