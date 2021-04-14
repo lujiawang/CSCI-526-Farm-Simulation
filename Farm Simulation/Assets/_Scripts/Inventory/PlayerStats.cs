@@ -16,7 +16,7 @@ public static class PlayerStats
         set { harvest = value;  }
     }
 
-    private static bool toSave = false;
+    private static bool toSave = true;
 
     public static bool Save
     {
