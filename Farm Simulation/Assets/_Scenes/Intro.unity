@@ -771,7 +771,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 499693443}
   selectedCommands:
-  - {fileID: 499693486}
+  - {fileID: 499693466}
   variables: []
   description: 
   stepPause: 0
@@ -1367,7 +1367,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 32
   indentLevel: 0
-  storyText: You will see 3 tabs from left side in the inventory
+  storyText: You will see 3 tabs on the left side of the inventory
   description: 
   character: {fileID: 414941533}
   portrait: {fileID: 0}
@@ -1394,7 +1394,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 34
   indentLevel: 0
-  storyText: The first tap is all seeds
+  storyText: By clicking the first tab, it will show all the seeds that are available
   description: 
   character: {fileID: 414941533}
   portrait: {fileID: 0}
@@ -1915,7 +1915,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 59
   indentLevel: 0
-  storyText: The third tap is food items that you make
+  storyText: The third tab will show  food items that you make
   description: 
   character: {fileID: 414941533}
   portrait: {fileID: 0}
@@ -1963,7 +1963,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 57
   indentLevel: 0
-  storyText: The second tap is harvest items
+  storyText: The second tab will show harvest items
   description: 
   character: {fileID: 414941533}
   portrait: {fileID: 0}
