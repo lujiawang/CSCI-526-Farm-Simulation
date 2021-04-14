@@ -23,6 +23,16 @@ public class SceneSwitcher : MonoBehaviour
 
     }
 
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("Main_Menu");
+    }
+
+    public void LoadSceneGeneral(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+
     //Intro to main
     public void IntroToMain()
     {

@@ -716,7 +716,8 @@ MonoBehaviour:
     height: 859
   selectedBlocks:
   - {fileID: 499693443}
-  selectedCommands: []
+  selectedCommands:
+  - {fileID: 499693459}
   variables: []
   description: 
   stepPause: 0
@@ -771,7 +772,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 68
     y: 74.1978
-    width: 102.27272
+    width: 62.272717
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -931,7 +932,7 @@ MonoBehaviour:
   itemId: 5
   indentLevel: 0
   targetObject: {fileID: 1509576602}
-  methodName: IntroToMain
+  methodName: MainMenu
   delay: 0
 --- !u!114 &499693450
 MonoBehaviour:
@@ -1669,7 +1670,7 @@ MonoBehaviour:
   waitUntilFinished: 0
 --- !u!114 &499693481
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -1690,7 +1691,7 @@ MonoBehaviour:
   rotTweenType: 4
 --- !u!114 &499693482
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -1717,7 +1718,7 @@ MonoBehaviour:
   setSayDialog: {fileID: 0}
 --- !u!114 &499693483
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
