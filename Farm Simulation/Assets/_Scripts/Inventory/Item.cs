@@ -50,6 +50,10 @@ public class Item : IComparable<Item>, IEquatable<Item>
 		// public static int foodBasicPrice = 325;
 		// public static float foodTierUpPriceFactor = 1.3f;
 
+		// for randomHarvest
+		public static int originalRandomHarvestUpperLimit = 5; //for record
+		public static int randomHarvestUpperLimit = 5; //the real control param
+
 		public Item(string name, int num)
 		{
 			SetAllFields(name, num);
@@ -255,7 +259,14 @@ public class Item : IComparable<Item>, IEquatable<Item>
 	    {
 	    	// int id = GetCropId(name);
 	    	System.Random rand = new System.Random();
-	        return rand.Next(3,6);
+	        return rand.Next(3, randomHarvestUpperLimit + 1);
+	    }
+
+	    public static IEnumerator ChangeRandomHarvestLimitCOR(int duration)
+	    {
+	    	randomHarvestUpperLimit = originalRandomHarvestUpperLimit + 2;
+	    	yield return new WaitForSecondsRealtime(duration);
+	    	randomHarvestUpperLimit = originalRandomHarvestUpperLimit;
 	    }
 
 	    public static string GetItemName(int id)

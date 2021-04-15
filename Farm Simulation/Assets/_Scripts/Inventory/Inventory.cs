@@ -43,6 +43,9 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     private bool resetInventory = false;
 
+    [SerializeField]
+    private bool addAllFoods = false;
+
     SoundManager soundManager;
 
     public List<Item> items = new List<Item>();
@@ -105,6 +108,13 @@ public class Inventory : MonoBehaviour
     		items.Add(new Item(i, 5));
     		items.Add(new Item(i+20, 5));
     	}
+        if(addAllFoods)
+        {
+            for(int i = Item.harvestIdUpperLimit+1; i <= Item.foodIdUpperLimit; i++)
+            {
+                items.Add(new Item(i, 2));
+            } 
+        }
     	if (onItemChangedCallback != null)
         {
             // StartCoroutine(onItemChangedCallback.Invoke());

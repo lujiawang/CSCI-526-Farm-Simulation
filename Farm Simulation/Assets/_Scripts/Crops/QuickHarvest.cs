@@ -82,6 +82,9 @@ public class QuickHarvest : MonoBehaviour
 	            	cropObj.GetComponent<CropGrowing>().SetHarvested(true);
 	            	// Debug.Log("Harvest");
 	            	int randomHarvest = Item.RandomHarvest(cropObj.name);
+	            	// change tab if necessary
+		            InventoryUI uiScript = GameObject.Find("Inventory").GetComponent<InventoryUI>();
+		            uiScript.ToggleRespectiveShowButton(Item.GetItemId(cropObj.name));
 	            	inventory.Add(cropObj.name, randomHarvest);
 
 	            	// show harvest number message

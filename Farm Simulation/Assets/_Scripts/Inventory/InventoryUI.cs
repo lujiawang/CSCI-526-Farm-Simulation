@@ -250,7 +250,7 @@ public class InventoryUI : MonoBehaviour
         }
 
         // change scroll height after updating UI
-        if(firstAddedItemIndex == -1)
+        if(firstAddedItemIndex == -1 && MenuAppear.isMenu)
             StartCoroutine(ScrollHeightRoutine(remainScrollPosition, lastDestoryCOR));
         else
             StartCoroutine(ScrollHeightRoutine(firstAddedItemIndex, lastDestoryCOR));

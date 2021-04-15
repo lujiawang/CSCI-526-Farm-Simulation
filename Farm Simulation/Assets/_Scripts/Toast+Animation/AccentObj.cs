@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// this class can only be used with InventorySLot prefab obj
 public class AccentObj : MonoBehaviour
 {	
 	Coroutine lastCOR;
-	Transform lastTarget;
-	Vector3 lastOriginalScale;
+	string lastTargetName;
+	// Vector3 lastOriginalScale;
+	Vector3 originalScale = new Vector3(1,1,1);
 
 	[Range(0,1)]
 	public float defaultDuration = 0.3f;
@@ -17,14 +19,16 @@ public class AccentObj : MonoBehaviour
 	{
 		if(target == null)
 			yield break;
-		if(target == lastTarget && lastCOR != null)
+		if(lastTargetName == GetName(target) && lastCOR != null)
 		{
 			StopCoroutine(lastCOR);
-			target.localScale = lastOriginalScale;
+			// target.localScale = lastOriginalScale;
 		}
+
+		target.localScale = originalScale;
 		
-		lastTarget = target;
-		lastOriginalScale = target.localScale;
+		lastTargetName = GetName(target);
+		// lastOriginalScale = target.localScale;
 		lastCOR = StartCoroutine(AccentCOR(target, defaultDuration));
 
 		yield return lastCOR;
@@ -34,18 +38,36 @@ public class AccentObj : MonoBehaviour
 	{
 		if(target == null)
 			yield break;
-		if(target == lastTarget && lastCOR != null)
+		if(lastTargetName == GetName(target) && lastCOR != null)
 		{
 			StopCoroutine(lastCOR);
-			target.localScale = lastOriginalScale;
+			// target.localScale = lastOriginalScale;
 		}
+
+		target.localScale = originalScale;
 		
-		lastTarget = target;
-		lastOriginalScale = target.localScale;
+		lastTargetName = GetName(target);
+		// lastOriginalScale = target.localScale;
 		lastCOR = StartCoroutine(AccentCOR(target, duration));
 
 		yield return lastCOR;
 	}
+
+	public string GetName(Transform target)
+	{
+		if(target == null)
+			return null;
+		return target.parent.Find("Text").GetComponent<Text>().text;
+	}
+
+	// public bool isEqual(Transform target1, Transform target2)
+	// {
+	// 	if(target1 == null || target2 == null)
+	// 		return false;
+	// 	string str1 = target1.parent.Find("Text").GetComponent<Text>().text;
+	// 	string str2 = target2.parent.Find("Text").GetComponent<Text>().text;
+	// 	return str1 == str2;
+	// }
 
 	IEnumerator AccentCOR(Transform target, float duration)
 	{
