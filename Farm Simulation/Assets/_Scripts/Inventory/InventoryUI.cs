@@ -109,7 +109,7 @@ public class InventoryUI : MonoBehaviour
 
     public void ToggleRespectiveShowButton(int id)
     {
-        if(AreAllShowParamsOn())
+        if(AreAllShowParamsOn() || !MenuAppear.isMenu)
             return;
         else if(id >= 0 && id <= Item.seedIdUpperLimit && !showSeeds)
         {
@@ -250,10 +250,11 @@ public class InventoryUI : MonoBehaviour
         }
 
         // change scroll height after updating UI
-        if(firstAddedItemIndex == -1 && MenuAppear.isMenu)
+        if(firstAddedItemIndex == -1 || MenuAppear.isMenu)
             StartCoroutine(ScrollHeightRoutine(remainScrollPosition, lastDestoryCOR));
         else
             StartCoroutine(ScrollHeightRoutine(firstAddedItemIndex, lastDestoryCOR));
+        
     }
 
     GameObject InstantiateSlot(Item item)
