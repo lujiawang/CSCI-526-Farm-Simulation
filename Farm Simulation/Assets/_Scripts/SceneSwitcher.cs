@@ -33,6 +33,12 @@ public class SceneSwitcher : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
+    // Menu to Intro
+    public void MenuToIntro()
+    {
+        SceneManager.LoadSceneAsync("Intro");
+    }
+
     //Intro to main
     public void IntroToMain()
     {

@@ -27,7 +27,10 @@ public class InventoryUI : MonoBehaviour
         zoomScript = GetComponentInParent<Canvas>().rootCanvas.GetComponent<ZoomObj>();
         accentScript = this.GetComponent<AccentObj>();
     	inventory = Inventory.instance;
-    	inventory.onItemChangedCallback += UpdateUI;    
+        inventory.onItemChangedCallback = null;
+    	inventory.onItemChangedCallback += UpdateUI;
+
+        UpdateUI(false);
     }
 
     public void SetShowParam(string showParam)

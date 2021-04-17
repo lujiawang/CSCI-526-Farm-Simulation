@@ -80,6 +80,36 @@ public class Inventory : MonoBehaviour
         
     }
 
+    public void ReStart()
+    {
+        items = new List<Item>();
+        // must initialize this first
+        soundManager = SoundManager.instance;
+        if(resetInventory)
+        {
+            PlayerPrefs.DeleteKey("inventoryIndex");
+        }
+
+        string[] indexArray = new string[0];
+        // if inventoryIndex is already set
+        if(PlayerPrefs.HasKey("inventoryIndex"))
+            indexArray = PlayerPrefs.GetString("inventoryIndex").Split(new char[1]{' '}, StringSplitOptions.RemoveEmptyEntries);
+        // else, set inventoryIndex and add starter package of seeds
+        else
+        {
+            PlayerPrefs.SetString("inventoryIndex","");
+
+            // add starter crops seeds to player's inventory
+            StartCoroutine(AddStarterPackage(StarterPackageSize));
+            
+        }
+
+        if(indexArray.Length > 0)
+        {
+            InitializeInventory(indexArray);
+        }
+    }
+
     // OnDestroy is called before exiting the game
     void OnDestroy()
     {
@@ -120,26 +150,29 @@ public class Inventory : MonoBehaviour
             // StartCoroutine(onItemChangedCallback.Invoke());
             onItemChangedCallback.Invoke(false);
         }
+
+        yield return null;
         
-        bool endLoop = false;
+        // bool endLoop = false;
         // show inventory menu if not already shown
-        while(!endLoop)
-        {
-            MenuAppear cScript = GameObject.Find("Canvas").transform.Find("Inventory").GetComponent<MenuAppear>();
-            if(!MenuAppear.isMenu && cScript.GetAnimator() != null)
-            {
-                cScript.MenuHideAndShow();
-                break;
-            }
-            yield return null;
-        }
+        // while(!endLoop)
+        // {
+
+        //     MenuAppear cScript = GameObject.Find("Canvas").transform.Find("Inventory").GetComponent<MenuAppear>();
+        //     if(!MenuAppear.isMenu && cScript.GetAnimator() != null)
+        //     {
+        //         cScript.MenuHideAndShow();
+        //         break;
+        //     }
+        //     yield return null;
+        // }
         // play sound
-        endLoop = false;
-        while(!endLoop)
-        {
-            endLoop = soundManager.PlaySound(8);
-            yield return null;
-        }
+        // endLoop = false;
+        // while(!endLoop)
+        // {
+        //     endLoop = soundManager.PlaySound(8);
+        //     yield return null;
+        // }
     }
 
     void InitializeInventory(string[] indexArray)

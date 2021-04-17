@@ -19,6 +19,7 @@ public class SoundManager : MonoBehaviour
     #endregion
 
     AudioSource[] audioSources;
+    public static float SFXVolume = 1f;
 
     void Start()
     {
@@ -75,6 +76,9 @@ public class SoundManager : MonoBehaviour
             case "CookStartSound":
                 index = 14;
                 break;
+            case "EatSound":
+                index = 15;
+                break;
             default:
                 Debug.LogWarning("invalid clip name!");
                 return false;
@@ -89,6 +93,7 @@ public class SoundManager : MonoBehaviour
         if (audioSources != null)
         {
             AudioSource audioSource = audioSources[index];
+            audioSource.volume = SFXVolume;
             audioSource.PlayOneShot(audioSource.clip);
             return true;
         }
@@ -103,6 +108,7 @@ public class SoundManager : MonoBehaviour
         if (audioSources != null)
         {
             AudioSource audioSource = audioSources[index];
+            audioSource.volume = SFXVolume;
             audioSource.PlayOneShot(audioSource.clip);
 
 

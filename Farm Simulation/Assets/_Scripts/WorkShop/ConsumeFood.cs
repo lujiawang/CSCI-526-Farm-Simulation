@@ -10,6 +10,7 @@ public class ConsumeFood : MonoBehaviour
 	FoodEffect effectScript; //on Canvas
 
 	Inventory inventory;
+    SoundManager soundManager;
 	bool enableConsume = false;
 
     void Start()
@@ -20,6 +21,7 @@ public class ConsumeFood : MonoBehaviour
     		enableConsume = true;
     		effectScript = motherInventory.transform.parent.GetComponent<FoodEffect>();
     		inventory = Inventory.instance;
+            soundManager = SoundManager.instance;
     	}
     }
 
@@ -38,10 +40,12 @@ public class ConsumeFood : MonoBehaviour
     			case 1: //FruitSalads
     				effectScript.FastForwardGrow(name);
     				inventory.Add(name, -1);
+                    soundManager.PlaySound(15);
     				break;
     			case 2: //Cornsuccotash
     				effectScript.HigherHarvest(name);
     				inventory.Add(name, -1);
+                    soundManager.PlaySound(15);
     				break;
     			default:
     				break;

@@ -32,9 +32,32 @@ public class InternetTime : MonoBehaviour
     [SerializeField]
     public bool useTimeForCrops = false;
 
+    public Coroutine updateCOR = null;
+
 	void Start()
 	{
-		StartCoroutine(UpdateTime());
+		updateCOR = StartCoroutine(UpdateTime());
+	}
+
+	public void StopOrStartCor(bool stop)
+	{
+		switch(stop)
+		{
+			case true:
+				if(updateCOR != null)
+				{
+					StopCoroutine(updateCOR);
+					updateCOR = null;
+				}
+				break;
+			case false:
+				if(updateCOR == null)
+					updateCOR = StartCoroutine(UpdateTime());
+				break;
+			default:
+				break;
+		}
+		
 	}
 
 	void OnDestroy()
@@ -56,7 +79,7 @@ public class InternetTime : MonoBehaviour
 	}
 
 	// updates every 10 seconds
-	private IEnumerator UpdateTime()
+	public IEnumerator UpdateTime()
 	{
 		do
 		{
