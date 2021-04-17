@@ -105,6 +105,7 @@ public class CurrencyChange : MonoBehaviour
         {
             newCurrency = Mathf.Max(min, newCurrency);
         }
+        PlayerStats.Currency = newCurrency;
         SetTrue();
     }
 
