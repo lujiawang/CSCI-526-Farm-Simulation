@@ -73,6 +73,35 @@ public class StoreInventory : MonoBehaviour
         
     }
 
+    public void ReStart()
+    {
+        items = new List<Item>();
+        // must initialize this first
+        soundManager = SoundManager.instance;
+        internetTime = InternetTime.instance;
+        internetTime.onTimeChangedCallback += UpdateStore;
+
+        storeUpdateInterval = TimeSpan.FromSeconds(updateIntervalSecs);
+
+        string[] indexArray = new string[0];
+        // if inventoryIndex is already set
+        if(PlayerPrefs.HasKey("storeInventoryIndex"))
+            indexArray = PlayerPrefs.GetString("storeInventoryIndex").Split(new char[1]{' '}, StringSplitOptions.RemoveEmptyEntries);
+        // else, set inventoryIndex and add starter package of seeds
+        else
+        {
+            PlayerPrefs.SetString("storeInventoryIndex","");
+
+            // randomize the store
+            RandomizeStore();
+        }
+
+        if(indexArray.Length > 0)
+        {
+            InitializeInventory(indexArray);
+        }
+    }
+
     // OnDestroy is called before exiting the game
     void OnDestroy()
     {
