@@ -771,7 +771,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 499693443}
   selectedCommands:
-  - {fileID: 499693489}
+  - {fileID: 499693449}
   variables: []
   description: 
   stepPause: 0
@@ -994,7 +994,7 @@ MonoBehaviour:
   itemId: 5
   indentLevel: 0
   targetObject: {fileID: 1509576602}
-  methodName: MainMenu
+  methodName: IntroToMain
   delay: 0
 --- !u!114 &499693450
 MonoBehaviour:
