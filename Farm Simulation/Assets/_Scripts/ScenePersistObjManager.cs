@@ -49,13 +49,15 @@ public class ScenePersistObjManager : MonoBehaviour
             InternetTime internetTime = InternetTime.instance;
             if (sceneName == "Main_Menu" || sceneName == "Intro")
             {
-                internetTime.StopOrStartCor(true); //stop updating time
+                // internetTime.StopOrStartCor(true); //stop updating time
+                Inventory.instance.onItemChangedCallback = null;
+                StoreInventory.instance.onStoreItemChangedCallback = null;
                 // this.GetComponent<Inventory>().enabled = false;
                 // this.GetComponent<StoreInventory>().enabled = false;
             }
             else
             {
-                internetTime.StopOrStartCor(false); //start updating time
+                // internetTime.StopOrStartCor(false); //start updating time
                 // this.GetComponent<Inventory>().enabled = true;
                 // this.GetComponent<StoreInventory>().enabled = true;
             }
