@@ -23,7 +23,7 @@ public class CurrencyChange : MonoBehaviour
     
     private void Awake()
     {
-        Debug.Log("testtesttest " + PlayerPrefs.GetInt("Currency",25));
+        //Debug.Log("testtesttest " + PlayerPrefs.GetInt("Currency",25));
         currentCurrency = PlayerStats.Currency;
         // newCurrency = 0;
         currencyChange = false;

@@ -8,6 +8,8 @@ public class SceneSwitcher : MonoBehaviour
     GameObject player;
     GameObject storeobj;
 
+    public static int storeCount;
+
 
     // Start is called before the first frame update
     void Start()
@@ -58,8 +60,20 @@ public class SceneSwitcher : MonoBehaviour
     //To store's intro
     public void ToStoreIntro()
     {
-        SceneManager.LoadScene("Store", LoadSceneMode.Additive);
-        MenuAppear.isMenu = false;
+        if (storeCount == 0)
+        {
+            SceneManager.LoadScene("Store", LoadSceneMode.Additive);
+            MenuAppear.isMenu = false;
+            storeCount++;
+        }
+        else
+        {
+            if (storeobj != null)
+            {
+                StoreToggle store = storeobj.GetComponent<StoreToggle>();
+                store.OpenStore();
+            }
+        }
     }
 
 
