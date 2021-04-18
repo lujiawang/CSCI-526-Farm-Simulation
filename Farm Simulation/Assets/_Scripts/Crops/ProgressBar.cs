@@ -19,6 +19,8 @@ public class ProgressBar : MonoBehaviour
     private GameObject[] CropLands;
     private GameObject relatedLand;
 
+    RectTransform rectTrans;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +28,8 @@ public class ProgressBar : MonoBehaviour
 
         int index = this.name[7] - '0';
         relatedLand = CropLands[index];
+        rectTrans = this.GetComponent<RectTransform>();
+        rectTrans.anchoredPosition = new Vector2(relatedLand.transform.localPosition.x, relatedLand.transform.localPosition.y + 0.8f);
     }
 
     // Update is called once per frame
