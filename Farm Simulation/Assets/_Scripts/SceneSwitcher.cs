@@ -6,17 +6,15 @@ using UnityEngine.SceneManagement;
 public class SceneSwitcher : MonoBehaviour
 {
     GameObject player;
-    GameObject storeobj;
 
     public static int storeCount;
-
+    private StoreToggle storeToggle;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-
-        storeobj = GameObject.FindGameObjectWithTag("Store");
+        storeToggle = this.GetComponent<StoreToggle>();
     }
 
     // Update is called once per frame
@@ -44,6 +42,7 @@ public class SceneSwitcher : MonoBehaviour
     //Intro to main
     public void IntroToMain()
     {
+        
         SceneManager.LoadScene("Farming_01_main");
     }
 
@@ -62,16 +61,18 @@ public class SceneSwitcher : MonoBehaviour
     {
         if (storeCount == 0)
         {
-            SceneManager.LoadScene("Store", LoadSceneMode.Additive);
-            MenuAppear.isMenu = false;
             storeCount++;
+            SceneManager.LoadScene("Store", LoadSceneMode.Additive);
+            if (storeToggle != null)
+            { 
+                storeToggle.OpenStore();
+            }
         }
         else
         {
-            if (storeobj != null)
+            if (storeToggle != null)
             {
-                StoreToggle store = storeobj.GetComponent<StoreToggle>();
-                store.OpenStore();
+                storeToggle.OpenStore();
             }
         }
     }
@@ -81,12 +82,10 @@ public class SceneSwitcher : MonoBehaviour
     public void SwitchToStore()
     {
         SceneManager.UnloadSceneAsync("Store");
-        Debug.Log(storeobj.name);
-
-        if (storeobj != null)
+        
+        if (storeToggle!= null)
         {
-            StoreToggle store = storeobj.GetComponent<StoreToggle>();
-            store.OpenStore();
+            storeToggle.OpenStore();
         }
 
     }
