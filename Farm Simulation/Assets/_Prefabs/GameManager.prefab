@@ -1609,7 +1609,6 @@ GameObject:
   - component: {fileID: 5027718611295886600}
   - component: {fileID: 5027718611295886601}
   - component: {fileID: 5027718611295886606}
-  - component: {fileID: 1680786372572728502}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -1657,8 +1656,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StarterPackageSize: 20
-  resetInventory: 0
-  addAllFoods: 0
+  resetInventory: 1
+  addAllFoods: 1
 --- !u!114 &5027718611295886600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1671,7 +1670,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8c0a2db2ab9246f9a90a608b7fca3cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randomizeItemTypes: 30
   updateIntervalSecs: 10
 --- !u!114 &5027718611295886601
 MonoBehaviour:
@@ -1697,17 +1695,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 160b614d326034140b2b51337839837f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1680786372572728502
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5027718611295886611}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a18102ffefcb478e9aa3244bc2ebd66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

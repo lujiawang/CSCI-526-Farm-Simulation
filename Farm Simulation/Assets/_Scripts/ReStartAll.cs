@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ReStartAll : MonoBehaviour
 {
@@ -22,5 +23,7 @@ public class ReStartAll : MonoBehaviour
     	inventory.ReStart();
     	StoreInventory storeInventory = StoreInventory.instance;
     	storeInventory.ReStart();
+
+        SceneManager.LoadSceneAsync("Intro", LoadSceneMode.Single);
     }
 }
