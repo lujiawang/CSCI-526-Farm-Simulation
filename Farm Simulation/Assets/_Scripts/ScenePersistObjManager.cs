@@ -9,7 +9,8 @@ public class ScenePersistObjManager : MonoBehaviour
 	private static GameObject canvasInstance;
 	void Awake()
     {
-    	string name = this.name;
+        Screen.SetResolution(1920, 1080, true);
+        string name = this.name;
         DontDestroyOnLoad(this.gameObject);
         // string sceneName = SceneManager.GetActiveScene().name;
         switch(name)
