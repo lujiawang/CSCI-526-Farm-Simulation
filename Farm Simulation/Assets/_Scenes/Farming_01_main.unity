@@ -18179,8 +18179,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1355957410}
-        m_MethodName: ToStoreIntro
+      - m_Target: {fileID: 1355957406}
+        m_MethodName: OpenStore
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
