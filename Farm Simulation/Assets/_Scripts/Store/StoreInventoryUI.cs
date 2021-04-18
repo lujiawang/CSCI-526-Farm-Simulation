@@ -29,7 +29,22 @@ public class StoreInventoryUI : MonoBehaviour
         // storeInventory.onStoreItemChangedCallback = null;
         storeInventory.onStoreItemChangedCallback += UpdateUI;
 
-        UpdateUI(false);
+        // UpdateUI(false);
+        StartCoroutine(OnSceneLoadedCOR());
+    }
+
+    IEnumerator OnSceneLoadedCOR()
+    {
+        bool endLoop = false;
+        while(!endLoop)
+        {
+            if(storeInventory.items != null)
+            {
+                endLoop = true;
+                UpdateUI(false);
+            }
+            yield return null;
+        }
     }
 
     public void SetShowParam(string showParam)

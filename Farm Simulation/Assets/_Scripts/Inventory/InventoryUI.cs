@@ -30,7 +30,22 @@ public class InventoryUI : MonoBehaviour
         // inventory.onItemChangedCallback = null;
     	inventory.onItemChangedCallback += UpdateUI;
 
-        UpdateUI(false);
+        // UpdateUI(false);
+        StartCoroutine(OnSceneLoadedCOR());
+    }
+
+    IEnumerator OnSceneLoadedCOR()
+    {
+        bool endLoop = false;
+        while(!endLoop)
+        {
+            if(inventory.items != null)
+            {
+                endLoop = true;
+                UpdateUI(false);
+            }
+            yield return null;
+        }
     }
 
     public void SetShowParam(string showParam)
