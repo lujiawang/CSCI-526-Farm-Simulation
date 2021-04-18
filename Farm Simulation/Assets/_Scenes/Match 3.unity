@@ -121,6 +121,80 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &417700529
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5027718611295886605, guid: c2e972617a533418db29a47f1e8bee4f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5027718611295886605, guid: c2e972617a533418db29a47f1e8bee4f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1330.6201
+      objectReference: {fileID: 0}
+    - target: {fileID: 5027718611295886605, guid: c2e972617a533418db29a47f1e8bee4f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 635.85046
+      objectReference: {fileID: 0}
+    - target: {fileID: 5027718611295886605, guid: c2e972617a533418db29a47f1e8bee4f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5027718611295886605, guid: c2e972617a533418db29a47f1e8bee4f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5027718611295886605, guid: c2e972617a533418db29a47f1e8bee4f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5027718611295886605, guid: c2e972617a533418db29a47f1e8bee4f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5027718611295886605, guid: c2e972617a533418db29a47f1e8bee4f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5027718611295886605, guid: c2e972617a533418db29a47f1e8bee4f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5027718611295886605, guid: c2e972617a533418db29a47f1e8bee4f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5027718611295886605, guid: c2e972617a533418db29a47f1e8bee4f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5027718611295886611, guid: c2e972617a533418db29a47f1e8bee4f,
+        type: 3}
+      propertyPath: m_Name
+      value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5027718611295886611, guid: c2e972617a533418db29a47f1e8bee4f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c2e972617a533418db29a47f1e8bee4f, type: 3}
 --- !u!1 &717822314
 GameObject:
   m_ObjectHideFlags: 0
@@ -577,7 +651,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
@@ -848,11 +922,11 @@ MonoBehaviour:
     - row: 0000000000000000000000000000
     - row: 0000000000000000000000000000
   pieces:
-  - {fileID: 21300000, guid: 7d70953360ce3461cbc00ffbfde297bf, type: 3}
-  - {fileID: 21300000, guid: 8f404698e78104113b80df4d24b3242b, type: 3}
-  - {fileID: 21300000, guid: 813dd7615913c4c548d3208b8125f838, type: 3}
-  - {fileID: 21300000, guid: 1cccba111bf81444aa7ca97f30abc964, type: 3}
-  - {fileID: 21300000, guid: 891cd0bc469ad4453b1005e0f2c6934b, type: 3}
+  - {fileID: -4121779799015333995, guid: ef320b5269778f842a9bb0cf66981501, type: 3}
+  - {fileID: 231382990177506502, guid: ef320b5269778f842a9bb0cf66981501, type: 3}
+  - {fileID: -5347296349980235180, guid: ef320b5269778f842a9bb0cf66981501, type: 3}
+  - {fileID: -3717749402573906489, guid: ef320b5269778f842a9bb0cf66981501, type: 3}
+  - {fileID: 8613099276131632838, guid: ef320b5269778f842a9bb0cf66981501, type: 3}
   gameBoard: {fileID: 1615412366}
   nodePiece: {fileID: 3873978321566265336, guid: 8709036c8575044149d2bfda47e919d5,
     type: 3}
