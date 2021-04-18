@@ -48,7 +48,7 @@ public class ScenePersistObjManager : MonoBehaviour
         if(name == "GameManager")
         {
             InternetTime internetTime = InternetTime.instance;
-            if (sceneName == "Main_Menu" || sceneName == "Intro")
+            if (sceneName == "Main_Menu" || sceneName == "Intro" || sceneName == "Match 3")
             {
                 // internetTime.StopOrStartCor(true); //stop updating time
                 Inventory.instance.onItemChangedCallback = null;
@@ -65,7 +65,7 @@ public class ScenePersistObjManager : MonoBehaviour
         }
         else if(name == "Canvas")
         {
-            if (sceneName == "Main_Menu" || sceneName == "Intro")
+            if (sceneName == "Main_Menu" || sceneName == "Intro" || sceneName == "Match 3")
             {
                 Destroy(this.gameObject);
                 // this.gameObject.SetActive(false);

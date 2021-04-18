@@ -24,10 +24,10 @@ public class StoreInventory : MonoBehaviour
 
 
     public static int stackLimit = 99;
-    public static int randomizeItemNumLimit = 10; // when randomizing, the maximum number of crops that can be generated
+    public static int randomizeItemNumLimit = 8; // when randomizing, the maximum number of crops that can be generated
     public static int randomizeItemTypesUpperLimit = 40; //how many types of items could be generated, used for randomizing store    
-    [Range(1, 40)]
-    public int randomizeItemTypes = 30; //5 // when randomizing, how many types of crops that can be generated
+    // [Range(1, 40)]
+    public static int randomizeItemTypesMax = 32; //5 // when randomizing, how many types of crops that can be generated
 
     public delegate void OnStoreItemChanged(bool remainScrollPosition);
     public OnStoreItemChanged onStoreItemChangedCallback;
@@ -111,7 +111,16 @@ public class StoreInventory : MonoBehaviour
 
     void RandomizeStore()
     {
-    	System.Random rand = new System.Random();
+        if(PlayerPrefs.HasKey("storeUnlockStage"))
+        {
+            int unlockStage = PlayerPrefs.GetInt("storeUnlockStage")>5?5:PlayerPrefs.GetInt("storeUnlockStage");
+            randomizeItemTypesUpperLimit = unlockStage * Item.tierDivideLength * 2;
+        }
+        else
+            randomizeItemTypesUpperLimit = 1 * Item.tierDivideLength * 2;
+        int randomizeItemTypes = randomizeItemTypesMax>randomizeItemTypesUpperLimit?randomizeItemTypesUpperLimit:randomizeItemTypesMax;
+    	
+        System.Random rand = new System.Random();
     	items = new List<Item>(); //clear out items list
     	List<int> ids = new List<int>(); //store all generated ids
     	for (int i = 0; i < randomizeItemTypes; i++)
@@ -120,10 +129,13 @@ public class StoreInventory : MonoBehaviour
     		// loop until generated a unique id number
     		do{
     			id = rand.Next(randomizeItemTypesUpperLimit); //generate integer between 0 - randomizeItemTypesUpperLimit
+                // determine if id should be seed or harvest
+                if(id >= randomizeItemTypesUpperLimit / 2)
+                    id = Item.seedIdUpperLimit + id + 1 - randomizeItemTypesUpperLimit / 2;
     		}while(ids.Contains(id));
     		ids.Add(id);
 
-    		int num = rand.Next(1, randomizeItemNumLimit+1);
+    		int num = rand.Next(2, randomizeItemNumLimit+1);
     		items.Add(new Item(id, num));
 
     		// rand = new Random();
