@@ -10,8 +10,15 @@ public class HarvestMode : MonoBehaviour
         
     }
 
+    private void OnDestroy()
+    {
+        PlayerStats.Harvest = false;
+    }
+
     public void HarvestModeToggle()
     {
         PlayerStats.Harvest = !PlayerStats.Harvest;
     }
+
+    
 }
