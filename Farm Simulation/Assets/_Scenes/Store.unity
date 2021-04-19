@@ -1023,7 +1023,6 @@ GameObject:
   - component: {fileID: 2061144820}
   - component: {fileID: 2061144826}
   - component: {fileID: 2061144825}
-  - component: {fileID: 2061144821}
   m_Layer: 0
   m_Name: Flowchart
   m_TagString: Untagged
@@ -1058,21 +1057,6 @@ MonoBehaviour:
   stopVoiceover: 1
   waitForVO: 0
   setSayDialog: {fileID: 0}
---- !u!114 &2061144821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2061144819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfcefb900be84c948bbe013dc8ffefb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBlock: {fileID: 2061144822}
-  suppressBlockAutoSelect: 0
-  FireOn: 4
 --- !u!114 &2061144822
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -1089,14 +1073,14 @@ MonoBehaviour:
     serializedVersion: 2
     x: 66
     y: 73
-    width: 60
+    width: 80
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
   itemId: 0
   blockName: Store
   description: 
-  eventHandler: {fileID: 2061144821}
+  eventHandler: {fileID: 0}
   commandList:
   - {fileID: 2061144825}
   - {fileID: 2061144820}
