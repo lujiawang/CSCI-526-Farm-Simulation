@@ -36,13 +36,12 @@ public class InventoryUI : MonoBehaviour
 
     IEnumerator OnSceneLoadedCOR()
     {
-        bool endLoop = false;
-        while(!endLoop)
+        for(float i = 0f; i < 5f; i += Time.deltaTime)
         {
             if(inventory.items.Count > 0)
             {
-                endLoop = true;
                 UpdateUI(false);
+                break;
             }
             yield return null;
         }
