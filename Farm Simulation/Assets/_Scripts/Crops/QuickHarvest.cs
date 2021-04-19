@@ -93,6 +93,27 @@ public class QuickHarvest : MonoBehaviour
 	            		Debug.LogWarning("Cannot find progressCanvas!!");
             		string cropLandName = cropObj.transform.parent.name;
             		int index = cropLandName[cropLandName.Length - 2] - '0';
+            		switch(index)
+            		{
+            			case 1:
+            				index = 6;
+            				break;
+            			case 2:
+            				index = 4;
+            				break;
+            			case 3:
+            				index = 7;
+            				break;
+            			case 6:
+            				index = 1;
+            				break;
+            			case 4:
+            				index = 2;
+            				break;
+            			case 7:
+            				index = 1;
+            				break;
+            		}
             		Text text = progressCanvas.transform.GetChild(index).Find("HarvestNum").GetComponent<Text>();
 
             		ShowToast cScript = canvas.GetComponent<ShowToast>();
