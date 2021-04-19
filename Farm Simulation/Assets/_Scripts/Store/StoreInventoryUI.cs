@@ -35,13 +35,12 @@ public class StoreInventoryUI : MonoBehaviour
 
     IEnumerator OnSceneLoadedCOR()
     {
-        bool endLoop = false;
-        while(!endLoop)
+        for(float i = 0f; i < 5f; i += Time.deltaTime)
         {
             if(storeInventory.items.Count > 0)
             {
-                endLoop = true;
                 UpdateUI(false);
+                break;
             }
             yield return null;
         }

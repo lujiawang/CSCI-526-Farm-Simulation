@@ -30,6 +30,7 @@ public class StoreToggle : MonoBehaviour
     void OnDestroy()
     {
         isStoreOpen = false;
+        TouchToMove.disablePlayerMovement = false;
     }
 
     /*private void OnTriggerEnter2D(Collider2D other)
