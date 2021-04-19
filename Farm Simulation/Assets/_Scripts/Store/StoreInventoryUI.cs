@@ -38,7 +38,7 @@ public class StoreInventoryUI : MonoBehaviour
         bool endLoop = false;
         while(!endLoop)
         {
-            if(storeInventory.items != null)
+            if(storeInventory.items.Count > 0)
             {
                 endLoop = true;
                 UpdateUI(false);
