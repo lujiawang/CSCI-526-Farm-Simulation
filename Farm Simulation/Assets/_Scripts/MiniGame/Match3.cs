@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Match3 : MonoBehaviour
 {
+    public int Score;
+    public Text ScoreText;
+    public InsertMiniGame game;
     public ArrayLayout boardLayout;
     [Header("UI Elements")]
     public Sprite[] pieces;
@@ -25,6 +29,7 @@ public class Match3 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        game = GetComponent<InsertMiniGame>();
         StartGame();
     }
 
@@ -58,6 +63,7 @@ public class Match3 : MonoBehaviour
             }
             else //If we made a match
             {
+                int pts = 0;
                 foreach(Point pnt in connected) //Remove the matched nodes 
                 {
                     Node node = getNodeAtPoint(pnt);
@@ -68,8 +74,9 @@ public class Match3 : MonoBehaviour
                         dead.Add(nodePiece);
                     }
                     node.SetPiece(null);
+                    pts++;
                 }
-
+                AddScore(pts);
                 ApplyGravityToBoard();
             }
             flipped.Remove(flip);
@@ -416,6 +423,14 @@ public class Match3 : MonoBehaviour
     {
         return new Vector2(48 + (96 * p.x), (-48 - (96 * p.y)));
     } 
+
+    public void AddScore(int pts)
+    {
+        Score += pts;
+        ScoreText.text = Score.ToString();
+        if(Score >= 100)
+            game.OpenCloseMiniGame();
+    }
 }
 
 
@@ -469,4 +484,6 @@ public class FlippedPieces
         else
             return null;
     }
+
+
 }
