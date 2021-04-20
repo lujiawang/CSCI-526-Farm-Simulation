@@ -11,7 +11,7 @@ public class InsertMiniGame : MonoBehaviour
 
     public static int firstEntryPrice = 100;
 
-    int price = firstEntryPrice; // the current minigame entry price
+    public int price = firstEntryPrice; // the current minigame entry price
 
     void Start()
     {
@@ -60,12 +60,12 @@ public class InsertMiniGame : MonoBehaviour
         }
     }
 
-    public void OpenCloseMiniGame()
+    public void OpenCloseMiniGame(bool win)
     {
 
         if (SceneManager.GetActiveScene().name == MiniGameName)
         {
-            if(true) // minigame succeeded
+            if(win) // minigame succeeded
             {
                 NextStageEntryPrice();
                 // show winning notification

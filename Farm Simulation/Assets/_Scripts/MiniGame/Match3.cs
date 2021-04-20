@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Match3 : MonoBehaviour
 {
     public int Score;
+    public int TargetScore;
     public Text ScoreText;
     public InsertMiniGame game;
     public ArrayLayout boardLayout;
@@ -171,6 +172,7 @@ public class Match3 : MonoBehaviour
 
     void StartGame()
     {
+        TargetScore = game.price;
         string seed = getRandomSeed();
         random = new System.Random(seed.GetHashCode());
         update = new List<NodePiece>();
@@ -428,8 +430,11 @@ public class Match3 : MonoBehaviour
     {
         Score += pts;
         ScoreText.text = Score.ToString();
-        if(Score >= 100)
-            game.OpenCloseMiniGame();
+        if(Score >= TargetScore)
+        {
+            game.OpenCloseMiniGame(true);
+        }
+            
     }
 }
 
