@@ -781,7 +781,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 499693443}
   selectedCommands:
-  - {fileID: 499693501}
+  - {fileID: 499693499}
   variables: []
   description: 
   stepPause: 0
@@ -2189,7 +2189,7 @@ MonoBehaviour:
     audioSourceRef: {fileID: 0}
     audioSourceVal: {fileID: 1412521870}
   startVolume: 1
-  endVolume: 1
+  endVolume: 0.5
   fadeDuration: 0
   waitUntilFinished: 0
   audioSourceOLD: {fileID: 0}
