@@ -6038,7 +6038,8 @@ MonoBehaviour:
   GoalText: {fileID: 975793745}
   TimerText: {fileID: 1910589791}
   CountDown: 0
-  game: {fileID: 0}
+  isGameOver: 0
+  game: {fileID: 2098138741}
   boardLayout:
     grid: {fileID: 0}
     rows:

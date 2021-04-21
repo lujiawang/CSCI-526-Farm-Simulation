@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class Match3 : MonoBehaviour
 {
-    public AudioSource matchSound;
-    public AudioSource noMatchSound;
+    // public AudioSource matchSound;
+    // public AudioSource noMatchSound;
 
     public int Score;
     public int TargetScore;
@@ -490,12 +490,14 @@ public class Match3 : MonoBehaviour
 
     public void PlayMatch()
     {
-        matchSound.Play();
+        // matchSound.Play();
+        SoundManager.instance.PlaySound(16);
     }
 
     public void PlayNoMatch()
     {
-        noMatchSound.Play();
+        // noMatchSound.Play();
+        SoundManager.instance.PlaySound(7);
     }
 
 }

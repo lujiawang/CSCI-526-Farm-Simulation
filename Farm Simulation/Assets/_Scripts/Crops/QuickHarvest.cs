@@ -111,7 +111,7 @@ public class QuickHarvest : MonoBehaviour
             				index = 2;
             				break;
             			case 7:
-            				index = 1;
+            				index = 3;
             				break;
             		}
             		Text text = progressCanvas.transform.GetChild(index).Find("HarvestNum").GetComponent<Text>();

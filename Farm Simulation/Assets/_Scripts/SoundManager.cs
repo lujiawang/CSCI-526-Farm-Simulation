@@ -79,6 +79,9 @@ public class SoundManager : MonoBehaviour
             case "EatSound":
                 index = 15;
                 break;
+            case "item_get":
+                index = 16;
+                break;
             default:
                 Debug.LogWarning("invalid clip name!");
                 return false;

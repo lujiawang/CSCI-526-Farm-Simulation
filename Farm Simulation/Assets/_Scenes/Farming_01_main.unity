@@ -3110,7 +3110,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 309316839}
         m_MethodName: OpenCloseMiniGame
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3169,6 +3169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MiniGameName: Match 3
+  price: 100
 --- !u!1 &315164319
 GameObject:
   m_ObjectHideFlags: 0
