@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class Match3 : MonoBehaviour
 {
+    public AudioSource matchSound;
+    public AudioSource noMatchSound;
+
     public int Score;
     public int TargetScore;
     public Text ScoreText;
@@ -83,7 +86,10 @@ public class Match3 : MonoBehaviour
                 if(connected.Count == 0) //If we didn't make a match
                 {
                     if(wasFlipped) //If we flipped
+                    {
                         FlipPieces(piece.index, flippedPiece.index, false);
+                        PlayNoMatch();
+                    }
                 }
                 else //If we made a match
                 {
@@ -100,8 +106,9 @@ public class Match3 : MonoBehaviour
                         node.SetPiece(null);
                         pts++;
                     }
-                    //ApplyGravityToBoard();
+                    ApplyGravityToBoard();
                     AddScore(pts);
+                    PlayMatch();
                 }
                 flipped.Remove(flip);
                 update.Remove(piece);
@@ -203,7 +210,7 @@ public class Match3 : MonoBehaviour
     {
         isGameOver = false;
         takingAway = false;
-        CountDown = 5;
+        CountDown = 90; // Change this to adjust count down
         TargetScore = game.price;
         ScoreText.text = "Score: 0";
         GoalText.text = "Goal: " + TargetScore.ToString();
@@ -480,6 +487,17 @@ public class Match3 : MonoBehaviour
         TimerText.text = CountDown.ToString(); 
         takingAway = false;
     }
+
+    public void PlayMatch()
+    {
+        matchSound.Play();
+    }
+
+    public void PlayNoMatch()
+    {
+        noMatchSound.Play();
+    }
+
 }
 
 
