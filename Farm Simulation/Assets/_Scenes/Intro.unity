@@ -793,8 +793,9 @@ GameObject:
   - component: {fileID: 499693501}
   - component: {fileID: 499693499}
   - component: {fileID: 499693502}
-  - component: {fileID: 499693503}
   - component: {fileID: 499693500}
+  - component: {fileID: 499693504}
+  - component: {fileID: 499693503}
   m_Layer: 0
   m_Name: Flowchart
   m_TagString: Untagged
@@ -829,7 +830,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 499693443}
   selectedCommands:
-  - {fileID: 499693500}
+  - {fileID: 499693484}
   variables: []
   description: 
   stepPause: 0
@@ -933,6 +934,7 @@ MonoBehaviour:
   - {fileID: 499693479}
   - {fileID: 499693469}
   - {fileID: 499693500}
+  - {fileID: 499693504}
   - {fileID: 499693503}
   - {fileID: 499693475}
   - {fileID: 499693484}
@@ -1522,7 +1524,7 @@ MonoBehaviour:
   indentLevel: 0
   duration: 1
   targetView: {fileID: 4531621}
-  waitUntilFinished: 0
+  waitUntilFinished: 1
   targetCamera: {fileID: 1797714617}
   orthoSizeTweenType: 4
   posTweenType: 4
@@ -2257,7 +2259,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 74
   indentLevel: 0
-  storyText: Once they are ripe, click on the harvest button and harvest them
+  storyText: Once they are ripe, click on the harvest button and move player to harvest
+    them
   description: 
   character: {fileID: 414941533}
   portrait: {fileID: 21300000, guid: 14e5be412a123b24c9e67a2607ee1167, type: 3}
@@ -2332,11 +2335,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45c952ea1ad444e479b570fa242679c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: 73
+  itemId: 76
   indentLevel: 0
   duration: 2
   targetView: {fileID: 97427018}
   waitUntilFinished: 0
+  targetCamera: {fileID: 1797714617}
+  orthoSizeTweenType: 4
+  posTweenType: 4
+  rotTweenType: 4
+--- !u!114 &499693504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499693440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45c952ea1ad444e479b570fa242679c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 75
+  indentLevel: 0
+  duration: 2
+  targetView: {fileID: 1618387741}
+  waitUntilFinished: 1
   targetCamera: {fileID: 1797714617}
   orthoSizeTweenType: 4
   posTweenType: 4
@@ -3815,7 +3839,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: a6847c806ab516a4a81b81ef4d0bd830, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.05
+  m_Volume: 0.01
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -3829,7 +3853,7 @@ AudioSource:
   rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
-  BypassReverbZones: 0
+  BypassReverbZones: 1
   rolloffCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -4163,6 +4187,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1618387740
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1618387742}
+  - component: {fileID: 1618387741}
+  m_Layer: 0
+  m_Name: View_middle
+  m_TagString: Untagged
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1618387741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618387740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95c387d3e32404bcc91c60318d766bb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewSize: 3.1328924
+  primaryAspectRatio: {x: 4, y: 3}
+  secondaryAspectRatio: {x: 2, y: 1}
+--- !u!4 &1618387742
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618387740}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 14.69, y: -1.7719859, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 44
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1653188943
 GameObject:
