@@ -12,6 +12,7 @@ public class Settings : MonoBehaviour
 
 	void Start()
 	{
+        SceneManager.sceneLoaded += OnSceneLoaded;
 		if(PlayerPrefs.HasKey("MusicVolume"))
 		{
 			float vol = PlayerPrefs.GetFloat("MusicVolume");
@@ -27,6 +28,25 @@ public class Settings : MonoBehaviour
 		}
 	}
 
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if(this == null)
+            return;
+        if(PlayerPrefs.HasKey("MusicVolume"))
+        {
+            float vol = PlayerPrefs.GetFloat("MusicVolume");
+            this.transform.Find("MusicGroup").Find("VolumeSlider").GetComponent<Slider>().value = vol;
+            SetMusicVol(vol);
+        }
+
+        if(PlayerPrefs.HasKey("SFXVolume"))
+        {
+            float vol = PlayerPrefs.GetFloat("SFXVolume");
+            this.transform.Find("SFXGroup").Find("VolumeSlider").GetComponent<Slider>().value = vol;
+            SetSFXVol(vol);
+        }
+    }
+
 	public void SetMusicVol(float vol)
     {
     	// float p = Mathf.Log10(vol) * 1;
@@ -38,6 +58,7 @@ public class Settings : MonoBehaviour
 		{
 			if(GameObject.Find("background_audio") != null)
 			{
+                Debug.Log("Found");
 	    		GameObject.Find("background_audio").GetComponent<AudioSource>().volume = vol;
 	    		break;
 			}
