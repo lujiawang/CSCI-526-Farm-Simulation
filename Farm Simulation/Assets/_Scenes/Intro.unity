@@ -781,7 +781,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 499693443}
   selectedCommands:
-  - {fileID: 499693448}
+  - {fileID: 499693501}
   variables: []
   description: 
   stepPause: 0
@@ -1552,7 +1552,7 @@ MonoBehaviour:
   rotTweenType: 4
 --- !u!114 &499693473
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -1721,7 +1721,7 @@ MonoBehaviour:
   rotTweenType: 4
 --- !u!114 &499693480
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -2145,7 +2145,7 @@ MonoBehaviour:
   waitForFrames: 1
 --- !u!114 &499693498
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -2172,7 +2172,7 @@ MonoBehaviour:
   setSayDialog: {fileID: 0}
 --- !u!114 &499693499
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -2189,13 +2189,13 @@ MonoBehaviour:
     audioSourceRef: {fileID: 0}
     audioSourceVal: {fileID: 1412521870}
   startVolume: 1
-  endVolume: 0.5
+  endVolume: 0.05
   fadeDuration: 0
   waitUntilFinished: 0
   audioSourceOLD: {fileID: 0}
 --- !u!114 &499693500
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -2216,7 +2216,7 @@ MonoBehaviour:
   rotTweenType: 4
 --- !u!114 &499693501
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -2234,7 +2234,7 @@ MonoBehaviour:
     audioSourceVal: {fileID: 1303176518}
   startVolume: 1
   endVolume: 0.5
-  fadeDuration: 10
+  fadeDuration: 15
   waitUntilFinished: 0
   audioSourceOLD: {fileID: 0}
 --- !u!1 &532682096
@@ -3691,6 +3691,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1412521871}
   - component: {fileID: 1412521870}
+  - component: {fileID: 1412521872}
   m_Layer: 0
   m_Name: Background_Sound-Nature-River-Creek-Strong-Flowing-Rocks-Maroon_Bells-Birds-White_River-Snowmass-USA-Zoom_H6-9624-03
   m_TagString: Untagged
@@ -3710,7 +3711,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: a6847c806ab516a4a81b81ef4d0bd830, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.05
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -3808,6 +3809,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 42
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1412521872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1412521869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd4b6e4a450bf50469a5f7096f5c931f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1509576602
 GameObject:
   m_ObjectHideFlags: 0
