@@ -781,7 +781,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 499693443}
   selectedCommands:
-  - {fileID: 499693501}
+  - {fileID: 499693459}
   variables: []
   description: 
   stepPause: 0
@@ -2184,7 +2184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 71
   indentLevel: 0
-  control: 0
+  control: 4
   _audioSource:
     audioSourceRef: {fileID: 0}
     audioSourceVal: {fileID: 1412521870}
@@ -3717,7 +3717,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 219
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
