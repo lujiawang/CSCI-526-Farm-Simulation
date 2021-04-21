@@ -266,11 +266,18 @@ public class InventoryUI : MonoBehaviour
             }
         }
 
+        // Debug.Log(MenuAppear.isMenu);
+
         // change scroll height after updating UI
-        if(firstAddedItemIndex == -1 || MenuAppear.isMenu)
+        if(firstAddedItemIndex == -1) // no added items
             StartCoroutine(ScrollHeightRoutine(remainScrollPosition, lastDestoryCOR));
-        else
-            StartCoroutine(ScrollHeightRoutine(firstAddedItemIndex, lastDestoryCOR));
+        else // items were added
+        {
+            if(MenuAppear.isMenu)
+                StartCoroutine(ScrollHeightRoutine(firstAddedItemIndex, lastDestoryCOR));
+            else
+                StartCoroutine(ScrollHeightRoutine(remainScrollPosition, lastDestoryCOR));
+        }
         
     }
 
