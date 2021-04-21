@@ -24850,6 +24850,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f5872b3de1725145b31abe31f6b7698, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  harvestModeObj: {fileID: 1112857971}
 --- !u!1 &2081821629
 GameObject:
   m_ObjectHideFlags: 0
