@@ -121,6 +121,52 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &4531620
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4531622}
+  - component: {fileID: 4531621}
+  m_Layer: 0
+  m_Name: View_harvest
+  m_TagString: Untagged
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &4531621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4531620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95c387d3e32404bcc91c60318d766bb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewSize: 0.7001568
+  primaryAspectRatio: {x: 4, y: 3}
+  secondaryAspectRatio: {x: 2, y: 1}
+--- !u!4 &4531622
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4531620}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.07, y: 3.32, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 43
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &97427017
 GameObject:
   m_ObjectHideFlags: 0
@@ -744,9 +790,11 @@ GameObject:
   - component: {fileID: 499693473}
   - component: {fileID: 499693498}
   - component: {fileID: 499693480}
-  - component: {fileID: 499693500}
   - component: {fileID: 499693501}
   - component: {fileID: 499693499}
+  - component: {fileID: 499693502}
+  - component: {fileID: 499693503}
+  - component: {fileID: 499693500}
   m_Layer: 0
   m_Name: Flowchart
   m_TagString: Untagged
@@ -781,7 +829,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 499693443}
   selectedCommands:
-  - {fileID: 499693459}
+  - {fileID: 499693500}
   variables: []
   description: 
   stepPause: 0
@@ -881,19 +929,21 @@ MonoBehaviour:
   - {fileID: 499693473}
   - {fileID: 499693498}
   - {fileID: 499693480}
-  - {fileID: 499693500}
   - {fileID: 499693474}
   - {fileID: 499693479}
   - {fileID: 499693469}
+  - {fileID: 499693500}
+  - {fileID: 499693503}
   - {fileID: 499693475}
   - {fileID: 499693484}
   - {fileID: 499693485}
   - {fileID: 499693470}
-  - {fileID: 499693472}
-  - {fileID: 499693483}
   - {fileID: 499693481}
   - {fileID: 499693482}
+  - {fileID: 499693483}
   - {fileID: 499693462}
+  - {fileID: 499693472}
+  - {fileID: 499693502}
   - {fileID: 499693458}
   - {fileID: 499693449}
   suppressAllAutoSelections: 0
@@ -1471,7 +1521,7 @@ MonoBehaviour:
   itemId: 39
   indentLevel: 0
   duration: 1
-  targetView: {fileID: 97427018}
+  targetView: {fileID: 4531621}
   waitUntilFinished: 0
   targetCamera: {fileID: 1797714617}
   orthoSizeTweenType: 4
@@ -1585,7 +1635,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 43
   indentLevel: 0
-  storyText: You can harvest them when they are ripe
+  storyText: You will see plants grow
   description: 
   character: {fileID: 414941533}
   portrait: {fileID: 21300000, guid: 14e5be412a123b24c9e67a2607ee1167, type: 3}
@@ -1775,7 +1825,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 51
   indentLevel: 0
-  storyText: Selling crops to the store after harvesting
+  storyText: Selling crops to the store after harvesting or
   description: 
   character: {fileID: 414941533}
   portrait: {fileID: 21300000, guid: 14e5be412a123b24c9e67a2607ee1167, type: 3}
@@ -1802,7 +1852,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 50
   indentLevel: 0
-  storyText: 'Playing games at the workshop or '
+  storyText: "Playing \tmini game at the store "
   description: 
   character: {fileID: 414941533}
   portrait: {fileID: 21300000, guid: 14e5be412a123b24c9e67a2607ee1167, type: 3}
@@ -2195,25 +2245,31 @@ MonoBehaviour:
   audioSourceOLD: {fileID: 0}
 --- !u!114 &499693500
 MonoBehaviour:
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 499693440}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45c952ea1ad444e479b570fa242679c5, type: 3}
+  m_Script: {fileID: 11500000, guid: ec422cd568a9c4a31ad7c36d0572b9da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: 69
+  itemId: 74
   indentLevel: 0
-  duration: 1
-  targetView: {fileID: 747186535}
-  waitUntilFinished: 1
-  targetCamera: {fileID: 1797714617}
-  orthoSizeTweenType: 4
-  posTweenType: 4
-  rotTweenType: 4
+  storyText: Once they are ripe, click on the harvest button and harvest them
+  description: 
+  character: {fileID: 414941533}
+  portrait: {fileID: 21300000, guid: 14e5be412a123b24c9e67a2607ee1167, type: 3}
+  voiceOverClip: {fileID: 0}
+  showAlways: 1
+  showCount: 1
+  extendPrevious: 0
+  fadeWhenDone: 1
+  waitForClick: 1
+  stopVoiceover: 1
+  waitForVO: 0
+  setSayDialog: {fileID: 0}
 --- !u!114 &499693501
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -2237,6 +2293,54 @@ MonoBehaviour:
   fadeDuration: 15
   waitUntilFinished: 0
   audioSourceOLD: {fileID: 0}
+--- !u!114 &499693502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499693440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec422cd568a9c4a31ad7c36d0572b9da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 72
+  indentLevel: 0
+  storyText: At workshop, you can cook with harvested vegetables
+  description: 
+  character: {fileID: 414941533}
+  portrait: {fileID: 21300000, guid: 14e5be412a123b24c9e67a2607ee1167, type: 3}
+  voiceOverClip: {fileID: 0}
+  showAlways: 1
+  showCount: 1
+  extendPrevious: 0
+  fadeWhenDone: 1
+  waitForClick: 1
+  stopVoiceover: 1
+  waitForVO: 0
+  setSayDialog: {fileID: 0}
+--- !u!114 &499693503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499693440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45c952ea1ad444e479b570fa242679c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 73
+  indentLevel: 0
+  duration: 2
+  targetView: {fileID: 97427018}
+  waitUntilFinished: 0
+  targetCamera: {fileID: 1797714617}
+  orthoSizeTweenType: 4
+  posTweenType: 4
+  rotTweenType: 4
 --- !u!1 &532682096
 GameObject:
   m_ObjectHideFlags: 0
