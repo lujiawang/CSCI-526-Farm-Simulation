@@ -211,7 +211,7 @@ public class Match3 : MonoBehaviour
         isGameOver = false;
         takingAway = false;
         CountDown = 90; // Change this to adjust count down
-        TargetScore = game.price;
+        TargetScore = 100 + (game.price - 100) / 2;
         ScoreText.text = "Score: 0";
         GoalText.text = "Goal: " + TargetScore.ToString();
         TimerText.text = CountDown.ToString();
