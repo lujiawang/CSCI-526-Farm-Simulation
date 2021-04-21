@@ -21,6 +21,8 @@ public class Cook : MonoBehaviour
 
     public GameObject Fire;
 
+    public static bool isCooking = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +34,11 @@ public class Cook : MonoBehaviour
 
         inventory = Inventory.instance;
         soundManager = SoundManager.instance;
+    }
+
+    void OnDestroy()
+    {
+        isCooking = false;
     }
 
     public void Cooking()
@@ -56,23 +63,29 @@ public class Cook : MonoBehaviour
     		return;
     	}
 
-        // play sound as cooing starts
-        soundManager.PlayMultiple(14, 5);
-
-        Fire.SetActive(true);
-        StartCoroutine(CookingAnimation(4f, ingredients));
+        // cooking animations
+        StartCoroutine(CookingAnimation(5, ingredients, this.gameObject));
+        // StartCoroutine(CookingAnimation(4f, ingredients));
+        isCooking = true;
 
     }
 
-
-
-    private IEnumerator CookingAnimation(float waitTime, List<string> ingredients)
+    private IEnumerator CookingAnimation(int playTimes, List<string> ingredients, GameObject obj)
     {
-        yield return new WaitForSeconds(waitTime);
-
+        Fire.SetActive(true);
+        // play sound
+        yield return StartCoroutine(soundManager.PlayMultiple(14, playTimes, obj));
         Fire.SetActive(false);
         CookResult(ingredients);
     }
+
+    // private IEnumerator CookingAnimation(float waitTime, List<string> ingredients)
+    // {
+    //     yield return new WaitForSeconds(waitTime);
+
+    //     Fire.SetActive(false);
+    //     CookResult(ingredients);
+    // }
 
     private void CookResult(List<string> ingredients)
     {
@@ -116,6 +129,7 @@ public class Cook : MonoBehaviour
             // play sound
             soundManager.PlaySound(13);
     	}
+        isCooking = false;
     }
 
     IEnumerator ShowCongrats(Recipe recipe, Coroutine waitTillAfter)

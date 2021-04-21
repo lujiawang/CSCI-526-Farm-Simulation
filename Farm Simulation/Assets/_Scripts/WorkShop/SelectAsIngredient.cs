@@ -25,7 +25,7 @@ public class SelectAsIngredient : MonoBehaviour
     	if(GameObject.Find("Ingredients") != null)
     		uiScript = GameObject.Find("Ingredients").GetComponent<IngredientsInventoryUI>();
     	if(!enableSelect || uiScript == null || inventory == null || 
-    		!uiScript.GetComponent<CanvasGroup>().blocksRaycasts )
+    		!uiScript.GetComponent<CanvasGroup>().blocksRaycasts || Cook.isCooking)
     		return;
     	string name = this.transform.Find("Text").GetComponent<Text>().text;
     	if(motherInventory.name == "Ingredients") //Deselect item from ingredients

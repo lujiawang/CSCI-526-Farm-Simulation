@@ -105,30 +105,31 @@ public class SoundManager : MonoBehaviour
         // Debug.Log("index:"+index);
     }
 
-    public bool PlayMultiple(int index, int times)
+    public IEnumerator PlayMultiple(int index, int times, GameObject obj)
     {
-        bool play = false;
-        if (audioSources != null)
+        if (audioSources != null && obj != null)
         {
             AudioSource audioSource = audioSources[index];
             audioSource.volume = SFXVolume;
             audioSource.PlayOneShot(audioSource.clip);
 
-
-            play = true;
             for (int i = 1; i < times; i++)
             {
-                StartCoroutine(playSoundWithDelay(audioSource, i));
+                yield return new WaitForSeconds(audioSource.clip.length);
+                if(obj == null)
+                    yield break;
+                audioSource.PlayOneShot(audioSource.clip);
             }
         }
-        return play;
     }
 
-    IEnumerator playSoundWithDelay(AudioSource audioSource, int times)
+    IEnumerator playSoundWithDelay(AudioSource audioSource, GameObject obj)
     {
-        yield return new WaitForSeconds(audioSource.clip.length * times);
+        yield return new WaitForSeconds(audioSource.clip.length);
+        if(obj == null)
+            yield break;
         audioSource.PlayOneShot(audioSource.clip);
-        Debug.Log("Played" + times);
+        // Debug.Log("Played" + times);
     }
 
 
