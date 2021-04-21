@@ -8,6 +8,11 @@ public class Match3 : MonoBehaviour
     public int Score;
     public int TargetScore;
     public Text ScoreText;
+    public Text GoalText;
+    public Text TimerText;
+    public int CountDown;
+    bool takingAway;
+    public bool isGameOver;
     public InsertMiniGame game;
     public ArrayLayout boardLayout;
     [Header("UI Elements")]
@@ -36,58 +41,80 @@ public class Match3 : MonoBehaviour
 
     void Update()
     {
-        List<NodePiece> finishedUpdating = new List<NodePiece>();
-        for(int i = 0; i < update.Count; i++)
+        if(isGameOver)
         {
-            NodePiece piece = update[i];
-            if(!piece.UpdatePiece()) finishedUpdating.Add(piece);
+            enabled = false;
+            if(Score >= TargetScore)
+                game.OpenCloseMiniGame(true);
+            else
+                game.OpenCloseMiniGame(false);
         }
-
-        for(int i = 0; i < finishedUpdating.Count; i++)
+        else
         {
-            NodePiece piece = finishedUpdating[i];
-            FlippedPieces flip = getFlipped(piece);
-            NodePiece flippedPiece = null;
-
-            List<Point> connected = isConnected(piece.index, true);
-            bool wasFlipped = (flip != null);
-
-            if(wasFlipped) //If we flipped to make this update
+            if(takingAway == false && CountDown > 0)
             {
-                flippedPiece = flip.getOtherPiece(piece);
-                AddPoints(ref connected, isConnected(flippedPiece.index, true));
+                StartCoroutine(TimerTake());
             }
-            if(connected.Count == 0) //If we didn't make a match
+
+            if(CountDown == 0)
+                isGameOver = true;
+
+            List<NodePiece> finishedUpdating = new List<NodePiece>();
+            for(int i = 0; i < update.Count; i++)
             {
-                if(wasFlipped) //If we flipped
-                    FlipPieces(piece.index, flippedPiece.index, false);
+                NodePiece piece = update[i];
+                if(!piece.UpdatePiece()) finishedUpdating.Add(piece);
             }
-            else //If we made a match
+
+            for(int i = 0; i < finishedUpdating.Count; i++)
             {
-                int pts = 0;
-                foreach(Point pnt in connected) //Remove the matched nodes 
+                NodePiece piece = finishedUpdating[i];
+                FlippedPieces flip = getFlipped(piece);
+                NodePiece flippedPiece = null;
+
+                List<Point> connected = isConnected(piece.index, true);
+                bool wasFlipped = (flip != null);
+
+                if(wasFlipped) //If we flipped to make this update
                 {
-                    Node node = getNodeAtPoint(pnt);
-                    NodePiece nodePiece = node.getPiece();
-                    if(nodePiece != null)
-                    {
-                        nodePiece.gameObject.SetActive(false);
-                        dead.Add(nodePiece);
-                    }
-                    node.SetPiece(null);
-                    pts++;
+                    flippedPiece = flip.getOtherPiece(piece);
+                    AddPoints(ref connected, isConnected(flippedPiece.index, true));
                 }
-                AddScore(pts);
-                ApplyGravityToBoard();
+                if(connected.Count == 0) //If we didn't make a match
+                {
+                    if(wasFlipped) //If we flipped
+                        FlipPieces(piece.index, flippedPiece.index, false);
+                }
+                else //If we made a match
+                {
+                    int pts = 0;
+                    foreach(Point pnt in connected) //Remove the matched nodes 
+                    {
+                        Node node = getNodeAtPoint(pnt);
+                        NodePiece nodePiece = node.getPiece();
+                        if(nodePiece != null)
+                        {
+                            nodePiece.gameObject.SetActive(false);
+                            dead.Add(nodePiece);
+                        }
+                        node.SetPiece(null);
+                        pts++;
+                    }
+                    //ApplyGravityToBoard();
+                    AddScore(pts);
+                }
+                flipped.Remove(flip);
+                update.Remove(piece);
             }
-            flipped.Remove(flip);
-            update.Remove(piece);
-        }
+            }
+
     }
 
     
-    void ApplyGravityToBoard()
+    public void ApplyGravityToBoard()
     {
+        if(isGameOver)
+            Debug.Log("Starting to apply Gravity!");
         for(int x = 0; x < width; x++)
         {
             for(int y = (height-1); y >= 0; y--)
@@ -153,6 +180,8 @@ public class Match3 : MonoBehaviour
                 }
             }
         }
+              if(isGameOver)
+            Debug.Log("Gravity Applied!");
     }
 
     FlippedPieces getFlipped(NodePiece p)
@@ -172,7 +201,13 @@ public class Match3 : MonoBehaviour
 
     void StartGame()
     {
+        isGameOver = false;
+        takingAway = false;
+        CountDown = 5;
         TargetScore = game.price;
+        ScoreText.text = "Score: 0";
+        GoalText.text = "Goal: " + TargetScore.ToString();
+        TimerText.text = CountDown.ToString();
         string seed = getRandomSeed();
         random = new System.Random(seed.GetHashCode());
         update = new List<NodePiece>();
@@ -429,12 +464,21 @@ public class Match3 : MonoBehaviour
     public void AddScore(int pts)
     {
         Score += pts;
-        ScoreText.text = Score.ToString();
+        ScoreText.text = "Score: " + Score.ToString();
         if(Score >= TargetScore)
         {
-            game.OpenCloseMiniGame(true);
+            isGameOver = true;
         }
             
+    }
+
+    IEnumerator TimerTake()
+    {
+        takingAway = true;
+        yield return new WaitForSeconds(1);
+        CountDown -= 1;
+        TimerText.text = CountDown.ToString(); 
+        takingAway = false;
     }
 }
 

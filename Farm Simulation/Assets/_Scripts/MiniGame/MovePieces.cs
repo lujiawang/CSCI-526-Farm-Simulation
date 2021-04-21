@@ -26,34 +26,43 @@ public class MovePieces : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(moving != null)
+
+
+        if(!game.isGameOver)
         {
-            Vector2 dir = ((Vector2) Input.mousePosition - mouseStart);
-            Vector2 nDir = dir.normalized;
-            Vector2 aDir = new Vector2(Mathf.Abs(dir.x), Mathf.Abs(dir.y));
-
-            newIndex = Point.clone(moving.index);
-            Point add = Point.zero;
-            if(dir.magnitude > 48) // if our cursor is 32 pixels away from starting point of the mouse
+            if(moving != null)
             {
+                Vector2 dir = ((Vector2) Input.mousePosition - mouseStart);
+                Vector2 nDir = dir.normalized;
+                Vector2 aDir = new Vector2(Mathf.Abs(dir.x), Mathf.Abs(dir.y));
 
-                // makde the direction either  (1,0) | (-1,0) | (0,1) | (0,-1) depending on the direction that 
-                // that the cursor points
-                if(aDir.x > aDir.y)
+                newIndex = Point.clone(moving.index);
+                Point add = Point.zero;
+                if(dir.magnitude > 48) // if our cursor is 32 pixels away from starting point of the mouse
                 {
-                    add = (new Point((nDir.x > 0) ? 1 : -1 , 0));
-                }
-                else if(aDir.y > aDir.x)
-                {
-                    add = (new Point(0, (nDir.y > 0) ? -1 : 1));
-                }
-                newIndex.add(add);
 
-                Vector2 pos = game.getPositionFromPoint(moving.index);
-                if(!newIndex.Equals(moving.index))
-                    pos += Point.mult(new Point(add.x, -add.y), 32).ToVector();
-                moving.MovePositionTo(pos);
+                    // makde the direction either  (1,0) | (-1,0) | (0,1) | (0,-1) depending on the direction that 
+                    // that the cursor points
+                    if(aDir.x > aDir.y)
+                    {
+                        add = (new Point((nDir.x > 0) ? 1 : -1 , 0));
+                    }
+                    else if(aDir.y > aDir.x)
+                    {
+                        add = (new Point(0, (nDir.y > 0) ? -1 : 1));
+                    }
+                    newIndex.add(add);
+
+                    Vector2 pos = game.getPositionFromPoint(moving.index);
+                    if(!newIndex.Equals(moving.index))
+                        pos += Point.mult(new Point(add.x, -add.y), 32).ToVector();
+                    moving.MovePositionTo(pos);
+                }
             }
+        }
+        else
+        {
+            enabled = false;
         }
     }
 
