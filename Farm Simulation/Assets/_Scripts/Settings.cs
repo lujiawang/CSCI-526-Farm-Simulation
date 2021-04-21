@@ -58,7 +58,7 @@ public class Settings : MonoBehaviour
 		{
 			if(GameObject.Find("background_audio") != null)
 			{
-                Debug.Log("Found");
+                // Debug.Log("Found");
 	    		GameObject.Find("background_audio").GetComponent<AudioSource>().volume = vol;
 	    		break;
 			}

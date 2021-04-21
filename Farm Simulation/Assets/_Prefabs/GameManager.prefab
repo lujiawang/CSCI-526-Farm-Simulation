@@ -1752,9 +1752,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 169167c3279c54ed599596b09a844335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StarterPackageSize: 20
-  resetInventory: 1
-  addAllFoods: 1
+  StarterPackageSize: 4
+  resetInventory: 0
+  addAllFoods: 0
 --- !u!114 &5027718611295886600
 MonoBehaviour:
   m_ObjectHideFlags: 0
