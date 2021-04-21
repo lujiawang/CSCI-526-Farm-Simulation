@@ -80,6 +80,12 @@ public class StoreToggle : MonoBehaviour
             GameObject.Find("Ingredients").GetComponent<CanvasGroup>().alpha = 0f;
             GameObject.Find("Ingredients").GetComponent<CanvasGroup>().blocksRaycasts = false;
         }
+        // disable Cook button
+        if(GameObject.Find("Cook") != null)
+        {
+            GameObject.Find("Cook").GetComponent<CanvasGroup>().alpha = 0f;
+            GameObject.Find("Cook").GetComponent<CanvasGroup>().blocksRaycasts = false;
+        }
         // disable WorkshopToggle
         if(GameObject.Find("WorkshopToggle") != null)
         {
@@ -118,6 +124,12 @@ public class StoreToggle : MonoBehaviour
         {
             GameObject.Find("Ingredients").GetComponent<CanvasGroup>().alpha = 1f;
             GameObject.Find("Ingredients").GetComponent<CanvasGroup>().blocksRaycasts = true;
+        }
+        // enable Cook button
+        if(GameObject.Find("Cook") != null)
+        {
+            GameObject.Find("Cook").GetComponent<CanvasGroup>().alpha = 1f;
+            GameObject.Find("Cook").GetComponent<CanvasGroup>().blocksRaycasts = true;
         }
         // enable WorkshopToggle
         if(GameObject.Find("WorkshopToggle") != null)

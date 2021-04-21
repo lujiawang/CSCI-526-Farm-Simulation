@@ -67,6 +67,7 @@ public class InsertMiniGame : MonoBehaviour
         {
             if(win) // minigame succeeded
             {
+                SoundManager.instance.PlaySound(11);
                 NextStageEntryPrice();
                 // show winning notification
                 StartCoroutine(CloseMiniGameCOR(true));
