@@ -781,7 +781,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 499693443}
   selectedCommands:
-  - {fileID: 499693499}
+  - {fileID: 499693501}
   variables: []
   description: 
   stepPause: 0
@@ -2233,7 +2233,7 @@ MonoBehaviour:
     audioSourceRef: {fileID: 0}
     audioSourceVal: {fileID: 1303176518}
   startVolume: 1
-  endVolume: 1
+  endVolume: 0.5
   fadeDuration: 10
   waitUntilFinished: 0
   audioSourceOLD: {fileID: 0}
@@ -3266,7 +3266,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1293088066}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.51, y: -1.035, z: 0}
+  m_LocalPosition: {x: 14.72, y: -1.25, z: 0}
   m_LocalScale: {x: 1.756262, y: 1.7844958, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3347,7 +3347,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1302977592}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 24.91, y: -0.32, z: 0}
+  m_LocalPosition: {x: 25.02, y: -0.37, z: 0}
   m_LocalScale: {x: 1.4430342, y: 1.4966493, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3382,7 +3382,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 9fc5390da1ab57445943e64c53778d1a, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.64
   m_Pitch: 1
   Loop: 0
   Mute: 0
