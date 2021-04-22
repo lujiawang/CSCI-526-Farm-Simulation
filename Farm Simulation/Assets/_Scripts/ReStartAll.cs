@@ -23,6 +23,7 @@ public class ReStartAll : MonoBehaviour
     	inventory.ReStart();
     	StoreInventory storeInventory = StoreInventory.instance;
     	storeInventory.ReStart();
+        PlayerStats.Currency = 100;
 
         SceneManager.LoadSceneAsync("Intro", LoadSceneMode.Single);
     }
