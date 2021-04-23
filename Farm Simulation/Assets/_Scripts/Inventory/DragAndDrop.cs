@@ -108,7 +108,8 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         if(!TouchToMove.IsPointerOverGameObject()){
             Vector3 mousePos3D = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             // Vector2 mousePos2D = new Vector2(mousePos3D.x, mousePos3D.y);
-            RaycastHit2D hitInformation = Physics2D.Raycast(mousePos3D, Camera.main.transform.forward);
+            RaycastHit2D hitInformation = Physics2D.Raycast(mousePos3D, Camera.main.transform.forward,  
+                Mathf.Infinity, layerMask);
 
             if(hitInformation.collider != null)
             {
