@@ -52,7 +52,8 @@ public class QuickHarvest : MonoBehaviour
     {
     	// Debug.Log("HarvestCrop");
 		Vector3 mousePos3D = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		RaycastHit2D hitInformation = Physics2D.Raycast(mousePos3D, Camera.main.transform.forward);
+		RaycastHit2D hitInformation = Physics2D.Raycast(mousePos3D, Camera.main.transform.forward, 
+			Mathf.Infinity, layerMask);
 		if(hitInformation.collider != null)
 		{
 			GameObject touchedObject = hitInformation.transform.gameObject;
