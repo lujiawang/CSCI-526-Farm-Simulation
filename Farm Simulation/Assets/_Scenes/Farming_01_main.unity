@@ -2886,6 +2886,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5027718611295886604, guid: c2e972617a533418db29a47f1e8bee4f,
+        type: 3}
+      propertyPath: resetInventory
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5027718611295886604, guid: c2e972617a533418db29a47f1e8bee4f,
+        type: 3}
+      propertyPath: StarterPackageSize
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5027718611295886605, guid: c2e972617a533418db29a47f1e8bee4f,
         type: 3}
       propertyPath: m_RootOrder

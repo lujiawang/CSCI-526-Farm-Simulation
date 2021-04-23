@@ -89,6 +89,20 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     {  
         if(endDrag)
             return;
+        bool droppedToZero = true;
+        foreach(Item item in inventory.items)
+        {
+            if(item.Name() == this.name)
+            {
+                droppedToZero = false;
+                break;
+            }
+        }
+        if(droppedToZero)
+        {
+            this.GetComponent<CanvasGroup>().alpha = 0f;
+            return;
+        }
         // continue dragging
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
         if(!TouchToMove.IsPointerOverGameObject()){
@@ -137,22 +151,27 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
                     }else // plant the crop
                     {
                         PlantCrop(touchedObject);
-                        bool droppedToZero = true;
-                        foreach(Item item in inventory.items)
-                        {
-                            if(item.Name() == this.name)
-                            {
-                                droppedToZero = false;
-                                break;
-                            }
-                        }
-                        if(droppedToZero)
-                        {
-                            Destroy(this.gameObject);
-                            TouchToMove.disablePlayerMovement = false;
-                            QuickHarvest.disableQuickHarvest = false;
-                            endDrag = false;
-                        }
+                        
+                        // bool droppedToZero = true;
+                        // foreach(Item item in inventory.items)
+                        // {
+                        //     if(item.Name() == this.name)
+                        //     {
+                        //         droppedToZero = false;
+                        //         break;
+                        //     }
+                        // }
+                        // if(droppedToZero)
+                        // {
+                        //     // Destroy(this.gameObject);
+                        //     // TouchToMove.disablePlayerMovement = false;
+                        //     // QuickHarvest.disableQuickHarvest = false;
+                        //     // endDrag = false;
+                        //     this.GetComponent<CanvasGroup>().alpha = 0f;
+                        // }else
+                        // {
+                        //     PlantCrop(touchedObject);
+                        // }
                     }
                 }
             }
