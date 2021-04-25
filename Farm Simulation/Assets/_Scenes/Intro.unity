@@ -1664,7 +1664,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 42
   indentLevel: 0
-  storyText: 'From Settings, you have option to control volume '
+  storyText: From Settings, you have option to control volume and sound
   description: 
   character: {fileID: 414941533}
   portrait: {fileID: 21300000, guid: 14e5be412a123b24c9e67a2607ee1167, type: 3}
