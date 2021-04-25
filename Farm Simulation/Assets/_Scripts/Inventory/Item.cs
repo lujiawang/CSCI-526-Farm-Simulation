@@ -39,7 +39,7 @@ public class Item : IComparable<Item>, IEquatable<Item>
 		public static int tierDivideLength = 4;
 		public static int basicPrice = 15;
 		public static float tierUpPriceFactor = 1.7f;
-		public static float seedToFruitFactor = 2.5f / 4; //4 = Expectation of randomharvest amount
+		public static float seedToFruitFactor = 3.6f / 4; //4 = Expectation of randomharvest amount
 
 		public static float basicGrowTime = 2f;
 		public static float tierUpGrowTimeFactor = 1.3f;

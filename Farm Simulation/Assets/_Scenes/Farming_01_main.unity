@@ -2886,6 +2886,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5027718611295886600, guid: c2e972617a533418db29a47f1e8bee4f,
+        type: 3}
+      propertyPath: updateIntervalSecs
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5027718611295886604, guid: c2e972617a533418db29a47f1e8bee4f,
+        type: 3}
+      propertyPath: addAllFoods
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5027718611295886604, guid: c2e972617a533418db29a47f1e8bee4f,
         type: 3}
       propertyPath: resetInventory
