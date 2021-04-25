@@ -830,7 +830,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 499693443}
   selectedCommands:
-  - {fileID: 499693484}
+  - {fileID: 499693475}
   variables: []
   description: 
   stepPause: 0
@@ -1664,7 +1664,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 42
   indentLevel: 0
-  storyText: 'From Setting, you have option to control volumn '
+  storyText: 'From Settings, you have option to control volume '
   description: 
   character: {fileID: 414941533}
   portrait: {fileID: 21300000, guid: 14e5be412a123b24c9e67a2607ee1167, type: 3}
@@ -1929,7 +1929,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 55
   indentLevel: 0
-  storyText: The first item, CornSeed, from the 1st tap is a free gift
+  storyText: The first item, CornSeed, from the 1st tab is a free gift
   description: 
   character: {fileID: 414941533}
   portrait: {fileID: 0}
